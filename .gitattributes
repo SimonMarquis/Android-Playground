@@ -1,0 +1,6 @@
+* text=auto eol=lf
+
+*.{bat,[bB][aA][tT]} text eol=crlf
+*.{cmd,[cC][mM][dD]} text eol=crlf
+        
+**/src/test/snapshots/**/*.png filter=lfs diff=lfs merge=lfs -text

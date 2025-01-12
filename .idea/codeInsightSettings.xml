@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<project version="4">
+    <component name="JavaProjectCodeInsightSettings">
+        <excluded-names>
+            <!--region JUnit assertions-->
+            <name>org.junit.Test</name>
+            <name>org.junit.Assert</name>
+            <name>org.junit.Assert.*</name>
+            <name>junit.framework.Assert</name>
+            <name>junit.framework.Assert.*</name>
+            <!--endregion-->
+
+            <!--region Jakarta injection-->
+            <name>jakarta.inject.*</name>
+            <!--endregion-->
+        </excluded-names>
+    </component>
+</project>

@@ -1,0 +1,18 @@
+package fr.smarquis.playground.core.di
+
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
+import org.junit.rules.TemporaryFolder
+
+open class TestAssetManager(private val folder: TemporaryFolder) : AssetManager {
+    override fun open(name: String) = folder.newFile(name).inputStream()
+}
+
+@Module
+@InstallIn(SingletonComponent::class)
+object AssetManagerFixturesModule {
+    @Provides
+    fun provides(): AssetManager = TODO("Please `@Provides` or `@BindValue` a `TestAssetManager` instance explicitly!")
+}

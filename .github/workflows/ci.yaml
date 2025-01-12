@@ -1,0 +1,130 @@
+name: 🏭 CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  merge_group:
+    types: [ checks_requested ]
+    branches: [ main ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.head.label || github.head_ref || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+
+  validation:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/check-git-lfs
+      - uses: ./.github/actions/setup-java
+      - uses: ./.github/actions/setup-gradle
+        with:
+          cache-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
+      - uses: ./.github/actions/setup-gradle-properties
+
+  checks:
+    name: 👮 Checks
+    needs: validation
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup-java
+      - uses: ./.github/actions/setup-gradle
+        with:
+          cache-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
+      - uses: ./.github/actions/setup-gradle-properties
+
+      - run: ./gradlew apiCheck --quiet
+      - run: ./gradlew dependencyGuard --quiet
+
+  build:
+    name: 👷 Build
+    needs: validation
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup-java
+      - uses: ./.github/actions/setup-gradle
+        with:
+          cache-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
+      - uses: ./.github/actions/setup-gradle-properties
+
+      - name: 👷 Build
+        id: build
+        run: ./gradlew assembleRelease
+      - name: 📦 Archive APKs
+        uses: actions/upload-artifact@v4
+        with:
+          name: apk
+          path: "**/build/outputs/apk/**/*.apk"
+      - name: 📦 Archive AARs
+        uses: actions/upload-artifact@v4
+        with:
+          name: aar
+          path: "**/build/outputs/aar"
+
+  test:
+    name: 🧑‍🔬 Test
+    needs: validation
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup-java
+      - uses: ./.github/actions/setup-gradle
+        with:
+          cache-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
+      - uses: ./.github/actions/setup-gradle-properties
+
+      - name: 🧑‍🔬 Test
+        id: test
+        run: ./gradlew globalCiUnitTest
+      - name: 📦 Archive JUnit reports
+        if: ${{ always() && contains(fromJSON('["success", "failure"]'),
+          steps.test.outcome) }}
+        uses: ./.github/actions/archive-junit-reports
+        with:
+          html: "**/build/reports/tests/test*"
+          xml: "**/build/test-results/test*/**.xml"
+
+  lint:
+    name: 🕵️ Lint
+    needs: validation
+    permissions:
+      actions: read
+      contents: read
+      # github/codeql-action/upload-sarif
+      security-events: write
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup-java
+      - uses: ./.github/actions/setup-gradle
+        with:
+          cache-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
+      - uses: ./.github/actions/setup-gradle-properties
+
+      - name: 🕵️ Lint
+        id: lint
+        run: ./gradlew globalCiLint
+      - name: 📦 Archive Lint reports
+        if: ${{ always() && contains(fromJSON('["success", "failure"]'), steps.lint.outcome) }}
+        uses: ./.github/actions/archive-lint-reports
+        with:
+          # CodeQL is not available for free on private repositories
+          # analysis: './'
+          html: "**/build/reports/lint-results-*.html"
+          sarif: "**/build/reports/lint-results-*.sarif"
+          xml: "**/build/reports/lint-results-*.xml"
