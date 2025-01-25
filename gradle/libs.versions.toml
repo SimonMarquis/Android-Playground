@@ -17,7 +17,7 @@ androidx-navigation = "2.8.5"
 android-desugarJdkLibs = "com.android.tools:desugar_jdk_libs:2.1.4"
 android-security-lint = "com.android.security.lint:lint:1.0.3"
 
-androidx-activity-compose = "androidx.activity:activity-compose:1.9.3"
+androidx-activity-compose = "androidx.activity:activity-compose:1.10.0"
 androidx-annotations = "androidx.annotation:annotation:1.9.1"
 androidx-appcompat = "androidx.appcompat:appcompat:1.7.0"
 androidx-collection = "androidx.collection:collection:1.4.0"
