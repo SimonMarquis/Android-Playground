@@ -112,8 +112,8 @@ com.google.dagger:dagger:2.55
 com.google.dagger:hilt-android:2.55
 com.google.dagger:hilt-core:2.55
 com.google.guava:listenablefuture:1.0
-com.squareup.okio:okio-jvm:3.9.1
-com.squareup.okio:okio:3.9.1
+com.squareup.okio:okio-jvm:3.10.2
+com.squareup.okio:okio:3.10.2
 jakarta.inject:jakarta.inject-api:2.0.1
 javax.inject:javax.inject:1
 org.jetbrains.kotlin:kotlin-android-extensions-runtime:1.9.22
