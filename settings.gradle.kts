@@ -54,7 +54,7 @@ develocity {
     buildScan {
         termsOfUseUrl = "https://gradle.com/terms-of-service"
         termsOfUseAgree = "yes"
-        val isCi = providers.systemProperty("CI").map(String::toBoolean)
+        val isCi = providers.environmentVariable("CI").map(String::toBoolean)
         publishing.onlyIf { isCi.getOrElse(false) }
         uploadInBackground = isCi
         obfuscation {
