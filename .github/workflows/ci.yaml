@@ -123,8 +123,7 @@ jobs:
         if: ${{ always() && contains(fromJSON('["success", "failure"]'), steps.lint.outcome) }}
         uses: ./.github/actions/archive-lint-reports
         with:
-          # CodeQL is not available for free on private repositories
-          # analysis: './'
+          analysis: './'
           html: "**/build/reports/lint-results-*.html"
           sarif: "**/build/reports/lint-results-*.sarif"
           xml: "**/build/reports/lint-results-*.xml"
