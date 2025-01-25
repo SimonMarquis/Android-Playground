@@ -21,6 +21,7 @@ dependencies {
     ksp(libs.hilt.compiler.android)
     testImplementation(libs.kotlinx.coroutines.test)
     testImplementation(libs.turbine)
+    testImplementation(testFixtures(projects.core.utils))
     testImplementation(testFixtures(projects.domain.dice))
     testImplementation(testFixtures(projects.domain.settings))
 }

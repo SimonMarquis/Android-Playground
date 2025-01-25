@@ -8,6 +8,7 @@ import assertk.assertions.hasSize
 import assertk.assertions.isEmpty
 import assertk.assertions.isSameInstanceAs
 import assertk.assertions.startsWith
+import fr.smarquis.playground.core.utils.StandardCoroutineScopeRule
 import fr.smarquis.playground.domain.dice.Dice
 import fr.smarquis.playground.domain.dice.SimpleDiceSource
 import fr.smarquis.playground.domain.settings.Settings
@@ -21,10 +22,14 @@ import kotlinx.datetime.Clock
 import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
+import org.junit.Rule
 import kotlin.test.Test
 
 @OptIn(ExperimentalCoroutinesApi::class)
 class HomeViewModelTest {
+
+    @get:Rule
+    val coroutines = StandardCoroutineScopeRule()
 
     @Test
     fun `rolls initial value, update and reset`() = runTest {
