@@ -3,12 +3,14 @@
 version: 2
 updates:
   - package-ecosystem: github-actions
+    open-pull-requests-limit: 10
     directories:
       - /.github/actions/*
       - /.github/workflows/*
     schedule:
       interval: daily
   - package-ecosystem: gradle
+    open-pull-requests-limit: 10
     directory: /
     schedule:
       interval: daily
