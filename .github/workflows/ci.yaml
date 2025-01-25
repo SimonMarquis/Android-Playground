@@ -20,6 +20,7 @@ concurrency:
 jobs:
 
   validation:
+    name: 🛃 Validation
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
