@@ -14,6 +14,8 @@ import fr.smarquis.playground.domain.settings.Settings
 import fr.smarquis.playground.domain.settings.SimpleSettingsSource
 import kotlinx.collections.immutable.PersistentList
 import kotlinx.collections.immutable.persistentListOf
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.runTest
 import kotlinx.datetime.Clock
 import kotlinx.datetime.LocalDateTime
@@ -21,6 +23,7 @@ import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
 import kotlin.test.Test
 
+@OptIn(ExperimentalCoroutinesApi::class)
 class HomeViewModelTest {
 
     @Test
@@ -28,6 +31,7 @@ class HomeViewModelTest {
         /* Given */
         val initial = persistentListOf(Dice.ONE, Dice.TWO, Dice.THREE)
         val vm = viewModel(initialRolls = initial)
+        advanceUntilIdle()
 
         /* When / Then */
         vm.rolls.test {
@@ -51,6 +55,7 @@ class HomeViewModelTest {
         val initial = Settings(strictMode = true, uncaughtExceptionHandler = false)
         val new = Settings(strictMode = false, uncaughtExceptionHandler = true)
         val vm = viewModel(initialSettings = initial)
+        advanceUntilIdle()
 
         /* When / Then */
         vm.settings.test {
