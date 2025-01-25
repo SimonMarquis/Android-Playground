@@ -86,6 +86,8 @@ okio = "com.squareup.okio:okio:3.10.2"
 
 slack-compose-lint = "com.slack.lint.compose:compose-lint-checks:1.4.2"
 
+turbine = "app.cash.turbine:turbine:1.2.0"
+
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 android-library = { id = "com.android.library", version.ref = "agp" }
