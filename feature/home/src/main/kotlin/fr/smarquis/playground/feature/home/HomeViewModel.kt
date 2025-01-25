@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import fr.smarquis.playground.domain.dice.Dice
+import fr.smarquis.playground.domain.dice.DiceRoller
 import fr.smarquis.playground.domain.dice.DiceSource
 import fr.smarquis.playground.domain.settings.Settings
 import fr.smarquis.playground.domain.settings.SettingsSource
@@ -18,13 +19,14 @@ import javax.inject.Inject
 
 @HiltViewModel
 internal class HomeViewModel @Inject constructor(
+    private val diceRoller: DiceRoller,
     private val diceSource: DiceSource,
     private val settingsSource: SettingsSource,
     val data: HomeData,
 ) : ViewModel() {
 
     val rolls: StateFlow<ImmutableList<Dice>> = diceSource.rolls.stateIn(viewModelScope, Eagerly, persistentListOf())
-    fun roll() = viewModelScope.launch { diceSource.roll(Dice.entries.random()) }
+    fun roll() = viewModelScope.launch { diceSource.roll(diceRoller()) }
     fun reset(): Job = viewModelScope.launch { diceSource.reset() }
 
     val settings: StateFlow<Settings> = settingsSource.settings.stateIn(viewModelScope, Eagerly, Settings())

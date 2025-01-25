@@ -2,14 +2,17 @@ package fr.smarquis.playground.feature.home
 
 import android.util.DisplayMetrics
 import app.cash.turbine.test
-import assertk.all
 import assertk.assertThat
-import assertk.assertions.hasSize
 import assertk.assertions.isEmpty
+import assertk.assertions.isEqualTo
 import assertk.assertions.isSameInstanceAs
-import assertk.assertions.startsWith
 import fr.smarquis.playground.core.utils.StandardCoroutineScopeRule
 import fr.smarquis.playground.domain.dice.Dice
+import fr.smarquis.playground.domain.dice.Dice.FOUR
+import fr.smarquis.playground.domain.dice.Dice.ONE
+import fr.smarquis.playground.domain.dice.Dice.THREE
+import fr.smarquis.playground.domain.dice.Dice.TWO
+import fr.smarquis.playground.domain.dice.DiceRoller
 import fr.smarquis.playground.domain.dice.SimpleDiceSource
 import fr.smarquis.playground.domain.settings.Settings
 import fr.smarquis.playground.domain.settings.SimpleSettingsSource
@@ -34,8 +37,9 @@ class HomeViewModelTest {
     @Test
     fun `rolls initial value, update and reset`() = runTest {
         /* Given */
-        val initial = persistentListOf(Dice.ONE, Dice.TWO, Dice.THREE)
-        val vm = viewModel(initialRolls = initial)
+        val initial = persistentListOf(ONE, TWO, THREE)
+        val diceRoller = { FOUR }
+        val vm = viewModel(initialRolls = initial, diceRoller = diceRoller)
         advanceUntilIdle()
 
         /* When / Then */
@@ -43,10 +47,7 @@ class HomeViewModelTest {
             assertThat(awaitItem()).isSameInstanceAs(initial)
 
             vm.roll()
-            assertThat(awaitItem()).all {
-                startsWith(*initial.toTypedArray())
-                hasSize(initial.size + 1)
-            }
+            assertThat(awaitItem()).isEqualTo(persistentListOf(ONE, TWO, THREE, FOUR))
 
             vm.reset()
             assertThat(awaitItem()).isEmpty()
@@ -72,10 +73,12 @@ class HomeViewModelTest {
     }
 
     private fun viewModel(
+        diceRoller: DiceRoller = DiceRoller(Dice.entries::random),
         initialRolls: PersistentList<Dice> = persistentListOf(),
         initialSettings: Settings = Settings(),
         now: LocalDateTime = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault()),
     ) = HomeViewModel(
+        diceRoller = diceRoller,
         diceSource = SimpleDiceSource(initialRolls),
         settingsSource = SimpleSettingsSource(initialSettings),
         data = HomeData(
