@@ -4,6 +4,7 @@ import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import fr.smarquis.playground.domain.dice.DiceRoller
 import fr.smarquis.playground.domain.dice.DiceSource
 
 @Module
@@ -11,4 +12,6 @@ import fr.smarquis.playground.domain.dice.DiceSource
 internal interface DiceSourceModule {
     @Binds
     fun bindsDiceSource(impl: DiceSourceImpl): DiceSource
+    @Binds
+    fun bindsDiceRoller(impl: RandomDiceRoller): DiceRoller
 }
