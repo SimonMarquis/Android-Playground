@@ -13,28 +13,27 @@ permissions:
 env:
   GH_TOKEN: ${{ github.token }}
   GH_REPO: ${{ github.repository }}
+  NO_COLOR: 1 # Disable gh colored output to avoid sed -e 's/\x1b\[[0-9;]*m//g'
 
 jobs:
   clear-cache:
     runs-on: ubuntu-latest
     steps:
-      - run: gh extension install actions/gh-actions-cache
-      - run: gh actions-cache list
-      - name: Clear cache entries
+      - run: gh cache list --limit 50 >> $GITHUB_STEP_SUMMARY
+      - name: Clear all cache entries
         if: github.event_name == 'workflow_dispatch'
         run: |
           set +e
-          for key in $(gh actions-cache list --sort size --order desc --limit 100 | cut -f 1 )
-          do
-              gh actions-cache delete $key --confirm | sed -e 's/\x1b\[[0-9;]*m//g' >> $GITHUB_STEP_SUMMARY
-          done
+          gh cache delete --all >> $GITHUB_STEP_SUMMARY
       - name: Clear cache entries from PR
         if: github.event_name == 'pull_request'
         run: |
           set +e
-          BRANCH="refs/pull/${{ github.event.pull_request.number }}/merge"
-          for key in $(gh actions-cache list --sort size --order desc --limit 100 --branch $BRANCH | cut -f 1 )
-          do
-              gh actions-cache delete $key --branch $BRANCH --confirm | sed -e 's/\x1b\[[0-9;]*m//g' >> $GITHUB_STEP_SUMMARY
+          refs=("refs/pull/17/head" "refs/pull/17/merge")
+          for ref in "${refs[@]}"; do
+            for key in $(gh cache list --ref "$ref" --limit 100 --json id --jq 'map(.id) | join("\n")'); do
+              gh cache delete "$key" >> $GITHUB_STEP_SUMMARY
+            done
           done
-      - run: gh actions-cache list
+        with:
+          PR: ${{ github.event.pull_request.number }}
