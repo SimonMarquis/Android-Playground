@@ -23,7 +23,7 @@ jobs:
         if: github.event_name == 'workflow_dispatch'
         run: |
           set +e
-          gh cache delete --all >> $GITHUB_STEP_SUMMARY
+          gh cache delete --all | tee -a $GITHUB_STEP_SUMMARY >&2
       - name: Clear cache entries from PR
         if: github.event_name == 'pull_request'
         run: |
@@ -31,7 +31,7 @@ jobs:
           refs=("refs/pull/$PR/head" "refs/pull/$PR/merge")
           for ref in "${refs[@]}"; do
             for key in $(gh cache list --ref "$ref" --limit 1000 --json id --jq 'map(.id) | join("\n")'); do
-              gh cache delete "$key" >> $GITHUB_STEP_SUMMARY
+              gh cache delete "$key" | tee -a $GITHUB_STEP_SUMMARY >&2
             done
           done
         env:
