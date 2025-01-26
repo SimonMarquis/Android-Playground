@@ -1,5 +1,7 @@
 # 🛝 Android Playground
 
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/SimonMarquis/Android-Playground?quickstart=1)
+
 |                                      🌑                                      |                                       ☀️                                        |
 |:----------------------------------------------------------------------------:|:-------------------------------------------------------------------------------:|
 | [![screenshot dark](art/screenshot-thumb-dark.png)](art/screenshot-dark.png) | [![screenshot light](art/screenshot-thumb-light.png)](art/screenshot-light.png) |
