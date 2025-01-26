@@ -1,5 +1,5 @@
 {
   "name": "Android",
   "build": { "dockerfile": "Dockerfile" },
-  "postCreateCommand": "./gradlew --version"
+  "postCreateCommand": "./gradlew wrapper"
 }
