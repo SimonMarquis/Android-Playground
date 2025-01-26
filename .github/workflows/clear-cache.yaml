@@ -19,20 +19,19 @@ jobs:
   clear-cache:
     runs-on: ubuntu-latest
     steps:
-      - run: gh cache list --limit 50 >> $GITHUB_STEP_SUMMARY
       - name: Clear all cache entries
         if: github.event_name == 'workflow_dispatch'
         run: |
           set +e
-          gh cache delete --all >> $GITHUB_STEP_SUMMARY
+          gh cache delete --all | tee -a $GITHUB_STEP_SUMMARY >&2
       - name: Clear cache entries from PR
         if: github.event_name == 'pull_request'
         run: |
           set +e
-          refs=("refs/pull/17/head" "refs/pull/17/merge")
+          refs=("refs/pull/$PR/head" "refs/pull/$PR/merge")
           for ref in "${refs[@]}"; do
-            for key in $(gh cache list --ref "$ref" --limit 100 --json id --jq 'map(.id) | join("\n")'); do
-              gh cache delete "$key" >> $GITHUB_STEP_SUMMARY
+            for key in $(gh cache list --ref "$ref" --limit 1000 --json id --jq 'map(.id) | join("\n")'); do
+              gh cache delete "$key" | tee -a $GITHUB_STEP_SUMMARY >&2
             done
           done
         env:
