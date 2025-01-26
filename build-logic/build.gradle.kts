@@ -32,6 +32,7 @@ dependencies {
     compileOnly(libs.gradlePlugins.dependencyGuard)
     compileOnly(libs.gradlePlugins.hilt)
     compileOnly(libs.gradlePlugins.powerAssert)
+    implementation(libs.gradlePlugins.androidArtifactsSizeReport)
     lintChecks(libs.androidx.lint.gradle)
 }
 

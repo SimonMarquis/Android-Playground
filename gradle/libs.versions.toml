@@ -46,6 +46,7 @@ androidx-preference = "androidx.preference:preference-ktx:1.2.1"
 assertk = "com.willowtreeapps.assertk:assertk:0.28.1"
 
 gradlePlugins-android = { module = "com.android.tools.build:gradle", version.ref = "agp" }
+gradlePlugins-androidArtifactsSizeReport = "io.github.cdsap.android-artifacts-size-report:io.github.cdsap.android-artifacts-size-report.gradle.plugin:0.1.1"
 gradlePlugins-compose = { module = "org.jetbrains.kotlin:compose-compiler-gradle-plugin", version.ref = "kotlin" }
 gradlePlugins-dependencyGuard = { module = "com.dropbox.dependency-guard:com.dropbox.dependency-guard.gradle.plugin", version.ref = "dependencyGuard" }
 gradlePlugins-develocity = "com.gradle:develocity-gradle-plugin:3.19"
