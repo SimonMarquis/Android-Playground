@@ -8,6 +8,7 @@ on:
       - closed
 
 permissions:
+  actions: write
   contents: read
 
 env:
