@@ -19,6 +19,11 @@ jobs:
         with:
           app-id: ${{ vars.BOT_APP_ID }}
           private-key: ${{ secrets.BOT_PRIVATE_KEY }}
+      - id: get-user-id
+        run: echo "user-id=$(gh api "/users/${APP_SLUG}[bot]" --jq .id)" >> "$GITHUB_OUTPUT"
+        env:
+          APP_SLUG: ${{ steps.app-token.outputs.app-slug }}
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
       - uses: actions/checkout@v4
         with:
           ref: ${{ github.head_ref }}
@@ -33,8 +38,8 @@ jobs:
       - run: |
           if ! git diff --quiet --exit-code -- ':(glob)**/dependencies/*.txt';
           then
-            git config --global user.name "dependabot[bot]"
-            git config --global user.email "49699333+dependabot[bot]@users.noreply.github.com"
+            git config --global user.name "${APP_SLUG}[bot]"
+            git config --global user.email "${APP_USER_ID}+${APP_SLUG}[bot]@users.noreply.github.com"
             git commit -m "🤖 Update Dependency Guard baseline" -m "[dependabot skip]" -- ':(glob)**/dependencies/*.txt'
             git show
             git push
@@ -42,3 +47,6 @@ jobs:
           else
             echo "::notice::UP-TO-DATE"
           fi
+        env:
+          APP_SLUG: ${{ steps.app-token.outputs.app-slug }}
+          APP_USER_ID: ${{ steps.get-user-id.outputs.user-id }}
