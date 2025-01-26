@@ -35,5 +35,5 @@ jobs:
               gh cache delete "$key" >> $GITHUB_STEP_SUMMARY
             done
           done
-        with:
+        env:
           PR: ${{ github.event.pull_request.number }}
