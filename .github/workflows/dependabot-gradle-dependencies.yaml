@@ -14,7 +14,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  baseline:
+  dependabot-gradle-dependencies:
     runs-on: ubuntu-latest
     if: github.actor == 'dependabot[bot]' && startsWith(github.head_ref, 'dependabot/gradle/')
     steps:
