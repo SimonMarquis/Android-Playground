@@ -1,5 +1,9 @@
 {
   "name": "Android",
   "build": { "dockerfile": "Dockerfile" },
+  "features": {
+    "git-lfs": "latest",
+    "github-cli": "latest"
+  },
   "postCreateCommand": "./gradlew wrapper"
 }
