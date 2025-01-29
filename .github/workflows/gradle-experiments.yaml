@@ -11,7 +11,7 @@ permissions:
 env:
   DEVELOCITY_URL: https://scans.gradle.com
   GIT_REPO: https://github.com/SimonMarquis/Android-Playground
-  TASKS: build
+  TASKS: apiCheck dependencyGuard assembleRelease globalCiUnitTest globalCiLint
 
 jobs:
   build-cache-compatibility:
