@@ -63,7 +63,7 @@ jobs:
   build-configuration-compatibility:
     runs-on: ubuntu-latest
     env:
-      ANDROID_SDK_CACHE_DIR: ${{ runner.temp }}
+      ANDROID_SDK_CACHE_DIR: "${{ runner.temp }}"
     steps:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/setup-java
