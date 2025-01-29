@@ -1,6 +1,8 @@
 name: 🐘 Gradle experiments
 
 on:
+  pull_request:
+    branches: [ main ]
   workflow_dispatch:
   schedule:
     - cron: 0 9 * * MON
@@ -12,6 +14,7 @@ env:
   GRADLE_ENTERPRISE_URL: https://scans.gradle.com
   GIT_REPO: https://github.com/SimonMarquis/Android-Playground
   TASKS: build
+  ANDROID_SDK_CACHE_DIR: ${{ runner.temp }}
 
 jobs:
   build-cache-compatibility:
