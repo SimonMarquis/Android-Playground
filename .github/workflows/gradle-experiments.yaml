@@ -62,11 +62,11 @@ jobs:
 
   build-configuration-compatibility:
     runs-on: ubuntu-latest
-    env:
-      ANDROID_SDK_CACHE_DIR: "${{ runner.temp }}"
     steps:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/setup-java
+      - run: |
+          echo "ANDROID_SDK_CACHE_DIR=${{ runner.temp }}" >> $GITHUB_ENV
       - name: Run configuration cache experiment
         uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/experiment-config-cache@f4b4a15ed96225ae1b6d3a09201a22f166f97fc5 # v2.7.3
         with:
