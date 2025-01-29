@@ -14,7 +14,6 @@ env:
   GRADLE_ENTERPRISE_URL: https://scans.gradle.com
   GIT_REPO: https://github.com/SimonMarquis/Android-Playground
   TASKS: build
-  ANDROID_SDK_CACHE_DIR: ${{ runner.temp }}
 
 jobs:
   build-cache-compatibility:
@@ -63,6 +62,8 @@ jobs:
 
   build-configuration-compatibility:
     runs-on: ubuntu-latest
+    env:
+      ANDROID_SDK_CACHE_DIR: ${{ runner.temp }}
     steps:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/setup-java
