@@ -1,9 +1,15 @@
 {
   "name": "Android",
-  "build": { "dockerfile": "Dockerfile" },
+  "build": {
+    "dockerfile": "Dockerfile",
+    "args": {
+      "USERNAME": "codespace"
+    }
+  },
   "features": {
     "git-lfs": "latest",
     "github-cli": "latest"
   },
-  "postCreateCommand": "./gradlew wrapper"
+  "postCreateCommand": "./gradlew wrapper",
+  "remoteUser": "codespace"
 }
