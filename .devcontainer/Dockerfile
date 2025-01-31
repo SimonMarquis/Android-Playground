@@ -49,3 +49,5 @@ RUN yes | sdkmanager --licenses --sdk_root="$ANDROID_HOME" \
     && sdkmanager --list
 
 WORKDIR $HOME
+
+CMD ["/bin/bash"]

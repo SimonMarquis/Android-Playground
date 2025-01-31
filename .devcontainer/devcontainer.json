@@ -10,6 +10,7 @@
     "git-lfs": "latest",
     "github-cli": "latest"
   },
+  "terminal.integrated.defaultProfile.linux": "bash",
   "postCreateCommand": "./gradlew wrapper",
   "remoteUser": "codespace"
 }
