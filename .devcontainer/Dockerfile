@@ -4,9 +4,9 @@ LABEL maintainer="Simon Marquis <contact@simon-marquis.fr>"
 LABEL description="A Docker image for Android devs."
 LABEL version="1.0.0"
 
-ARG CMD_LINE_VERSION=11076708
+ARG CMD_LINE_VERSION=12700392
 ARG ANDROID_VERSION=35
-ARG ANDROID_BUILD_TOOLS_VERSION=35.0.2
+ARG ANDROID_BUILD_TOOLS_VERSION=35.0.1
 
 ENV ANDROID_HOME /opt/android
 ENV ANDROID_SDK_ROOT /opt/android
@@ -25,13 +25,14 @@ RUN curl https://dl.google.com/android/repository/commandlinetools-linux-${CMD_L
 
 # Install Android SDKs
 RUN yes | sdkmanager --licenses --sdk_root="$ANDROID_HOME" \
-    && sdkmanager --update --sdk_root="$ANDROID_HOME" \
     && sdkmanager --install --sdk_root="$ANDROID_HOME" \
         "build-tools;${ANDROID_BUILD_TOOLS_VERSION}" \
         "platforms;android-${ANDROID_VERSION}" \
         "platform-tools" \
         "extras;android;m2repository" \
         "extras;google;m2repository" \
+        "cmdline-tools;latest" \
+    && sdkmanager --update --sdk_root="$ANDROID_HOME" \
     && sdkmanager --list
 
 # Clean up
