@@ -31,7 +31,6 @@ RUN yes | sdkmanager --licenses --sdk_root="$ANDROID_HOME" \
         "platform-tools" \
         "extras;android;m2repository" \
         "extras;google;m2repository" \
-        "cmdline-tools;latest" \
     && sdkmanager --update --sdk_root="$ANDROID_HOME" \
     && sdkmanager --list
 
