@@ -10,6 +10,11 @@
     "git-lfs": "latest",
     "github-cli": "latest"
   },
+  "hostRequirements": {
+    "cpus": 4,
+    "memory": "8gb",
+    "storage": "32gb"
+  },
   "settings": {
     "terminal.integrated.defaultProfile.linux": "bash",
     "terminal.integrated.profiles.linux": {
