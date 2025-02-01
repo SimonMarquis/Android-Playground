@@ -16,7 +16,7 @@ java {
 
 kotlin {
     compilerOptions {
-        allWarningsAsErrors = true
+        allWarningsAsErrors = providers.gradleProperty("playground.warningsAsErrors").map(String::toBoolean).getOrElse(true)
         jvmTarget = JVM_17
     }
     explicitApi()

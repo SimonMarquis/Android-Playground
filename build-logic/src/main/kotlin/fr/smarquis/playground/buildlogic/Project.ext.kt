@@ -82,6 +82,7 @@ internal fun <T> Project.getOrCreateExtra(
 }
 
 internal inline fun <reified T : KotlinBaseExtension> Project.configureKotlin(
+    properties: PlaygroundProperties = playground(),
     crossinline configure: T.() -> Unit = {},
 ) {
     configure<JavaPluginExtension> {
@@ -95,7 +96,7 @@ internal inline fun <reified T : KotlinBaseExtension> Project.configureKotlin(
             else -> TODO("Unsupported project extension $this ${T::class}")
         }.apply {
             jvmTarget = JvmTarget.JVM_11
-            allWarningsAsErrors = true
+            allWarningsAsErrors = properties.warningsAsErrors
         }
         explicitApi()
         configure()
