@@ -8,18 +8,19 @@
 
 #### 🐘 Gradle
 
-| Task                                                           | Description                                                                                 |
-|----------------------------------------------------------------|---------------------------------------------------------------------------------------------|
-| `gradlew assembleDebug`                                        | Build debug APK                                                                             |
-| `gradlew assembleRelease`                                      | Build release APK (optimized & minified)                                                    |
-| `gradlew apiCheck`                                             | Checks project public API ([BCV](https://github.com/Kotlin/binary-compatibility-validator)) |
-| `gradlew apiDump`                                              | Dumps project public API ([BCV](https://github.com/Kotlin/binary-compatibility-validator))  |
-| `gradlew dependencyGuard`                                      | Checks project dependencies                                                                 |
-| `gradlew dependencyGuardBaseline`                              | Dumps project dependencies                                                                  |
-| `gradlew globalCiLint`                                         | CI Lint checks (html/sarif/txt/xml)                                                         |
-| `gradlew globalCiUnitTest`                                     | CI unit tests (html/xml)                                                                    |
-| `gradlew assembleRelease -Pplayground.compose.compilerMetrics` | Compose compiler metrics                                                                    |
-| `gradlew assembleRelease -Pplayground.compose.compilerReports` | Compose compiler reports                                                                    |
+| Task                                                             | Description                                                                                 |
+|------------------------------------------------------------------|---------------------------------------------------------------------------------------------|
+| `gradlew assembleDebug`                                          | Build debug APK                                                                             |
+| `gradlew assembleRelease`                                        | Build release APK (optimized & minified)                                                    |
+| `gradlew apiCheck`                                               | Checks project public API ([BCV](https://github.com/Kotlin/binary-compatibility-validator)) |
+| `gradlew apiDump`                                                | Dumps project public API ([BCV](https://github.com/Kotlin/binary-compatibility-validator))  |
+| `gradlew dependencyGuard`                                        | Checks project dependencies                                                                 |
+| `gradlew dependencyGuardBaseline`                                | Dumps project dependencies                                                                  |
+| `gradlew globalCiLint`                                           | CI Lint checks (html/sarif/txt/xml)                                                         |
+| `gradlew globalCiUnitTest`                                       | CI unit tests (html/xml)                                                                    |
+| `gradlew assembleRelease -Pplayground.compose.compilerMetrics`   | Compose compiler metrics                                                                    |
+| `gradlew assembleRelease -Pplayground.compose.compilerReports`   | Compose compiler reports                                                                    |
+| `gradlew --write-verification-metadata pgp,sha256 --export-keys` | Generates verification metadata & keyring                                                   |
 
 #### 🐙 GitHub workflows
 
