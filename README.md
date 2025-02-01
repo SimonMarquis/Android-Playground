@@ -8,7 +8,7 @@
 
 #### 🐘 Gradle
 
-| Gradle Task                                                    |                                                                                             |
+| Task                                                           | Description                                                                                 |
 |----------------------------------------------------------------|---------------------------------------------------------------------------------------------|
 | `gradlew assembleDebug`                                        | Build debug APK                                                                             |
 | `gradlew assembleRelease`                                      | Build release APK (optimized & minified)                                                    |
@@ -31,14 +31,14 @@
 - [![🐘 Gradle experiments](https://github.com/SimonMarquis/Android-Playground/actions/workflows/gradle-experiments.yaml/badge.svg)](https://github.com/SimonMarquis/Android-Playground/actions/workflows/gradle-experiments.yaml)
 - [![🐘 Gradle Wrapper updater](https://github.com/SimonMarquis/Android-Playground/actions/workflows/gradle-wrapper-updater.yaml/badge.svg)](https://github.com/SimonMarquis/Android-Playground/actions/workflows/gradle-wrapper-updater.yaml)
 
-#### 🐙GitHub composite actions
+#### 🐙 GitHub composite actions
 
-- [📦 Archive JUnit reports](.github/actions/archive-junit-reports/action.yaml)
-- [📦 Archive Lint reports](.github/actions/archive-lint-reports/action.yaml)
-- [👮 Check git-lfs files](.github/actions/check-git-lfs/action.yaml)
-- [🐘 Setup Gradle](.github/actions/setup-gradle/action.yaml)
-- [🐘 Setup gradle.properties](.github/actions/setup-gradle-properties/action.yaml)
-- [☕️ Setup Java](.github/actions/setup-java/action.yaml)
+- [`📦 Archive JUnit reports`](.github/actions/archive-junit-reports/action.yaml)
+- [`📦 Archive Lint reports`](.github/actions/archive-lint-reports/action.yaml)
+- [`👮 Check git-lfs files`](.github/actions/check-git-lfs/action.yaml)
+- [`🐘 Setup Gradle`](.github/actions/setup-gradle/action.yaml)
+- [`🐘 Setup gradle.properties`](.github/actions/setup-gradle-properties/action.yaml)
+- [`☕️ Setup Java`](.github/actions/setup-java/action.yaml)
 
 <details>
 <summary><h4>🏗️ Architecture…</h4></summary>
