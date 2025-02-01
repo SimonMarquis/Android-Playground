@@ -20,6 +20,8 @@ internal class PlaygroundProperties private constructor(private val project: Pro
     val libraries by lazy { PlaygroundLibraries(catalog) }
     val versions by lazy { PlaygroundVersions(catalog) }
 
+    val warningsAsErrors
+        get() = project.providers.gradleProperty("playground.warningsAsErrors").toBoolean().getOrElse(true)
     val isRerunTest
         get() = project.providers.gradleProperty("playground.rerun-tests").isPresent
     val ciUnitTestVariant
@@ -35,7 +37,7 @@ internal class PlaygroundProperties private constructor(private val project: Pro
     val ciLintVariant
         get() = project.providers.gradleProperty("playground.ci-lint.variant").orElse("release")
     val lintWarningsAsErrors
-        get() = project.providers.gradleProperty("playground.lint.warningsAsErrors").toBoolean().getOrElse(true)
+        get() = project.providers.gradleProperty("playground.lint.warningsAsErrors").toBoolean().getOrElse(warningsAsErrors)
     val composeCompilerMetrics
         get() = project.providers.gradleProperty("playground.compose.compilerMetrics").isPresent
     val composeCompilerReports
