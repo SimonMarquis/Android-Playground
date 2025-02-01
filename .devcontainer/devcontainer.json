@@ -10,7 +10,13 @@
     "git-lfs": "latest",
     "github-cli": "latest"
   },
-  "terminal.integrated.defaultProfile.linux": "bash",
-  "postCreateCommand": "./gradlew wrapper",
+  "settings": {
+    "terminal.integrated.defaultProfile.linux": "bash",
+    "terminal.integrated.profiles.linux": {
+      "bash": {
+        "path": "/bin/bash"
+      }
+    }
+  },
   "remoteUser": "codespace"
 }
