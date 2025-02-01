@@ -6,6 +6,22 @@
       "USERNAME": "codespace"
     }
   },
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "bash",
+        "terminal.integrated.profiles.linux": {
+          "bash": {
+            "path": "/bin/bash"
+          }
+        }
+      },
+      "extensions": [
+        "tamasfe.even-better-toml",
+        "vscjava.vscode-gradle"
+      ]
+    }
+  },
   "features": {
     "git-lfs": "latest",
     "github-cli": "latest"
@@ -14,14 +30,6 @@
     "cpus": 4,
     "memory": "8gb",
     "storage": "32gb"
-  },
-  "settings": {
-    "terminal.integrated.defaultProfile.linux": "bash",
-    "terminal.integrated.profiles.linux": {
-      "bash": {
-        "path": "/bin/bash"
-      }
-    }
   },
   "postCreateCommand": "./gradlew",
   "remoteUser": "codespace"
