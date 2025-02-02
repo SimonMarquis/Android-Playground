@@ -29,8 +29,8 @@ internal class PlaygroundAndroidApplicationPlugin : Plugin<Project> {
                     proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"))
                 }
                 release {
-                    isMinifyEnabled = true
-                    isShrinkResources = true
+                    isMinifyEnabled = playground().isMinifyEnabled
+                    isShrinkResources = isMinifyEnabled
                     signingConfig = signingConfigs["debug"]
                     proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
                     // https://github.com/Kotlin/kotlinx.coroutines#avoiding-including-the-debug-infrastructure-in-the-resulting-apk

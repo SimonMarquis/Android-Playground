@@ -22,6 +22,8 @@ internal class PlaygroundProperties private constructor(private val project: Pro
 
     val warningsAsErrors
         get() = project.providers.gradleProperty("playground.warningsAsErrors").toBoolean().getOrElse(true)
+    val isMinifyEnabled
+        get() = project.providers.gradleProperty("playground.isMinifyEnabled").toBoolean().getOrElse(true)
     val isRerunTest
         get() = project.providers.gradleProperty("playground.rerun-tests").isPresent
     val ciUnitTestVariant
