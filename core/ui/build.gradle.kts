@@ -8,4 +8,5 @@ dependencies {
     api(libs.androidx.compose.ui.text)
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.compose.ui)
+    implementation(libs.androidx.splashscreen)
 }
