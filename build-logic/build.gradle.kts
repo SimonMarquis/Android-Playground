@@ -33,6 +33,8 @@ dependencies {
     compileOnly(libs.gradlePlugins.hilt)
     compileOnly(libs.gradlePlugins.powerAssert)
     implementation(libs.gradlePlugins.androidArtifactsSizeReport)
+    implementation(libs.android.tools.common)
+    implementation(libs.assertk)
     lintChecks(libs.androidx.lint.gradle)
 }
 

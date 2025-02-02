@@ -4,10 +4,10 @@ minSdk = "24"
 targetSdk = "35"
 
 agp = "8.8.0"
+android-tools = "31.8.0"
 hilt = "2.55"
 kotlin = "2.1.10"
 ksp = "2.1.10-1.0.29"
-lint = "31.8.0"
 dependencyGuard = "0.5.0"
 androidx-navigation = "2.8.6"
 
@@ -16,6 +16,7 @@ androidx-navigation = "2.8.6"
 [libraries]
 android-desugarJdkLibs = "com.android.tools:desugar_jdk_libs:2.1.4"
 android-security-lint = "com.android.security.lint:lint:1.0.3"
+android-tools-common = { module = "com.android.tools:common", version.ref = "android-tools" }
 
 androidx-activity-compose = "androidx.activity:activity-compose:1.10.0"
 androidx-annotations = "androidx.annotation:annotation:1.9.1"
@@ -79,10 +80,10 @@ kotlinx-datetime = "org.jetbrains.kotlinx:kotlinx-datetime:0.6.1"
 kotlinx-serialization-bom = "org.jetbrains.kotlinx:kotlinx-serialization-bom:1.8.0"
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json" }
 
-lint = { module = "com.android.tools.lint:lint", version.ref = "lint" }
-lint-api = { module = "com.android.tools.lint:lint-api", version.ref = "lint" }
-lint-checks = { module = "com.android.tools.lint:lint-checks", version.ref = "lint" }
-lint-tests = { module = "com.android.tools.lint:lint-tests", version.ref = "lint" }
+lint = { module = "com.android.tools.lint:lint", version.ref = "android-tools" }
+lint-api = { module = "com.android.tools.lint:lint-api", version.ref = "android-tools" }
+lint-checks = { module = "com.android.tools.lint:lint-checks", version.ref = "android-tools" }
+lint-tests = { module = "com.android.tools.lint:lint-tests", version.ref = "android-tools" }
 
 okio = "com.squareup.okio:okio:3.10.2"
 

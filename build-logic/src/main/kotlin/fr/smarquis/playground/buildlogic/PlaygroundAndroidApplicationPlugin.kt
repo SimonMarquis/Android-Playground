@@ -18,6 +18,9 @@ internal class PlaygroundAndroidApplicationPlugin : Plugin<Project> {
         androidApplication {
             defaultConfig {
                 targetSdk = versions.targetSdk.toString().toInt()
+                androidResources {
+                    localeFilters += "en"
+                }
             }
             buildTypes {
                 debug {

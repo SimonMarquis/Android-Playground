@@ -38,6 +38,8 @@ internal class PlaygroundProperties private constructor(private val project: Pro
         get() = project.providers.gradleProperty("playground.ci-lint.variant").orElse("release")
     val lintWarningsAsErrors
         get() = project.providers.gradleProperty("playground.lint.warningsAsErrors").toBoolean().getOrElse(warningsAsErrors)
+    val ciBadgingVariant
+        get() = project.providers.gradleProperty("playground.ci-badging.variant").orElse("release")
     val composeCompilerMetrics
         get() = project.providers.gradleProperty("playground.compose.compilerMetrics").isPresent
     val composeCompilerReports

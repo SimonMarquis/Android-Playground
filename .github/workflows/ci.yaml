@@ -47,6 +47,7 @@ jobs:
 
       - run: ./gradlew apiCheck --quiet
       - run: ./gradlew dependencyGuard --quiet
+      - run: ./gradlew globalCiBadging --quiet
 
   build:
     name: 👷 Build
