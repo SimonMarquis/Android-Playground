@@ -42,6 +42,7 @@ androidx-lint-gradle = "androidx.lint:lint-gradle:1.0.0-alpha03"
 androidx-material3 = { module = "androidx.compose.material3:material3" }
 androidx-navigation = { module = "androidx.navigation:navigation-compose", version.ref = "androidx-navigation" }
 androidx-preference = "androidx.preference:preference-ktx:1.2.1"
+androidx-splashscreen = "androidx.core:core-splashscreen:1.0.1"
 
 assertk = "com.willowtreeapps.assertk:assertk:0.28.1"
 
