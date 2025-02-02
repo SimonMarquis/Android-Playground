@@ -17,8 +17,7 @@
         }
       },
       "extensions": [
-        "tamasfe.even-better-toml",
-        "vscjava.vscode-gradle"
+        "tamasfe.even-better-toml"
       ]
     }
   },
