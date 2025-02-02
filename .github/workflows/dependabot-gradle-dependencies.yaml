@@ -44,7 +44,7 @@ jobs:
 
       - id: gradle-signature-verification
         run: |
-          ./gradlew --write-verification-metadata pgp,sha256 --export-keys help
+          ./gradlew --write-verification-metadata pgp,sha256 --export-keys
 
           if ! git diff --quiet --exit-code -- 'gradle/verification-keyring.keys' 'gradle/verification-metadata.xml';
           then
