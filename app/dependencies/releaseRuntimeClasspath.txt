@@ -47,6 +47,7 @@ androidx.compose.ui:ui:1.7.7
 androidx.compose:compose-bom:2025.01.01
 androidx.concurrent:concurrent-futures:1.1.0
 androidx.core:core-ktx:1.15.0
+androidx.core:core-splashscreen:1.0.1
 androidx.core:core:1.15.0
 androidx.cursoradapter:cursoradapter:1.0.0
 androidx.customview:customview-poolingcontainer:1.0.0

@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
     <style name="PlaygroundAppTheme" parent="Theme.AppCompat.DayNight" tools:ignore="ResourceName" />
+    <style name="PlaygroundAppTheme.SplashScreen" parent="Theme.SplashScreen" tools:ignore="ResourceName">
+        <item name="postSplashScreenTheme">@style/PlaygroundAppTheme</item>
+    </style>
 </resources>
