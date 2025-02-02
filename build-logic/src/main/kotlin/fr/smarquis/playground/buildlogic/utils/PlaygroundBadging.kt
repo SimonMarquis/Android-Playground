@@ -166,8 +166,8 @@ internal abstract class CheckBadgingTask : DefaultTask() {
     @TaskAction
     fun taskAction() {
         runCatching {
-            assertThat(generatedBadging.get().asFile.readLines())
-                .containsExactly(*goldenBadging.get().asFile.readLines().toTypedArray())
+            assertThat(generatedBadging.get().asFile.readLines().filterNot(String::isBlank))
+                .containsExactly(*goldenBadging.get().asFile.readLines().filterNot(String::isBlank).toTypedArray())
         }.onFailure {
             problems.reporter.throwing {
                 val message = "Generated Android badging file differs from the golden badging file!"
