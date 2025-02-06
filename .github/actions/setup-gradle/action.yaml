@@ -1,6 +1,10 @@
 name: 🐘 Setup Gradle
 description: Gradle setup and wrapper validation
 inputs:
+  cache-disabled:
+    description: When 'true', all caching is disabled. No entries will be written to or read from the cache.
+    required: false
+    default: false
   cache-encryption-key:
     description: Gradle Configuration Cache encryption key
     required: false
@@ -9,8 +13,9 @@ runs:
   steps:
     - uses: gradle/actions/setup-gradle@94baf225fe0a508e581a564467443d0e2379123b # v4.3.0
       with:
-        validate-wrappers: true
-        cache-cleanup: on-success
-        gradle-home-cache-strict-match: true
         add-job-summary-as-pr-comment: on-failure
+        cache-cleanup: on-success
+        cache-disabled: ${{ inputs.cache-disabled }}
         cache-encryption-key: ${{ inputs.cache-encryption-key }}
+        gradle-home-cache-strict-match: true
+        validate-wrappers: true
