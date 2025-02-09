@@ -7,6 +7,7 @@ import androidx.lifecycle.ProcessLifecycleOwner
 import androidx.lifecycle.lifecycleScope
 import dagger.hilt.android.HiltAndroidApp
 import dagger.hilt.android.qualifiers.ApplicationContext
+import fr.smarquis.playground.core.android.ProfileVerifierLogger
 import fr.smarquis.playground.core.android.StrictMode
 import fr.smarquis.playground.core.android.UncaughtExceptionHandler
 import fr.smarquis.playground.domain.settings.SettingsSource
@@ -26,9 +27,13 @@ public class PlaygroundApplication : Application() {
     @Inject
     public lateinit var settingsSource: SettingsSource
 
+    @Inject
+    public lateinit var profileVerifierLogger: ProfileVerifierLogger
+
     override fun onCreate() {
         super.onCreate()
         registerSettings()
+        profileVerifierLogger()
     }
 
     public fun isDebuggable(): Boolean = 0 != applicationInfo.flags and FLAG_DEBUGGABLE
