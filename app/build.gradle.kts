@@ -18,7 +18,8 @@ android {
 }
 
 dependencies {
-    baselineProfile(projects.baselineprofile)
+    baselineProfile(projects.profiling)
+
     lintChecks(projects.lint)
 
     implementation(libs.androidx.core)

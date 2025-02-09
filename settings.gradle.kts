@@ -79,7 +79,6 @@ rootProject.name = "Android-Playground"
 
 include(
     ":app",
-    ":baselineprofile",
     ":lint",
     ":feature:home",
     ":core:android",
@@ -92,6 +91,7 @@ include(
     ":data:dice",
     ":data:settings",
     ":platform",
+    ":profiling",
 )
 
 with(VERSION_17) {

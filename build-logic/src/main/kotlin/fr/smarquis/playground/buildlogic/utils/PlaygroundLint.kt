@@ -4,6 +4,7 @@ import com.android.build.api.dsl.Lint
 import fr.smarquis.playground.buildlogic.PlaygroundProperties
 import fr.smarquis.playground.buildlogic.androidExtension
 import fr.smarquis.playground.buildlogic.capitalized
+import fr.smarquis.playground.buildlogic.isAndroidTest
 import fr.smarquis.playground.buildlogic.playground
 import org.gradle.api.Project
 import org.gradle.api.Task
@@ -30,6 +31,7 @@ internal object PlaygroundLint {
     fun configureSubproject(project: Project) = with(project) {
         val globalTask = rootProject.tasks.named(GLOBAL_CI_LINT_TASK_NAME)
         pluginManager.withPlugin("com.android.base") {
+            if (project.isAndroidTest) return@withPlugin // Android Test modules are special, SourceSet with name 'main' not found...
             createAndroidCiLintTask(globalTask)
         }
         pluginManager.withPlugin("org.jetbrains.kotlin.jvm") {
