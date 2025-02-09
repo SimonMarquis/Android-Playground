@@ -129,3 +129,7 @@ jobs:
           html: "**/build/reports/lint-results-*.html"
           sarif: "**/build/reports/lint-results-*.sarif"
           xml: "**/build/reports/lint-results-*.xml"
+      - uses: github/codeql-action/init@v3
+        with:
+          languages: kotlin
+      - uses: github/codeql-action/analyze@v3
