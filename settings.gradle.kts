@@ -114,7 +114,7 @@ gradle.lifecycle.afterProject {
     // Ensures our base plugin is applied everywhere
     require(plugins.hasPlugin("playground.base")) {
         val sortedPlugins = plugins.toList().map(Plugin<Any>::toString).sorted()
-        """👮 $this is missing base plugin!\n${sortedPlugins.joinToString("\n")}"""
+        "👮 $this is missing base plugin!\n${sortedPlugins.joinToString("\n")}"
     }
 }
 
