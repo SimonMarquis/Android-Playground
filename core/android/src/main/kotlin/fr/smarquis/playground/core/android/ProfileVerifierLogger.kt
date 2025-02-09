@@ -37,6 +37,6 @@ public class ProfileVerifierLogger @Inject constructor() {
         RESULT_CODE_ERROR_CANT_WRITE_PROFILE_VERIFICATION_RESULT_CACHE_FILE -> "ERROR_CANT_WRITE_PROFILE_VERIFICATION_RESULT_CACHE_FILE"
         RESULT_CODE_ERROR_UNSUPPORTED_API_VERSION -> "ERROR_UNSUPPORTED_API_VERSION"
         else -> "Unknown result code [$this]"
-
     }
+
 }
