@@ -19,6 +19,8 @@
 | `gradlew globalCiBadging`                                        | CI badging checks                                                                           |
 | `gradlew globalCiLint`                                           | CI Lint checks (html/sarif/txt/xml)                                                         |
 | `gradlew globalCiUnitTest`                                       | CI unit tests (html/xml)                                                                    |
+| `gradlew generateBaselineProfile`                                | Generates Baseline & Startup profiles                                                       |
+| `gradlew connectedBenchmarkAndroidTest`                          | Runs benchmark tests                                                                        |
 | `gradlew assembleRelease -Pplayground.compose.compilerMetrics`   | Compose compiler metrics                                                                    |
 | `gradlew assembleRelease -Pplayground.compose.compilerReports`   | Compose compiler reports                                                                    |
 | `gradlew --write-verification-metadata pgp,sha256 --export-keys` | Generates verification metadata & keyring                                                   |
