@@ -4,3 +4,5 @@
 *.{cmd,[cC][mM][dD]} text eol=crlf
         
 **/src/test/snapshots/**/*.png filter=lfs diff=lfs merge=lfs -text
+
+**/generated/baselineProfiles/*-prof.txt filter=lfs diff=lfs merge=lfs -text
