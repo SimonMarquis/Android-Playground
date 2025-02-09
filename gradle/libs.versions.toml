@@ -119,3 +119,4 @@ playground-kotlin-jvm = { id = "playground.kotlin-jvm" }
 playground-android-application = { id = "playground.android-application" }
 playground-android-library = { id = "playground.android-library" }
 playground-android-compose = { id = "playground.android-compose" }
+playground-android-test = { id = "playground.android-test" }

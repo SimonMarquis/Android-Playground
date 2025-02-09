@@ -2,6 +2,7 @@ package fr.smarquis.playground.buildlogic.utils
 
 import fr.smarquis.playground.buildlogic.PlaygroundProperties
 import fr.smarquis.playground.buildlogic.capitalized
+import fr.smarquis.playground.buildlogic.isAndroidTest
 import fr.smarquis.playground.buildlogic.isCi
 import fr.smarquis.playground.buildlogic.libs
 import fr.smarquis.playground.buildlogic.playground
@@ -43,6 +44,7 @@ internal object PlaygroundUnitTests {
         }
 
     fun configureSubproject(project: Project) = with(project) {
+        if (isAndroidTest) return@with // Android Test modules are special, they don't have tests...
         val globalTask = rootProject.tasks.named(GLOBAL_CI_UNIT_TEST_TASK_NAME)
         pluginManager.withPlugin("com.android.base") {
             createAndroidCiUnitTestTask(globalTask)
