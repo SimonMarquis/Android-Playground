@@ -50,6 +50,7 @@ gradlePlugin {
         create("PlaygroundAndroidApplicationPlugin", libs.plugins.playground.android.application)
         create("PlaygroundAndroidComposePlugin", libs.plugins.playground.android.compose)
         create("PlaygroundAndroidLibraryPlugin", libs.plugins.playground.android.library)
+        create("PlaygroundAndroidTestPlugin", libs.plugins.playground.android.test)
         create("PlaygroundBasePlugin", libs.plugins.playground.base)
         create("PlaygroundHiltPlugin", libs.plugins.playground.hilt)
         create("PlaygroundKotlinJvmPlugin", libs.plugins.playground.kotlin.jvm)
