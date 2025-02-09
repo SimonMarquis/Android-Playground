@@ -2,6 +2,7 @@ package fr.smarquis.playground.feature.home
 
 import android.util.DisplayMetrics
 import android.util.DisplayMetrics.DENSITY_XXXHIGH
+import androidx.activity.compose.ReportDrawn
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -45,6 +46,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType.Companion.LongPress
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalHapticFeedback
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.SpanStyle
@@ -87,6 +89,7 @@ internal fun HomeScreen(
         reset = viewModel::reset,
         update = viewModel::update,
     )
+    ReportDrawn()
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -104,6 +107,7 @@ private fun HomeScreenContent(
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
     Scaffold(
         modifier = modifier
+            .testTag("home")
             .fillMaxSize()
             .background(PlaygroundTheme.colorScheme.background)
             .nestedScroll(scrollBehavior.nestedScrollConnection),
@@ -128,6 +132,7 @@ private fun HomeScreenContent(
         val haptic = LocalHapticFeedback.current
         LazyColumn(
             contentPadding = contentPadding,
+            modifier = Modifier.testTag("home::list")
         ) {
             category(key = "tools", title = "Tools", icon = Icons.Default.Settings)
             entry(
@@ -254,7 +259,9 @@ private fun LazyListScope.category(
     modifier: Modifier = Modifier.fillMaxWidth(),
 ): Unit = item(key = key, contentType = "category") {
     Row(
-        modifier = modifier.padding(top = 16.dp, bottom = 16.dp),
+        modifier = modifier
+            .testTag(key)
+            .padding(top = 16.dp, bottom = 16.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
         Icon(
@@ -284,6 +291,7 @@ private fun LazyListScope.entry(
 ): Unit = item(key = key, contentType = "entry") {
     Column(
         modifier = modifier
+            .testTag(key)
             .run {
                 if (onClick == null) combinedClickable(onClick = { }, onLongClick = onLongClick)
                 else combinedClickable(onClick = onClick, onLongClick = onLongClick)
@@ -312,6 +320,7 @@ private fun LazyListScope.toggle(
 ): Unit = item(key = key, contentType = "toggle") {
     Row(
         modifier = modifier
+            .testTag(key)
             .clickable { onCheckedChange(!checked) }
             .padding(horizontal = 56.dp, vertical = 8.dp),
         verticalAlignment = Alignment.CenterVertically,

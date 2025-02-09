@@ -1,7 +1,9 @@
 plugins {
+    idea
     alias(libs.plugins.playground.android.application)
     alias(libs.plugins.playground.android.compose)
     alias(libs.plugins.playground.hilt)
+    alias(libs.plugins.androidx.baselineprofile)
 }
 
 android {
@@ -10,15 +12,20 @@ android {
         versionCode = 1
         versionName = "1.0"
     }
+    baselineProfile {
+        dexLayoutOptimization = true
+    }
 }
 
 dependencies {
+    baselineProfile(projects.baselineprofile)
     lintChecks(projects.lint)
 
     implementation(libs.androidx.core)
     implementation(libs.androidx.datastore)
     implementation(libs.androidx.navigation)
     implementation(libs.androidx.lifecycle.process)
+    implementation(libs.androidx.profileinstaller)
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.splashscreen)
     implementation(libs.kotlinx.datetime)
@@ -31,4 +38,11 @@ dependencies {
     implementation(projects.domain.settings)
     implementation(projects.data.dice)
     implementation(projects.data.settings)
+}
+
+idea {
+    module {
+        // Exclude baseline profiles: **/generated/baselineProfiles/*-prof.txt
+        excludeDirs.add(file("src/release/generated"))
+    }
 }

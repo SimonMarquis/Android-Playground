@@ -79,6 +79,7 @@ rootProject.name = "Android-Playground"
 
 include(
     ":app",
+    ":baselineprofile",
     ":lint",
     ":feature:home",
     ":core:android",
