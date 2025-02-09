@@ -1,4 +1,5 @@
 plugins {
+    idea
     alias(libs.plugins.playground.android.application)
     alias(libs.plugins.playground.android.compose)
     alias(libs.plugins.playground.hilt)
@@ -37,4 +38,11 @@ dependencies {
     implementation(projects.domain.settings)
     implementation(projects.data.dice)
     implementation(projects.data.settings)
+}
+
+idea {
+    module {
+        // Exclude baseline profiles: **/generated/baselineProfiles/*-prof.txt
+        excludeDirs.add(file("src/release/generated"))
+    }
 }
