@@ -21,7 +21,7 @@ jobs:
       matrix:
         experiment: [1, 2, 3]
     env:
-      GIT_REPO: "file://${{ GITHUB_WORKSPACE }}"
+      GIT_REPO: "file://$GITHUB_WORKSPACE"
     steps:
       - uses: actions/checkout@v4
         with:
