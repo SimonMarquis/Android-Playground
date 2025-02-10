@@ -13,7 +13,6 @@ permissions:
 env:
   DEVELOCITY_URL: https://scans.gradle.com
   GIT_REPO: "file://$GITHUB_WORKSPACE"
-  GIT_BRANCH: "main"
   TASKS: apiCheck dependencyGuard assembleRelease globalCiUnitTest globalCiLint
 
 jobs:
@@ -26,6 +25,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           lfs: true
+          fetch-depth: 0
       - uses: ./.github/actions/setup-java
       - uses: ./.github/actions/setup-gradle-properties
       - name: Download latest version of the validation scripts
