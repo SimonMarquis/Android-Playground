@@ -12,7 +12,6 @@ permissions:
 
 env:
   DEVELOCITY_URL: https://scans.gradle.com
-  GIT_REPO: "file://$GITHUB_WORKSPACE"
   TASKS: apiCheck dependencyGuard assembleRelease globalCiUnitTest globalCiLint
 
 jobs:
@@ -21,6 +20,8 @@ jobs:
     strategy:
       matrix:
         experiment: [1, 2, 3]
+    env:
+      GIT_REPO: "file://${{ GITHUB_WORKSPACE }}"
     steps:
       - uses: actions/checkout@v4
         with:
@@ -36,7 +37,6 @@ jobs:
         uses: gradle/develocity-build-validation-scripts/.github/actions/gradle/experiment-1@f4b4a15ed96225ae1b6d3a09201a22f166f97fc5 # v2.7.3
         with:
           gitRepo: ${{ env.GIT_REPO }}
-          gitBranch: refs/remotes/pull/80/merge # ${{ github.event.repository.default_branch }}
           tasks: ${{ env.TASKS }}
           develocityUrl: ${{ env.DEVELOCITY_URL }}
       - name: Run experiment 2
@@ -44,7 +44,6 @@ jobs:
         uses: gradle/develocity-build-validation-scripts/.github/actions/gradle/experiment-2@f4b4a15ed96225ae1b6d3a09201a22f166f97fc5 # v2.7.3
         with:
           gitRepo: ${{ env.GIT_REPO }}
-          gitBranch: refs/remotes/pull/80/merge # ${{ github.event.repository.default_branch }}
           tasks: ${{ env.TASKS }}
           develocityUrl: ${{ env.DEVELOCITY_URL }}
           failIfNotFullyCacheable: true
@@ -53,7 +52,6 @@ jobs:
         uses: gradle/develocity-build-validation-scripts/.github/actions/gradle/experiment-3@f4b4a15ed96225ae1b6d3a09201a22f166f97fc5 # v2.7.3
         with:
           gitRepo: ${{ env.GIT_REPO }}
-          gitBranch: refs/remotes/pull/80/merge # ${{ github.event.repository.default_branch }}
           tasks: ${{ env.TASKS }}
           develocityUrl: ${{ env.DEVELOCITY_URL }}
           failIfNotFullyCacheable: true
