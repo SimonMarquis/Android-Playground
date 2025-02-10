@@ -2,6 +2,8 @@ name: 🐘 Gradle experiments
 
 on:
   workflow_dispatch:
+  pull_request:
+    branches: [ main ]
   schedule:
     - cron: 0 9 * * MON
 
@@ -10,7 +12,7 @@ permissions:
 
 env:
   DEVELOCITY_URL: https://scans.gradle.com
-  GIT_REPO: https://github.com/SimonMarquis/Android-Playground
+  GIT_REPO: "file://$GITHUB_WORKSPACE"
   TASKS: apiCheck dependencyGuard assembleRelease globalCiUnitTest globalCiLint
 
 jobs:
@@ -21,7 +23,10 @@ jobs:
         experiment: [1, 2, 3]
     steps:
       - uses: actions/checkout@v4
+        with:
+          lfs: true
       - uses: ./.github/actions/setup-java
+      - uses: ./.github/actions/setup-gradle-properties
       - name: Download latest version of the validation scripts
         uses: gradle/develocity-build-validation-scripts/.github/actions/gradle/download@f4b4a15ed96225ae1b6d3a09201a22f166f97fc5 # v2.7.3
         with:
