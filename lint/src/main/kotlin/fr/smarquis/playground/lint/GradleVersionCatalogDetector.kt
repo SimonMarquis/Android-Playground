@@ -30,11 +30,13 @@ public class GradleVersionCatalogDetector : Detector(), TomlScanner, GradleScann
 
     private fun LintTomlDocument.checkSort(context: TomlContext) {
         listOfNotNull(bundles, libraries, plugins, versions).forEach {
-            it.getMappedValues().toList().fold("") { lastKey, (key, library: LintTomlValue) ->
-                if (key >= lastKey) return@fold key
-                context.report(SORT, library.keyOrFullLocation(), SORT.getBriefDescription(RAW))
-                lastKey
-            }
+            it.getMappedValues().toList()
+                .filterNot { context.isSuppressedWithComment(it.second.getKeyStartOffset(), SORT) }
+                .fold("") { lastKey, (key, library: LintTomlValue) ->
+                    if (key >= lastKey) return@fold key
+                    context.report(SORT, library.keyOrFullLocation(), SORT.getBriefDescription(RAW))
+                    lastKey
+                }
         }
     }
 
