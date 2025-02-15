@@ -5,7 +5,9 @@ import com.android.tools.lint.checks.infrastructure.TestFiles.toml
 import fr.smarquis.playground.lint.GradleVersionCatalogDetector.Companion.BANNED_DEPENDENCY_NAME_REGEX
 import fr.smarquis.playground.lint.GradleVersionCatalogDetector.Companion.CATALOG_NAME
 import fr.smarquis.playground.lint.GradleVersionCatalogDetector.Companion.DEPENDENCY_NAME
+import fr.smarquis.playground.lint.GradleVersionCatalogDetector.Companion.SIMPLIFICATION
 import fr.smarquis.playground.lint.GradleVersionCatalogDetector.Companion.SORT
+import fr.smarquis.playground.lint.GradleVersionCatalogDetector.Companion.VERSION_INLINING
 import org.intellij.lang.annotations.Language
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
@@ -51,7 +53,6 @@ class GradleVersionCatalogDetectorTest : LintDetectorTest() {
         )
         .cleanup()
 
-
     @Test
     fun `SORT issue`() = lint()
         .issues(SORT)
@@ -77,6 +78,106 @@ class GradleVersionCatalogDetectorTest : LintDetectorTest() {
             baz = "fr.smarquis:baz:1.0.0"
             ~~~
             2 errors, 0 warnings
+            """.trimIndent(),
+        )
+        .cleanup()
+
+    @Test
+    fun `VERSION_INLINING issue`() = lint()
+        .issues(VERSION_INLINING)
+        .files(
+            `versions-toml`(
+                "libs",
+                """
+                [versions]
+                FOO = "1.2.3"
+                BAR = "3.2.1"
+                OTHER = "1"
+                [libraries]
+                foo = { module = "fr.smarquis:foo", version.ref = "FOO" }
+                other = { module = "fr.smarquis:other", version.ref = "OTHER" }
+                [plugins]
+                bar = { id = "fr.smarquis.bar", version.ref = "BAR" }
+                other = { id = "fr.smarquis.other", version.ref = "OTHER" }
+                """.trimIndent(),
+            ),
+        )
+        .run()
+        .expect(
+            """
+            ../gradle/libs.versions.toml:2: Error: Version is used only once, it can be inlined [GradleVersionCatalogVersionInlining]
+            FOO = "1.2.3"
+            ~~~~~~~~~~~~~
+            ../gradle/libs.versions.toml:3: Error: Version is used only once, it can be inlined [GradleVersionCatalogVersionInlining]
+            BAR = "3.2.1"
+            ~~~~~~~~~~~~~
+            ../gradle/libs.versions.toml:6: Error: Version is used only once, it can be inlined [GradleVersionCatalogVersionInlining]
+            foo = { module = "fr.smarquis:foo", version.ref = "FOO" }
+                                                ~~~~~~~~~~~~~~~~~~~
+            ../gradle/libs.versions.toml:9: Error: Version is used only once, it can be inlined [GradleVersionCatalogVersionInlining]
+            bar = { id = "fr.smarquis.bar", version.ref = "BAR" }
+                                            ~~~~~~~~~~~~~~~~~~~
+            4 errors, 0 warnings
+            """.trimIndent(),
+        )
+        .cleanup()
+
+    @Test
+    fun `SIMPLIFICATION issue`() = lint()
+        .issues(SIMPLIFICATION)
+        .files(
+            `versions-toml`(
+                "libs",
+                """
+                [versions]
+                test = "1"
+                [libraries]
+                foo = { module = "fr.smarquis:foo", version = "1.2.3" }
+                bar = { group = "fr.smarquis", name = "bar", version = "1.2.3" }
+                baz = { group = "fr.smarquis", name = "baz", version.ref = "test" }
+                ignored = { module = "fr.smarquis:ignored", version.ref = "test" }
+                [plugins]
+                foo = { id = "fr.smarquis.foo", version = "1.2.3" }
+                ignored = { id = "fr.smarquis.ignored", version.ref = "test" }
+                """.trimIndent(),
+            ),
+        )
+        .run()
+        .expect(
+            """
+            ../gradle/libs.versions.toml:4: Error: Dependency declaration can be simplified [GradleVersionCatalogSimplification]
+            foo = { module = "fr.smarquis:foo", version = "1.2.3" }
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+            ../gradle/libs.versions.toml:5: Error: Dependency declaration can be simplified [GradleVersionCatalogSimplification]
+            bar = { group = "fr.smarquis", name = "bar", version = "1.2.3" }
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+            ../gradle/libs.versions.toml:6: Error: Dependency declaration can be simplified [GradleVersionCatalogSimplification]
+            baz = { group = "fr.smarquis", name = "baz", version.ref = "test" }
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+            ../gradle/libs.versions.toml:9: Error: Dependency declaration can be simplified [GradleVersionCatalogSimplification]
+            foo = { id = "fr.smarquis.foo", version = "1.2.3" }
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+            4 errors, 0 warnings
+            """.trimIndent(),
+        )
+        .expectFixDiffs(
+            """
+            Autofix for gradle/libs.versions.toml line 4: Replace library declaration with simpler form.:
+            @@ -4 +4
+            - foo = { module = "fr.smarquis:foo", version = "1.2.3" }
+            + foo = "fr.smarquis:foo:1.2.3"
+            Autofix for gradle/libs.versions.toml line 5: Replace library declaration with simpler form.:
+            @@ -5 +5
+            - bar = { group = "fr.smarquis", name = "bar", version = "1.2.3" }
+            + bar = "fr.smarquis:bar:1.2.3"
+            Autofix for gradle/libs.versions.toml line 6: Replace library declaration with simpler form.:
+            @@ -6 +6
+            - baz = { group = "fr.smarquis", name = "baz", version.ref = "test" }
+            + baz = { module = "fr.smarquis:baz", version.ref = "test"
+            Autofix for gradle/libs.versions.toml line 9: Replace plugin declaration with simpler form.:
+            @@ -9 +9
+            - foo = { id = "fr.smarquis.foo", version = "1.2.3" }
+            + foo = "fr.smarquis.foo:1.2.3"
             """.trimIndent(),
         )
         .cleanup()
