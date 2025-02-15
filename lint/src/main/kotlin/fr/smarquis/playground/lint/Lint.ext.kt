@@ -22,3 +22,5 @@ internal inline fun <reified T : Detector> implementation(
     scope: EnumSet<Scope>,
     vararg scopes: EnumSet<Scope>,
 ): Implementation = Implementation(T::class.java, scope, *scopes)
+
+internal inline fun <reified T : Any> Any?.cast(): T = this as T
