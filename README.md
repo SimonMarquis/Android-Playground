@@ -45,6 +45,53 @@
 - [`🐘 Setup gradle.properties`](.github/actions/setup-gradle-properties/action.yaml)
 - [`☕️ Setup Java`](.github/actions/setup-java/action.yaml)
 
+#### 🕵️ Lint checks
+
+- <details><summary><a href="https://github.com/SimonMarquis/Android-Playground/blob/main/lint/src/main/kotlin/fr/smarquis/playground/lint/AssertionsDetector.kt">AssertionsDetector</a></summary>
+
+  - Prefer using `kotlin.test` assertions instead of JUnit's in Kotlin unit tests.
+  - Prefer using `kotlin.test` assertions instead of `assert` in unit tests. Its execution requires a specific JVM option to be enabled on the JVM.
+
+</details>
+
+- <details><summary><a href="https://github.com/SimonMarquis/Android-Playground/blob/main/lint/src/main/kotlin/fr/smarquis/playground/lint/GradleVersionCatalogDetector.kt">GradleVersionCatalogDetector</a></summary>
+
+  - Dependencies should be sorted alphabetically to maintain consistency and readability.
+  - Dependencies should follow the configured regex.
+  - Extracting a version in the `[versions]` section is useful only if it is used more than once or referenced elsewhere.
+  - Dependency declaration should use the simplest form possible, omitting unnecessary inline tables.
+
+</details>
+
+- <details><summary><a href="https://github.com/SimonMarquis/Android-Playground/blob/main/lint/src/main/kotlin/fr/smarquis/playground/lint/NamedParametersDetector.kt">NamedParametersDetector</a></summary>
+
+  - Not specifying parameters name using the same type can lead to unexpected results when refactoring methods signature.  
+    Enforcing explicit named parameters also helps detecting mistakes during code review.  
+    Quick fix: `⌥⏎` (macOS) or `Alt+Enter` (Windows/Linux) ➝ `Add names to call arguments`.
+
+</details>
+
+- <details><summary><a href="https://github.com/SimonMarquis/Android-Playground/blob/main/lint/src/main/kotlin/fr/smarquis/playground/lint/ReplaceMethodCallDetector.kt">ReplaceMethodCallDetector</a></summary>
+
+  - The method `foo()` should not be called!
+
+</details>
+
+- <details><summary><a href="https://github.com/SimonMarquis/Android-Playground/blob/main/lint/src/main/kotlin/fr/smarquis/playground/lint/TestMethodBannedWordsDetector.kt">TestMethodBannedWordsDetector</a></summary>
+
+  - Test methods name should not contains banned words.
+    The default behavior checks for `failure,failed` words to reduce collisions when searching through logs.
+
+</details>
+
+- <details><summary><a href="https://github.com/SimonMarquis/Android-Playground/blob/main/lint/src/main/kotlin/fr/smarquis/playground/lint/TypographyDetector.kt">TypographyDetector</a></summary>
+
+  - Escaped character are impossible to decipher for a human. Using unescaped character is generally self explanatory.
+  - Typography can be replaced with a better alternative.
+  - Curly quotes must be replaced with straight quote as Talkback does not properly handle them.
+
+</details>
+
 <details>
 <summary><h4>🏗️ Architecture…</h4></summary>
 
