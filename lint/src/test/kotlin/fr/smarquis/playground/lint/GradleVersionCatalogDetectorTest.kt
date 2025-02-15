@@ -60,24 +60,57 @@ class GradleVersionCatalogDetectorTest : LintDetectorTest() {
             `versions-toml`(
                 "libs",
                 """
+                [versions]
+                foo = "1.0.0"
+                bar = "1.0.0"
+                baz = "1.0.0"
+                qux = "1.0.0"
                 [libraries]
                 foo = "fr.smarquis:foo:1.0.0"
                 bar = "fr.smarquis:bar:1.0.0"
                 baz = "fr.smarquis:baz:1.0.0"
                 qux = "fr.smarquis:qux:1.0.0"
+                [plugins]
+                foo = "fr.smarquis.foo:1.0.0"
+                bar = "fr.smarquis.bar:1.0.0"
+                baz = "fr.smarquis.baz:1.0.0"
+                qux = "fr.smarquis.qux:1.0.0"
+                [bundles]
+                foo = ["foo"]
+                bar = ["bar"]
+                baz = ["baz"]
+                qux = ["qux"]
                 """.trimIndent(),
             ),
         )
         .run()
         .expect(
             """
-            ../gradle/libs.versions.toml:3: Error: Dependencies are not sorted correctly [GradleVersionCatalogSort]
+            ../gradle/libs.versions.toml:3: Error: Entries are not sorted correctly [GradleVersionCatalogSort]
+            bar = "1.0.0"
+            ~~~
+            ../gradle/libs.versions.toml:4: Error: Entries are not sorted correctly [GradleVersionCatalogSort]
+            baz = "1.0.0"
+            ~~~
+            ../gradle/libs.versions.toml:8: Error: Entries are not sorted correctly [GradleVersionCatalogSort]
             bar = "fr.smarquis:bar:1.0.0"
             ~~~
-            ../gradle/libs.versions.toml:4: Error: Dependencies are not sorted correctly [GradleVersionCatalogSort]
+            ../gradle/libs.versions.toml:9: Error: Entries are not sorted correctly [GradleVersionCatalogSort]
             baz = "fr.smarquis:baz:1.0.0"
             ~~~
-            2 errors, 0 warnings
+            ../gradle/libs.versions.toml:13: Error: Entries are not sorted correctly [GradleVersionCatalogSort]
+            bar = "fr.smarquis.bar:1.0.0"
+            ~~~
+            ../gradle/libs.versions.toml:14: Error: Entries are not sorted correctly [GradleVersionCatalogSort]
+            baz = "fr.smarquis.baz:1.0.0"
+            ~~~
+            ../gradle/libs.versions.toml:18: Error: Entries are not sorted correctly [GradleVersionCatalogSort]
+            bar = ["bar"]
+            ~~~
+            ../gradle/libs.versions.toml:19: Error: Entries are not sorted correctly [GradleVersionCatalogSort]
+            baz = ["baz"]
+            ~~~
+            8 errors, 0 warnings
             """.trimIndent(),
         )
         .cleanup()
