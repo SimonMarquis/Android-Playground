@@ -29,8 +29,7 @@ public class GradleVersionCatalogDetector : Detector(), TomlScanner, GradleScann
     }
 
     private fun LintTomlDocument.checkSort(context: TomlContext) {
-        val toList = libraries.getMappedValues().toList()
-        toList.fold("") { lastKey, (key, library: LintTomlValue) ->
+        libraries?.getMappedValues()?.toList()?.fold("") { lastKey, (key, library: LintTomlValue) ->
             if (key >= lastKey) return@fold key
             context.report(SORT, library.keyOrFullLocation(), SORT.getBriefDescription(RAW))
             lastKey
@@ -38,16 +37,16 @@ public class GradleVersionCatalogDetector : Detector(), TomlScanner, GradleScann
     }
 
     private fun LintTomlDocument.checkDependencyNames(context: TomlContext) {
-        libraries.getMappedValues().forEach { (key: String, library: LintTomlValue) ->
+        libraries?.getMappedValues()?.forEach { (key: String, library: LintTomlValue) ->
             if (!BANNED_DEPENDENCY_NAME_REGEX.getValue(context).orEmpty().toRegex().matches(key)) return@forEach
             context.report(DEPENDENCY_NAME, library.keyOrFullLocation(), DEPENDENCY_NAME.getBriefDescription(RAW))
         }
     }
 
     private fun LintTomlDocument.checkVersionInlining(context: TomlContext) {
-        val versions = versions.getMappedValues()
+        val versions = versions?.getMappedValues() ?: return
         listOf(libraries, plugins)
-            .flatMap { it.getMappedValues().values }
+            .flatMap { it?.getMappedValues()?.values.orEmpty() }
             .groupBy { versions[it["version"]["ref"]?.getActualValue() as? String] }
             .filter { it.key != null && it.value.size == 1 }.cast<Map<LintTomlValue, List<LintTomlValue>>>()
             .mapValuesNotNull { it.value.single()["version"]["ref"] }
@@ -58,7 +57,7 @@ public class GradleVersionCatalogDetector : Detector(), TomlScanner, GradleScann
     }
 
     private fun LintTomlDocument.checkSimplification(context: TomlContext) {
-        plugins.getMappedValues().forEach { (key, value) ->
+        plugins?.getMappedValues()?.forEach { (key, value) ->
             val id = value["id"]?.getActualValue() ?: return@forEach
             val version = value["version"]?.takeIf { it is LintTomlLiteralValue }?.getActualValue() ?: return@forEach
 
@@ -73,7 +72,7 @@ public class GradleVersionCatalogDetector : Detector(), TomlScanner, GradleScann
                     .autoFix().build(),
             )
         }
-        libraries.getMappedValues().forEach { (key, value) ->
+        libraries?.getMappedValues()?.forEach { (key, value) ->
             val module = value["module"]?.getActualValue()
             val group = value["group"]?.getActualValue()
             val name = value["name"]?.getActualValue()
@@ -106,9 +105,9 @@ public class GradleVersionCatalogDetector : Detector(), TomlScanner, GradleScann
         .getOrNull() ?: getFullLocation()
 
     private operator fun LintTomlValue?.get(key: String) = (this as? LintTomlMapValue)?.get(key)
-    private val LintTomlDocument.versions get() = getValue("versions") as LintTomlMapValue
-    private val LintTomlDocument.libraries get() = getValue("libraries") as LintTomlMapValue
-    private val LintTomlDocument.plugins get() = getValue("plugins") as LintTomlMapValue
+    private val LintTomlDocument.versions get() = getValue("versions") as? LintTomlMapValue
+    private val LintTomlDocument.libraries get() = getValue("libraries") as? LintTomlMapValue
+    private val LintTomlDocument.plugins get() = getValue("plugins") as? LintTomlMapValue
 
     public companion object {
 
@@ -166,7 +165,7 @@ public class GradleVersionCatalogDetector : Detector(), TomlScanner, GradleScann
             implementation = IMPLEMENTATION,
         )
 
-        internal val ISSUES = arrayOf(SORT, DEPENDENCY_NAME, VERSION_INLINING, SIMPLIFICATION)
+        internal val ISSUES = arrayOf(SORT, VERSION_INLINING, SIMPLIFICATION, DEPENDENCY_NAME)
             .onEach { it.setOptions(listOf(CATALOG_NAME, BANNED_DEPENDENCY_NAME_REGEX)) }
 
     }
