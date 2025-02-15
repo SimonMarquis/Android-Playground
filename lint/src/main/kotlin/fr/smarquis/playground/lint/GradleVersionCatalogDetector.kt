@@ -29,10 +29,12 @@ public class GradleVersionCatalogDetector : Detector(), TomlScanner, GradleScann
     }
 
     private fun LintTomlDocument.checkSort(context: TomlContext) {
-        libraries?.getMappedValues()?.toList()?.fold("") { lastKey, (key, library: LintTomlValue) ->
-            if (key >= lastKey) return@fold key
-            context.report(SORT, library.keyOrFullLocation(), SORT.getBriefDescription(RAW))
-            lastKey
+        listOfNotNull(bundles, libraries, plugins, versions).forEach {
+            it.getMappedValues().toList().fold("") { lastKey, (key, library: LintTomlValue) ->
+                if (key >= lastKey) return@fold key
+                context.report(SORT, library.keyOrFullLocation(), SORT.getBriefDescription(RAW))
+                lastKey
+            }
         }
     }
 
@@ -45,8 +47,8 @@ public class GradleVersionCatalogDetector : Detector(), TomlScanner, GradleScann
 
     private fun LintTomlDocument.checkVersionInlining(context: TomlContext) {
         val versions = versions?.getMappedValues() ?: return
-        listOf(libraries, plugins)
-            .flatMap { it?.getMappedValues()?.values.orEmpty() }
+        listOfNotNull(libraries, plugins)
+            .flatMap { it.getMappedValues().values }
             .groupBy { versions[it["version"]["ref"]?.getActualValue() as? String] }
             .filter { it.key != null && it.value.size == 1 }.cast<Map<LintTomlValue, List<LintTomlValue>>>()
             .mapValuesNotNull { it.value.single()["version"]["ref"] }
@@ -105,9 +107,10 @@ public class GradleVersionCatalogDetector : Detector(), TomlScanner, GradleScann
         .getOrNull() ?: getFullLocation()
 
     private operator fun LintTomlValue?.get(key: String) = (this as? LintTomlMapValue)?.get(key)
-    private val LintTomlDocument.versions get() = getValue("versions") as? LintTomlMapValue
+    private val LintTomlDocument.bundles get() = getValue("bundles") as? LintTomlMapValue
     private val LintTomlDocument.libraries get() = getValue("libraries") as? LintTomlMapValue
     private val LintTomlDocument.plugins get() = getValue("plugins") as? LintTomlMapValue
+    private val LintTomlDocument.versions get() = getValue("versions") as? LintTomlMapValue
 
     public companion object {
 
@@ -127,8 +130,8 @@ public class GradleVersionCatalogDetector : Detector(), TomlScanner, GradleScann
 
         public val SORT: Issue = Issue.create(
             id = "GradleVersionCatalogSort",
-            briefDescription = "Dependencies are not sorted correctly",
-            explanation = "Dependencies should be sorted alphabetically to maintain consistency and readability.",
+            briefDescription = "Entries are not sorted correctly",
+            explanation = "Entries should be sorted alphabetically to maintain consistency and readability.",
             category = USABILITY,
             priority = 1,
             severity = ERROR,
