@@ -121,6 +121,9 @@ jobs:
         with:
           cache-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
       - uses: ./.github/actions/setup-gradle-properties
+      - uses: github/codeql-action/init@v3
+        with:
+          languages: kotlin
 
       - name: 🕵️ Lint
         id: lint
@@ -133,3 +136,4 @@ jobs:
           html: "**/build/reports/lint-results-*.html"
           sarif: "**/build/reports/lint-results-*.sarif"
           xml: "**/build/reports/lint-results-*.xml"
+      - uses: github/codeql-action/analyze@v3
