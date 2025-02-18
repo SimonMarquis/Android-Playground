@@ -58,7 +58,7 @@ gradlePlugins-android = { module = "com.android.tools.build:gradle", version.ref
 gradlePlugins-androidArtifactsSizeReport = "io.github.cdsap.android-artifacts-size-report:io.github.cdsap.android-artifacts-size-report.gradle.plugin:0.1.1"
 gradlePlugins-compose = { module = "org.jetbrains.kotlin:compose-compiler-gradle-plugin", version.ref = "kotlin" }
 gradlePlugins-dependencyGuard = { module = "com.dropbox.dependency-guard:com.dropbox.dependency-guard.gradle.plugin", version.ref = "dependencyGuard" }
-gradlePlugins-develocity = "com.gradle:develocity-gradle-plugin:3.19.1"
+gradlePlugins-develocity = "com.gradle:develocity-gradle-plugin:3.19.2"
 gradlePlugins-hilt = { module = "com.google.dagger:hilt-android-gradle-plugin", version.ref = "hilt" }
 gradlePlugins-kotlin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 gradlePlugins-ksp = { module = "com.google.devtools.ksp:com.google.devtools.ksp.gradle.plugin", version.ref = "ksp" }
