@@ -1,5 +1,5 @@
 package dagger
 
-public typealias List<T> = @JvmSuppressWildcards kotlin.collections.List<T>
-public typealias Set<T> = @JvmSuppressWildcards kotlin.collections.Set<T>
-public typealias Map<K, V> = @JvmSuppressWildcards kotlin.collections.Map<K, V>
+public typealias List<T> = kotlin.collections.List<@JvmSuppressWildcards T>
+public typealias Set<T> = kotlin.collections.Set<@JvmSuppressWildcards T>
+public typealias Map<K, V> = kotlin.collections.Map<K, @JvmSuppressWildcards V>
