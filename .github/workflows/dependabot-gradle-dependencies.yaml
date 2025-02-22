@@ -48,6 +48,9 @@ jobs:
         run: |
           ./gradlew --write-verification-metadata pgp,sha256 --export-keys
 
+          # Remove unnecessary version attributes from trusted-key entries
+          sed -i 's/<trusted-key\(.*\) version="[^"]*"/<trusted-key\1/g' gradle/verification-metadata.xml
+
           if ! git diff --quiet --exit-code -- 'gradle/verification-keyring.keys' 'gradle/verification-metadata.xml';
           then
             git commit -m "🤖 Update Gradle dependency signatures" -m "[dependabot skip]" -- 'gradle/verification-keyring.keys' 'gradle/verification-metadata.xml'
