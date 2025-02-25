@@ -18,7 +18,7 @@ ksp = "2.1.10-1.0.30"
 [bundles]
 
 [libraries]
-android-desugarJdkLibs = "com.android.tools:desugar_jdk_libs:2.1.4"
+android-desugarJdkLibs = "com.android.tools:desugar_jdk_libs:2.1.5"
 android-security-lint = "com.android.security.lint:lint:1.0.3"
 android-tools-common = { module = "com.android.tools:common", version.ref = "android-tools" }
 
