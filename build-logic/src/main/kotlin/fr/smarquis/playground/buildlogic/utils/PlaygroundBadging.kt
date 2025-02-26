@@ -16,6 +16,8 @@ import org.gradle.api.Project
 import org.gradle.api.Task
 import org.gradle.api.file.DirectoryProperty
 import org.gradle.api.file.RegularFileProperty
+import org.gradle.api.problems.ProblemGroup
+import org.gradle.api.problems.ProblemId
 import org.gradle.api.problems.Problems
 import org.gradle.api.problems.Severity
 import org.gradle.api.provider.Property
@@ -169,15 +171,16 @@ internal abstract class CheckBadgingTask : DefaultTask() {
             assertThat(generatedBadging.get().asFile.readLines().filterNot(String::isBlank))
                 .containsExactly(*goldenBadging.get().asFile.readLines().filterNot(String::isBlank).toTypedArray())
         }.onFailure {
-            /*problems.reporter.throwing {
-                val message = "Generated Android badging file differs from the golden badging file!"
-                id("playground-android-badging", "Android badging file changed!")
-                contextualLabel(message)
+            val problemGroup = ProblemGroup.create(/* name = */ "playground-group", /* displayName = */ "Playground")
+            val problemId = ProblemId.create(/* name = */ "playground-android-badging", /* displayName = */ "Android badging file changed!", /* group = */ problemGroup)
+            val exception = GradleException("Generated Android badging file differs from the golden badging file!").initCause(it)
+            problems.reporter.throwing(exception, problemId) {
+                contextualLabel(exception.message.orEmpty())
                 fileLocation(generatedBadging.get().asFile.absolutePath)
                 solution("If this change is intended, run the `${targetUpdateBadgingTaskName.get()}` task.")
                 severity(Severity.ERROR)
-                withException(GradleException("$message\n\n${it.message}").initCause(it))
-            }*/
+                withException(exception)
+            }
         }
     }
 
