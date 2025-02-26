@@ -91,7 +91,7 @@ internal object PlaygroundLint {
 
         checkDependencies = true
 
-        disable += "AndroidGradlePluginVersion
+        disable += "AndroidGradlePluginVersion"
         disable += "GradleDependency"
         disable += "NewerVersionAvailable"
         disable += "ObsoleteLintCustomCheck"
