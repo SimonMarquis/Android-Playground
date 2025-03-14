@@ -20,8 +20,6 @@ android {
 dependencies {
     baselineProfile(projects.profiling)
 
-    lintChecks(projects.lint)
-
     implementation(libs.androidx.core)
     implementation(libs.androidx.datastore)
     implementation(libs.androidx.navigation)
@@ -39,6 +37,16 @@ dependencies {
     implementation(projects.domain.settings)
     implementation(projects.data.dice)
     implementation(projects.data.settings)
+
+    compileOnly(projects.lint) {
+        isTransitive = false
+        because(
+            """
+            Android Lint does not seem to behave as expected when executed on isolated JVM modules. 🤦
+            The workaround is to add them to an Android module's dependency graph and enable `checkDependencies`.
+            """.trimIndent()
+        )
+    }
 }
 
 idea {
