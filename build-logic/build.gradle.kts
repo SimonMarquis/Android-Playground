@@ -24,18 +24,23 @@ kotlin {
 
 
 dependencies {
-    compileOnly(libs.gradlePlugins.android)
-    compileOnly(libs.gradlePlugins.kotlin)
-    compileOnly(libs.gradlePlugins.ksp)
-    compileOnly(libs.gradlePlugins.compose)
-    compileOnly(libs.gradlePlugins.develocity)
-    compileOnly(libs.gradlePlugins.dependencyGuard)
-    compileOnly(libs.gradlePlugins.hilt)
-    compileOnly(libs.gradlePlugins.powerAssert)
-    implementation(libs.gradlePlugins.androidArtifactsSizeReport)
+    compileOnly(plugin(libs.plugins.android.application))
+    compileOnly(plugin(libs.plugins.android.library))
+    compileOnly(plugin(libs.plugins.dependencyGuard))
+    compileOnly(plugin(libs.plugins.develocity))
+    compileOnly(plugin(libs.plugins.hilt))
+    compileOnly(plugin(libs.plugins.kotlin.compose))
+    compileOnly(plugin(libs.plugins.kotlin.jvm))
+    compileOnly(plugin(libs.plugins.kotlin.powerAssert))
+    compileOnly(plugin(libs.plugins.ksp))
+    implementation(plugin(libs.plugins.artifactsSizeReport))
     implementation(libs.android.tools.common)
     implementation(libs.assertk)
     lintChecks(libs.androidx.lint.gradle)
+}
+
+private fun DependencyHandlerScope.plugin(plugin: Provider<PluginDependency>) = plugin.map {
+    "${it.pluginId}:${it.pluginId}.gradle.plugin:${it.version.requiredVersion}"
 }
 
 tasks {
