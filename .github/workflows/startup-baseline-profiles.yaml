@@ -50,7 +50,7 @@ jobs:
       - name: 📦 Archive Profiles
         uses: actions/upload-artifact@v4
         with:
-          name: build-configuration-compatibility-reports
+          name: baseline-profiles
           path: "**/generated/baselineProfiles/*-prof.txt"
 
       - name: 📡 Create PR
