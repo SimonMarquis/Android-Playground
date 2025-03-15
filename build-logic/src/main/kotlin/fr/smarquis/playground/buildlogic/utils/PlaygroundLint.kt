@@ -92,6 +92,7 @@ internal object PlaygroundLint {
         checkDependencies = true
         absolutePaths = true
 
+        enable += "StopShip"
         disable += "AndroidGradlePluginVersion"
         disable += "GradleDependency"
         disable += "NewerVersionAvailable"
