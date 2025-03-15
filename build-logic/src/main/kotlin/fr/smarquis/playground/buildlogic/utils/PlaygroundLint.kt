@@ -90,6 +90,7 @@ internal object PlaygroundLint {
         sarifReport = true
 
         checkDependencies = true
+        absolutePaths = true
 
         disable += "AndroidGradlePluginVersion"
         disable += "GradleDependency"
