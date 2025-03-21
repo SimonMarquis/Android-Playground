@@ -1,7 +1,6 @@
 public final class fr/smarquis/playground/core/android/AndroidAssetManager_Factory : dagger/internal/Factory {
 	public fun <init> (Ldagger/internal/Provider;)V
 	public static fun create (Ldagger/internal/Provider;)Lfr/smarquis/playground/core/android/AndroidAssetManager_Factory;
-	public static fun create (Ljavax/inject/Provider;)Lfr/smarquis/playground/core/android/AndroidAssetManager_Factory;
 	public fun get ()Lfr/smarquis/playground/core/android/AndroidAssetManager;
 	public synthetic fun get ()Ljava/lang/Object;
 	public static fun newInstance (Landroid/content/res/AssetManager;)Lfr/smarquis/playground/core/android/AndroidAssetManager;
@@ -10,7 +9,6 @@ public final class fr/smarquis/playground/core/android/AndroidAssetManager_Facto
 public final class fr/smarquis/playground/core/android/AndroidFileManager_Factory : dagger/internal/Factory {
 	public fun <init> (Ldagger/internal/Provider;)V
 	public static fun create (Ldagger/internal/Provider;)Lfr/smarquis/playground/core/android/AndroidFileManager_Factory;
-	public static fun create (Ljavax/inject/Provider;)Lfr/smarquis/playground/core/android/AndroidFileManager_Factory;
 	public fun get ()Lfr/smarquis/playground/core/android/AndroidFileManager;
 	public synthetic fun get ()Ljava/lang/Object;
 	public static fun newInstance (Landroid/app/Application;)Lfr/smarquis/playground/core/android/AndroidFileManager;
@@ -53,7 +51,6 @@ public final class fr/smarquis/playground/core/android/UncaughtExceptionHandler 
 public final class fr/smarquis/playground/core/android/di/AppModule_ProvidesAppPackageNameFactory : dagger/internal/Factory {
 	public fun <init> (Ldagger/internal/Provider;)V
 	public static fun create (Ldagger/internal/Provider;)Lfr/smarquis/playground/core/android/di/AppModule_ProvidesAppPackageNameFactory;
-	public static fun create (Ljavax/inject/Provider;)Lfr/smarquis/playground/core/android/di/AppModule_ProvidesAppPackageNameFactory;
 	public synthetic fun get ()Ljava/lang/Object;
 	public fun get ()Ljava/lang/String;
 	public static fun providesAppPackageName (Landroid/app/Application;)Ljava/lang/String;
@@ -62,7 +59,6 @@ public final class fr/smarquis/playground/core/android/di/AppModule_ProvidesAppP
 public final class fr/smarquis/playground/core/android/di/AppModule_ProvidesAppVersionCodeFactory : dagger/internal/Factory {
 	public fun <init> (Ldagger/internal/Provider;)V
 	public static fun create (Ldagger/internal/Provider;)Lfr/smarquis/playground/core/android/di/AppModule_ProvidesAppVersionCodeFactory;
-	public static fun create (Ljavax/inject/Provider;)Lfr/smarquis/playground/core/android/di/AppModule_ProvidesAppVersionCodeFactory;
 	public fun get ()Ljava/lang/Long;
 	public synthetic fun get ()Ljava/lang/Object;
 	public static fun providesAppVersionCode (Landroid/app/Application;)J
@@ -71,7 +67,6 @@ public final class fr/smarquis/playground/core/android/di/AppModule_ProvidesAppV
 public final class fr/smarquis/playground/core/android/di/AppModule_ProvidesAppVersionNameFactory : dagger/internal/Factory {
 	public fun <init> (Ldagger/internal/Provider;)V
 	public static fun create (Ldagger/internal/Provider;)Lfr/smarquis/playground/core/android/di/AppModule_ProvidesAppVersionNameFactory;
-	public static fun create (Ljavax/inject/Provider;)Lfr/smarquis/playground/core/android/di/AppModule_ProvidesAppVersionNameFactory;
 	public synthetic fun get ()Ljava/lang/Object;
 	public fun get ()Ljava/lang/String;
 	public static fun providesAppVersionName (Landroid/app/Application;)Ljava/lang/String;
@@ -80,7 +75,6 @@ public final class fr/smarquis/playground/core/android/di/AppModule_ProvidesAppV
 public final class fr/smarquis/playground/core/android/di/CoreAndroidModule_Companion_ProvidesDisplayMetricsFactory : dagger/internal/Factory {
 	public fun <init> (Ldagger/internal/Provider;)V
 	public static fun create (Ldagger/internal/Provider;)Lfr/smarquis/playground/core/android/di/CoreAndroidModule_Companion_ProvidesDisplayMetricsFactory;
-	public static fun create (Ljavax/inject/Provider;)Lfr/smarquis/playground/core/android/di/CoreAndroidModule_Companion_ProvidesDisplayMetricsFactory;
 	public fun get ()Landroid/util/DisplayMetrics;
 	public synthetic fun get ()Ljava/lang/Object;
 	public static fun providesDisplayMetrics (Landroid/app/Application;)Landroid/util/DisplayMetrics;
@@ -89,7 +83,6 @@ public final class fr/smarquis/playground/core/android/di/CoreAndroidModule_Comp
 public final class fr/smarquis/playground/core/android/di/CoreAndroidModule_Companion_ProvidesPackageInfoFactory : dagger/internal/Factory {
 	public fun <init> (Ldagger/internal/Provider;)V
 	public static fun create (Ldagger/internal/Provider;)Lfr/smarquis/playground/core/android/di/CoreAndroidModule_Companion_ProvidesPackageInfoFactory;
-	public static fun create (Ljavax/inject/Provider;)Lfr/smarquis/playground/core/android/di/CoreAndroidModule_Companion_ProvidesPackageInfoFactory;
 	public fun get ()Landroid/content/pm/PackageInfo;
 	public synthetic fun get ()Ljava/lang/Object;
 	public static fun providesPackageInfo (Landroid/app/Application;)Landroid/content/pm/PackageInfo;
@@ -98,7 +91,6 @@ public final class fr/smarquis/playground/core/android/di/CoreAndroidModule_Comp
 public final class fr/smarquis/playground/core/android/di/CoreAndroidModule_Companion_ProvidesRealAssetManagerFactory : dagger/internal/Factory {
 	public fun <init> (Ldagger/internal/Provider;)V
 	public static fun create (Ldagger/internal/Provider;)Lfr/smarquis/playground/core/android/di/CoreAndroidModule_Companion_ProvidesRealAssetManagerFactory;
-	public static fun create (Ljavax/inject/Provider;)Lfr/smarquis/playground/core/android/di/CoreAndroidModule_Companion_ProvidesRealAssetManagerFactory;
 	public fun get ()Landroid/content/res/AssetManager;
 	public synthetic fun get ()Ljava/lang/Object;
 	public static fun providesRealAssetManager (Landroid/app/Application;)Landroid/content/res/AssetManager;
@@ -163,7 +155,6 @@ public final class fr/smarquis/playground/core/android/di/HiltWrapper_InstantsMo
 public final class fr/smarquis/playground/core/android/di/InstantsModule_ProvidesFirstInstallLocalDateTimeFactory : dagger/internal/Factory {
 	public fun <init> (Ldagger/internal/Provider;)V
 	public static fun create (Ldagger/internal/Provider;)Lfr/smarquis/playground/core/android/di/InstantsModule_ProvidesFirstInstallLocalDateTimeFactory;
-	public static fun create (Ljavax/inject/Provider;)Lfr/smarquis/playground/core/android/di/InstantsModule_ProvidesFirstInstallLocalDateTimeFactory;
 	public synthetic fun get ()Ljava/lang/Object;
 	public fun get ()Lkotlinx/datetime/LocalDateTime;
 	public static fun providesFirstInstallLocalDateTime (J)Lkotlinx/datetime/LocalDateTime;
@@ -172,7 +163,6 @@ public final class fr/smarquis/playground/core/android/di/InstantsModule_Provide
 public final class fr/smarquis/playground/core/android/di/InstantsModule_ProvidesFirstInstallTimeFactory : dagger/internal/Factory {
 	public fun <init> (Ldagger/internal/Provider;)V
 	public static fun create (Ldagger/internal/Provider;)Lfr/smarquis/playground/core/android/di/InstantsModule_ProvidesFirstInstallTimeFactory;
-	public static fun create (Ljavax/inject/Provider;)Lfr/smarquis/playground/core/android/di/InstantsModule_ProvidesFirstInstallTimeFactory;
 	public fun get ()Ljava/lang/Long;
 	public synthetic fun get ()Ljava/lang/Object;
 	public static fun providesFirstInstallTime (Landroid/content/pm/PackageInfo;)J
@@ -181,7 +171,6 @@ public final class fr/smarquis/playground/core/android/di/InstantsModule_Provide
 public final class fr/smarquis/playground/core/android/di/InstantsModule_ProvidesLastUpdateLocalDateTimeFactory : dagger/internal/Factory {
 	public fun <init> (Ldagger/internal/Provider;)V
 	public static fun create (Ldagger/internal/Provider;)Lfr/smarquis/playground/core/android/di/InstantsModule_ProvidesLastUpdateLocalDateTimeFactory;
-	public static fun create (Ljavax/inject/Provider;)Lfr/smarquis/playground/core/android/di/InstantsModule_ProvidesLastUpdateLocalDateTimeFactory;
 	public synthetic fun get ()Ljava/lang/Object;
 	public fun get ()Lkotlinx/datetime/LocalDateTime;
 	public static fun providesLastUpdateLocalDateTime (J)Lkotlinx/datetime/LocalDateTime;
@@ -190,7 +179,6 @@ public final class fr/smarquis/playground/core/android/di/InstantsModule_Provide
 public final class fr/smarquis/playground/core/android/di/InstantsModule_ProvidesLastUpdateTimeFactory : dagger/internal/Factory {
 	public fun <init> (Ldagger/internal/Provider;)V
 	public static fun create (Ldagger/internal/Provider;)Lfr/smarquis/playground/core/android/di/InstantsModule_ProvidesLastUpdateTimeFactory;
-	public static fun create (Ljavax/inject/Provider;)Lfr/smarquis/playground/core/android/di/InstantsModule_ProvidesLastUpdateTimeFactory;
 	public fun get ()Ljava/lang/Long;
 	public synthetic fun get ()Ljava/lang/Object;
 	public static fun providesLastUpdateTime (Landroid/content/pm/PackageInfo;)J
