@@ -1,5 +1,6 @@
 package fr.smarquis.playground.buildlogic.utils
 
+import com.android.build.api.dsl.CommonExtension
 import com.android.build.api.dsl.Lint
 import fr.smarquis.playground.buildlogic.PlaygroundProperties
 import fr.smarquis.playground.buildlogic.androidExtension
@@ -63,7 +64,7 @@ internal object PlaygroundLint {
             dependency = "lint${variant}",
         )
         globalTask.configure { dependsOn(ciLint) }
-        configureLintTask(extension.lint)
+        configureLintTask((extension as CommonExtension<*, *, *, *, *, *>).lint)
     }
 
     private fun Project.registerCiLintTask(
