@@ -45,12 +45,11 @@ internal object PlaygroundUnitTests {
 
     fun configureSubproject(project: Project) = with(project) {
         if (isAndroidTest) return@with // Android Test modules are special, they don't have tests...
-        val globalTask = rootProject.tasks.named(GLOBAL_CI_UNIT_TEST_TASK_NAME)
         pluginManager.withPlugin("com.android.base") {
-            createAndroidCiUnitTestTask(globalTask)
+            createAndroidCiUnitTestTask()
         }
         pluginManager.withPlugin("org.jetbrains.kotlin.jvm") {
-            createJvmCiUnitTestTask(globalTask)
+            createJvmCiUnitTestTask()
         }
         configureTestTasks()
         addTestDependencies()
@@ -58,14 +57,12 @@ internal object PlaygroundUnitTests {
     }
 
     private fun Project.createJvmCiUnitTestTask(
-        globalTask: TaskProvider<Task>,
     ) {
         logger.debug("{} Creating CI unit test tasks for project '{}'", LOG, this)
-        val ciUnitTest = registerCiUnitTestTask(
+        /*val ciUnitTest = */registerCiUnitTestTask(
             name = CI_UNIT_TEST_TASK_NAME,
             dependencyTaskName = "test",
         )
-        globalTask.configure { dependsOn(ciUnitTest) }
         registerCiUnitTestTask(
             name = COMPILE_CI_UNIT_TEST_NAME,
             dependencyTaskName = "testClasses",
@@ -73,17 +70,15 @@ internal object PlaygroundUnitTests {
     }
 
     private fun Project.createAndroidCiUnitTestTask(
-        globalTask: TaskProvider<Task>,
     ) {
         val variant = playground().ciUnitTestVariant.get().capitalized()
         val variantUnitTestTaskName = "test${variant}UnitTest"
         val variantCompileUnitTestTaskName = "compile${variant}UnitTestSources"
         logger.debug("{} Creating CI unit test tasks for project '{}' and variant '{}'", LOG, this, variant)
-        val ciUnitTest = registerCiUnitTestTask(
+        /*val ciUnitTest = */registerCiUnitTestTask(
             name = CI_UNIT_TEST_TASK_NAME,
             dependencyTaskName = variantUnitTestTaskName,
         )
-        globalTask.configure { dependsOn(ciUnitTest) }
         registerCiUnitTestTask(
             name = COMPILE_CI_UNIT_TEST_NAME,
             dependencyTaskName = variantCompileUnitTestTaskName,

@@ -51,7 +51,7 @@ jobs:
 
       - uses: ./.github/actions/check-gradle-dependency-lock-state
       - run: ./gradlew apiCheck --quiet
-      - run: ./gradlew globalCiBadging -Pplayground.isMinifyEnabled=false --quiet
+      - run: ./gradlew ciBadging -Pplayground.isMinifyEnabled=false --quiet
 
   build:
     name: 👷 Build
@@ -97,7 +97,7 @@ jobs:
 
       - name: 🧑‍🔬 Test
         id: test
-        run: ./gradlew globalCiUnitTest
+        run: ./gradlew ciUnitTest
       - name: 📦 Archive JUnit reports
         if: ${{ always() && contains(fromJSON('["success", "failure"]'),
           steps.test.outcome) }}
@@ -127,7 +127,7 @@ jobs:
 
       - name: 🕵️ Lint
         id: lint
-        run: ./gradlew globalCiLint --continue
+        run: ./gradlew ciLint --continue
       - name: 📦 Archive Lint reports
         if: ${{ always() && contains(fromJSON('["success", "failure"]'), steps.lint.outcome) }}
         uses: ./.github/actions/archive-lint-reports
