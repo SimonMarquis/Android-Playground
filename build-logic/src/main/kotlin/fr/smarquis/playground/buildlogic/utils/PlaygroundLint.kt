@@ -1,5 +1,6 @@
 package fr.smarquis.playground.buildlogic.utils
 
+import com.android.build.api.dsl.CommonExtension
 import com.android.build.api.dsl.Lint
 import fr.smarquis.playground.buildlogic.PlaygroundProperties
 import fr.smarquis.playground.buildlogic.androidExtension
@@ -29,18 +30,16 @@ internal object PlaygroundLint {
         }
 
     fun configureSubproject(project: Project) = with(project) {
-        val globalTask = rootProject.tasks.named(GLOBAL_CI_LINT_TASK_NAME)
         pluginManager.withPlugin("com.android.base") {
             if (project.isAndroidTest) return@withPlugin // Android Test modules are special, SourceSet with name 'main' not found...
-            createAndroidCiLintTask(globalTask)
+            createAndroidCiLintTask()
         }
         pluginManager.withPlugin("org.jetbrains.kotlin.jvm") {
-            createJvmCiLintTask(globalTask)
+            createJvmCiLintTask()
         }
     }
 
     private fun Project.createJvmCiLintTask(
-        globalTask: TaskProvider<Task>,
     ) = afterEvaluate {
         apply(plugin = "com.android.lint")
         logger.debug("{} Creating CI lint tasks for project '{}'", LOG, this)
@@ -48,22 +47,19 @@ internal object PlaygroundLint {
         val lint = tasks.named("lint")
         registerCiLintTask(name = "lintDebug", dependency = lint, disabled = true)
         registerCiLintTask(name = "lintRelease", dependency = lint, disabled = true)
-        val ciLint = registerCiLintTask(name = CI_LINT_TASK_NAME, dependency = lint, disabled = true)
-        globalTask.configure { dependsOn(ciLint) }
+        /*val ciLint = */registerCiLintTask(name = CI_LINT_TASK_NAME, dependency = lint, disabled = true)
         configureLintTask(extensions.getByType())
     }
 
     private fun Project.createAndroidCiLintTask(
-        globalTask: TaskProvider<Task>,
     ) = androidExtension.finalizeDsl { extension ->
         val variant = playground().ciLintVariant.get().capitalized()
         logger.debug("{} Creating CI lint tasks for project '{}' and variant '{}'", LOG, this, variant)
-        val ciLint = registerCiLintTask(
+        /*val ciLint = */registerCiLintTask(
             name = CI_LINT_TASK_NAME,
             dependency = "lint${variant}",
         )
-        globalTask.configure { dependsOn(ciLint) }
-        configureLintTask(extension.lint)
+        configureLintTask((extension as CommonExtension<*, *, *, *, *, *>).lint)
     }
 
     private fun Project.registerCiLintTask(
