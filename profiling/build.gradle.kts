@@ -9,8 +9,8 @@ plugins {
 @Suppress("UnstableApiUsage")
 android {
     targetProjectPath = projects.app.path
-    testOptions.managedDevices.devices {
-        create<ManagedVirtualDevice>("gmd") {
+    testOptions.managedDevices.localDevices {
+        create("gmd") {
             device = "Pixel 6"
             apiLevel = 34
             systemImageSource = "aosp-atd"
