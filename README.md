@@ -14,8 +14,7 @@
 | `gradlew assembleRelease`                                        | Build release APK (optimized & minified)                                                    |
 | `gradlew apiCheck`                                               | Checks project public API ([BCV](https://github.com/Kotlin/binary-compatibility-validator)) |
 | `gradlew apiDump`                                                | Dumps project public API ([BCV](https://github.com/Kotlin/binary-compatibility-validator))  |
-| `gradlew dependencyGuard`                                        | Checks project dependencies                                                                 |
-| `gradlew dependencyGuardBaseline`                                | Dumps project dependencies                                                                  |
+| `gradlew globalCiDependencyLocking --write-locks`                | CI dependency lock state checks                                                             |
 | `gradlew globalCiBadging`                                        | CI badging checks                                                                           |
 | `gradlew globalCiLint`                                           | CI Lint checks (html/sarif/txt/xml)                                                         |
 | `gradlew globalCiUnitTest`                                       | CI unit tests (html/xml)                                                                    |

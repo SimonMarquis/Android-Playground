@@ -50,7 +50,7 @@ jobs:
       - uses: ./.github/actions/setup-gradle-properties
 
       - run: ./gradlew apiCheck --quiet
-      - run: ./gradlew dependencyGuard --quiet
+      - run: ./gradlew globalCiDependencyLockState --write-locks --quiet
       - run: ./gradlew globalCiBadging -Pplayground.isMinifyEnabled=false --quiet
 
   build:
