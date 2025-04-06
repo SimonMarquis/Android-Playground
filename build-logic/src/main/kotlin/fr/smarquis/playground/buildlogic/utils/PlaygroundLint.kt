@@ -90,6 +90,7 @@ internal object PlaygroundLint {
         sarifReport = true
 
         checkDependencies = true
+        checkReleaseBuilds = false
         absolutePaths = true
 
         enable += "StopShip"
