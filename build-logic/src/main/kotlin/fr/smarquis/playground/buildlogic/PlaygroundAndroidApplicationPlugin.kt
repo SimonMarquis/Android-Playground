@@ -1,11 +1,10 @@
 package fr.smarquis.playground.buildlogic
 
-import com.dropbox.gradle.plugins.dependencyguard.DependencyGuardPlugin
-import com.dropbox.gradle.plugins.dependencyguard.DependencyGuardPluginExtension
 import org.gradle.api.Plugin
 import org.gradle.api.Project
+import org.gradle.api.artifacts.dsl.LockMode.STRICT
 import org.gradle.kotlin.dsl.apply
-import org.gradle.kotlin.dsl.configure
+import org.gradle.kotlin.dsl.assign
 import org.gradle.kotlin.dsl.get
 
 internal class PlaygroundAndroidApplicationPlugin : Plugin<Project> {
@@ -13,7 +12,6 @@ internal class PlaygroundAndroidApplicationPlugin : Plugin<Project> {
     override fun apply(target: Project) = with(target) {
         apply(plugin = "com.android.application")
         apply<PlaygroundAndroidBasePlugin>()
-        apply<DependencyGuardPlugin>()
 
         androidApplication {
             defaultConfig {
@@ -43,15 +41,20 @@ internal class PlaygroundAndroidApplicationPlugin : Plugin<Project> {
                 includeInBundle = false
             }
         }
-        configure<DependencyGuardPluginExtension> {
-            configuration("releaseRuntimeClasspath") {
-                allowedFilter = {
-                    listOf(
-                        "androidx.compose.ui:ui-tooling:",
-                        "junit",
-                    ).none(it::contains)
-                }
+
+        // Configure Gradle Dependency Locking https://docs.gradle.org/current/userguide/dependency_locking.html
+        val isWriteDependencyLocks = gradle.startParameter.isWriteDependencyLocks
+        tasks.register("dependencyLockState") {
+            dependsOn("dependencies")
+            doFirst {
+                require(isWriteDependencyLocks) { "$path must be run from the command line with the `--write-locks` flag" }
             }
+        }
+        dependencyLocking {
+            lockMode = STRICT
+        }
+        configurations.configureEach {
+            if (name == "releaseRuntimeClasspath") resolutionStrategy.activateDependencyLocking()
         }
     }
 
