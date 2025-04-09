@@ -99,7 +99,7 @@ androidx-navigation = { id = "androidx.navigation.safeargs", version.ref = "andr
 artifactsSizeReport = "io.github.cdsap.android-artifacts-size-report:0.1.1"
 binaryCompatibilityValidator = "org.jetbrains.kotlinx.binary-compatibility-validator:0.17.0"
 dependencyGuard = "com.dropbox.dependency-guard:0.5.0"
-develocity = "com.gradle.develocity:3.19.2"
+develocity = "com.gradle.develocity:4.0"
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
