@@ -81,7 +81,7 @@ lint-api = { module = "com.android.tools.lint:lint-api", version.ref = "android-
 lint-checks = { module = "com.android.tools.lint:lint-checks", version.ref = "android-tools" }
 lint-tests = { module = "com.android.tools.lint:lint-tests", version.ref = "android-tools" }
 
-okio = "com.squareup.okio:okio:3.10.2"
+okio = "com.squareup.okio:okio:3.11.0"
 
 slack-compose-lint = "com.slack.lint.compose:compose-lint-checks:1.4.2"
 
