@@ -118,8 +118,8 @@ com.google.guava:failureaccess:1.0.1
 com.google.guava:guava:31.0.1-jre
 com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava
 com.google.j2objc:j2objc-annotations:1.3
-com.squareup.okio:okio-jvm:3.10.2
-com.squareup.okio:okio:3.10.2
+com.squareup.okio:okio-jvm:3.11.0
+com.squareup.okio:okio:3.11.0
 jakarta.inject:jakarta.inject-api:2.0.1
 javax.inject:javax.inject:1
 org.checkerframework:checker-qual:3.12.0
