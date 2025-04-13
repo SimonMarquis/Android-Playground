@@ -26,7 +26,6 @@ kotlin {
 dependencies {
     compileOnly(plugin(libs.plugins.android.application))
     compileOnly(plugin(libs.plugins.android.library))
-    compileOnly(plugin(libs.plugins.dependencyGuard))
     compileOnly(plugin(libs.plugins.develocity))
     compileOnly(plugin(libs.plugins.hilt))
     compileOnly(plugin(libs.plugins.kotlin.compose))

@@ -1,0 +1,26 @@
+name: 🐘 Check Gradle dependency lock state
+description: Check Gradle dependency lock state
+
+runs:
+  using: composite
+  steps:
+    - run: ./gradlew dependencyLockState --write-locks > /dev/null
+      shell: bash
+    - run: git diff --quiet --exit-code -- ':(glob)**/*gradle.lockfile'
+      shell: bash
+      id: check
+    - if: ${{ failure() && steps.check.conclusion == 'failure' }}
+      run: |
+        tee --append "$GITHUB_STEP_SUMMARY" << EOF >/dev/null || true
+        **🐘 Gradle dependency lock state violations detected!**
+        \`\`\`diff
+        $(git diff --unified=0 -- ':(glob)**/*gradle.lockfile' | grep -E '^(diff|[+-][^+-])')
+        \`\`\`
+        EOF
+
+        [[ -n $PR_NUMBER ]] && gh pr comment "$PR_NUMBER" --body-file "$GITHUB_STEP_SUMMARY"
+      shell: bash
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
+        PR_NUMBER: ${{ github.event_name == 'pull_request' && github.event.pull_request.number || '' }}
+      continue-on-error: true
