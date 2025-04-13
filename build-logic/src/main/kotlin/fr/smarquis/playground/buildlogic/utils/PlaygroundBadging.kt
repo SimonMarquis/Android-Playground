@@ -56,14 +56,12 @@ internal object PlaygroundBadging {
         }
 
     fun configureProject(project: Project) = with(project) {
-        val globalTask = rootProject.tasks.named(GLOBAL_CI_BADGING_TASK_NAME)
         pluginManager.withPlugin("com.android.application") {
-            createAndroidBadgingTasks(globalTask)
+            createAndroidBadgingTasks()
         }
     }
 
     private fun Project.createAndroidBadgingTasks(
-        globalTask: TaskProvider<Task>,
         baseExtension: BaseExtension = project.extensions.getByType<BaseExtension>(),
         componentsExtension: ApplicationAndroidComponentsExtension = project.extensions.getByType<ApplicationAndroidComponentsExtension>(),
         properties: PlaygroundProperties = playground(),
@@ -99,11 +97,10 @@ internal object PlaygroundBadging {
 
         if (variant.name == properties.ciBadgingVariant.get()) {
             logger.debug("{} Creating CI Badging tasks for project '{}' and variant '{}'", LOG, target, variant.name)
-            val ciBadging = tasks.register(CI_BADGING_TASK_NAME) {
+            /*val ciBadging = */tasks.register(CI_BADGING_TASK_NAME) {
                 group = VERIFICATION_GROUP
                 dependsOn(checkBadgingTask)
             }
-            globalTask.configure { dependsOn(ciBadging) }
         }
     }
 
