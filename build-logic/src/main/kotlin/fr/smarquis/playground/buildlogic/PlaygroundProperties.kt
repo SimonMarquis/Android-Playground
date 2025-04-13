@@ -3,6 +3,8 @@ package fr.smarquis.playground.buildlogic
 import org.gradle.api.Project
 import org.gradle.api.artifacts.MinimalExternalModuleDependency
 import org.gradle.api.artifacts.VersionCatalog
+import org.gradle.api.artifacts.dsl.LockMode
+import org.gradle.api.artifacts.dsl.LockMode.STRICT
 import org.gradle.api.provider.Provider
 import org.gradle.kotlin.dsl.provideDelegate
 import kotlin.reflect.KProperty
@@ -46,6 +48,12 @@ internal class PlaygroundProperties private constructor(private val project: Pro
         get() = project.providers.gradleProperty("playground.compose.compilerMetrics").isPresent
     val composeCompilerReports
         get() = project.providers.gradleProperty("playground.compose.compilerReports").isPresent
+    val dependencyLockingMode
+        get() = project.providers.gradleProperty("playground.dependency-locking.mode").map(LockMode::valueOf).orElse(STRICT)
+    val dependencyLockingConfigurations
+        get() = project.providers.gradleProperty("playground.dependency-locking.configurations")
+            .map { it.split(" ", ",").toSet() }
+            .orElse(setOf("debugRuntimeClasspath", "releaseRuntimeClasspath"))
 
     private fun Provider<String>.toBoolean(): Provider<Boolean> = map(String::toBoolean)
     private fun Provider<String>.toInt(): Provider<Int> = map(String::toInt)

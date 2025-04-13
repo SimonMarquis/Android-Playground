@@ -1,6 +1,7 @@
 package fr.smarquis.playground.buildlogic
 
 import fr.smarquis.playground.buildlogic.utils.PlaygroundBadging
+import fr.smarquis.playground.buildlogic.utils.PlaygroundDependencyLocking
 import fr.smarquis.playground.buildlogic.utils.PlaygroundLint
 import fr.smarquis.playground.buildlogic.utils.PlaygroundUnitTests
 import org.gradle.api.Plugin
@@ -16,6 +17,7 @@ internal class PlaygroundRootPlugin : Plugin<Project> {
         PlaygroundUnitTests.configureRootProject(target)
         PlaygroundLint.configureRootProject(target)
         PlaygroundBadging.configureRootProject(target)
+        PlaygroundDependencyLocking.configureRootProject(target)
     }
 
 }
