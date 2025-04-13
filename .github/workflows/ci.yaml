@@ -49,8 +49,8 @@ jobs:
           cache-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
       - uses: ./.github/actions/setup-gradle-properties
 
+      - uses: ./.github/actions/check-gradle-dependency-lock-state
       - run: ./gradlew apiCheck --quiet
-      - run: ./gradlew dependencyGuard --quiet
       - run: ./gradlew globalCiBadging -Pplayground.isMinifyEnabled=false --quiet
 
   build:

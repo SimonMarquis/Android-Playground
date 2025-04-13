@@ -69,13 +69,13 @@ jobs:
           PR_URL: ${{ github.event.pull_request.html_url }}
           GH_TOKEN: ${{ steps.app-token.outputs.token }}
 
-      - id: gradle-dependency-guard-baseline
+      - id: gradle-dependency-lock-state
         run: |
-          ./gradlew dependencyGuardBaseline
+          ./gradlew dependencyLockState --write-locks > /dev/null
 
-          if ! git diff --quiet --exit-code -- ':(glob)**/dependencies/*.txt';
+          if ! git diff --quiet --exit-code -- ':(glob)**/*gradle.lockfile';
           then
-            git commit -m "🤖 Update Dependency Guard baseline" -m "[dependabot skip]" -- ':(glob)**/dependencies/*.txt'
+            git commit -m "🤖 Update Gradle dependency lock state" -m "[dependabot skip]" -- ':(glob)**/*gradle.lockfile'
             git show
 
             echo "::notice::UPDATED"
