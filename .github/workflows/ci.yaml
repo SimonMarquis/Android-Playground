@@ -51,7 +51,7 @@ jobs:
 
       - uses: ./.github/actions/check-gradle-dependency-lock-state
       - run: ./gradlew apiCheck --quiet
-      - run: ./gradlew globalCiBadging -Pplayground.isMinifyEnabled=false --quiet
+      - run: ./gradlew ciBadging -Pplayground.isMinifyEnabled=false --quiet
 
   build:
     name: 👷 Build

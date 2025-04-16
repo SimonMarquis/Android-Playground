@@ -45,65 +45,55 @@ import javax.inject.Inject
  */
 @Suppress("UnstableApiUsage")
 internal object PlaygroundBadging {
-    private const val GLOBAL_CI_BADGING_TASK_NAME = "globalCiBadging"
     private const val CI_BADGING_TASK_NAME = "ciBadging"
     private const val LOG = "PlaygroundBadging:"
 
     fun configureRootProject(project: Project): TaskProvider<Task> =
-        project.tasks.register(GLOBAL_CI_BADGING_TASK_NAME) {
+        project.tasks.register(CI_BADGING_TASK_NAME) {
             group = VERIFICATION_GROUP
-            description = "Global lifecycle task to run all ciBadging tasks."
+            description = "Global lifecycle task to run all $CI_BADGING_TASK_NAME tasks."
         }
 
     fun configureProject(project: Project) = with(project) {
-        val globalTask = rootProject.tasks.named(GLOBAL_CI_BADGING_TASK_NAME)
         pluginManager.withPlugin("com.android.application") {
-            createAndroidBadgingTasks(globalTask)
+            createAndroidBadgingTasks()
         }
     }
 
     private fun Project.createAndroidBadgingTasks(
-        globalTask: TaskProvider<Task>,
-        baseExtension: BaseExtension = project.extensions.getByType<BaseExtension>(),
-        componentsExtension: ApplicationAndroidComponentsExtension = project.extensions.getByType<ApplicationAndroidComponentsExtension>(),
+        baseExtension: BaseExtension = extensions.getByType(),
+        android: ApplicationAndroidComponentsExtension = extensions.getByType(),
         properties: PlaygroundProperties = playground(),
-    ) = componentsExtension.onVariants { variant ->
-        val target = this@createAndroidBadgingTasks
+    ) = android.onVariants { variant ->
         val capitalizedVariantName = variant.name.capitalized()
 
-        val generateBadgingTaskName = "generate${capitalizedVariantName}Badging"
-        val generateBadging = project.tasks.register<GenerateBadgingTask>(generateBadgingTaskName) {
+        val generateBadging = tasks.register<GenerateBadgingTask>("generate${capitalizedVariantName}Badging") {
             apk = variant.artifacts.get(SingleArtifact.APK_FROM_BUNDLE)
             // TODO: Replace with `sdkComponents.aapt2` when it's available in AGP https://issuetracker.google.com/issues/376815836
-            aapt2Executable = componentsExtension.sdkComponents.sdkDirectory.map {
-                it.file("${FD_BUILD_TOOLS}/${baseExtension.buildToolsVersion}/${FN_AAPT2}")
-            }
+            aapt2 = android.sdkComponents.sdkDirectory.map { it.file("$FD_BUILD_TOOLS/${baseExtension.buildToolsVersion}/$FN_AAPT2") }
             badging = layout.buildDirectory.file("outputs/apk_from_bundle/${variant.name}/${variant.name}-badging.txt")
         }
 
         val updateBadgingTaskName = "update${capitalizedVariantName}Badging"
-        val updateBadgingTask = project.tasks.register<Copy>(updateBadgingTaskName) {
+        tasks.register<Copy>(updateBadgingTaskName) {
             description = "Copies the generated badging file into the main project directory."
             from(generateBadging.get().badging)
             into(layout.projectDirectory)
         }
-        updateBadgingTask.toString()
 
-        val checkBadgingTaskName = "check${capitalizedVariantName}Badging"
-        val checkBadgingTask = project.tasks.register<CheckBadgingTask>(checkBadgingTaskName) {
+        val checkBadgingTask = tasks.register<CheckBadgingTask>("check${capitalizedVariantName}Badging") {
             goldenBadging = layout.projectDirectory.file("${variant.name}-badging.txt")
             generatedBadging = generateBadging.get().badging
-            targetUpdateBadgingTaskName = "${target.path}:$updateBadgingTaskName"
-            output = layout.buildDirectory.dir("intermediates/$checkBadgingTaskName")
+            updateTask = updateBadgingTaskName
+            output = layout.buildDirectory.dir("intermediates/$name")
         }
 
         if (variant.name == properties.ciBadgingVariant.get()) {
-            logger.debug("{} Creating CI Badging tasks for project '{}' and variant '{}'", LOG, target, variant.name)
-            val ciBadging = tasks.register(CI_BADGING_TASK_NAME) {
+            logger.debug("{} Creating CI Badging tasks for project '{}' and variant '{}'", LOG, this, variant.name)
+            tasks.register(CI_BADGING_TASK_NAME) {
                 group = VERIFICATION_GROUP
                 dependsOn(checkBadgingTask)
             }
-            globalTask.configure { dependsOn(ciBadging) }
         }
     }
 
@@ -112,16 +102,16 @@ internal object PlaygroundBadging {
 @CacheableTask
 internal abstract class GenerateBadgingTask : DefaultTask() {
 
-    @get:OutputFile
-    abstract val badging: RegularFileProperty
-
     @get:PathSensitive(NONE)
     @get:InputFile
     abstract val apk: RegularFileProperty
 
     @get:PathSensitive(NONE)
     @get:InputFile
-    abstract val aapt2Executable: RegularFileProperty
+    abstract val aapt2: RegularFileProperty
+
+    @get:OutputFile
+    abstract val badging: RegularFileProperty
 
     @get:Inject
     abstract val execOperations: ExecOperations
@@ -133,7 +123,7 @@ internal abstract class GenerateBadgingTask : DefaultTask() {
     @TaskAction
     fun taskAction() {
         execOperations.exec {
-            commandLine(aapt2Executable.get().asFile.absolutePath, "dump", "badging", apk.get().asFile.absolutePath)
+            commandLine(aapt2.get().asFile.absolutePath, "dump", "badging", apk.get().asFile.absolutePath)
             standardOutput = badging.asFile.get().outputStream()
         }
     }
@@ -142,9 +132,6 @@ internal abstract class GenerateBadgingTask : DefaultTask() {
 @Suppress("UnstableApiUsage")
 @CacheableTask
 internal abstract class CheckBadgingTask : DefaultTask() {
-
-    @get:OutputDirectory
-    abstract val output: DirectoryProperty
 
     @get:PathSensitive(NONE)
     @get:InputFile
@@ -155,7 +142,10 @@ internal abstract class CheckBadgingTask : DefaultTask() {
     abstract val generatedBadging: RegularFileProperty
 
     @get:Input
-    abstract val targetUpdateBadgingTaskName: Property<String>
+    abstract val updateTask: Property<String>
+
+    @get:OutputDirectory
+    abstract val output: DirectoryProperty
 
     @get:Inject
     abstract val problems: Problems
@@ -177,7 +167,7 @@ internal abstract class CheckBadgingTask : DefaultTask() {
             problems.reporter.throwing(exception, problemId) {
                 contextualLabel(exception.message.orEmpty())
                 fileLocation(generatedBadging.get().asFile.absolutePath)
-                solution("If this change is intended, run the `${targetUpdateBadgingTaskName.get()}` task.")
+                solution("If this change is intended, run the `${updateTask.get()}` task.")
                 severity(Severity.ERROR)
                 withException(exception)
             }
