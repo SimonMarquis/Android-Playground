@@ -1,5 +1,6 @@
 import org.gradle.api.JavaVersion.VERSION_17
 
+
 pluginManagement {
     includeBuild("build-logic")
     repositories {
