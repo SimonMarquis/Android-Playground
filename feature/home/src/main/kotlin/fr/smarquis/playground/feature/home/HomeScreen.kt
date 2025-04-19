@@ -25,11 +25,15 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.DateRange
+import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.filled.Phone
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.outlined.Info
+import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
@@ -39,6 +43,9 @@ import androidx.compose.material3.contentColorFor
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -73,14 +80,14 @@ import kotlin.text.Typography.times
 
 @Composable
 internal fun HomeScreen(
-    navigate: () -> Unit,
+    navigateToLicenses: () -> Unit,
     modifier: Modifier = Modifier,
     viewModel: HomeViewModel = hiltViewModel(),
 ) {
     val rolls: ImmutableList<Dice> by viewModel.rolls.collectAsState()
     val settings: Settings by viewModel.settings.collectAsState()
     HomeScreenContent(
-        navigate = navigate,
+        navigateToLicenses = navigateToLicenses,
         modifier = modifier,
         rolls = rolls,
         settings = settings,
@@ -95,7 +102,7 @@ internal fun HomeScreen(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun HomeScreenContent(
-    navigate: () -> Unit,
+    navigateToLicenses: () -> Unit,
     rolls: ImmutableList<Dice>,
     settings: Settings,
     data: HomeData,
@@ -123,6 +130,18 @@ private fun HomeScreenContent(
                 modifier = Modifier.fillMaxWidth(),
                 windowInsets = WindowInsets.safeDrawing.only(Horizontal + Top),
                 scrollBehavior = scrollBehavior,
+                actions = {
+                    var expanded by remember { mutableStateOf(false) }
+                    IconButton(onClick = { expanded = !expanded }) {
+                        Icon(imageVector = Icons.Default.MoreVert, contentDescription = "More")
+                        DropdownMenu(expanded = expanded, onDismissRequest = { expanded = false }) {
+                            DropdownMenuItem(
+                                text = { Text(stringResource(R.string.playground_feature_home_oss_licenses)) },
+                                onClick = { expanded = false ; navigateToLicenses() },
+                            )
+                        }
+                    }
+                },
             )
         },
         containerColor = Color.Transparent,
@@ -132,7 +151,7 @@ private fun HomeScreenContent(
         val haptic = LocalHapticFeedback.current
         LazyColumn(
             contentPadding = contentPadding,
-            modifier = Modifier.testTag("home::list")
+            modifier = Modifier.testTag("home::list"),
         ) {
             category(key = "tools", title = "Tools", icon = Icons.Default.Settings)
             entry(
@@ -350,7 +369,7 @@ private fun LazyListScope.toggle(
 private fun HomeScreenContentPreview() {
     val now = now().toLocalDateTime(currentSystemDefault())
     HomeScreenContent(
-        navigate = {},
+        navigateToLicenses = {},
         rolls = persistentListOf(),
         settings = Settings(),
         data = HomeData(

@@ -15,11 +15,11 @@ public fun NavGraphBuilder.addHomeRoute(
     navGraphBuilder: NavGraphBuilder,
     navController: NavController,
     modifier: Modifier = Modifier,
-    navigate: () -> Unit,
+    navigateToLicenses: () -> Unit,
 ): Unit = composable<HomeRoute> {
     // NOTE: Customize behavior with navGraphBuilder and/or navController
     HomeScreen(
         modifier = modifier,
-        navigate = navigate,
+        navigateToLicenses = navigateToLicenses,
     )
 }

@@ -32,6 +32,7 @@ dependencies {
     compileOnly(plugin(libs.plugins.kotlin.jvm))
     compileOnly(plugin(libs.plugins.kotlin.powerAssert))
     compileOnly(plugin(libs.plugins.ksp))
+    compileOnly(plugin(libs.plugins.licensee))
     implementation(plugin(libs.plugins.artifactsSizeReport))
     implementation(libs.android.tools.common)
     implementation(libs.assertk)
