@@ -106,6 +106,7 @@ kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlin-powerAssert = { id = "org.jetbrains.kotlin.plugin.power-assert", version.ref = "kotlin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 ksp = "com.google.devtools.ksp:2.1.20-2.0.0"
+licensee = "app.cash.licensee:1.13.0"
 
 playground-android-application = { id = "playground.android-application" }
 playground-android-compose = { id = "playground.android-compose" }

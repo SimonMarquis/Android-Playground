@@ -5,9 +5,10 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import org.junit.rules.TemporaryFolder
+import java.io.File
 
 open class TestAssetManager(private val folder: TemporaryFolder) : AssetManager {
-    override fun open(name: String) = folder.newFile(name).inputStream()
+    override fun open(name: String) = File(folder.root, name).inputStream()
 }
 
 @Module

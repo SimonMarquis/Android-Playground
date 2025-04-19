@@ -1,8 +1,13 @@
 package fr.smarquis.playground.buildlogic
 
+import app.cash.licensee.LicenseeExtension
+import app.cash.licensee.LicenseePlugin
+import app.cash.licensee.SpdxId
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.apply
+import org.gradle.kotlin.dsl.assign
+import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.get
 
 internal class PlaygroundAndroidApplicationPlugin : Plugin<Project> {
@@ -10,6 +15,7 @@ internal class PlaygroundAndroidApplicationPlugin : Plugin<Project> {
     override fun apply(target: Project) = with(target) {
         apply(plugin = "com.android.application")
         apply<PlaygroundAndroidBasePlugin>()
+        apply<LicenseePlugin>()
 
         androidApplication {
             defaultConfig {
@@ -38,6 +44,13 @@ internal class PlaygroundAndroidApplicationPlugin : Plugin<Project> {
                 includeInApk = false
                 includeInBundle = false
             }
+        }
+
+        extensions.configure<LicenseeExtension> {
+            bundleAndroidAsset = true
+            allow(SpdxId.Apache_20)
+            allow(SpdxId.BSD_3_Clause)
+            allow(SpdxId.MIT)
         }
     }
 }
