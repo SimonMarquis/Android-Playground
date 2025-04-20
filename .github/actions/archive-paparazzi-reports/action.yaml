@@ -4,13 +4,14 @@ runs:
   using: composite
   steps:
     - name: Archive HTML report
+      if: ${{ hashFiles('**/build/reports/paparazzi/**/*.html') != '' }}
       uses: actions/upload-artifact@v4
       with:
         name: paparazzi-html
         path: '**/build/reports/paparazzi'
     - name: Archive failures & deltas
-      if: ${{ hashFiles('**/build/paparazzi/failures/**.png') != '' }}
+      if: ${{ hashFiles('**/build/paparazzi/failures/*.png') != '' }}
       uses: actions/upload-artifact@v4
       with:
         name: paparazzi-failures
-        path: '**/build/paparazzi/failures/**.png'
+        path: '**/build/paparazzi/failures/*.png'
