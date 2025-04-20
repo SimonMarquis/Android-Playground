@@ -124,5 +124,5 @@ playground-hilt = { id = "playground.hilt" }
 playground-kotlin-jvm = { id = "playground.kotlin-jvm" }
 playground-ksp = { id = "playground.ksp" }
 playground-platform = { id = "playground.platform" }
-playground-screenshots = { id = "playground.screenshots" }
 playground-root = { id = "playground.root" }
+playground-screenshots = { id = "playground.screenshots" }
