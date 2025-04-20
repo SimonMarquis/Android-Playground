@@ -5,8 +5,8 @@ plugins {
 }
 
 dependencies {
-    api(libs.androidx.datastore)
+    api(libs.androidx.datastore.core)
     implementation(libs.kotlinx.coroutines.core)
     implementation(projects.core.di)
-    testFixturesApi(libs.androidx.datastore)
+    testFixturesApi(libs.androidx.datastore.core)
 }
