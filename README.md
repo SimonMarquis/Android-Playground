@@ -2,9 +2,10 @@
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/SimonMarquis/Android-Playground?quickstart=1)
 
-|                                      🌑                                      |                                       ☀️                                        |
-|:----------------------------------------------------------------------------:|:-------------------------------------------------------------------------------:|
-| [![screenshot dark](art/screenshot-thumb-dark.png)](art/screenshot-dark.png) | [![screenshot light](art/screenshot-thumb-light.png)](art/screenshot-light.png) |
+|                                                                                🌑                                                                                |                                                                                 ☀️                                                                                  |
+|:----------------------------------------------------------------------------------------------------------------------------------------------------------------:|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
+|                                           [![screenshot dark](art/screenshot-thumb-dark.png)](art/screenshot-dark.png)                                           |                                           [![screenshot light](art/screenshot-thumb-light.png)](art/screenshot-light.png)                                           |
+| <details><summary>📜 Open Source Licenses…</summary>[![screenshot oss dark](art/screenshot-licenses-thumb-dark.png)](art/screenshot-licenses-dark.png)</details> | <details><summary>📜 Open Source Licenses…</summary>[![screenshot oss light](art/screenshot-licenses-thumb-light.png)](art/screenshot-licenses-light.png)</details> |
 
 #### 🐘 Gradle
 
