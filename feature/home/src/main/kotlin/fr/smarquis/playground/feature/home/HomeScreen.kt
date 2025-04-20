@@ -261,6 +261,7 @@ private fun LazyListScope.category(
     Row(
         modifier = modifier
             .testTag(key)
+            .fillMaxWidth()
             .padding(top = 16.dp, bottom = 16.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
@@ -322,11 +323,11 @@ private fun LazyListScope.toggle(
         modifier = modifier
             .testTag(key)
             .clickable { onCheckedChange(!checked) }
-            .padding(horizontal = 56.dp, vertical = 8.dp),
+            .padding(start = 56.dp, end = 32.dp, top = 8.dp, bottom = 8.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
         Column(
-            modifier = modifier,
+            modifier = modifier.weight(1F),
         ) {
             Text(
                 text = title,
@@ -338,6 +339,7 @@ private fun LazyListScope.toggle(
                 fontFamily = Monospace,
             )
         }
+        Spacer(modifier = Modifier.width(8.dp))
         Switch(
             checked = checked,
             onCheckedChange = onCheckedChange,
