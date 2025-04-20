@@ -5,7 +5,6 @@ plugins {
 
 dependencies {
     implementation(projects.core.datastore)
-    implementation(projects.core.di)
     implementation(projects.domain.settings)
     implementation(libs.kotlinx.coroutines.core)
     testImplementation(libs.kotlinx.coroutines.test)
