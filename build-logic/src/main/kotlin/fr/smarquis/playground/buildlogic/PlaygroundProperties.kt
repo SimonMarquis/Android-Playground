@@ -54,6 +54,8 @@ internal class PlaygroundProperties private constructor(private val project: Pro
         get() = project.providers.gradleProperty("playground.dependency-locking.configurations")
             .map { it.split(" ", ",").toSet() }
             .orElse(setOf("debugRuntimeClasspath", "releaseRuntimeClasspath"))
+    val screenshotTestingVariant
+        get() = project.providers.gradleProperty("playground.screenshot-testing.variant").orElse("release")
 
     private fun Provider<String>.toBoolean(): Provider<Boolean> = map(String::toBoolean)
     private fun Provider<String>.toInt(): Provider<Int> = map(String::toInt)

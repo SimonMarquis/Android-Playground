@@ -20,6 +20,9 @@
 | `gradlew ciBadging -Pplayground.isMinifyEnabled=false`           | CI badging checks                                                                           |
 | `gradlew globalCiLint`                                           | CI Lint checks (html/sarif/txt/xml)                                                         |
 | `gradlew globalCiUnitTest`                                       | CI unit tests (html/xml)                                                                    |
+| `gradlew verifyScreenshots`                                      | Verify screenshot tests images against golden images                                                                                        |
+| `gradlew recordScreenshots`                                      | Record screenshot tests golden images                                                                                       |
+| `gradlew cleanRecordScreenshots`                                | Clean and record screenshot tests golden images                                                                                      |
 | `gradlew generateBaselineProfile`                                | Generates Baseline & Startup profiles                                                       |
 | `gradlew connectedBenchmarkAndroidTest`                          | Runs benchmark tests                                                                        |
 | `gradlew assembleRelease -Pplayground.compose.compilerMetrics`   | Compose compiler metrics                                                                    |

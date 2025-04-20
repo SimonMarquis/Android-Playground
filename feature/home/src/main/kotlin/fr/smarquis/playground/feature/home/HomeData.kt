@@ -1,6 +1,6 @@
 package fr.smarquis.playground.feature.home
 
-import android.util.DisplayMetrics
+import fr.smarquis.playground.core.di.DisplayMetrics
 import fr.smarquis.playground.core.di.qualifier.AppPackageName
 import fr.smarquis.playground.core.di.qualifier.AppVersionCode
 import fr.smarquis.playground.core.di.qualifier.AppVersionName

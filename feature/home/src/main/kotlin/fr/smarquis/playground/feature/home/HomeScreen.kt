@@ -1,6 +1,5 @@
 package fr.smarquis.playground.feature.home
 
-import android.util.DisplayMetrics
 import android.util.DisplayMetrics.DENSITY_XXXHIGH
 import androidx.activity.compose.ReportDrawn
 import androidx.compose.foundation.ExperimentalFoundationApi
@@ -67,15 +66,14 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import fr.smarquis.playground.core.di.DisplayMetrics
 import fr.smarquis.playground.core.ui.PlaygroundTheme
 import fr.smarquis.playground.core.ui.asAnnotatedString
 import fr.smarquis.playground.domain.dice.Dice
 import fr.smarquis.playground.domain.settings.Settings
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
-import kotlinx.datetime.Clock.System.now
-import kotlinx.datetime.TimeZone.Companion.currentSystemDefault
-import kotlinx.datetime.toLocalDateTime
+import kotlinx.datetime.LocalDateTime
 import kotlin.text.Typography.times
 
 @Composable
@@ -101,7 +99,7 @@ internal fun HomeScreen(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun HomeScreenContent(
+internal fun HomeScreenContent(
     navigateToLicenses: () -> Unit,
     rolls: ImmutableList<Dice>,
     settings: Settings,
@@ -366,14 +364,13 @@ private fun LazyListScope.toggle(
     }
 }
 
-@Preview(showBackground = true)
+@Preview
 @Composable
-private fun HomeScreenContentPreview() {
-    val now = now().toLocalDateTime(currentSystemDefault())
+internal fun HomeScreenContentPreview() {
     HomeScreenContent(
         navigateToLicenses = {},
         rolls = persistentListOf(),
-        settings = Settings(),
+        settings = Settings(strictMode = true),
         data = HomeData(
             packageName = "preview.test",
             versionCode = 1,
@@ -383,14 +380,14 @@ private fun HomeScreenContentPreview() {
             deviceProduct = "product",
             deviceSdkInt = 35,
             deviceRelease = "15",
-            firstInstallTime = now,
-            lastUpdateTime = now,
-            currentTime = now,
-            displayMetrics = DisplayMetrics().apply {
-                widthPixels = 1080
-                heightPixels = 1920
-                densityDpi = DENSITY_XXXHIGH
-            },
+            firstInstallTime = LocalDateTime.parse("2025-01-01T12:34:56"),
+            lastUpdateTime = LocalDateTime.parse("2025-01-02T12:34:56"),
+            currentTime = LocalDateTime.parse("2025-01-03T12:34:56"),
+            displayMetrics = DisplayMetrics(
+                widthPixels = 1080,
+                heightPixels = 1920,
+                densityDpi = DENSITY_XXXHIGH,
+            ),
         ),
         roll = {},
         reset = {},

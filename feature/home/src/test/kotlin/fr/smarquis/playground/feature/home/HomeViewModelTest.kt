@@ -1,11 +1,11 @@
 package fr.smarquis.playground.feature.home
 
-import android.util.DisplayMetrics
 import app.cash.turbine.test
 import assertk.assertThat
 import assertk.assertions.isEmpty
 import assertk.assertions.isEqualTo
 import assertk.assertions.isSameInstanceAs
+import fr.smarquis.playground.core.di.DisplayMetrics
 import fr.smarquis.playground.core.utils.StandardCoroutineScopeRule
 import fr.smarquis.playground.domain.dice.Dice
 import fr.smarquis.playground.domain.dice.Dice.FOUR
@@ -93,7 +93,11 @@ class HomeViewModelTest {
             firstInstallTime = now,
             lastUpdateTime = now,
             currentTime = now,
-            displayMetrics = DisplayMetrics(),
+            displayMetrics = DisplayMetrics(
+                widthPixels = 1080,
+                heightPixels = 1920,
+                densityDpi = 640,
+            ),
         ),
     )
 

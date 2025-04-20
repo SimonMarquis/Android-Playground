@@ -33,6 +33,7 @@ dependencies {
     compileOnly(plugin(libs.plugins.kotlin.powerAssert))
     compileOnly(plugin(libs.plugins.ksp))
     compileOnly(plugin(libs.plugins.licensee))
+    compileOnly(plugin(libs.plugins.paparazzi))
     implementation(plugin(libs.plugins.artifactsSizeReport))
     implementation(libs.android.tools.common)
     implementation(libs.assertk)
@@ -61,6 +62,7 @@ gradlePlugin {
         create("PlaygroundKotlinJvmPlugin", libs.plugins.playground.kotlin.jvm)
         create("PlaygroundKspPlugin", libs.plugins.playground.ksp)
         create("PlaygroundPlatformPlugin", libs.plugins.playground.platform)
+        create("PlaygroundScreenshotsPlugin", libs.plugins.playground.screenshots)
         create("PlaygroundRootPlugin", libs.plugins.playground.root)
         create("greeting.GreetingPlugin", libs.plugins.playground.greeting)
     }
