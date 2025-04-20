@@ -8,6 +8,7 @@ import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.WindowInsetsSides.Companion.Horizontal
@@ -29,6 +30,7 @@ import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material3.Card
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.DropdownMenu
@@ -48,6 +50,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
@@ -182,7 +185,6 @@ private fun LicensesScreenFailure(failure: Failure, contentPadding: PaddingValue
 }
 
 @Composable
-@OptIn(ExperimentalFoundationApi::class)
 private fun LicensesScreenContent(
     uiState: Success,
     contentPadding: PaddingValues,
@@ -194,55 +196,77 @@ private fun LicensesScreenContent(
         modifier = Modifier.testTag("licenses::list"),
     ) {
         uiState.licenses.forEach { (key, values) ->
-            item(
-                key = key,
-                contentType = "header",
-            ) {
-                Text(
-                    key,
-                    color = PlaygroundTheme.colorScheme.primary,
-                    style = PlaygroundTheme.typography.titleMedium,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(start = 16.dp, end = 16.dp, top = 16.dp),
-                )
+            item(key = key, contentType = "header") {
+                LicensesScreenHeader(key)
             }
-
             items(
                 items = values,
                 key = { """${it.groupId}:${it.artifactId}:${it.version}""" },
                 contentType = { "item" },
             ) {
-                var expanded by remember { mutableStateOf(false) }
-                Box(
-                    Modifier
-                        .fillMaxWidth()
-                        .combinedClickable(onClick = { expanded = !expanded })
-                        .padding(horizontal = 32.dp, vertical = 8.dp),
-                ) {
-                    Column {
-                        Text(
-                            it.name ?: it.artifactId,
-                            style = PlaygroundTheme.typography.titleSmall,
-                        )
-                        Text(
-                            "${it.artifactId}:${it.version}",
-                            style = PlaygroundTheme.typography.bodySmall,
-                            fontFamily = Monospace,
-                        )
-                        Text(
-                            it.spdxLicenses.joinToString(" $bullet ") { it.name },
-                            style = PlaygroundTheme.typography.bodySmall,
-                            fontFamily = Monospace,
-                        )
-                    }
-                    LicensesScreenDropdown(it, expanded, onDismiss = { expanded = false })
-                }
+                LicensesScreenItem(it)
             }
         }
         item {
             Spacer(Modifier.windowInsetsBottomHeight(WindowInsets.navigationBars))
         }
+    }
+}
+
+@Composable
+private fun LicensesScreenHeader(key: String) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .testTag(key)
+            .padding(vertical = 16.dp),
+        verticalAlignment = CenterVertically,
+    ) {
+        Icon(
+            modifier = Modifier
+                .padding(horizontal = 16.dp)
+                .width(24.dp),
+            imageVector = Icons.Outlined.Info,
+            tint = PlaygroundTheme.colorScheme.primary,
+            contentDescription = null,
+        )
+        Text(
+            text = key,
+            color = PlaygroundTheme.colorScheme.primary,
+            style = PlaygroundTheme.typography.titleMedium,
+        )
+    }
+}
+
+@Composable
+@OptIn(ExperimentalFoundationApi::class)
+private fun LicensesScreenItem(it: ArtifactDetail) {
+    var expanded by remember { mutableStateOf(false) }
+    Box(
+        Modifier
+            .fillMaxWidth()
+            .combinedClickable(onClick = { expanded = !expanded })
+            .padding(horizontal = 56.dp, vertical = 8.dp),
+    ) {
+        Column {
+            Text(
+                text = it.name ?: it.artifactId,
+                style = PlaygroundTheme.typography.titleSmall,
+            )
+            Text(
+                modifier = Modifier.basicMarquee(),
+                text = "${it.artifactId}:${it.version}",
+                style = PlaygroundTheme.typography.bodySmall,
+                fontFamily = Monospace,
+            )
+            Text(
+                modifier = Modifier.basicMarquee(),
+                text = it.spdxLicenses.joinToString(" $bullet ") { it.name },
+                style = PlaygroundTheme.typography.bodySmall,
+                fontFamily = Monospace,
+            )
+        }
+        LicensesScreenDropdown(it, expanded, onDismiss = { expanded = false })
     }
 }
 
