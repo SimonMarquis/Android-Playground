@@ -46,7 +46,10 @@ jobs:
       - uses: ./.github/actions/check-git-lfs
       - uses: ./.github/actions/setup-java
       - uses: ./.github/actions/setup-gradle
+        with:
+          cache-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
       - uses: ./.github/actions/setup-gradle-properties
+
       - run: ./gradlew cleanRecordScreenshots
       - run: |
           git status --porcelain
