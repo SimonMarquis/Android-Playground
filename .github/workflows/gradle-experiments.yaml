@@ -10,7 +10,7 @@ permissions:
 
 env:
   DEVELOCITY_URL: https://scans.gradle.com
-  TASKS: apiCheck assembleRelease globalCiUnitTest globalCiLint
+  TASKS: apiCheck licensee assembleRelease globalCiUnitTest globalCiLint
 
 jobs:
   build-cache-compatibility:

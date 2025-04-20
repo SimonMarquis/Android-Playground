@@ -12,6 +12,8 @@ import androidx.navigation.compose.rememberNavController
 import fr.smarquis.playground.core.ui.AndroidPlaygroundTheme
 import fr.smarquis.playground.feature.home.HomeRoute
 import fr.smarquis.playground.feature.home.addHomeRoute
+import fr.smarquis.playground.feature.licenses.LicensesRoute
+import fr.smarquis.playground.feature.licenses.addLicensesRoute
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalComposeUiApi::class)
 @Composable
@@ -25,7 +27,11 @@ internal fun PlaygroundApp() = AndroidPlaygroundTheme {
         addHomeRoute(
             navGraphBuilder = this,
             navController = navController,
-            navigate = { /* do nothing */ },
+            navigateToLicenses = { navController.navigate(route = LicensesRoute) },
+        )
+        addLicensesRoute(
+            navGraphBuilder = this,
+            navController = navController,
         )
         // NOTE: add new routes here
     }

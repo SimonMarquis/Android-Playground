@@ -30,12 +30,14 @@ dependencies {
     implementation(libs.kotlinx.datetime)
 
     implementation(projects.feature.home)
+    implementation(projects.feature.licenses)
     implementation(projects.core.android)
     implementation(projects.core.di)
     implementation(projects.core.ui)
     implementation(projects.domain.dice)
     implementation(projects.domain.settings)
     implementation(projects.data.dice)
+    implementation(projects.data.licenses)
     implementation(projects.data.settings)
 
     compileOnly(projects.lint) {
