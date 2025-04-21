@@ -11,7 +11,9 @@ runs:
     - name: Archive Gradle reports
       uses: actions/upload-artifact@v4
       with:
-        name: ${{ format(format('gradle-reports-[{0}]', inputs.id == '' && '{0}' || '{0}#{1}), github.job, inputs.id) }}
+        # gradle-report-[job]
+        # gradle-report-[job@id]
+        name: ${{ format(format('gradle-reports-[{0}]', inputs.id == '' && '{0}' || '{0}#{1}'), github.job, inputs.id) }}
         path: |
           build/reports/dependency-verification
           build/reports/dependency-configuration-cache
