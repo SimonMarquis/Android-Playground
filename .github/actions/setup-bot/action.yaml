@@ -23,6 +23,9 @@ outputs:
   user-id:
     description: GitHub App user id
     value: ${{ steps.get-user-id.outputs.user-id }}
+  committer:
+    description: Git committer
+    value: ${{ format('{0} <{1}+{2}[bot]@users.noreply.github.com>', steps.app-token.outputs.app-slug, steps.get-user-id.outputs.user-id, steps.app-token.outputs.app-slug) }}
 
 runs:
   using: composite
@@ -43,10 +46,8 @@ runs:
         git config --global --list
       shell: bash
       continue-on-error: true
-    - run: gh auth login
+    - run: gh auth login --with-token <<< "${{ steps.app-token.outputs.token }}"
       shell: bash
-      env:
-        GH_TOKEN: ${{ steps.app-token.outputs.token }}
     - run: |
         gh auth status
         git config --global --list
