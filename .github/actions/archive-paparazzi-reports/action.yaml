@@ -1,0 +1,27 @@
+name: 📦 Archive Paparazzi reports
+description: Archive Paparazzi reports, failures and deltas
+
+runs:
+  using: composite
+  steps:
+    - name: Archive HTML report
+      uses: actions/upload-artifact@v4
+      with:
+        name: paparazzi-html
+        path: '**/build/reports/paparazzi'
+        if-no-files-found: ignore
+    - name: Archive failures & deltas
+      id: artifact-failures-and-deltas
+      uses: actions/upload-artifact@v4
+      with:
+        name: paparazzi-failures
+        path: '**/build/paparazzi/failures/*.png'
+        if-no-files-found: ignore
+    - if: ${{ steps.artifact-failures-and-deltas.outputs.artifact-id != '' && github.event_name == 'pull_request' }}
+      run: gh pr comment "$PR_NUMBER" --body "[📸 Paparazzi deltas & golden images]($ARTIFACT_URL)"
+      shell: bash
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
+        PR_NUMBER: ${{ github.event.pull_request.number }}
+        ARTIFACT_URL: ${{ steps.artifact-failures-and-deltas.outputs.artifact-url }}
+      continue-on-error: true

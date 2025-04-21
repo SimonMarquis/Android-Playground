@@ -20,6 +20,9 @@
 | `gradlew ciBadging -Pplayground.isMinifyEnabled=false`           | CI badging checks                                                                           |
 | `gradlew globalCiLint`                                           | CI Lint checks (html/sarif/txt/xml)                                                         |
 | `gradlew globalCiUnitTest`                                       | CI unit tests (html/xml)                                                                    |
+| `gradlew verifyScreenshots`                                      | Verify screenshot tests images against golden images                                                                                        |
+| `gradlew recordScreenshots`                                      | Record screenshot tests golden images                                                                                       |
+| `gradlew cleanRecordScreenshots`                                | Clean and record screenshot tests golden images                                                                                      |
 | `gradlew generateBaselineProfile`                                | Generates Baseline & Startup profiles                                                       |
 | `gradlew connectedBenchmarkAndroidTest`                          | Runs benchmark tests                                                                        |
 | `gradlew assembleRelease -Pplayground.compose.compilerMetrics`   | Compose compiler metrics                                                                    |
@@ -35,12 +38,14 @@
 - [![🐘 Gradle dependency submission](https://github.com/SimonMarquis/Android-Playground/actions/workflows/gradle-dependency-submission.yaml/badge.svg)](https://github.com/SimonMarquis/Android-Playground/actions/workflows/gradle-dependency-submission.yaml)
 - [![🐘 Gradle experiments](https://github.com/SimonMarquis/Android-Playground/actions/workflows/gradle-experiments.yaml/badge.svg)](https://github.com/SimonMarquis/Android-Playground/actions/workflows/gradle-experiments.yaml)
 - [![🐘 Gradle Wrapper updater](https://github.com/SimonMarquis/Android-Playground/actions/workflows/gradle-wrapper-updater.yaml/badge.svg)](https://github.com/SimonMarquis/Android-Playground/actions/workflows/gradle-wrapper-updater.yaml)
+- [![📸 Paparazzi Golden Images](https://github.com/SimonMarquis/Android-Playground/actions/workflows/paparazzi-golden-images.yaml/badge.svg)](https://github.com/SimonMarquis/Android-Playground/actions/workflows/paparazzi-golden-images.yaml)
 - [![⚡ Startup & Baseline Profiles](https://github.com/SimonMarquis/Android-Playground/actions/workflows/startup-baseline-profiles.yaml/badge.svg)](https://github.com/SimonMarquis/Android-Playground/actions/workflows/startup-baseline-profiles.yaml)
 
 #### 🐙 GitHub composite actions
 
 - [`📦 Archive JUnit reports`](.github/actions/archive-junit-reports/action.yaml)
 - [`📦 Archive Lint reports`](.github/actions/archive-lint-reports/action.yaml)
+- [`📦 Archive Paparazzi reports`](.github/actions/archive-paparazzi-reports/action.yaml)
 - [`👮 Check git-lfs files`](.github/actions/check-git-lfs/action.yaml)
 - [`🐘 Setup Gradle`](.github/actions/setup-gradle/action.yaml)
 - [`🐘 Setup gradle.properties`](.github/actions/setup-gradle-properties/action.yaml)

@@ -75,9 +75,9 @@ public final class fr/smarquis/playground/core/android/di/AppModule_ProvidesAppV
 public final class fr/smarquis/playground/core/android/di/CoreAndroidModule_Companion_ProvidesDisplayMetricsFactory : dagger/internal/Factory {
 	public fun <init> (Ldagger/internal/Provider;)V
 	public static fun create (Ldagger/internal/Provider;)Lfr/smarquis/playground/core/android/di/CoreAndroidModule_Companion_ProvidesDisplayMetricsFactory;
-	public fun get ()Landroid/util/DisplayMetrics;
+	public fun get ()Lfr/smarquis/playground/core/di/DisplayMetrics;
 	public synthetic fun get ()Ljava/lang/Object;
-	public static fun providesDisplayMetrics (Landroid/app/Application;)Landroid/util/DisplayMetrics;
+	public static fun providesDisplayMetrics (Landroid/app/Application;)Lfr/smarquis/playground/core/di/DisplayMetrics;
 }
 
 public final class fr/smarquis/playground/core/android/di/CoreAndroidModule_Companion_ProvidesPackageInfoFactory : dagger/internal/Factory {

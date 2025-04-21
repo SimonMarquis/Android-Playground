@@ -91,9 +91,9 @@ internal fun LicensesScreen(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun LicensesScreen(
+internal fun LicensesScreen(
+    uiState: UiState,
     modifier: Modifier = Modifier,
-    uiState: UiState = Loading,
     navigateBack: () -> Unit,
 ) {
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
@@ -174,7 +174,7 @@ private fun LicensesScreenFailure(failure: Failure, contentPadding: PaddingValue
         ) {
             SelectionContainer {
                 Text(
-                    text = failure.cause.stackTraceToString(),
+                    text = failure.cause.stackTraceToString().trimEnd(),
                     style = PlaygroundTheme.typography.labelSmall,
                     fontFamily = Monospace,
                     modifier = Modifier.padding(8.dp),
@@ -323,19 +323,18 @@ private fun LicensesScreenDropdown(
     }
 }
 
-
-@Preview(showBackground = true)
+@Preview
 @Composable
-private fun LicensesScreenContentLoadingPreview() {
+internal fun LicensesScreenContentLoadingPreview() {
     LicensesScreen(
         uiState = Loading,
         navigateBack = {},
     )
 }
 
-@Preview(showBackground = true)
+@Preview
 @Composable
-private fun LicensesScreenContentFailurePreview() {
+internal fun LicensesScreenContentFailurePreview() {
     LicensesScreen(
         uiState = Failure(FileNotFoundException()),
         navigateBack = {},
@@ -354,9 +353,9 @@ private val MIT = SpdxLicense(
     url = "https://opensource.org/license/mit/",
 )
 
-@Preview(showBackground = true)
+@Preview
 @Composable
-private fun LicensesScreenContentPreview() {
+internal fun LicensesScreenContentPreview() {
     LicensesScreen(
         uiState = Success(
             persistentMapOf(

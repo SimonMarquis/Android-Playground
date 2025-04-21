@@ -11,7 +11,7 @@ public final class fr/smarquis/playground/feature/home/HomeData_Factory : dagger
 	public static fun create (Ldagger/internal/Provider;Ldagger/internal/Provider;Ldagger/internal/Provider;Ldagger/internal/Provider;Ldagger/internal/Provider;Ldagger/internal/Provider;Ldagger/internal/Provider;Ldagger/internal/Provider;Ldagger/internal/Provider;Ldagger/internal/Provider;Ldagger/internal/Provider;Ldagger/internal/Provider;)Lfr/smarquis/playground/feature/home/HomeData_Factory;
 	public fun get ()Lfr/smarquis/playground/feature/home/HomeData;
 	public synthetic fun get ()Ljava/lang/Object;
-	public static fun newInstance (Ljava/lang/String;JLjava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ILjava/lang/String;Lkotlinx/datetime/LocalDateTime;Lkotlinx/datetime/LocalDateTime;Lkotlinx/datetime/LocalDateTime;Landroid/util/DisplayMetrics;)Lfr/smarquis/playground/feature/home/HomeData;
+	public static fun newInstance (Ljava/lang/String;JLjava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ILjava/lang/String;Lkotlinx/datetime/LocalDateTime;Lkotlinx/datetime/LocalDateTime;Lkotlinx/datetime/LocalDateTime;Lfr/smarquis/playground/core/di/DisplayMetrics;)Lfr/smarquis/playground/feature/home/HomeData;
 }
 
 public final class fr/smarquis/playground/feature/home/HomeRoute {
