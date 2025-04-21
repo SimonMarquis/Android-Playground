@@ -40,16 +40,12 @@ runs:
         GH_TOKEN: ${{ steps.app-token.outputs.token }}
     - run: gh auth status
       shell: bash
-      env:
-        GH_TOKEN: ${{ steps.app-token.outputs.token }}
     - run: gh auth login
       shell: bash
       env:
         GH_TOKEN: ${{ steps.app-token.outputs.token }}
     - run: gh auth status
       shell: bash
-      env:
-        GH_TOKEN: ${{ steps.app-token.outputs.token }}
     - if: inputs.override-git-user == 'true'
       run: |
         git config --global --list
@@ -61,5 +57,3 @@ runs:
         APP_USER_ID: ${{ steps.get-user-id.outputs.user-id }}
     - run: gh auth status
       shell: bash
-      env:
-        GH_TOKEN: ${{ steps.app-token.outputs.token }}
