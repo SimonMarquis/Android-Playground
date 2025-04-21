@@ -18,19 +18,11 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
-      - uses: actions/create-github-app-token@v2
-        id: app-token
-        with:
-          app-id: ${{ vars.BOT_APP_ID }}
-          private-key: ${{ secrets.BOT_PRIVATE_KEY }}
-      - id: get-user-id
-        run: echo "user-id=$(gh api "/users/${APP_SLUG}[bot]" --jq .id)" >> "$GITHUB_OUTPUT"
-        env:
-          APP_SLUG: ${{ steps.app-token.outputs.app-slug }}
-          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+      - id: setup-bot
+        uses: ./.github/actions/setup-bot
       - uses: actions/checkout@v4
         with:
-          token: ${{ steps.app-token.outputs.token }}
+          token: ${{ steps.setup-bot.outputs.token }}
           lfs: true
       - uses: ./.github/actions/setup-java
       - uses: ./.github/actions/setup-gradle
@@ -62,5 +54,5 @@ jobs:
           body: ""
           base: ${{ github.event.repository.default_branch }}
           branch: update-android-profiles
-          token: ${{ steps.app-token.outputs.token }}
-          committer: ${{ format('{0} <{1}+{2}[bot]@users.noreply.github.com>', steps.app-token.outputs.app-slug, steps.get-user-id.outputs.user-id, steps.app-token.outputs.app-slug) }}
+          token: ${{ steps.setup-bot.outputs.token }}
+          committer: ${{ format('{0} <{1}+{2}[bot]@users.noreply.github.com>', steps.setup-bot.outputs.app-slug, steps.setup-bot.outputs.user-id, steps.setup-bot.outputs.app-slug) }}
