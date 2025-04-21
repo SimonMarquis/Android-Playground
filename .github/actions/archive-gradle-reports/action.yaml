@@ -1,0 +1,30 @@
+name: 📦 Archive Gradle reports
+description: Archive Gradle reports ...
+
+runs:
+  using: composite
+  steps:
+    - name: Archive ...
+      uses: actions/upload-artifact@v4
+      with:
+        name: gradle-report-dependency-verification
+        path: 'build/reports/dependency-verification'
+        if-no-files-found: ignore
+    - name: Archive ...
+      uses: actions/upload-artifact@v4
+      with:
+        name: gradle-report-dependency-configuration-cache
+        path: 'build/reports/dependency-configuration-cache'
+        if-no-files-found: ignore
+    - name: Archive ...
+      uses: actions/upload-artifact@v4
+      with:
+        name: gradle-report-problems
+        path: 'build/reports/problems/problems-report.html'
+        if-no-files-found: ignore
+    - name: Archive ...
+      uses: actions/upload-artifact@v4
+      with:
+        name: gradle-report-licensee
+        path: '**/build/reports/licensee'
+        if-no-files-found: ignore
