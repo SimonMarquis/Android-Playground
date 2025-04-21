@@ -35,7 +35,7 @@ jobs:
         run: gh pr checkout "$INPUT_REF"
         env:
           INPUT_REF: ${{ inputs.ref }}
-          token: ${{ steps.app-token.outputs.token }}
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
       - run: |
           git config --global user.name "${APP_SLUG}[bot]"
           git config --global user.email "${APP_USER_ID}+${APP_SLUG}[bot]@users.noreply.github.com"
