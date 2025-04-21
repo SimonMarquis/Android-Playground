@@ -4,15 +4,16 @@ description: Archive Gradle reports
 inputs:
   id:
     description: A unique identifier, to avoid collisions when using matrix strategy
+    required: false
 
 runs:
   using: composite
   steps:
     - uses: actions/upload-artifact@v4
       with:
-        # Generate unique identifiers
-        # - gradle-report-[job]
-        # - gradle-report-[job#id]
+        # Format unique identifiers:
+        # - gradle-reports-[job]
+        # - gradle-reports-[job#id]
         name: ${{ format(format('gradle-reports-[{0}]', inputs.id == '' && '{0}' || '{0}#{1}'), github.job, inputs.id) }}
         path: |
           build/reports/dependency-configuration-cache
