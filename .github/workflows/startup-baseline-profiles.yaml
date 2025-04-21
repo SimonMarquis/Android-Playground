@@ -58,4 +58,4 @@ jobs:
           base: ${{ github.event.repository.default_branch }}
           branch: update-android-profiles
           token: ${{ steps.setup-bot.outputs.token }}
-          committer: ${{ step.setup-bot.outputs.committer }}
+          committer: ${{ step.setup-bot.outputs.git-committer }}

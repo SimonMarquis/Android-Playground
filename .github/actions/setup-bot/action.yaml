@@ -23,7 +23,13 @@ outputs:
   user-id:
     description: GitHub App user id
     value: ${{ steps.get-user-id.outputs.user-id }}
-  committer:
+  git-user-name:
+    description: Git user name
+    value: ${{ format('{0}[bot]', steps.app-token.outputs.app-slug) }}
+  git-user-email:
+    description: Git user email
+    value: ${{ format('{0}+{1}[bot]@users.noreply.github.com', steps.get-user-id.outputs.user-id, steps.app-token.outputs.app-slug) }}
+  git-committer:
     description: Git committer
     value: ${{ format('{0} <{1}+{2}[bot]@users.noreply.github.com>', steps.app-token.outputs.app-slug, steps.get-user-id.outputs.user-id, steps.app-token.outputs.app-slug) }}
 
