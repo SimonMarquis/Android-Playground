@@ -33,6 +33,8 @@ jobs:
         with:
           cache-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
       - uses: ./.github/actions/setup-gradle-properties
+      # STOPSHIP
+      - uses: ./.github/actions/setup-bot
 
   checks:
     name: 👮 Checks
