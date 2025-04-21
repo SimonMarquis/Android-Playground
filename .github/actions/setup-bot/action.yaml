@@ -54,8 +54,9 @@ runs:
       shell: bash
       continue-on-error: true
     - run: |
-        touch foo.txt
-        git commit -m "foo" -- foo.txt
+        date > foo.txt
+        git add foo.txt
+        git commit -m "foo"
         git show
       shell: bash
     - run: gh auth setup-git
@@ -66,8 +67,9 @@ runs:
       shell: bash
       continue-on-error: true
     - run: |
-        touch bar.txt
-        git commit -m "bar" -- bar.txt
+        date > bar.txt
+        git add bar.txt
+        git commit -m "bar"
         git show
       shell: bash
     - if: inputs.override-git-user == 'true'
@@ -85,8 +87,9 @@ runs:
       shell: bash
       continue-on-error: true
     - run: |
-        touch baz.txt
-        git commit -m "baz" -- baz.txt
+        date > baz.txt
+        git add baz.txt
+        git commit -m "baz"
         git show
       shell: bash
 
