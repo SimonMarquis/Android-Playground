@@ -38,12 +38,14 @@
 - [![🐘 Gradle dependency submission](https://github.com/SimonMarquis/Android-Playground/actions/workflows/gradle-dependency-submission.yaml/badge.svg)](https://github.com/SimonMarquis/Android-Playground/actions/workflows/gradle-dependency-submission.yaml)
 - [![🐘 Gradle experiments](https://github.com/SimonMarquis/Android-Playground/actions/workflows/gradle-experiments.yaml/badge.svg)](https://github.com/SimonMarquis/Android-Playground/actions/workflows/gradle-experiments.yaml)
 - [![🐘 Gradle Wrapper updater](https://github.com/SimonMarquis/Android-Playground/actions/workflows/gradle-wrapper-updater.yaml/badge.svg)](https://github.com/SimonMarquis/Android-Playground/actions/workflows/gradle-wrapper-updater.yaml)
+- [![📸 Paparazzi Golden Images](https://github.com/SimonMarquis/Android-Playground/actions/workflows/paparazzi-golden-images.yaml/badge.svg)](https://github.com/SimonMarquis/Android-Playground/actions/workflows/paparazzi-golden-images.yaml)
 - [![⚡ Startup & Baseline Profiles](https://github.com/SimonMarquis/Android-Playground/actions/workflows/startup-baseline-profiles.yaml/badge.svg)](https://github.com/SimonMarquis/Android-Playground/actions/workflows/startup-baseline-profiles.yaml)
 
 #### 🐙 GitHub composite actions
 
 - [`📦 Archive JUnit reports`](.github/actions/archive-junit-reports/action.yaml)
 - [`📦 Archive Lint reports`](.github/actions/archive-lint-reports/action.yaml)
+- [`📦 Archive Paparazzi reports`](.github/actions/archive-paparazzi-reports/action.yaml)
 - [`👮 Check git-lfs files`](.github/actions/check-git-lfs/action.yaml)
 - [`🐘 Setup Gradle`](.github/actions/setup-gradle/action.yaml)
 - [`🐘 Setup gradle.properties`](.github/actions/setup-gradle-properties/action.yaml)

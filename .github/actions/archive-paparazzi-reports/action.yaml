@@ -1,5 +1,6 @@
 name: 📦 Archive Paparazzi reports
 description: Archive Paparazzi reports, failures and deltas
+
 runs:
   using: composite
   steps:
