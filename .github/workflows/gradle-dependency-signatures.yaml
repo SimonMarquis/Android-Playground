@@ -14,7 +14,7 @@ permissions:
 
 jobs:
   gradle-dependency-signatures:
-    if: github.actor == 'SimonMarquis'
+    if: contains(fromJson(vars.AUTHORIZED_ACTORS || '[]'), github.actor)
     runs-on: ubuntu-latest
     steps:
       - id: setup-bot
