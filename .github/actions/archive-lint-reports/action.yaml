@@ -18,18 +18,21 @@ runs:
       with:
         name: lint-html
         path: ${{ inputs.html }}
+        if-no-files-found: ignore
     - name: Archive Lint XML reports
       if: inputs.xml != ''
       uses: actions/upload-artifact@v4
       with:
         name: lint-xml
         path: ${{ inputs.xml }}
+        if-no-files-found: ignore
     - name: Archive Lint SARIF reports
       if: inputs.sarif != ''
       uses: actions/upload-artifact@v4
       with:
         name: lint-sarif
         path: ${{ inputs.sarif }}
+        if-no-files-found: ignore
     - name: Analyse Lint SARIF report
       if: inputs.analysis != ''
       uses: github/codeql-action/upload-sarif@v3
