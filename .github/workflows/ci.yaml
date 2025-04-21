@@ -58,6 +58,8 @@ jobs:
       - run: ./gradlew licensee --quiet
       - if: ${{ !cancelled() }}
         uses: ./.github/actions/archive-gradle-reports
+        with:
+          id: ${{ matrix.experiment }}
 
   checks:
     name: 👮 Checks
