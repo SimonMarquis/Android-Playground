@@ -54,12 +54,9 @@ jobs:
           develocityUrl: ${{ env.DEVELOCITY_URL }}
       - name: Upload build reports
         if: ${{ !cancelled() }}
-        uses: actions/upload-artifact@v4
+        uses: ./.github/actions/archive-gradle-reports
         with:
-          name: "build-cache-compatibility-reports-${{ matrix.experiment }}"
-          path: |
-            build/reports/configuration-cache/**/*.html
-            build/reports/problems/problems-report.html
+          id: ${{ matrix.experiment }}
 
   build-configuration-compatibility:
     runs-on: ubuntu-latest
@@ -80,9 +77,4 @@ jobs:
           tasks: ${{ env.TASKS }}
       - name: Upload build reports
         if: ${{ !cancelled() }}
-        uses: actions/upload-artifact@v4
-        with:
-          name: build-configuration-compatibility-reports
-          path: |
-            build/reports/configuration-cache/**/*.html
-            build/reports/problems/problems-report.html
+        uses: ./.github/actions/archive-gradle-reports

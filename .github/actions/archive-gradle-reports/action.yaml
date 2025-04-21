@@ -8,15 +8,15 @@ inputs:
 runs:
   using: composite
   steps:
-    - name: Archive Gradle reports
-      uses: actions/upload-artifact@v4
+    - uses: actions/upload-artifact@v4
       with:
-        # gradle-report-[job]
-        # gradle-report-[job@id]
+        # Generate unique identifiers
+        # - gradle-report-[job]
+        # - gradle-report-[job#id]
         name: ${{ format(format('gradle-reports-[{0}]', inputs.id == '' && '{0}' || '{0}#{1}'), github.job, inputs.id) }}
         path: |
-          build/reports/dependency-verification
           build/reports/dependency-configuration-cache
+          build/reports/dependency-verification
           build/reports/problems/problems-report.html
           **/build/reports/licensee
         if-no-files-found: ignore

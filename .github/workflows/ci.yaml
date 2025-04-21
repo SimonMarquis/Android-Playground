@@ -34,33 +34,6 @@ jobs:
           cache-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
       - uses: ./.github/actions/setup-gradle-properties
 
-  wip:
-    name: 🚧 WIP
-    needs: validation
-    runs-on: ubuntu-latest
-    timeout-minutes: 15
-    strategy:
-      fail-fast: false
-      matrix:
-        experiment: [1, 2, 3]
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          lfs: true
-      - uses: ./.github/actions/setup-java
-      - uses: ./.github/actions/setup-gradle
-        with:
-          cache-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
-      - uses: ./.github/actions/setup-gradle-properties
-
-      - uses: ./.github/actions/check-gradle-dependency-lock-state
-      - run: ./gradlew apiCheck --quiet
-      - run: ./gradlew licensee --quiet
-      - if: ${{ !cancelled() }}
-        uses: ./.github/actions/archive-gradle-reports
-        with:
-          id: ${{ matrix.experiment }}
-
   checks:
     name: 👮 Checks
     needs: validation
