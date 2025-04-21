@@ -43,19 +43,19 @@ runs:
         GH_TOKEN: ${{ steps.app-token.outputs.token }}
     - run: |
         gh auth status || true
-        git config --global --list
+        git config --list
       shell: bash
       continue-on-error: true
     - run: gh auth login --with-token <<< "${{ steps.app-token.outputs.token }}"
       shell: bash
     - run: |
         gh auth status || true
-        git config --global --list
+        git config --list
       shell: bash
       continue-on-error: true
     - if: inputs.override-git-user == 'true'
       run: |
-        git config --global --list
+        git config --list
         git config --global user.name "${APP_SLUG}[bot]"
         git config --global user.email "${APP_USER_ID}+${APP_SLUG}[bot]@users.noreply.github.com"
       shell: bash
@@ -64,7 +64,7 @@ runs:
         APP_USER_ID: ${{ steps.get-user-id.outputs.user-id }}
     - run: |
         gh auth status || true
-        git config --global --list
+        git config --list
       shell: bash
       continue-on-error: true
 
