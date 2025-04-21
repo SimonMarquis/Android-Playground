@@ -11,7 +11,16 @@ runs:
         path: '**/build/reports/paparazzi'
     - name: Archive failures & deltas
       if: ${{ hashFiles('**/build/paparazzi/failures/*.png') != '' }}
+      id: artifact-failures-and-deltas
       uses: actions/upload-artifact@v4
       with:
         name: paparazzi-failures
         path: '**/build/paparazzi/failures/*.png'
+    - if: ${{ hashFiles('**/build/paparazzi/failures/*.png') != '' && github.event_name == 'pull_request' }}
+      run: gh pr comment "$PR_NUMBER" --body "[📸 Paparazzi Golden Images]($ARTIFACT_URL)"
+      shell: bash
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
+        PR_NUMBER: ${{ github.event.pull_request.number }}
+        ARTIFACT_URL: ${{ steps.artifact-failures-and-deltas.outputs.artifact-url }}
+      continue-on-error: true
