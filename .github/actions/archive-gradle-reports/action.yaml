@@ -1,44 +1,20 @@
 name: 📦 Archive Gradle reports
-description: Archive Gradle reports ...
+description: Archive Gradle reports
 
 inputs:
   id:
-    description: A unique identifier when using matrix strategy to avoid collisions
+    description: A unique identifier, to avoid collisions when using matrix strategy
 
 runs:
   using: composite
   steps:
-    - name: Dump GitHub context
-      shell: bash
-      env:
-        GITHUB_CONTEXT: ${{ toJson(github) }}
-      run: echo "$GITHUB_CONTEXT"
-    - name: Dump job context
-      shell: bash
-      env:
-        JOB_CONTEXT: ${{ toJson(job) }}
-      run: echo "$JOB_CONTEXT"
-    - name: Archive ...
+    - name: Archive Gradle reports
       uses: actions/upload-artifact@v4
       with:
-        name: ${{ format(inputs.id == '' && 'gradle-report-dependency-verification ({0})' || 'gradle-report-dependency-verification ({0}-{1})', github.job, inputs.id) }}
-        path: 'build/reports/dependency-verification'
-        if-no-files-found: ignore
-    - name: Archive ...
-      uses: actions/upload-artifact@v4
-      with:
-        name: ${{ format(inputs.id == '' && 'gradle-report-dependency-configuration-cache ({0})' || 'gradle-report-dependency-configuration-cache ({0}-{1})', github.job, inputs.id) }}
-        path: 'build/reports/dependency-configuration-cache'
-        if-no-files-found: ignore
-    - name: Archive ...
-      uses: actions/upload-artifact@v4
-      with:
-        name: ${{ format(inputs.id == '' && 'gradle-report-problems ({0})' || 'gradle-report-problems ({0}-{1})', github.job, inputs.id) }}
-        path: 'build/reports/problems/problems-report.html'
-        if-no-files-found: ignore
-    - name: Archive ...
-      uses: actions/upload-artifact@v4
-      with:
-        name: ${{ format(inputs.id == '' && 'gradle-report-licensee ({0})' || 'gradle-report-licensee ({0}-{1})', github.job, inputs.id) }}
-        path: '**/build/reports/licensee'
+        name: ${{ format(format('gradle-reports-[{0}]', inputs.id == '' && '{0}' || '{0}#{1}), github.job, inputs.id) }}
+        path: |
+          build/reports/dependency-verification
+          build/reports/dependency-configuration-cache
+          build/reports/problems/problems-report.html
+          **/build/reports/licensee
         if-no-files-found: ignore
