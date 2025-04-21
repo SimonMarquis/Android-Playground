@@ -49,6 +49,7 @@
 - [`📦 Archive Paparazzi reports`](.github/actions/archive-paparazzi-reports/action.yaml)
 - [`👮 Check git-lfs files`](.github/actions/check-git-lfs/action.yaml)
 - [`🐘 Check Gradle dependency lock state`](.github/actions/check-gradle-dependency-lock-state/action.yaml)
+- [`🤖 Setup Bot`](.github/actions/setup-bot/action.yaml)
 - [`🐘 Setup Gradle`](.github/actions/setup-gradle/action.yaml)
 - [`🐘 Setup gradle.properties`](.github/actions/setup-gradle-properties/action.yaml)
 - [`☕️ Setup Java`](.github/actions/setup-java/action.yaml)
