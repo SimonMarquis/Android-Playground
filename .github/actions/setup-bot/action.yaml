@@ -2,6 +2,10 @@ name: 🤖 Setup Bot
 description: Setup Bot
 
 inputs:
+  app-id:
+    description: GitHub App ID
+    required: true
+    default: ${{ vars.BOT_APP_ID }}
   override-git-user:
     description: When 'true', the global git user will be set to the bot identity.
     required: false
@@ -24,7 +28,7 @@ runs:
     - uses: actions/create-github-app-token@v2
       id: app-token
       with:
-        app-id: ${{ vars.BOT_APP_ID }}
+        app-id: ${{ inputs.app-id }}
         private-key: ${{ secrets.BOT_PRIVATE_KEY }}
     - id: get-user-id
       run: echo "user-id=$(gh api "/users/${APP_SLUG}[bot]" --jq .id)" >> "$GITHUB_OUTPUT"
