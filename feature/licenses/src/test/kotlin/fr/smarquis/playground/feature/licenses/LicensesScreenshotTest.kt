@@ -10,7 +10,7 @@ import org.junit.runner.RunWith
 import kotlin.test.Test
 
 @RunWith(TestParameterInjector::class)
-class LicensesScreenshotTest(@TestParameter val theme: Theme) {
+class LicensesScreenshotTest(@param:TestParameter val theme: Theme) {
 
     @get:Rule
     val screenshot = screenshotRule()
