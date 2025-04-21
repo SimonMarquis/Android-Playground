@@ -22,6 +22,7 @@ jobs:
         uses: ./.github/actions/setup-bot
         with:
           app-id: ${{ vars.BOT_APP_ID }}
+          private-key: ${{ secrets.BOT_PRIVATE_KEY }}
       - uses: actions/checkout@v4
         with:
           ref: ${{ github.head_ref }}
