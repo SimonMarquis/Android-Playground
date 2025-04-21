@@ -54,7 +54,7 @@ jobs:
       - run: ./gradlew licensee --quiet
       - run: ./gradlew ciBadging -Pplayground.isMinifyEnabled=false --quiet
       - if: ${{ !cancelled() }}
-        uses: ./.github/actions/gradle-reports
+        uses: ./.github/actions/archive-gradle-reports
 
   build:
     name: 👷 Build
@@ -85,7 +85,7 @@ jobs:
           name: aar
           path: "**/build/outputs/aar"
       - if: ${{ !cancelled() }}
-        uses: ./.github/actions/gradle-reports
+        uses: ./.github/actions/archive-gradle-reports
 
   test:
     name: 🧑‍🔬 Test
@@ -115,7 +115,7 @@ jobs:
         if: ${{ !cancelled() && contains(fromJSON('["success", "failure"]'), steps.test.outcome) }}
         uses: ./.github/actions/archive-paparazzi-reports
       - if: ${{ !cancelled() }}
-        uses: ./.github/actions/gradle-reports
+        uses: ./.github/actions/archive-gradle-reports
 
   lint:
     name: 🕵️ Lint
@@ -149,4 +149,4 @@ jobs:
           sarif: "**/build/reports/lint-results*.sarif"
           xml: "**/build/reports/lint-results*.xml"
       - if: ${{ !cancelled() }}
-        uses: ./.github/actions/gradle-reports
+        uses: ./.github/actions/archive-gradle-reports
