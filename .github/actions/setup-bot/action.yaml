@@ -53,6 +53,11 @@ runs:
         git config --list
       shell: bash
       continue-on-error: true
+    - run: |
+        touch foo.txt
+        git commit -m "foo" -- foo.txt
+        git show
+      shell: bash
     - run: gh auth setup-git
       shell: bash
     - run: |
@@ -60,6 +65,11 @@ runs:
         git config --list
       shell: bash
       continue-on-error: true
+    - run: |
+        touch bar.txt
+        git commit -m "bar" -- bar.txt
+        git show
+      shell: bash
     - if: inputs.override-git-user == 'true'
       run: |
         git config --list
@@ -74,4 +84,9 @@ runs:
         git config --list
       shell: bash
       continue-on-error: true
+    - run: |
+        touch baz.txt
+        git commit -m "baz" -- baz.txt
+        git show
+      shell: bash
 
