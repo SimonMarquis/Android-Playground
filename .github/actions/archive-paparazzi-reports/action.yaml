@@ -4,20 +4,20 @@ runs:
   using: composite
   steps:
     - name: Archive HTML report
-      if: ${{ hashFiles('**/build/reports/paparazzi/**/*.html') != '' }}
       uses: actions/upload-artifact@v4
       with:
         name: paparazzi-html
         path: '**/build/reports/paparazzi'
+        if-no-files-found: ignore
     - name: Archive failures & deltas
-      if: ${{ hashFiles('**/build/paparazzi/failures/*.png') != '' }}
       id: artifact-failures-and-deltas
       uses: actions/upload-artifact@v4
       with:
         name: paparazzi-failures
         path: '**/build/paparazzi/failures/*.png'
-    - if: ${{ hashFiles('**/build/paparazzi/failures/*.png') != '' && github.event_name == 'pull_request' }}
-      run: gh pr comment "$PR_NUMBER" --body "[📸 Paparazzi Golden Images]($ARTIFACT_URL)"
+        if-no-files-found: ignore
+    - if: ${{ steps.artifact-failures-and-deltas.outputs.artifact-id != '' && github.event_name == 'pull_request' }}
+      run: gh pr comment "$PR_NUMBER" --body "[📸 Paparazzi deltas & golden images]($ARTIFACT_URL)"
       shell: bash
       env:
         GITHUB_TOKEN: ${{ github.token }}
