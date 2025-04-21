@@ -102,13 +102,13 @@ jobs:
         id: test
         run: ./gradlew globalCiUnitTest verifyScreenshots
       - name: 📦 Archive JUnit reports
-        if: ${{ always() && contains(fromJSON('["success", "failure"]'), steps.test.outcome) }}
+        if: ${{ !cancelled() && contains(fromJSON('["success", "failure"]'), steps.test.outcome) }}
         uses: ./.github/actions/archive-junit-reports
         with:
           html: "**/build/reports/tests/test*"
           xml: "**/build/test-results/test*/**.xml"
       - name: 📦 Archive Paparazzi reports
-        if: ${{ always() && contains(fromJSON('["success", "failure"]'), steps.test.outcome) }}
+        if: ${{ !cancelled() && contains(fromJSON('["success", "failure"]'), steps.test.outcome) }}
         uses: ./.github/actions/archive-paparazzi-reports
 
   lint:
@@ -134,7 +134,7 @@ jobs:
         id: lint
         run: ./gradlew globalCiLint --continue
       - name: 📦 Archive Lint reports
-        if: ${{ always() && contains(fromJSON('["success", "failure"]'), steps.lint.outcome) }}
+        if: ${{ !cancelled() && contains(fromJSON('["success", "failure"]'), steps.lint.outcome) }}
         uses: ./.github/actions/archive-lint-reports
         with:
           # hard-coded path to the merged lint report
