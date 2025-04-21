@@ -44,6 +44,7 @@
 
 #### 🐙 GitHub composite actions
 
+- [`📦 Archive Gradle reports`](.github/actions/archive-gradle-reports/action.yaml)
 - [`📦 Archive JUnit reports`](.github/actions/archive-junit-reports/action.yaml)
 - [`📦 Archive Lint reports`](.github/actions/archive-lint-reports/action.yaml)
 - [`📦 Archive Paparazzi reports`](.github/actions/archive-paparazzi-reports/action.yaml)
