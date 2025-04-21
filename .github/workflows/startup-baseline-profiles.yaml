@@ -20,6 +20,8 @@ jobs:
     steps:
       - id: setup-bot
         uses: ./.github/actions/setup-bot
+        with:
+          app-id: ${{ vars.BOT_APP_ID }}
       - uses: actions/checkout@v4
         with:
           token: ${{ steps.setup-bot.outputs.token }}

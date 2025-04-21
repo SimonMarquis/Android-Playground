@@ -35,6 +35,8 @@ jobs:
       - uses: ./.github/actions/setup-gradle-properties
       # STOPSHIP
       - uses: ./.github/actions/setup-bot
+        with:
+          app-id: ${{ vars.BOT_APP_ID }}
 
   checks:
     name: 👮 Checks

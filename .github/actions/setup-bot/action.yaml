@@ -5,7 +5,6 @@ inputs:
   app-id:
     description: GitHub App ID
     required: true
-    default: ${{ vars.BOT_APP_ID }}
   override-git-user:
     description: When 'true', the global git user will be set to the bot identity.
     required: false
