@@ -8,10 +8,6 @@
          <key-server uri="https://keyserver.ubuntu.com"/>
          <key-server uri="https://keys.openpgp.org"/>
       </key-servers>
-      <trusted-artifacts>
-         <trust group="app.cash.paparazzi" name="paparazzi" version="2.0.0-SNAPSHOT" reason="SNAPSHOT verification breaks the build!"/>
-         <trust group="app.cash.paparazzi" name="paparazzi-gradle-plugin" version="2.0.0-SNAPSHOT" reason="SNAPSHOT verification breaks the build!"/>
-      </trusted-artifacts>
       <ignored-keys>
          <ignored-key id="902E15693BB8846B" reason="Key couldn't be downloaded from any key server"/>
       </ignored-keys>
@@ -46,6 +42,7 @@
          <trusted-key id="1D0A8B5E77C678A7C724445ABF984B4145EA13F7" group="com.squareup" name="javapoet"/>
          <trusted-key id="1D217F8475EEE9F19AB8DD6B793FD5751A0F0780">
             <trusting group="app.cash.licensee"/>
+            <trusting group="app.cash.paparazzi"/>
             <trusting group="com.squareup.okio"/>
          </trusted-key>
          <trusted-key id="24D04176586361FDA94EE0315F7786DF73E61F56" group="com.google.devtools.ksp"/>
