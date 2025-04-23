@@ -1,4 +1,5 @@
 name: 🐘 Gradle dependency lock state
+run-name: 🐘 Gradle dependency lock state [${{ inputs.ref }}]
 
 on:
   workflow_dispatch:

@@ -1,4 +1,5 @@
 name: 🐘 Gradle dependency signatures
+run-name: 🐘 Gradle dependency signatures [${{ inputs.ref }}]
 
 on:
   workflow_dispatch:
