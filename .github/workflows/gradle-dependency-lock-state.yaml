@@ -1,0 +1,68 @@
+name: 🐘 Gradle dependency lock state
+
+on:
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: PR number, branch, or url
+        required: false
+        type: string
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  gradle-dependency-lock-state:
+    if: contains(fromJson(vars.AUTHORIZED_ACTORS || '[]'), github.actor)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - id: setup-bot
+        uses: ./.github/actions/setup-bot
+        with:
+          app-id: ${{ vars.BOT_APP_ID }}
+          private-key: ${{ secrets.BOT_PRIVATE_KEY }}
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ steps.setup-bot.outputs.token }}
+      - if: inputs.ref != ''
+        run: gh pr checkout "$INPUT_REF"
+        env:
+          INPUT_REF: ${{ inputs.ref }}
+          GH_TOKEN: ${{ steps.setup-bot.outputs.token }}
+
+      - uses: ./.github/actions/setup-java
+      - uses: ./.github/actions/setup-gradle
+        with:
+          cache-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
+      - uses: ./.github/actions/setup-gradle-properties
+
+      - run: ./gradlew dependencyLockState --write-locks > /dev/null
+      - run: |
+          # Remove unnecessary version attributes from trusted-key entries
+          sed -i 's/<trusted-key\(.*\) version="[^"]*"/<trusted-key\1/g' gradle/verification-metadata.xml
+
+          if ! git diff --quiet --exit-code -- ':(glob)**/*gradle.lockfile';
+          then
+            git commit -m "🤖 Update Gradle dependency lock state" -m "[dependabot skip]" -- ':(glob)**/*gradle.lockfile'
+            git show
+
+            if [[ -z "${INPUT_REF}" ]]; then
+              new_pr_branch="gradle-dependency-lock-state/$GITHUB_RUN_ID-$GITHUB_RUN_NUMBER"
+              git switch --create "$new_pr_branch"
+              git push origin "$new_pr_branch"
+              gh pr create \
+                --title "🤖 Update Gradle dependency lock state" --fill \
+                --base "$GITHUB_REF_NAME" --head "$new_pr_branch" \
+                --assignee "$GITHUB_TRIGGERING_ACTOR"
+            else
+              git push
+
+            echo "::notice::UPDATED"
+          else
+            echo "::notice::UP-TO-DATE"
+          fi
+        env:
+          INPUT_REF: ${{ inputs.ref }}
+          GH_TOKEN: ${{ steps.setup-bot.outputs.token }}
