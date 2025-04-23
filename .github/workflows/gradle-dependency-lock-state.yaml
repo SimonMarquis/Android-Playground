@@ -45,7 +45,7 @@ jobs:
 
           if ! git diff --quiet --exit-code -- ':(glob)**/*gradle.lockfile';
           then
-            git commit -m "🤖 Update Gradle dependency lock state" -m "[dependabot skip]" -- ':(glob)**/*gradle.lockfile'
+            git commit -m "🤖 Update Gradle dependency lock state" -- ':(glob)**/*gradle.lockfile'
             git show
 
             if [[ -z "${INPUT_REF}" ]]; then
