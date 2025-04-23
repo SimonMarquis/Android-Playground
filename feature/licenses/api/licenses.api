@@ -3,7 +3,7 @@ public final class fr/smarquis/playground/feature/licenses/ComposableSingletons$
 	public fun <init> ()V
 	public final fun getLambda$-1462941838$licenses_release ()Lkotlin/jvm/functions/Function2;
 	public final fun getLambda$-2089006031$licenses_release ()Lkotlin/jvm/functions/Function2;
-	public final fun getLambda$-746911085$licenses_release ()Lkotlin/jvm/functions/Function3;
+	public final fun getLambda$-712087148$licenses_release ()Lkotlin/jvm/functions/Function3;
 }
 
 public final class fr/smarquis/playground/feature/licenses/LicensesRoute {
