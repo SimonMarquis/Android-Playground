@@ -58,7 +58,7 @@ jobs:
                 --assignee "$GITHUB_TRIGGERING_ACTOR"
             else
               git push
-
+            fi
             echo "::notice::UPDATED"
           else
             echo "::notice::UP-TO-DATE"
