@@ -28,6 +28,7 @@
             <trusting group="androidx.core"/>
             <trusting group="androidx.databinding"/>
             <trusting group="androidx.datastore"/>
+            <trusting group="androidx.lint" name="lint-gradle" version="1.0.0-alpha04"/>
             <trusting group="^androidx[.]compose($|([.].*))" regex="true"/>
             <trusting group="^androidx[.]navigation($|([.].*))" regex="true"/>
             <trusting group="^com[.]android($|([.].*))" regex="true"/>
