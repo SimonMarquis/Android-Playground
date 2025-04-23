@@ -1,4 +1,5 @@
 name: 📸 Paparazzi Golden Images
+run-name: 📸 Paparazzi Golden Images [${{ inputs.ref }}]
 
 on:
   workflow_dispatch:
