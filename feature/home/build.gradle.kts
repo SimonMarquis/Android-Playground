@@ -9,10 +9,10 @@ plugins {
 }
 
 dependencies {
+    api(projects.domain.dice)
+    api(projects.domain.settings)
     implementation(projects.core.di)
     implementation(projects.core.ui)
-    implementation(projects.domain.dice)
-    implementation(projects.domain.settings)
     implementation(libs.androidx.navigation)
     implementation(libs.androidx.hilt.navigation.compose)
     implementation(libs.hilt.android)

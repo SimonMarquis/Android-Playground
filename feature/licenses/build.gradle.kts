@@ -9,9 +9,9 @@ plugins {
 }
 
 dependencies {
+    api(projects.domain.licenses)
     implementation(projects.core.di)
     implementation(projects.core.ui)
-    implementation(projects.domain.licenses)
     implementation(libs.androidx.navigation)
     implementation(libs.androidx.hilt.navigation.compose)
     implementation(libs.hilt.android)
