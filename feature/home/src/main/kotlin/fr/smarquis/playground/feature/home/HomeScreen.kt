@@ -76,14 +76,13 @@ import kotlinx.collections.immutable.persistentListOf
 import kotlinx.datetime.LocalDateTime
 import kotlin.text.Typography.times
 
-private fun main(): Unit = Unit
-
 @Composable
 internal fun HomeScreen(
     navigateToLicenses: () -> Unit,
     modifier: Modifier = Modifier,
     viewModel: HomeViewModel = hiltViewModel(),
 ) {
+    println(Unit)
     val rolls: ImmutableList<Dice> by viewModel.rolls.collectAsState()
     val settings: Settings by viewModel.settings.collectAsState()
     HomeScreenContent(
