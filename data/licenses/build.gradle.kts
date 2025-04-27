@@ -5,8 +5,8 @@ plugins {
 }
 
 dependencies {
+    api(projects.domain.licenses)
     implementation(projects.core.di)
-    implementation(projects.domain.licenses)
     implementation(libs.kotlinx.coroutines.core)
     implementation(libs.kotlinx.serialization.json)
     testImplementation(libs.kotlinx.coroutines.test)
