@@ -76,7 +76,7 @@ import kotlinx.collections.immutable.persistentListOf
 import kotlinx.datetime.LocalDateTime
 import kotlin.text.Typography.times
 
-internal fun main(): Unit = Unit
+private fun main(): Unit = Unit
 
 @Composable
 internal fun HomeScreen(
