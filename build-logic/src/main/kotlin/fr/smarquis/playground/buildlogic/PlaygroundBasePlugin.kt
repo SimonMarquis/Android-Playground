@@ -4,6 +4,7 @@ import fr.smarquis.playground.buildlogic.utils.PlaygroundBadging
 import fr.smarquis.playground.buildlogic.utils.PlaygroundDependencyLocking
 import fr.smarquis.playground.buildlogic.utils.PlaygroundLint
 import fr.smarquis.playground.buildlogic.utils.PlaygroundPlatforms
+import fr.smarquis.playground.buildlogic.utils.PlaygroundTopology
 import fr.smarquis.playground.buildlogic.utils.PlaygroundUnitTests
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -25,6 +26,7 @@ internal class PlaygroundBasePlugin : Plugin<Project> {
         PlaygroundBadging.configureProject(target)
         PlaygroundDependencyLocking.configureProject(target)
         PlaygroundPlatforms.configureProject(target)
+        PlaygroundTopology.configureProject(target)
 
         configureReproducibleBuilds()
     }
