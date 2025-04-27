@@ -51,8 +51,8 @@ jobs:
 
       - uses: ./.github/actions/check-gradle-dependency-lock-state
       - run: ./gradlew licensee --quiet
-      - run: ./gradlew apiCheck --quiet
       - run: ./gradlew topologyCheck --quiet
+      - run: ./gradlew apiCheck --quiet
       - run: ./gradlew ciBadging -Pplayground.isMinifyEnabled=false --quiet
       - if: ${{ !cancelled() }}
         uses: ./.github/actions/archive-gradle-reports
