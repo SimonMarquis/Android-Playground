@@ -53,11 +53,8 @@ internal class PlaygroundAndroidBasePlugin : Plugin<Project> {
         }
 
         val coreLibraryDesugaring by configurations
-        val lintChecks by configurations
         dependencies {
             coreLibraryDesugaring(libs.`android-desugarJdkLibs`.get())
-            lintChecks(libs.`android-security-lint`)
-            lintChecks(project(":lint"))
         }
     }
 

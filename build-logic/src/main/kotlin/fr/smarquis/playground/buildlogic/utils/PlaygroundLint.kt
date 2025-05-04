@@ -5,13 +5,16 @@ import fr.smarquis.playground.buildlogic.PlaygroundProperties
 import fr.smarquis.playground.buildlogic.androidExtension
 import fr.smarquis.playground.buildlogic.capitalized
 import fr.smarquis.playground.buildlogic.isAndroidTest
+import fr.smarquis.playground.buildlogic.libs
 import fr.smarquis.playground.buildlogic.playground
 import org.gradle.api.Project
 import org.gradle.api.Task
-import org.gradle.api.provider.Provider
 import org.gradle.api.tasks.TaskProvider
 import org.gradle.kotlin.dsl.apply
+import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.getByType
+import org.gradle.kotlin.dsl.getValue
+import org.gradle.kotlin.dsl.provideDelegate
 import org.gradle.language.base.plugins.LifecycleBasePlugin
 
 /**
@@ -32,9 +35,12 @@ internal object PlaygroundLint {
         val globalTask = rootProject.tasks.named(GLOBAL_CI_LINT_TASK_NAME)
         pluginManager.withPlugin("com.android.base") {
             if (project.isAndroidTest) return@withPlugin // Android Test modules are special, SourceSet with name 'main' not found...
+            configureDependencies()
             createAndroidCiLintTask(globalTask)
         }
         pluginManager.withPlugin("org.jetbrains.kotlin.jvm") {
+            apply(plugin = "com.android.lint")
+            configureDependencies()
             createJvmCiLintTask(globalTask)
         }
     }
@@ -42,7 +48,6 @@ internal object PlaygroundLint {
     private fun Project.createJvmCiLintTask(
         globalTask: TaskProvider<Task>,
     ) = afterEvaluate {
-        apply(plugin = "com.android.lint")
         logger.debug("{} Creating CI lint tasks for project '{}'", LOG, this)
 
         val lint = tasks.named("lint")
@@ -74,6 +79,14 @@ internal object PlaygroundLint {
         group = LifecycleBasePlugin.VERIFICATION_GROUP
         dependsOn(dependency)
         if (disabled) enabled = false
+    }
+
+    private fun Project.configureDependencies() {
+        val lintChecks by configurations
+        dependencies {
+            lintChecks(libs.`android-security-lint`)
+            lintChecks(project(":lint"))
+        }
     }
 
     private fun Project.configureLintTask(
