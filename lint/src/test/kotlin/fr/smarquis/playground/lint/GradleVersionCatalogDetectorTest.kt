@@ -29,8 +29,8 @@ class GradleVersionCatalogDetectorTest : LintDetectorTest() {
         .issues(DEPENDENCY_NAME)
         .files(
             `versions-toml`(
-                "test",
-                """                
+                name = "test",
+                toml = """                
                 [libraries]
                 foo = "fr.smarquis:foo:1.0.0"
                 bar = "fr.smarquis:bar:1.0.0"
@@ -58,8 +58,8 @@ class GradleVersionCatalogDetectorTest : LintDetectorTest() {
         .issues(SORT)
         .files(
             `versions-toml`(
-                "libs",
-                """
+                name = "libs",
+                toml = """
                 [versions]
                 foo = "1.0.0"
                 bar = "1.0.0"
@@ -120,8 +120,8 @@ class GradleVersionCatalogDetectorTest : LintDetectorTest() {
         .issues(VERSION_INLINING)
         .files(
             `versions-toml`(
-                "libs",
-                """
+                name = "libs",
+                toml = """
                 [versions]
                 FOO = "1.2.3"
                 BAR = "3.2.1"
@@ -160,8 +160,8 @@ class GradleVersionCatalogDetectorTest : LintDetectorTest() {
         .issues(SIMPLIFICATION)
         .files(
             `versions-toml`(
-                "libs",
-                """
+                name = "libs",
+                toml = """
                 [versions]
                 test = "1"
                 [libraries]
