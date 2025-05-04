@@ -82,6 +82,7 @@
   - Not specifying parameters name using the same type can lead to unexpected results when refactoring methods signature.  
     Enforcing explicit named parameters also helps detecting mistakes during code review.  
     Quick fix: `⌥⏎` (macOS) or `Alt+Enter` (Windows/Linux) ➝ `Add names to call arguments`.
+  - Using a variable for a function call parameter while another parameter with the exact same name exists is probably a bug.
 
 </details>
 
