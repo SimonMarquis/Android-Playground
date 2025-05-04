@@ -24,3 +24,4 @@ internal inline fun <reified T : Detector> implementation(
 ): Implementation = Implementation(T::class.java, scope, *scopes)
 
 internal inline fun <reified T : Any> Any?.cast(): T = this as T
+internal inline fun <reified T : Any> Any?.safeCast(): T? = this as? T

@@ -13,6 +13,8 @@ internal class IssueRegistry : IssueRegistry() {
     override val issues: List<Issue> = listOf(
         AssertionsDetector.JUNIT_ASSERTION_ISSUE,
         AssertionsDetector.KOTLIN_ASSERT_ISSUE,
+        AssertionsDetector.KOTLIN_TYPE_ASSERTION_ISSUE,
+        AssertionsDetector.KOTLIN_EQUALITY_ASSERTION_ISSUE,
         *GradleVersionCatalogDetector.ISSUES,
         NamedParametersDetector.ISSUE,
         ReplaceMethodCallDetector.ISSUE,
