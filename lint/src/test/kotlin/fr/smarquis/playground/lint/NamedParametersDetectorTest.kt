@@ -183,7 +183,7 @@ class NamedParametersDetectorTest : LintDetectorTest() {
                 src/foo/test2.kt:8: Information: Parameters of the same type should be named [MissingNamedParameters]
                     collidingWithDefault(firstName = "first", "last")
                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-                0 errors, 0 warnings
+                0 errors, 0 warnings, 5 hints
                 """.trimIndent(),
             )
     }
