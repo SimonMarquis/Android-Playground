@@ -168,22 +168,22 @@ class NamedParametersDetectorTest : LintDetectorTest() {
             .run()
             .expect(
                 """
-                src/foo/test2.kt:4: Information: Parameters of the same type should be named [MissingNamedParameters]
+                src/foo/test2.kt:4: Hint: Parameters of the same type should be named [MissingNamedParameters]
                     colliding("a", "b", 42)
                     ~~~~~~~~~~~~~~~~~~~~~~~
-                src/foo/test2.kt:5: Information: Parameters of the same type should be named [MissingNamedParameters]
+                src/foo/test2.kt:5: Hint: Parameters of the same type should be named [MissingNamedParameters]
                     colliding("a", "b", age = 42)
                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-                src/foo/test2.kt:6: Information: Parameters of the same type should be named [MissingNamedParameters]
+                src/foo/test2.kt:6: Hint: Parameters of the same type should be named [MissingNamedParameters]
                     colliding(firstName = "a", "b", 42)
                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-                src/foo/test2.kt:7: Information: Parameters of the same type should be named [MissingNamedParameters]
+                src/foo/test2.kt:7: Hint: Parameters of the same type should be named [MissingNamedParameters]
                     collidingWithDefault("first", "last")
                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-                src/foo/test2.kt:8: Information: Parameters of the same type should be named [MissingNamedParameters]
+                src/foo/test2.kt:8: Hint: Parameters of the same type should be named [MissingNamedParameters]
                     collidingWithDefault(firstName = "first", "last")
                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-                0 errors, 0 warnings
+                0 errors, 0 warnings, 5 hints
                 """.trimIndent(),
             )
     }

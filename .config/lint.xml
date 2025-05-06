@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <lint>
     <issue id="AndroidGradlePluginVersion,GradleDependency,NewerVersionAvailable" severity="ignore"/>
+    <issue id="OldTargetApi" severity="warning"/>
     <issue id="all">
         <ignore path="build" />
     </issue>

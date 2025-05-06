@@ -111,6 +111,7 @@ internal object PlaygroundLint {
         disable += "GradleDependency"
         disable += "NewerVersionAvailable"
         disable += "ObsoleteLintCustomCheck"
+        warning += "OldTargetApi"
 
         lintConfig = isolated.rootProject.projectDirectory.dir(".config").file("lint.xml").asFile
         baseline = isolated.rootProject.projectDirectory.dir(".config").file("lint-baseline.xml").asFile
