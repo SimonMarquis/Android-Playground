@@ -42,7 +42,7 @@ androidx-datastore-core = "androidx.datastore:datastore-preferences-core:1.1.6"
 androidx-espresso-core = "androidx.test.espresso:espresso-core:3.6.1"
 androidx-hilt-navigation-compose = "androidx.hilt:hilt-navigation-compose:1.2.0"
 androidx-junit = "androidx.test.ext:junit:1.2.1"
-androidx-lifecycle-process = "androidx.lifecycle:lifecycle-process:2.8.7"
+androidx-lifecycle-process = "androidx.lifecycle:lifecycle-process:2.9.0"
 androidx-lint-gradle = "androidx.lint:lint-gradle:1.0.0-alpha04"
 androidx-material3 = { module = "androidx.compose.material3:material3" }
 androidx-navigation = { module = "androidx.navigation:navigation-compose", version.ref = "androidx-navigation" }
