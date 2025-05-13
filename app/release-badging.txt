@@ -1,6 +1,6 @@
-package: name='fr.smarquis.playground' versionCode='1' versionName='1.0' platformBuildVersionName='15' platformBuildVersionCode='35' compileSdkVersion='35' compileSdkVersionCodename='15'
+package: name='fr.smarquis.playground' versionCode='1' versionName='1.0' platformBuildVersionName='16' platformBuildVersionCode='36' compileSdkVersion='36' compileSdkVersionCodename='16'
 minSdkVersion:'24'
-targetSdkVersion:'35'
+targetSdkVersion:'36'
 uses-permission: name='fr.smarquis.playground.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION'
 application-label:'🛝'
 application-icon-160:'res/mipmap-anydpi-v26/playground_app_ic_launcher.xml'
