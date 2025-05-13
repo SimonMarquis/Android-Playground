@@ -82,7 +82,7 @@ val ksp = libs.plugins.ksp.get().version.toString()
 if (kotlin != ksp.split("-").first()) {
     throw GradleException(
         """
-        Kotlin and KSP version mismatch:
+        Kotlin/KSP versions mismatch:
         - Kotlin: $kotlin
         - KSP:    $ksp
         """.trimIndent(),
