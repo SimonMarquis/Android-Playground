@@ -75,3 +75,16 @@ private fun NamedDomainObjectContainer<PluginDeclaration>.create(
     id = plugin.get().pluginId
     implementationClass = "fr.smarquis.playground.buildlogic.$name"
 }
+
+// Check Kotlin/KSP versions mismatch
+val kotlin = libs.versions.kotlin.get()
+val ksp = libs.plugins.ksp.get().version.toString()
+if (kotlin != ksp.split("-").first()) {
+    throw GradleException(
+        """
+        Kotlin/KSP versions mismatch:
+        - Kotlin: $kotlin
+        - KSP:    $ksp
+        """.trimIndent(),
+    )
+}
