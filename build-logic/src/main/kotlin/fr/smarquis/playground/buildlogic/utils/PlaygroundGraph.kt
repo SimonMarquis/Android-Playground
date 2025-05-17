@@ -56,6 +56,7 @@ internal object PlaygroundGraph {
             val graph = measureTimedValue { Graph().invoke(project) }
                 .also { logger.lifecycle("{} Computing graph for project '{}' in {}", LOG, this, it.duration.toString(MILLISECONDS)) }
                 .value
+            projectPath = project.path
             dependencies = graph.dependencies()
             plugins = graph.plugins()
             output = project.layout.buildDirectory.file("mermaid.txt")
@@ -110,6 +111,9 @@ internal object PlaygroundGraph {
 private abstract class GraphDumpTask : DefaultTask() {
 
     @get:Input
+    abstract val projectPath: Property<String>
+
+    @get:Input
     abstract val dependencies: MapProperty<String, Set<Pair<String, String>>>
 
     @get:Input
@@ -122,9 +126,9 @@ private abstract class GraphDumpTask : DefaultTask() {
 
     @TaskAction
     operator fun invoke() {
-        val dependencies: Set<Triple<String, String, String>> = dependencies.get()
+        val dependencies = dependencies.get()
             .flatMapTo(mutableSetOf()) { it.value.map { dep -> Triple(it.key, dep.first, dep.second) } }
-        val mermaid = MermaidBuilder(dependencies, plugins.get())
+        val mermaid = MermaidBuilder(projectPath.get(), dependencies, plugins.get())
         output.get().asFile.writeText(mermaid)
         logger.lifecycle(output.get().asFile.toPath().toUri().toString())
         logger.lifecycle(mermaid.toMermaidLiveUrl())
@@ -180,6 +184,7 @@ private abstract class GraphUpdateTask : DefaultTask() {
 
 private object MermaidBuilder {
     operator fun invoke(
+        self: String,
         dependencies: Set<Triple<String, String, String>>,
         pluginTypes: Map<String, PluginType>,
     ) = buildString {
@@ -200,6 +205,7 @@ private object MermaidBuilder {
         // Nodes and subgraphs (limited to a single nested layer)
         val (rootProjects, nestedProjects) = dependencies
             .map { it.first to it.third }.map { it.toList() }.flatten().toSet()
+            .plus(self) // Special case when this specific module has no other dependency
             .groupBy { it.substringBeforeLast(":") }
             .entries.partition { it.key.isEmpty() }
         nestedProjects.sortedByDescending { it.value.size }.forEach { (group, projects) ->
@@ -211,7 +217,7 @@ private object MermaidBuilder {
             appendLine(it.aliasWithType(indent = 2, pluginTypes.getValue(it)))
         }
         // Links
-        appendLine()
+        if (dependencies.isNotEmpty()) appendLine()
         dependencies
             .sortedWith(compareBy({ it.first }, { it.third }, { it.second }))
             .forEach { appendLine(it.link(indent = 2)) }
