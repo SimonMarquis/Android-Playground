@@ -210,6 +210,7 @@ private object MermaidBuilder {
             .entries.partition { it.key.isEmpty() }
         nestedProjects.sortedByDescending { it.value.size }.forEach { (group, projects) ->
             appendLine("  subgraph $group")
+            appendLine("    direction TB")
             projects.sorted().forEach { appendLine(it.aliasWithType(indent = 4, pluginTypes.getValue(it))) }
             appendLine("  end")
         }
