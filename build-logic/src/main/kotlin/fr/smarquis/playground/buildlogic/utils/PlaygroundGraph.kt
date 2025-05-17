@@ -173,7 +173,8 @@ private abstract class GraphUpdateTask : DefaultTask() {
             |```mermaid
             |$mermaid
             |```
-            |[✨ View in `mermaid.live`](${mermaid.toMermaidLiveUrl()})
+            |> [!TIP]
+            |> [✨ View in `mermaid.live`](${mermaid.toMermaidLiveUrl()})
             |$end
             """.trimMargin()
         }
