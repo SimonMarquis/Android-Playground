@@ -155,7 +155,7 @@ private abstract class GraphUpdateTask : DefaultTask() {
                 """
                 # `${projectPath.get()}`
     
-                <!--region graph--><!--endregion-->
+                <!--region graph--> <!--endregion-->
     
                 """.trimIndent(),
             )
