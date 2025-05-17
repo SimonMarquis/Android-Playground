@@ -29,6 +29,8 @@
 | `gradlew assembleRelease -Pplayground.compose.compilerMetrics`   | Compose compiler metrics                                                                    |
 | `gradlew assembleRelease -Pplayground.compose.compilerReports`   | Compose compiler reports                                                                    |
 | `gradlew --write-verification-metadata pgp,sha256 --export-keys` | Generates verification metadata & keyring                                                   |
+| `gradlew graphDump`                                              | Dumps project dependencies to a mermaid file                                                |
+| `gradlew graphUpdate`                                            | Updates Markdown file with the corresponding dependency graph                               |
 
 #### 🐙 GitHub workflows
 
@@ -107,120 +109,81 @@
 
 </details>
 
-<details>
-<summary><h4>🏗️ Architecture…</h4></summary>
+#### 🏗️ Architecture
 
-[✨ Open with `mermaid.live`](https://mermaid.live/view#pako:eNqtV1tvmzAU_ivIfYUoobl6UqWtXaVJmzRtbxt7cINJvICNjFmbVf3vsw0k2DGQpmukYvv7zvHxuYGfwZrFGEAQBEFE14wmZAMj6nkp2rNSQA-nOzUVW5xh6MWIy6nmRnTDUb71Pn9TOMw5S0hK6OZnBA7jCPzSIMpzuSz_dy70iRflQ7UVjJFAasWrhjAmaywF1KPmDiOpXKIFLiTaDC1GgYWQuytGM_yPOjCNzUOtGce1qBpq-ULIkbK_GR_VVxyiD2evniFZCpIqq_TTxpTW0taKaMwZiVW8qtEFu7rtHdLca6sDO3FtzDJEaBMXPenIjArrj-v5nP4MGrbjFdmTYCTKQwLVs34jG9KWZcoC9TgFL9Sg7dMVfShDLwhu7FTpZhAX1HKZDY88gQvxKctT2aCoQIIw6o2GdxyQq9LK6EzSFC2D4_f5rqgMUx2MOrx2eqIeRtnHsLKug9l9mrfKW96QB1Z-eEAFlj7BX7Vz6igd-_aReWMmixsxjDug7RbhQGq_moultWgnjg0cqssEmzRxLLttNXq-hszs68jw7nRxwK5IWrShYiAXCB1j3w5kd4JbaNmF2qHpZBhuNVkXmj5YLR1GDcoZpho50d8ETdYZyl7f9c6WPTqtXYCn8e5ALXE9tYQVuk5RUdzhxNsxIVtG8PtP5snmkcKr5WQ2vr_3C8HZDsOrJEnqcfBIYrGFYf7kr1nKuMbeGcpKuqPskdaa5gv1u0xTfbBAVrislMpHldbwdjqZh2_TmpIHjvi-1nj94W66vEBj-312dGMLtnpQD4e4wVY59EhXMXbix5dnHZoWppqnw80txsl7yvLfiSGkh2G1T7e9Rr0P7Nbk_uCWh9Jz-9joxt0UpxbggwxzuUssr3DPSiQC-qoWAeipz3F5XQMRfZG8Mpdq8MeYyFwAMEFpgX2ASsG-7-kaQMFL3JDuCJJfl1mzmCP6g7H2FMBn8ATgKhxNxyv5N5mGs3A8n_tgD-BkuhpNw-twJtcXi1BiLz74qxWMR8v5ZLW6XixX80W4nE2kBNYWfaluofoy6gPOys32YOSGq-NVm3P5gYn5LSupAHD28g-FZQ6z)
-
+<!--region graph-->
+> [!TIP]
+> [✨ View in `mermaid.live`](https://mermaid.live/view#base64:eyJjb2RlIjoiLS0tXG5jb25maWc6XG4gIGxheW91dDogZWxrXG4gIGVsazpcbiAgICBub2RlUGxhY2VtZW50U3RyYXRlZ3k6IFNJTVBMRVxuLS0tXG5ncmFwaCBUQlxuICBzdWJncmFwaCA6Y29yZVxuICAgIGRpcmVjdGlvbiBUQlxuICAgIDpjb3JlOmFuZHJvaWRbYW5kcm9pZF06OjphbmRyb2lkLWxpYnJhcnlcbiAgICA6Y29yZTpkYXRhc3RvcmVbZGF0YXN0b3JlXTo6Omp2bVxuICAgIDpjb3JlOmRpW2RpXTo6Omp2bVxuICAgIDpjb3JlOnVpW3VpXTo6OmFuZHJvaWQtbGlicmFyeVxuICAgIDpjb3JlOnV0aWxzW3V0aWxzXTo6Omp2bVxuICBlbmRcbiAgc3ViZ3JhcGggOmRvbWFpblxuICAgIGRpcmVjdGlvbiBUQlxuICAgIDpkb21haW46ZGljZVtkaWNlXTo6Omp2bVxuICAgIDpkb21haW46bGljZW5zZXNbbGljZW5zZXNdOjo6anZtXG4gICAgOmRvbWFpbjpzZXR0aW5nc1tzZXR0aW5nc106Ojpqdm1cbiAgZW5kXG4gIHN1YmdyYXBoIDpkYXRhXG4gICAgZGlyZWN0aW9uIFRCXG4gICAgOmRhdGE6ZGljZVtkaWNlXTo6Omp2bVxuICAgIDpkYXRhOmxpY2Vuc2VzW2xpY2Vuc2VzXTo6Omp2bVxuICAgIDpkYXRhOnNldHRpbmdzW3NldHRpbmdzXTo6Omp2bVxuICBlbmRcbiAgc3ViZ3JhcGggOmZlYXR1cmVcbiAgICBkaXJlY3Rpb24gVEJcbiAgICA6ZmVhdHVyZTpob21lW2hvbWVdOjo6YW5kcm9pZC1saWJyYXJ5XG4gICAgOmZlYXR1cmU6bGljZW5zZXNbbGljZW5zZXNdOjo6YW5kcm9pZC1saWJyYXJ5XG4gIGVuZFxuICA6cHJvZmlsaW5nW3Byb2ZpbGluZ106OjphbmRyb2lkLXRlc3RcbiAgOmFwcFthcHBdOjo6YW5kcm9pZC1hcHBsaWNhdGlvblxuXG4gIDphcHAgLS4tPiA6Y29yZTphbmRyb2lkXG4gIDphcHAgLS4tPiA6Y29yZTpkaVxuICA6YXBwIC0uLT4gOmNvcmU6dWlcbiAgOmFwcCAtLi0-IDpkYXRhOmRpY2VcbiAgOmFwcCAtLi0-IDpkYXRhOmxpY2Vuc2VzXG4gIDphcHAgLS4tPiA6ZGF0YTpzZXR0aW5nc1xuICA6YXBwIC0uLT4gOmRvbWFpbjpkaWNlXG4gIDphcHAgLS4tPiA6ZG9tYWluOnNldHRpbmdzXG4gIDphcHAgLS4tPiA6ZmVhdHVyZTpob21lXG4gIDphcHAgLS4tPiA6ZmVhdHVyZTpsaWNlbnNlc1xuICA6YXBwIC0uLT58YmFzZWxpbmVQcm9maWxlfCA6cHJvZmlsaW5nXG4gIDpjb3JlOmFuZHJvaWQgLS4tPiA6Y29yZTpkaVxuICA6Y29yZTphbmRyb2lkIC0uLT4gOmNvcmU6dXRpbHNcbiAgOmNvcmU6ZGF0YXN0b3JlIC0uLT4gOmNvcmU6ZGlcbiAgOmNvcmU6dXRpbHMgLS4tPiA6Y29yZTpkaVxuICA6ZGF0YTpkaWNlIC0uLT4gOmNvcmU6ZGF0YXN0b3JlXG4gIDpkYXRhOmRpY2UgLS4tPiA6Y29yZTpkaVxuICA6ZGF0YTpkaWNlIC0tLT4gOmRvbWFpbjpkaWNlXG4gIDpkYXRhOmxpY2Vuc2VzIC0uLT4gOmNvcmU6ZGlcbiAgOmRhdGE6bGljZW5zZXMgLS0tPiA6ZG9tYWluOmxpY2Vuc2VzXG4gIDpkYXRhOnNldHRpbmdzIC0uLT4gOmNvcmU6ZGF0YXN0b3JlXG4gIDpkYXRhOnNldHRpbmdzIC0tLT4gOmRvbWFpbjpzZXR0aW5nc1xuICA6ZmVhdHVyZTpob21lIC0uLT4gOmNvcmU6ZGlcbiAgOmZlYXR1cmU6aG9tZSAtLi0-IDpjb3JlOnVpXG4gIDpmZWF0dXJlOmhvbWUgLS0tPiA6ZG9tYWluOmRpY2VcbiAgOmZlYXR1cmU6aG9tZSAtLS0-IDpkb21haW46c2V0dGluZ3NcbiAgOmZlYXR1cmU6bGljZW5zZXMgLS4tPiA6Y29yZTpkaVxuICA6ZmVhdHVyZTpsaWNlbnNlcyAtLi0-IDpjb3JlOnVpXG4gIDpmZWF0dXJlOmxpY2Vuc2VzIC0tLT4gOmRvbWFpbjpsaWNlbnNlc1xuICA6cHJvZmlsaW5nIC0uLT58dGVzdGVkQXBrc3wgOmFwcFxuXG5jbGFzc0RlZiBhbmRyb2lkLWFwcGxpY2F0aW9uIGZpbGw6IzJDNDE2MixzdHJva2U6I2ZmZixzdHJva2Utd2lkdGg6MnB4LGNvbG9yOiNmZmY7XG5jbGFzc0RlZiBhbmRyb2lkLWxpYnJhcnkgZmlsbDojM0JENDgyLHN0cm9rZTojZmZmLHN0cm9rZS13aWR0aDoycHgsY29sb3I6I2ZmZjtcbmNsYXNzRGVmIGFuZHJvaWQtdGVzdCBmaWxsOiMzQkQ0ODIsc3Ryb2tlOiNmZmYsc3Ryb2tlLXdpZHRoOjJweCxjb2xvcjojZmZmO1xuY2xhc3NEZWYganZtIGZpbGw6IzdGNTJGRixzdHJva2U6I2ZmZixzdHJva2Utd2lkdGg6MnB4LGNvbG9yOiNmZmY7In0=)
 ```mermaid
 ---
 config:
   layout: elk
-  theme: neutral
+  elk:
+    nodePlacementStrategy: SIMPLE
 ---
-
-graph LR
-  :profiling["profiling"]
-  :app["app"]
-  :app["app"]
-  :profiling["profiling"]
-  subgraph :data
-    :data:dice["dice"]
-    :data:dice["dice"]
-    :data:licenses["licenses"]
-    :data:settings["settings"]
-    :data:licenses["licenses"]
-    :data:settings["settings"]
-  end
+graph TB
   subgraph :core
-    :core:datastore["datastore"]
-    :core:di["di"]
-    :core:datastore["datastore"]
-    :core:utils["utils"]
-    :core:ui["ui"]
-    :core:android["android"]
-    :core:datastore["datastore"]
-    :core:di["di"]
-    :core:android["android"]
-    :core:utils["utils"]
-    :core:utils["utils"]
+    direction TB
+    :core:android[android]:::android-library
+    :core:datastore[datastore]:::jvm
+    :core:di[di]:::jvm
+    :core:ui[ui]:::android-library
+    :core:utils[utils]:::jvm
   end
   subgraph :domain
-    :domain:dice["dice"]
-    :domain:licenses["licenses"]
-    :domain:licenses["licenses"]
-    :domain:settings["settings"]
-    :domain:dice["dice"]
-    :domain:settings["settings"]
+    direction TB
+    :domain:dice[dice]:::jvm
+    :domain:licenses[licenses]:::jvm
+    :domain:settings[settings]:::jvm
+  end
+  subgraph :data
+    direction TB
+    :data:dice[dice]:::jvm
+    :data:licenses[licenses]:::jvm
+    :data:settings[settings]:::jvm
   end
   subgraph :feature
-    :feature:licenses["licenses"]
-    :feature:home["home"]
-    :feature:licenses["licenses"]
-    :feature:home["home"]
+    direction TB
+    :feature:home[home]:::android-library
+    :feature:licenses[licenses]:::android-library
   end
+  :profiling[profiling]:::android-test
+  :app[app]:::android-application
 
-  :data:dice --> :core:datastore
-  :data:dice --> :core:di
-  :data:dice --> :domain:dice
-  :data:dice -. testImplementation .-> :core:datastore
-  :data:dice -. testImplementation .-> :core:utils
-  :profiling -- testedApks --> :app
-  :feature:licenses --> :core:di
-  :feature:licenses --> :core:ui
-  :feature:licenses --> :domain:licenses
-  :feature:licenses -. testImplementation .-> :domain:licenses
-  :feature:licenses -. testImplementation .-> :core:utils
-  :app -- baselineProfile --> :profiling
-  :app --> :feature:home
-  :app --> :feature:licenses
-  :app --> :core:android
-  :app --> :core:di
-  :app --> :core:ui
-  :app --> :domain:dice
-  :app --> :domain:settings
-  :app --> :data:dice
-  :app --> :data:licenses
-  :app --> :data:settings
-  :core:datastore --> :core:di
-  :data:licenses --> :core:di
-  :data:licenses --> :domain:licenses
-  :data:licenses -. testImplementation .-> :core:di
-  :data:licenses -. testImplementation .-> :core:utils
-  :feature:home --> :core:di
-  :feature:home --> :core:ui
-  :feature:home --> :domain:dice
-  :feature:home --> :domain:settings
-  :feature:home -. testImplementation .-> :core:utils
-  :feature:home -. testImplementation .-> :domain:dice
-  :feature:home -. testImplementation .-> :domain:settings
-  :data:settings --> :core:datastore
-  :data:settings --> :domain:settings
-  :data:settings -. testImplementation .-> :core:datastore
-  :data:settings -. testImplementation .-> :core:utils
-  :core:android --> :core:di
-  :core:android --> :core:utils
-  :core:utils --> :core:di
+  :app -.-> :core:android
+  :app -.-> :core:di
+  :app -.-> :core:ui
+  :app -.-> :data:dice
+  :app -.-> :data:licenses
+  :app -.-> :data:settings
+  :app -.-> :domain:dice
+  :app -.-> :domain:settings
+  :app -.-> :feature:home
+  :app -.-> :feature:licenses
+  :app -.->|baselineProfile| :profiling
+  :core:android -.-> :core:di
+  :core:android -.-> :core:utils
+  :core:datastore -.-> :core:di
+  :core:utils -.-> :core:di
+  :data:dice -.-> :core:datastore
+  :data:dice -.-> :core:di
+  :data:dice ---> :domain:dice
+  :data:licenses -.-> :core:di
+  :data:licenses ---> :domain:licenses
+  :data:settings -.-> :core:datastore
+  :data:settings ---> :domain:settings
+  :feature:home -.-> :core:di
+  :feature:home -.-> :core:ui
+  :feature:home ---> :domain:dice
+  :feature:home ---> :domain:settings
+  :feature:licenses -.-> :core:di
+  :feature:licenses -.-> :core:ui
+  :feature:licenses ---> :domain:licenses
+  :profiling -.->|testedApks| :app
 
-  classDef kotlin-jvm fill:#8150FF,stroke:#fff,stroke-width:2px,color:#fff;
-  classDef unknown fill:#676767,stroke:#fff,stroke-width:2px,color:#fff;
-  classDef android-application fill:#2C4162,stroke:#fff,stroke-width:2px,color:#fff;
-  classDef android-library fill:#3BD482,stroke:#fff,stroke-width:2px,color:#fff;
-  class :data:dice kotlin-jvm
-  class :core:datastore kotlin-jvm
-  class :core:di kotlin-jvm
-  class :domain:dice kotlin-jvm
-  class :core:utils kotlin-jvm
-  class :profiling unknown
-  class :app android-application
-  class :feature:licenses android-library
-  class :core:ui android-library
-  class :domain:licenses kotlin-jvm
-  class :feature:home android-library
-  class :core:android android-library
-  class :domain:settings kotlin-jvm
-  class :data:licenses kotlin-jvm
-  class :data:settings kotlin-jvm
+classDef android-application fill:#2C4162,stroke:#fff,stroke-width:2px,color:#fff;
+classDef android-library fill:#3BD482,stroke:#fff,stroke-width:2px,color:#fff;
+classDef android-test fill:#3BD482,stroke:#fff,stroke-width:2px,color:#fff;
+classDef jvm fill:#7F52FF,stroke:#fff,stroke-width:2px,color:#fff;
 ```
-
-</details>
+<!--endregion-->
