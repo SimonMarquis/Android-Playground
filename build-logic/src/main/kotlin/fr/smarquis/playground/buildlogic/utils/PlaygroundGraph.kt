@@ -170,11 +170,11 @@ private abstract class GraphUpdateTask : DefaultTask() {
             val mermaid = input.get().asFile.readText()
             """
             |$start
+            |> [!TIP]
+            |> [✨ View in `mermaid.live`](${mermaid.toMermaidLiveUrl()})
             |```mermaid
             |$mermaid
             |```
-            |> [!TIP]
-            |> [✨ View in `mermaid.live`](${mermaid.toMermaidLiveUrl()})
             |$end
             """.trimMargin()
         }
