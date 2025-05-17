@@ -37,6 +37,8 @@ dependencies {
     implementation(plugin(libs.plugins.artifactsSizeReport))
     implementation(libs.android.tools.common)
     implementation(libs.assertk)
+    implementation(platform(libs.kotlinx.serialization.bom))
+    implementation(libs.kotlinx.serialization.json)
     lintChecks(libs.androidx.lint.gradle)
 }
 

@@ -2,6 +2,7 @@ package fr.smarquis.playground.buildlogic
 
 import fr.smarquis.playground.buildlogic.utils.PlaygroundBadging
 import fr.smarquis.playground.buildlogic.utils.PlaygroundDependencyLocking
+import fr.smarquis.playground.buildlogic.utils.PlaygroundGraph
 import fr.smarquis.playground.buildlogic.utils.PlaygroundLint
 import fr.smarquis.playground.buildlogic.utils.PlaygroundPlatforms
 import fr.smarquis.playground.buildlogic.utils.PlaygroundTopology
@@ -27,6 +28,7 @@ internal class PlaygroundBasePlugin : Plugin<Project> {
         PlaygroundDependencyLocking.configureProject(target)
         PlaygroundPlatforms.configureProject(target)
         PlaygroundTopology.configureProject(target)
+        PlaygroundGraph.configureProject(target)
 
         configureReproducibleBuilds()
     }
