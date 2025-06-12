@@ -90,7 +90,7 @@ slack-compose-lint = "com.slack.lint.compose:compose-lint-checks:1.4.2"
 
 testParameterInjector = "com.google.testparameterinjector:test-parameter-injector:1.18"
 
-turbine = "app.cash.turbine:turbine:1.2.0"
+turbine = "app.cash.turbine:turbine:1.2.1"
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
