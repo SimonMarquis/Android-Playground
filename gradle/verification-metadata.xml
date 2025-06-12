@@ -48,6 +48,7 @@
          <trusted-key id="1D217F8475EEE9F19AB8DD6B793FD5751A0F0780">
             <trusting group="app.cash.licensee"/>
             <trusting group="app.cash.paparazzi"/>
+            <trusting group="app.cash.turbine"/>
             <trusting group="com.squareup.okio"/>
          </trusted-key>
          <trusted-key id="24D04176586361FDA94EE0315F7786DF73E61F56" group="com.google.devtools.ksp"/>
