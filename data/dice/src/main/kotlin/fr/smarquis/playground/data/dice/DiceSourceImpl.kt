@@ -26,7 +26,7 @@ internal val RollsPreferenceKey = byteArrayPreferencesKey("rolls")
 
 internal class DiceSourceImpl @Inject constructor(
     private val datastore: DataStore<Preferences>,
-    @Dispatcher(Default) private val dispatcher: CoroutineContext,
+    @param:Dispatcher(Default) private val dispatcher: CoroutineContext,
 ) : DiceSource {
 
 
