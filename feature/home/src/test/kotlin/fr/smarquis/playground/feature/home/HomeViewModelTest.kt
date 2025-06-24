@@ -29,7 +29,7 @@ import kotlin.test.Test
 import kotlin.time.Clock
 import kotlin.time.ExperimentalTime
 
-@OptIn(ExperimentalCoroutinesApi::class)
+@OptIn(ExperimentalCoroutinesApi::class, ExperimentalTime::class)
 class HomeViewModelTest {
 
     @get:Rule
