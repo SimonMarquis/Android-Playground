@@ -5,4 +5,5 @@ import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.TimeZone.Companion.currentSystemDefault
 import kotlinx.datetime.toLocalDateTime
 
+@OptIn(kotlin.time.ExperimentalTime::class)
 public fun Long.toLocalDateTime(): LocalDateTime = fromEpochMilliseconds(this).toLocalDateTime(currentSystemDefault())
