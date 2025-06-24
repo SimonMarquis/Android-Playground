@@ -16,19 +16,19 @@ import kotlinx.datetime.LocalDateTime
 import javax.inject.Inject
 
 internal data class HomeData @Inject constructor(
-    @AppPackageName val packageName: String,
-    @AppVersionCode val versionCode: Long,
-    @AppVersionName val versionName: String,
+    @param:AppPackageName val packageName: String,
+    @param:AppVersionCode val versionCode: Long,
+    @param:AppVersionName val versionName: String,
 
-    @DeviceManufacturer val deviceManufacturer: String,
-    @DeviceModel val deviceModel: String,
-    @DeviceProduct val deviceProduct: String,
-    @DeviceSdkInt val deviceSdkInt: Int,
-    @DeviceRelease val deviceRelease: String,
+    @param:DeviceManufacturer val deviceManufacturer: String,
+    @param:DeviceModel val deviceModel: String,
+    @param:DeviceProduct val deviceProduct: String,
+    @param:DeviceSdkInt val deviceSdkInt: Int,
+    @param:DeviceRelease val deviceRelease: String,
 
-    @FirstInstallTime val firstInstallTime: LocalDateTime,
-    @LastUpdateTime val lastUpdateTime: LocalDateTime,
-    @CurrentTime val currentTime: LocalDateTime,
+    @param:FirstInstallTime val firstInstallTime: LocalDateTime,
+    @param:LastUpdateTime val lastUpdateTime: LocalDateTime,
+    @param:CurrentTime val currentTime: LocalDateTime,
 
     val displayMetrics: DisplayMetrics,
 )
