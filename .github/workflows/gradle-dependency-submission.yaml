@@ -17,4 +17,4 @@ jobs:
         with:
           cache-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
       - uses: ./.github/actions/setup-gradle-properties
-      - uses: gradle/actions/dependency-submission@06832c7b30a0129d7fb559bcc6e43d26f6374244 # v4.3.1
+      - uses: gradle/actions/dependency-submission@ac638b010cf58a27ee6c972d7336334ccaf61c96 # v4.4.1
