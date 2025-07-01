@@ -9,6 +9,7 @@ pluginManagement {
         }
         mavenCentral()
         gradlePluginPortal()
+        maven("https://central.sonatype.com/repository/maven-snapshots/") { mavenContent { snapshotsOnly() } }
     }
 }
 
@@ -25,7 +26,7 @@ dependencyResolutionManagement {
         }
         mavenCentral()
         gradlePluginPortal()
-        maven("https://oss.sonatype.org/content/repositories/snapshots") { mavenContent { snapshotsOnly() } }
+        maven("https://central.sonatype.com/repository/maven-snapshots/") { mavenContent { snapshotsOnly() } }
     }
     versionCatalogs {
         create("libs") {
