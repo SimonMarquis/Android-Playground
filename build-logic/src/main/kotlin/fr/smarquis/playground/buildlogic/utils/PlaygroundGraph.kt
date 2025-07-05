@@ -12,8 +12,6 @@ import fr.smarquis.playground.buildlogic.utils.PlaygroundGraph.PluginType.Androi
 import fr.smarquis.playground.buildlogic.utils.PlaygroundGraph.PluginType.Jvm
 import fr.smarquis.playground.buildlogic.utils.PlaygroundGraph.PluginType.Unknown
 import fr.smarquis.playground.buildlogic.utils.PlaygroundGraph.SUPPORTED_CONFIGURATIONS
-import kotlinx.serialization.json.buildJsonObject
-import kotlinx.serialization.json.put
 import org.gradle.api.DefaultTask
 import org.gradle.api.Project
 import org.gradle.api.artifacts.Configuration
@@ -258,11 +256,27 @@ private object MermaidBuilder {
     }
 
     @OptIn(ExperimentalEncodingApi::class)
-    fun String.toMermaidLiveUrl(): String = buildJsonObject { put("code", this@toMermaidLiveUrl) }
-        .toString()
+    fun String.toMermaidLiveUrl(): String = escapeAsJsonString()
+        // language=JSON
+        .let { """{"code":"$it"}""" }
         .toByteArray()
         .let { Base64.UrlSafe.encode(it) }
-        .replace("/", "_").replace("+", "-")
         .let { "https://mermaid.live/view#base64:$it" }
+
+    /**
+     * This is only escaping some known values, and does not care about `\d`, `\f`, etc.
+     */
+    private fun String.escapeAsJsonString(): String = buildString {
+        for (char in this@escapeAsJsonString) {
+            when (char) {
+                '\\' -> append("""\\""")
+                '"' -> append("""\"""")
+                '\n' -> append("""\n""")
+                '\r' -> append("""\r""")
+                '\t' -> append("""\t""")
+                else -> append(char)
+            }
+        }
+    }
 
 }
