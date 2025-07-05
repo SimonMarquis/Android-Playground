@@ -18,6 +18,21 @@ concurrency:
 
 jobs:
 
+  finish:
+    name: 🏁 Finish
+    if: ${{ !cancelled() }} # Skipped jobs are considered successful
+    needs:
+      - validation
+      - checks
+      - build
+      - test
+      - lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Report failure
+        if: ${{ contains(needs.*.result, 'failure') || contains(needs.*.result, 'cancelled') }}
+        run: exit 1
+
   validation:
     name: 🛃 Validation
     runs-on: ubuntu-latest
