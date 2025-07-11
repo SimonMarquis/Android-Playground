@@ -6,8 +6,8 @@ targetSdk = "36"
 #noinspection GradleVersionCatalogSort
 compileSdk = "36"
 
-agp = "8.11.0"
-android-tools = "31.11.0"
+agp = "8.11.1"
+android-tools = "31.11.1"
 androidx-benchmark = "1.3.4"
 androidx-navigation = "2.9.1"
 hilt = "2.56.2"
