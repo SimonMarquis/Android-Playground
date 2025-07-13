@@ -1,3 +1,4 @@
+// https://github.com/gradle/gradle/tree/master/platforms/core-configuration/kotlin-dsl/src/main/kotlin/org/gradle/kotlin/dsl
 package fr.smarquis.playground.buildlogic.dsl
 
 import org.gradle.api.DomainObjectCollection
