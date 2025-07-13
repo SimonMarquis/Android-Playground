@@ -1,5 +1,8 @@
 package fr.smarquis.playground.buildlogic.utils
 
+import fr.smarquis.playground.buildlogic.dsl.assign
+import fr.smarquis.playground.buildlogic.dsl.register
+import fr.smarquis.playground.buildlogic.dsl.withType
 import fr.smarquis.playground.buildlogic.utils.PlaygroundTopology.IGNORED_DEPENDENCIES
 import fr.smarquis.playground.buildlogic.utils.PlaygroundTopology.LOG
 import fr.smarquis.playground.buildlogic.utils.PlaygroundTopology.RULES
@@ -12,16 +15,12 @@ import org.gradle.api.problems.ProblemGroup
 import org.gradle.api.problems.ProblemId
 import org.gradle.api.problems.Problems
 import org.gradle.api.problems.Severity
-import org.gradle.api.project.IsolatedProject
 import org.gradle.api.provider.Property
 import org.gradle.api.provider.SetProperty
 import org.gradle.api.tasks.CacheableTask
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.OutputFile
 import org.gradle.api.tasks.TaskAction
-import org.gradle.kotlin.dsl.assign
-import org.gradle.kotlin.dsl.register
-import org.gradle.kotlin.dsl.withType
 import org.gradle.language.base.plugins.LifecycleBasePlugin.VERIFICATION_GROUP
 import org.intellij.lang.annotations.Language
 import java.lang.System.lineSeparator

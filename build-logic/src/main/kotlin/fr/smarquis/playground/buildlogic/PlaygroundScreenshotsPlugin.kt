@@ -1,9 +1,9 @@
 package fr.smarquis.playground.buildlogic
 
 import app.cash.paparazzi.gradle.PaparazziPlugin
+import fr.smarquis.playground.buildlogic.dsl.apply
 import org.gradle.api.Plugin
 import org.gradle.api.Project
-import org.gradle.kotlin.dsl.apply
 import org.gradle.language.base.plugins.LifecycleBasePlugin.VERIFICATION_GROUP
 
 internal class PlaygroundScreenshotsPlugin : Plugin<Project> {

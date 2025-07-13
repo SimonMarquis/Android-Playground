@@ -1,5 +1,7 @@
 package fr.smarquis.playground.buildlogic
 
+import fr.smarquis.playground.buildlogic.dsl.apply
+import fr.smarquis.playground.buildlogic.dsl.withType
 import fr.smarquis.playground.buildlogic.utils.PlaygroundBadging
 import fr.smarquis.playground.buildlogic.utils.PlaygroundDependencyLocking
 import fr.smarquis.playground.buildlogic.utils.PlaygroundGraph
@@ -10,8 +12,6 @@ import fr.smarquis.playground.buildlogic.utils.PlaygroundUnitTests
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.tasks.bundling.AbstractArchiveTask
-import org.gradle.kotlin.dsl.apply
-import org.gradle.kotlin.dsl.withType
 
 internal class PlaygroundBasePlugin : Plugin<Project> {
 
