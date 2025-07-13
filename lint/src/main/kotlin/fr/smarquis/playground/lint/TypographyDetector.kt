@@ -10,7 +10,6 @@ import com.android.resources.ResourceFolderType
 import com.android.resources.ResourceFolderType.VALUES
 import com.android.tools.lint.detector.api.Category.Companion.TYPOGRAPHY
 import com.android.tools.lint.detector.api.Issue
-import com.android.tools.lint.detector.api.LintFix
 import com.android.tools.lint.detector.api.ResourceXmlDetector
 import com.android.tools.lint.detector.api.Scope.Companion.RESOURCE_FILE_SCOPE
 import com.android.tools.lint.detector.api.Severity.ERROR
@@ -132,7 +131,7 @@ public class TypographyDetector : ResourceXmlDetector() {
                 // scope = node.text,
                 location = location,
                 message = ESCAPED_UNICODE_ISSUE.getBriefDescription(TEXT),
-                quickfixData = LintFix.create()
+                quickfixData = fix()
                     .name("Replace ${match.value} with $replacement")
                     .replace().range(location).with(replacement)
                     .autoFix().build(),
@@ -149,7 +148,7 @@ public class TypographyDetector : ResourceXmlDetector() {
                 issue = REPLACEMENT_ISSUE,
                 location = location,
                 message = REPLACEMENT_ISSUE.getBriefDescription(TEXT),
-                quickfixData = LintFix.create()
+                quickfixData = fix()
                     .name("Replace $search with $replacement")
                     .replace().range(location).with(replacement)
                     .autoFix().build(),
@@ -163,7 +162,7 @@ public class TypographyDetector : ResourceXmlDetector() {
             issue = CURLY_QUOTE_ISSUE,
             location = context.getLocation(node.asDomNode()),
             message = CURLY_QUOTE_ISSUE.getBriefDescription(TEXT),
-            quickfixData = LintFix.create()
+            quickfixData = fix()
                 .name("Replace curly quote with straight quote")
                 .replace().text("’").with("\\'").all()
                 .autoFix().build(),
