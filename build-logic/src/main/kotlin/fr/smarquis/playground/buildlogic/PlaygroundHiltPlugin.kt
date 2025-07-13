@@ -21,13 +21,13 @@ internal class PlaygroundHiltPlugin : Plugin<Project> {
             }
             extensions.configure<KspExtension> {
                 // https://dagger.dev/dev-guide/compiler-options.html#fastinit-mode
-                arg("dagger.fastInit", "ENABLED") // default value with Hilt
+                arg(k = "dagger.fastInit", v = "ENABLED") // default value with Hilt
                 // https://dagger.dev/dev-guide/compiler-options#ignore-provision-key-wildcards
-                arg("dagger.ignoreProvisionKeyWildcards", "ENABLED")
+                arg(k = "dagger.ignoreProvisionKeyWildcards", v = "ENABLED")
                 // https://dagger.dev/dev-guide/compiler-options#useBindingGraphFix
-                arg("dagger.useBindingGraphFix", "ENABLED")
+                arg(k = "dagger.useBindingGraphFix", v = "ENABLED")
                 // https://www.zacsweers.dev/dagger-party-tricks-refactoring/
-                arg("dagger.warnIfInjectionFactoryNotGeneratedUpstream", "ENABLED")
+                arg(k = "dagger.warnIfInjectionFactoryNotGeneratedUpstream", v = "ENABLED")
             }
         }
 
