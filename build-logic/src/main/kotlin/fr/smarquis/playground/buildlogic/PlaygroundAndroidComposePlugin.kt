@@ -1,18 +1,15 @@
 package fr.smarquis.playground.buildlogic
 
+import fr.smarquis.playground.buildlogic.dsl.apply
+import fr.smarquis.playground.buildlogic.dsl.assign
+import fr.smarquis.playground.buildlogic.dsl.configure
 import org.gradle.api.Plugin
 import org.gradle.api.Project
-import org.gradle.kotlin.dsl.apply
-import org.gradle.kotlin.dsl.assign
-import org.gradle.kotlin.dsl.configure
-import org.gradle.kotlin.dsl.dependencies
-import org.gradle.kotlin.dsl.getValue
-import org.gradle.kotlin.dsl.provideDelegate
 import org.jetbrains.kotlin.compose.compiler.gradle.ComposeCompilerGradlePluginExtension
 
 internal class PlaygroundAndroidComposePlugin : Plugin<Project> {
 
-    override fun apply(target: Project) = with(target) {
+    override fun apply(target: Project): Unit = with(target) {
         apply(plugin = "org.jetbrains.kotlin.android")
         apply(plugin = "org.jetbrains.kotlin.plugin.compose")
         apply<PlaygroundAndroidBasePlugin>()
@@ -24,17 +21,12 @@ internal class PlaygroundAndroidComposePlugin : Plugin<Project> {
 
         configureComposeCompilerMetrics()
 
-        val implementation by configurations
-        val debugImplementation by configurations
-        val lintChecks by configurations
-        dependencies {
-            implementation(libs.`androidx-compose-foundations`)
-            implementation(libs.`androidx-compose-runtime`)
-            implementation(libs.`androidx-compose-ui-tooling-preview`)
-            debugImplementation(libs.`androidx-compose-ui-test-manifest`)
-            debugImplementation(libs.`androidx-compose-ui-tooling`)
-            lintChecks(libs.`slack-compose-lint`)
-        }
+        dependencies.add("implementation", target.libs.`androidx-compose-foundations`)
+        dependencies.add("implementation", target.libs.`androidx-compose-runtime`)
+        dependencies.add("implementation", target.libs.`androidx-compose-ui-tooling-preview`)
+        dependencies.add("debugImplementation", target.libs.`androidx-compose-ui-test-manifest`)
+        dependencies.add("debugImplementation", target.libs.`androidx-compose-ui-tooling`)
+        dependencies.add("lintChecks", target.libs.`slack-compose-lint`)
     }
 
     /**

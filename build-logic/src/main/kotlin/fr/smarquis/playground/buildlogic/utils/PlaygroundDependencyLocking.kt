@@ -1,10 +1,10 @@
 package fr.smarquis.playground.buildlogic.utils
 
 import fr.smarquis.playground.buildlogic.PlaygroundProperties
+import fr.smarquis.playground.buildlogic.dsl.assign
 import fr.smarquis.playground.buildlogic.playground
 import org.gradle.api.Project
 import org.gradle.api.artifacts.dsl.LockMode
-import org.gradle.kotlin.dsl.assign
 
 /**
  * Configures Gradle [Dependency Locking](https://docs.gradle.org/current/userguide/dependency_locking.html) for Android Application modules.

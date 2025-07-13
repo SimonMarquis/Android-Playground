@@ -6,7 +6,6 @@ import org.gradle.api.artifacts.VersionCatalog
 import org.gradle.api.artifacts.dsl.LockMode
 import org.gradle.api.artifacts.dsl.LockMode.STRICT
 import org.gradle.api.provider.Provider
-import org.gradle.kotlin.dsl.provideDelegate
 import kotlin.reflect.KProperty
 
 internal fun Project.playground() = PlaygroundProperties(this)

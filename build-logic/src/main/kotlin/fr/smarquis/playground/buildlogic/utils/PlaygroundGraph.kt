@@ -1,9 +1,11 @@
 package fr.smarquis.playground.buildlogic.utils
 
 import fr.smarquis.playground.buildlogic.associateWithNotNull
+import fr.smarquis.playground.buildlogic.dsl.assign
+import fr.smarquis.playground.buildlogic.dsl.register
+import fr.smarquis.playground.buildlogic.dsl.withType
 import fr.smarquis.playground.buildlogic.measureTimedValue
 import fr.smarquis.playground.buildlogic.utils.MermaidBuilder.toMermaidLiveUrl
-import fr.smarquis.playground.buildlogic.utils.PlaygroundGraph.Graph
 import fr.smarquis.playground.buildlogic.utils.PlaygroundGraph.IGNORED_PROJECTS
 import fr.smarquis.playground.buildlogic.utils.PlaygroundGraph.PluginType
 import fr.smarquis.playground.buildlogic.utils.PlaygroundGraph.PluginType.AndroidApplication
@@ -26,9 +28,6 @@ import org.gradle.api.tasks.OutputFile
 import org.gradle.api.tasks.PathSensitive
 import org.gradle.api.tasks.PathSensitivity.NONE
 import org.gradle.api.tasks.TaskAction
-import org.gradle.kotlin.dsl.assign
-import org.gradle.kotlin.dsl.register
-import org.gradle.kotlin.dsl.withType
 import kotlin.io.encoding.Base64
 import kotlin.io.encoding.ExperimentalEncodingApi
 import kotlin.text.RegexOption.DOT_MATCHES_ALL

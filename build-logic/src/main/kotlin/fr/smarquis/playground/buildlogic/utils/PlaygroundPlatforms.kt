@@ -1,10 +1,10 @@
 package fr.smarquis.playground.buildlogic.utils
 
+import fr.smarquis.playground.buildlogic.dsl.getByType
 import fr.smarquis.playground.buildlogic.isJavaPlatform
 import fr.smarquis.playground.buildlogic.libs
 import org.gradle.api.Project
 import org.gradle.api.artifacts.VersionCatalogsExtension
-import org.gradle.kotlin.dsl.getByType
 import kotlin.text.RegexOption.IGNORE_CASE
 
 /**

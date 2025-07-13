@@ -4,17 +4,14 @@ import com.android.build.api.dsl.Lint
 import fr.smarquis.playground.buildlogic.PlaygroundProperties
 import fr.smarquis.playground.buildlogic.androidExtension
 import fr.smarquis.playground.buildlogic.capitalized
+import fr.smarquis.playground.buildlogic.dsl.apply
+import fr.smarquis.playground.buildlogic.dsl.getByType
 import fr.smarquis.playground.buildlogic.isAndroidTest
 import fr.smarquis.playground.buildlogic.libs
 import fr.smarquis.playground.buildlogic.playground
 import org.gradle.api.Project
 import org.gradle.api.Task
 import org.gradle.api.tasks.TaskProvider
-import org.gradle.kotlin.dsl.apply
-import org.gradle.kotlin.dsl.dependencies
-import org.gradle.kotlin.dsl.getByType
-import org.gradle.kotlin.dsl.getValue
-import org.gradle.kotlin.dsl.provideDelegate
 import org.gradle.language.base.plugins.LifecycleBasePlugin
 
 /**
@@ -82,11 +79,8 @@ internal object PlaygroundLint {
     }
 
     private fun Project.configureDependencies() {
-        val lintChecks by configurations
-        dependencies {
-            lintChecks(libs.`android-security-lint`)
-            lintChecks(project(":lint"))
-        }
+        dependencies.add("lintChecks", libs.`android-security-lint`)
+        dependencies.add("lintChecks", project(":lint"))
     }
 
     private fun Project.configureLintTask(

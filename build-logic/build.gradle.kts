@@ -2,7 +2,9 @@ import org.gradle.api.JavaVersion.VERSION_17
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17
 
 plugins {
-    `kotlin-dsl`
+    alias(libs.plugins.kotlin.jvm)
+    alias(libs.plugins.kotlin.sam)
+    alias(libs.plugins.kotlin.assignment)
     `java-gradle-plugin`
     alias(libs.plugins.android.lint)
 }
@@ -22,19 +24,34 @@ kotlin {
     explicitApi()
 }
 
+samWithReceiver {
+    annotation(HasImplicitReceiver::class.qualifiedName!!)
+}
+assignment {
+    annotation(SupportsKotlinAssignmentOverloading::class.qualifiedName!!)
+}
 
 dependencies {
     compileOnly(plugin(libs.plugins.android.application))
+    compileOnly(plugin(libs.plugins.android.cacheFix))
     compileOnly(plugin(libs.plugins.android.library))
+    compileOnly(plugin(libs.plugins.android.lint))
+    compileOnly(plugin(libs.plugins.android.settings))
+    compileOnly(plugin(libs.plugins.android.test))
+    compileOnly(plugin(libs.plugins.androidx.baselineprofile))
+    compileOnly(plugin(libs.plugins.androidx.navigation))
+    compileOnly(plugin(libs.plugins.artifactsSizeReport))
+    compileOnly(plugin(libs.plugins.binaryCompatibilityValidator))
     compileOnly(plugin(libs.plugins.develocity))
     compileOnly(plugin(libs.plugins.hilt))
+    compileOnly(plugin(libs.plugins.kotlin.android))
     compileOnly(plugin(libs.plugins.kotlin.compose))
     compileOnly(plugin(libs.plugins.kotlin.jvm))
     compileOnly(plugin(libs.plugins.kotlin.powerAssert))
     compileOnly(plugin(libs.plugins.ksp))
     compileOnly(plugin(libs.plugins.licensee))
     compileOnly(plugin(libs.plugins.paparazzi))
-    implementation(plugin(libs.plugins.artifactsSizeReport))
+
     implementation(libs.android.tools.common)
     implementation(libs.assertk)
     lintChecks(libs.androidx.lint.gradle)

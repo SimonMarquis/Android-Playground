@@ -9,6 +9,9 @@ import com.android.build.api.variant.ApplicationAndroidComponentsExtension
 import com.android.build.gradle.BaseExtension
 import fr.smarquis.playground.buildlogic.PlaygroundProperties
 import fr.smarquis.playground.buildlogic.capitalized
+import fr.smarquis.playground.buildlogic.dsl.assign
+import fr.smarquis.playground.buildlogic.dsl.getByType
+import fr.smarquis.playground.buildlogic.dsl.register
 import fr.smarquis.playground.buildlogic.playground
 import org.gradle.api.DefaultTask
 import org.gradle.api.GradleException
@@ -31,9 +34,6 @@ import org.gradle.api.tasks.PathSensitive
 import org.gradle.api.tasks.PathSensitivity.NONE
 import org.gradle.api.tasks.TaskAction
 import org.gradle.api.tasks.TaskProvider
-import org.gradle.kotlin.dsl.assign
-import org.gradle.kotlin.dsl.getByType
-import org.gradle.kotlin.dsl.register
 import org.gradle.language.base.plugins.LifecycleBasePlugin.VERIFICATION_GROUP
 import org.gradle.process.ExecOperations
 import javax.inject.Inject
