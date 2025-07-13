@@ -1,18 +1,15 @@
 package fr.smarquis.playground.buildlogic
 
+import fr.smarquis.playground.buildlogic.dsl.apply
 import io.github.cdsap.agp.artifacts.AndroidArtifactsInfoPlugin
 import org.gradle.api.JavaVersion
 import org.gradle.api.Plugin
 import org.gradle.api.Project
-import org.gradle.kotlin.dsl.apply
-import org.gradle.kotlin.dsl.dependencies
-import org.gradle.kotlin.dsl.getValue
-import org.gradle.kotlin.dsl.provideDelegate
 import org.jetbrains.kotlin.gradle.dsl.KotlinAndroidProjectExtension
 
 internal class PlaygroundAndroidBasePlugin : Plugin<Project> {
 
-    override fun apply(target: Project) = with(target) {
+    override fun apply(target: Project): Unit = with(target) {
         apply(plugin = "org.jetbrains.kotlin.android")
         apply<PlaygroundBasePlugin>()
         apply<AndroidArtifactsInfoPlugin>()
@@ -52,10 +49,7 @@ internal class PlaygroundAndroidBasePlugin : Plugin<Project> {
             }
         }
 
-        val coreLibraryDesugaring by configurations
-        dependencies {
-            coreLibraryDesugaring(libs.`android-desugarJdkLibs`.get())
-        }
+        dependencies.add("coreLibraryDesugaring", libs.`android-desugarJdkLibs`.get())
     }
 
 }

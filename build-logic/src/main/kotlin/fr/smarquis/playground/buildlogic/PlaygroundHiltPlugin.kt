@@ -2,15 +2,12 @@ package fr.smarquis.playground.buildlogic
 
 import com.google.devtools.ksp.gradle.KspExtension
 import dagger.hilt.android.plugin.HiltExtension
+import fr.smarquis.playground.buildlogic.dsl.apply
+import fr.smarquis.playground.buildlogic.dsl.configure
+import fr.smarquis.playground.buildlogic.dsl.withType
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.tasks.compile.JavaCompile
-import org.gradle.kotlin.dsl.apply
-import org.gradle.kotlin.dsl.configure
-import org.gradle.kotlin.dsl.dependencies
-import org.gradle.kotlin.dsl.getValue
-import org.gradle.kotlin.dsl.provideDelegate
-import org.gradle.kotlin.dsl.withType
 
 internal class PlaygroundHiltPlugin : Plugin<Project> {
 
@@ -34,13 +31,9 @@ internal class PlaygroundHiltPlugin : Plugin<Project> {
             }
         }
 
-        val implementation by configurations
-        val ksp by configurations
-        dependencies {
-            implementation(libs.hilt)
-            ksp(libs.`hilt-compiler`)
-            if (isAndroid) implementation(libs.`hilt-android`)
-        }
+        dependencies.add("implementation", libs.hilt)
+        dependencies.add("ksp", libs.`hilt-compiler`)
+        if (isAndroid) dependencies.add("implementation", libs.`hilt-android`)
 
         tasks.withType<JavaCompile>().configureEach {
             if (!name.startsWith("hiltJavaCompile")) return@configureEach

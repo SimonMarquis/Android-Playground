@@ -5,7 +5,6 @@ import com.android.tools.lint.detector.api.Detector
 import com.android.tools.lint.detector.api.Incident
 import com.android.tools.lint.detector.api.Issue
 import com.android.tools.lint.detector.api.JavaContext
-import com.android.tools.lint.detector.api.LintFix
 import com.android.tools.lint.detector.api.Scope.JAVA_FILE
 import com.android.tools.lint.detector.api.Scope.TEST_SOURCES
 import com.android.tools.lint.detector.api.Severity
@@ -25,7 +24,7 @@ public class ReplaceMethodCallDetector : Detector(), SourceCodeScanner {
             .at(node)
             .message(ISSUE.getBriefDescription(RAW))
             .fix(
-                LintFix.create()
+                fix()
                     .name("Replace `foo` with `Unit`")
                     .replace().all().with("Unit")
                     .robot(true).independent(true).build(),

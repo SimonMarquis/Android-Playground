@@ -2,6 +2,10 @@ package fr.smarquis.playground.buildlogic.utils
 
 import fr.smarquis.playground.buildlogic.PlaygroundProperties
 import fr.smarquis.playground.buildlogic.capitalized
+import fr.smarquis.playground.buildlogic.dsl.apply
+import fr.smarquis.playground.buildlogic.dsl.assign
+import fr.smarquis.playground.buildlogic.dsl.configure
+import fr.smarquis.playground.buildlogic.dsl.withType
 import fr.smarquis.playground.buildlogic.isAndroidTest
 import fr.smarquis.playground.buildlogic.isCi
 import fr.smarquis.playground.buildlogic.libs
@@ -15,14 +19,7 @@ import org.gradle.api.tasks.testing.logging.TestLogEvent.FAILED
 import org.gradle.api.tasks.testing.logging.TestLogEvent.PASSED
 import org.gradle.api.tasks.testing.logging.TestLogEvent.SKIPPED
 import org.gradle.api.tasks.testing.logging.TestLogEvent.STARTED
-import org.gradle.kotlin.dsl.apply
-import org.gradle.kotlin.dsl.assign
-import org.gradle.kotlin.dsl.configure
-import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.develocity
-import org.gradle.kotlin.dsl.getValue
-import org.gradle.kotlin.dsl.provideDelegate
-import org.gradle.kotlin.dsl.withType
 import org.gradle.language.base.plugins.LifecycleBasePlugin
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.powerassert.gradle.PowerAssertGradleExtension
@@ -134,11 +131,10 @@ internal object PlaygroundUnitTests {
         if (properties.isRerunTest) outputs.upToDateWhen { false }
     }
 
-    private fun Project.addTestDependencies() = dependencies {
-        val testImplementation by configurations
-        testImplementation(libs.`kotlin-test`)
-        testImplementation(libs.assertk)
-        testImplementation(libs.junit)
+    private fun Project.addTestDependencies() {
+        dependencies.add("testImplementation", libs.`kotlin-test`)
+        dependencies.add("testImplementation", libs.assertk)
+        dependencies.add("testImplementation", libs.junit)
     }
 
     @OptIn(ExperimentalKotlinGradlePluginApi::class)

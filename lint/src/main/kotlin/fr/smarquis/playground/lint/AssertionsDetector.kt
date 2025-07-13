@@ -5,7 +5,6 @@ import com.android.tools.lint.detector.api.Category
 import com.android.tools.lint.detector.api.Detector
 import com.android.tools.lint.detector.api.Issue
 import com.android.tools.lint.detector.api.JavaContext
-import com.android.tools.lint.detector.api.LintFix
 import com.android.tools.lint.detector.api.Scope.JAVA_FILE
 import com.android.tools.lint.detector.api.Scope.TEST_SOURCES
 import com.android.tools.lint.detector.api.Severity
@@ -67,7 +66,7 @@ public class AssertionsDetector : Detector(), Detector.UastScanner {
                         scope = node,
                         location = context.getLocation(node),
                         message = "Replace boolean assertion with `${replacement.substringAfterLast(".")}`",
-                        quickfixData = LintFix.create()
+                        quickfixData = fix()
                             .replace().all()
                             .with(
                                 buildString {
@@ -94,7 +93,7 @@ public class AssertionsDetector : Detector(), Detector.UastScanner {
                         scope = node,
                         location = context.getLocation(node),
                         message = "Replace boolean assertion with `${replacement.substringAfterLast(".")}`",
-                        quickfixData = LintFix.create()
+                        quickfixData = fix()
                             .replace().all().with(
                                 buildString {
                                     append(replacement.substringAfterLast("."))

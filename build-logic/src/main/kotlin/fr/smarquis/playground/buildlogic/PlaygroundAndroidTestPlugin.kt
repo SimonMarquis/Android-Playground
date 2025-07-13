@@ -1,8 +1,8 @@
 package fr.smarquis.playground.buildlogic
 
+import fr.smarquis.playground.buildlogic.dsl.apply
 import org.gradle.api.Plugin
 import org.gradle.api.Project
-import org.gradle.kotlin.dsl.apply
 
 internal class PlaygroundAndroidTestPlugin : Plugin<Project> {
 

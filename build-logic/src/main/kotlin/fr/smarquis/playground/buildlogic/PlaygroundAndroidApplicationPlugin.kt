@@ -3,12 +3,11 @@ package fr.smarquis.playground.buildlogic
 import app.cash.licensee.LicenseeExtension
 import app.cash.licensee.LicenseePlugin
 import app.cash.licensee.SpdxId
+import fr.smarquis.playground.buildlogic.dsl.apply
+import fr.smarquis.playground.buildlogic.dsl.assign
+import fr.smarquis.playground.buildlogic.dsl.configure
 import org.gradle.api.Plugin
 import org.gradle.api.Project
-import org.gradle.kotlin.dsl.apply
-import org.gradle.kotlin.dsl.assign
-import org.gradle.kotlin.dsl.configure
-import org.gradle.kotlin.dsl.get
 
 internal class PlaygroundAndroidApplicationPlugin : Plugin<Project> {
 
@@ -33,7 +32,7 @@ internal class PlaygroundAndroidApplicationPlugin : Plugin<Project> {
                 release {
                     isMinifyEnabled = playground().isMinifyEnabled
                     isShrinkResources = isMinifyEnabled
-                    signingConfig = signingConfigs["debug"]
+                    signingConfig = signingConfigs.getByName("debug")
                     proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
                     // https://github.com/Kotlin/kotlinx.coroutines#avoiding-including-the-debug-infrastructure-in-the-resulting-apk
                     packaging.resources.excludes += "DebugProbesKt.bin"
