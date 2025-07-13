@@ -11,7 +11,6 @@ import com.android.tools.lint.detector.api.Category.Companion.USABILITY
 import com.android.tools.lint.detector.api.Detector
 import com.android.tools.lint.detector.api.GradleScanner
 import com.android.tools.lint.detector.api.Issue
-import com.android.tools.lint.detector.api.LintFix
 import com.android.tools.lint.detector.api.Scope.Companion.TOML_SCOPE
 import com.android.tools.lint.detector.api.Severity.ERROR
 import com.android.tools.lint.detector.api.StringOption
@@ -70,7 +69,7 @@ public class GradleVersionCatalogDetector : Detector(), TomlScanner, GradleScann
                 issue = SIMPLIFICATION,
                 location = value.getLocation(),
                 message = SIMPLIFICATION.getBriefDescription(RAW),
-                quickfixData = LintFix.create()
+                quickfixData = fix()
                     .name("Replace plugin declaration with simpler form.")
                     .replace().range(value.getFullLocation()).with("""$key = "$id:$version"""")
                     .autoFix().build(),
@@ -96,7 +95,7 @@ public class GradleVersionCatalogDetector : Detector(), TomlScanner, GradleScann
                 issue = SIMPLIFICATION,
                 location = value.getLocation(),
                 message = SIMPLIFICATION.getBriefDescription(RAW),
-                quickfixData = LintFix.create()
+                quickfixData = fix()
                     .name("Replace library declaration with simpler form.")
                     .replace().range(value.getFullLocation()).with(replacement)
                     .autoFix().build(),
