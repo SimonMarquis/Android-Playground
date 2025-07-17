@@ -33,6 +33,18 @@ jobs:
           INPUT_REF: ${{ inputs.ref }}
           GH_TOKEN: ${{ steps.setup-bot.outputs.token }}
 
+      - name: Cleanup verification-metadata.xml and verification-keyring.keys
+        run: |
+          sudo apt-get install -y xmlstarlet
+          xmlstarlet edit --inplace \
+            -N g="https://schema.gradle.org/dependency-verification" \
+            --delete 'g:verification-metadata/g:configuration/g:trusted-artifacts' \
+            --delete 'g:verification-metadata/g:configuration/g:ignored-keys' \
+            --delete 'g:verification-metadata/g:configuration/g:trusted-keys' \
+            --delete 'g:verification-metadata/g:components/*' \
+            gradle/verification-metadata.xml
+          rm gradle/verification-keyring.keys
+
       - uses: ./.github/actions/setup-java
       - uses: ./.github/actions/setup-gradle
         with:
