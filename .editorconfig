@@ -1,0 +1,29 @@
+root = true
+
+[*.{kt,kts,java,gradle}]
+charset=utf-8
+tab_width = 4
+indent_size = 4
+indent_style = space
+max_line_length=140
+insert_final_newline=true
+
+[*.{kt,kts}]
+ij_kotlin_code_style_defaults = KOTLIN_OFFICIAL
+ij_kotlin_allow_trailing_comma = true
+ij_kotlin_allow_trailing_comma_on_call_site = true
+ktlint_code_style = intellij_idea
+ktlint_function_naming_ignore_when_annotated_with=Composable
+ktlint_standard_comment-wrapping = disabled # A block comment may not be followed by any other element on that same line
+ktlint_standard_discouraged-comment-location = disabled # Trailing comments (A comment in a 'value_argument_list' is only allowed when placed on a separate line)
+ktlint_standard_function-signature = disabled # Seems to incorrectly reformat parameter lists in function signatures
+ktlint_standard_property-naming = disabled # Multiple top-level const vals (and Companion vals) are using PascalCase
+
+[{*.md,*.mdown,*.markdown}]
+indent_size = 2
+indent_style = space
+trim_trailing_whitespace = false
+
+[{*.yml,*.yaml}]
+indent_size = 2
+indent_style = space

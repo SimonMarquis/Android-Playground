@@ -1,0 +1,63 @@
+name: 🤖 Setup Bot
+description: Setup Bot
+
+inputs:
+  app-id:
+    description: GitHub App ID
+    required: true
+  private-key:
+    description: GitHub App private key
+    required: true
+  configure-git-user:
+    description: When 'true', the bot identity will be set for the global git user.
+    required: false
+    default: 'true'
+
+outputs:
+  app-slug:
+    description: GitHub App slug
+    value: ${{ steps.app-token.outputs.app-slug }}
+  token:
+    description: GitHub App installation access token
+    value: ${{ steps.app-token.outputs.token }}
+  user-id:
+    description: GitHub App user id
+    value: ${{ steps.get-user-id.outputs.user-id }}
+  git-user-name:
+    description: Git user name
+    value: ${{ format('{0}[bot]', steps.app-token.outputs.app-slug) }}
+  git-user-email:
+    description: Git user email
+    value: ${{ format('{0}+{1}[bot]@users.noreply.github.com', steps.get-user-id.outputs.user-id, steps.app-token.outputs.app-slug) }}
+  git-committer:
+    description: Git committer
+    value: ${{ format('{0} <{1}+{2}[bot]@users.noreply.github.com>', steps.app-token.outputs.app-slug, steps.get-user-id.outputs.user-id, steps.app-token.outputs.app-slug) }}
+
+runs:
+  using: composite
+  steps:
+    - uses: actions/create-github-app-token@v2
+      id: app-token
+      with:
+        app-id: ${{ inputs.app-id }}
+        private-key: ${{ inputs.private-key }}
+    - id: get-user-id
+      run: echo "user-id=$(gh api "/users/${APP_SLUG}[bot]" --jq .id)" >> "$GITHUB_OUTPUT"
+      shell: bash
+      env:
+        APP_SLUG: ${{ steps.app-token.outputs.app-slug }}
+        GH_TOKEN: ${{ steps.app-token.outputs.token }}
+    - run: |
+        gh auth login --with-token <<< "$TOKEN"
+        gh auth status
+      shell: bash
+      env:
+        TOKEN: ${{ steps.app-token.outputs.token }}
+    - if: inputs.configure-git-user == 'true'
+      run: |
+        git config --global user.name "${APP_SLUG}[bot]"
+        git config --global user.email "${APP_USER_ID}+${APP_SLUG}[bot]@users.noreply.github.com"
+      shell: bash
+      env:
+        APP_SLUG: ${{ steps.app-token.outputs.app-slug }}
+        APP_USER_ID: ${{ steps.get-user-id.outputs.user-id }}

@@ -1,0 +1,40 @@
+# https://docs.github.com/github/administering-a-repository/configuration-options-for-dependency-updates
+
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    open-pull-requests-limit: 10
+    directories:
+      - /.github/actions/*
+      - /.github/workflows/*
+    schedule:
+      interval: daily
+  - package-ecosystem: gradle
+    open-pull-requests-limit: 10
+    directory: /
+    schedule:
+      interval: daily
+    registries: "*"
+    labels: []
+    groups:
+      android-build-tools:
+        patterns:
+          - com.android.tools.build:*
+          - com.android.tools.lint:*
+          - com.android.application
+          - com.android.library
+          - com.android.lint
+          - com.android.settings
+          - com.android.test
+      kotlin-ksp:
+        patterns:
+          - org.jetbrains.kotlin:*
+          - org.jetbrains.kotlin.jvm
+          - com.google.devtools.ksp
+registries:
+  maven-google:
+    type: maven-repository
+    url: https://maven.google.com
+  gradle-plugins:
+    type: maven-repository
+    url: https://plugins.gradle.org/m2/

@@ -1,0 +1,79 @@
+name: 🤖 Dependabot Gradle dependencies
+on:
+  pull_request:
+    paths:
+      - '**.gradle.kts'
+      - '**/*.versions.toml'
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.head.label || github.head_ref || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  dependabot-gradle-dependencies:
+    runs-on: ubuntu-latest
+    if: github.actor == 'dependabot[bot]' && startsWith(github.head_ref, 'dependabot/gradle/')
+    steps:
+      - uses: actions/checkout@v4
+      - id: setup-bot
+        uses: ./.github/actions/setup-bot
+        with:
+          app-id: ${{ vars.BOT_APP_ID }}
+          private-key: ${{ secrets.BOT_PRIVATE_KEY }}
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+          token: ${{ steps.setup-bot.outputs.token }}
+      - uses: ./.github/actions/setup-java
+      - uses: ./.github/actions/setup-gradle
+        with:
+          cache-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
+      - uses: ./.github/actions/setup-gradle-properties
+
+      - id: gradle-signature-verification
+        run: |
+          ./gradlew --write-verification-metadata pgp,sha256 --export-keys
+
+          # Remove unnecessary version attributes from trusted-key entries
+          sed -i 's/<trusted-key\(.*\) version="[^"]*"/<trusted-key\1/g' gradle/verification-metadata.xml
+
+          if ! git diff --quiet --exit-code -- 'gradle/verification-keyring.keys' 'gradle/verification-metadata.xml';
+          then
+            git commit -m "🤖 Update Gradle dependency signatures" -m "[dependabot skip]" -- 'gradle/verification-keyring.keys' 'gradle/verification-metadata.xml'
+            git show
+
+            echo "::notice::UPDATED"
+            echo "dirty=true" >> $GITHUB_OUTPUT
+          else
+            echo "::notice::UP-TO-DATE"
+          fi
+
+      - name: Disable auto-merge for this PR
+        if: steps.gradle-signature-verification.outputs.dirty == 'true'
+        run: gh pr merge --disable-auto "$PR_URL"
+        env:
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          GH_TOKEN: ${{ steps.setup-bot.outputs.token }}
+
+      - id: gradle-dependency-lock-state
+        run: |
+          ./gradlew dependencyLockState --write-locks > /dev/null
+
+          if ! git diff --quiet --exit-code -- ':(glob)**/*gradle.lockfile';
+          then
+            git commit -m "🤖 Update Gradle dependency lock state" -m "[dependabot skip]" -- ':(glob)**/*gradle.lockfile'
+            git show
+
+            echo "::notice::UPDATED"
+            echo "dirty=true" >> $GITHUB_OUTPUT
+          else
+            echo "::notice::UP-TO-DATE"
+          fi
+
+      - name: Update the PR with new commits
+        if: ${{ !cancelled() && contains(steps.*.outputs.dirty, 'true') }}
+        run: git push

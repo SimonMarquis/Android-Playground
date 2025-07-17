@@ -1,0 +1,64 @@
+public final class fr/smarquis/playground/feature/licenses/ComposableSingletons$LicensesScreenKt {
+	public static final field INSTANCE Lfr/smarquis/playground/feature/licenses/ComposableSingletons$LicensesScreenKt;
+	public fun <init> ()V
+	public final fun getLambda$-1462941838$licenses_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$-2089006031$licenses_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$-712087148$licenses_release ()Lkotlin/jvm/functions/Function3;
+}
+
+public final class fr/smarquis/playground/feature/licenses/LicensesRoute {
+	public static final field $stable I
+	public static final field INSTANCE Lfr/smarquis/playground/feature/licenses/LicensesRoute;
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class fr/smarquis/playground/feature/licenses/LicensesRouteKt {
+	public static final fun addLicensesRoute (Landroidx/navigation/NavGraphBuilder;Landroidx/navigation/NavGraphBuilder;Landroidx/navigation/NavController;Landroidx/compose/ui/Modifier;)V
+	public static synthetic fun addLicensesRoute$default (Landroidx/navigation/NavGraphBuilder;Landroidx/navigation/NavGraphBuilder;Landroidx/navigation/NavController;Landroidx/compose/ui/Modifier;ILjava/lang/Object;)V
+}
+
+public final class fr/smarquis/playground/feature/licenses/LicensesViewModel_Factory : dagger/internal/Factory {
+	public fun <init> (Ldagger/internal/Provider;Ldagger/internal/Provider;)V
+	public static fun create (Ldagger/internal/Provider;Ldagger/internal/Provider;)Lfr/smarquis/playground/feature/licenses/LicensesViewModel_Factory;
+	public fun get ()Lfr/smarquis/playground/feature/licenses/LicensesViewModel;
+	public synthetic fun get ()Ljava/lang/Object;
+	public static fun newInstance (Lfr/smarquis/playground/domain/licenses/LicensesRepository;Lkotlin/coroutines/CoroutineContext;)Lfr/smarquis/playground/feature/licenses/LicensesViewModel;
+}
+
+public final class fr/smarquis/playground/feature/licenses/LicensesViewModel_HiltModules {
+}
+
+public abstract class fr/smarquis/playground/feature/licenses/LicensesViewModel_HiltModules$BindsModule {
+	public abstract fun binds (Lfr/smarquis/playground/feature/licenses/LicensesViewModel;)Landroidx/lifecycle/ViewModel;
+}
+
+public final class fr/smarquis/playground/feature/licenses/LicensesViewModel_HiltModules$KeyModule {
+	public static fun provide ()Z
+}
+
+public final class fr/smarquis/playground/feature/licenses/LicensesViewModel_HiltModules_BindsModule_Binds_LazyMapKey {
+	public static field lazyClassKeyName Ljava/lang/String;
+	public fun <init> ()V
+}
+
+public final class fr/smarquis/playground/feature/licenses/LicensesViewModel_HiltModules_KeyModule_ProvideFactory : dagger/internal/Factory {
+	public fun <init> ()V
+	public static fun create ()Lfr/smarquis/playground/feature/licenses/LicensesViewModel_HiltModules_KeyModule_ProvideFactory;
+	public fun get ()Ljava/lang/Boolean;
+	public synthetic fun get ()Ljava/lang/Object;
+	public static fun provide ()Z
+}
+
+public final class fr/smarquis/playground/feature/licenses/LicensesViewModel_HiltModules_KeyModule_Provide_LazyMapKey {
+	public static field lazyClassKeyName Ljava/lang/String;
+	public fun <init> ()V
+}
+
+public class hilt_aggregated_deps/_fr_smarquis_playground_feature_licenses_LicensesViewModel_HiltModules_BindsModule {
+	public fun <init> ()V
+}
+
+public class hilt_aggregated_deps/_fr_smarquis_playground_feature_licenses_LicensesViewModel_HiltModules_KeyModule {
+	public fun <init> ()V
+}
+

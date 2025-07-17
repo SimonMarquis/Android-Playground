@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="playground_feature_home_title">🛝 Playground</string>
+    <string name="playground_feature_home_oss_licenses">Open Source Licenses</string>
+</resources>

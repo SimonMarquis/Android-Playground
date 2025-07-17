@@ -1,0 +1,30 @@
+plugins {
+    alias(libs.plugins.playground.android.library)
+    alias(libs.plugins.playground.android.compose)
+    alias(libs.plugins.playground.screenshots)
+    alias(libs.plugins.androidx.navigation)
+    alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.hilt)
+}
+
+dependencies {
+    api(projects.domain.dice)
+    api(projects.domain.settings)
+    implementation(projects.core.di)
+    implementation(projects.core.ui)
+    implementation(libs.androidx.navigation)
+    implementation(libs.androidx.hilt.navigation.compose)
+    implementation(libs.hilt.android)
+    implementation(libs.kotlinx.serialization.json)
+    implementation(libs.kotlinx.datetime)
+    ksp(libs.hilt.compiler)
+    ksp(libs.hilt.compiler.android)
+    testImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(libs.turbine)
+    testImplementation(libs.testParameterInjector)
+    testImplementation(testFixtures(projects.core.ui))
+    testImplementation(testFixtures(projects.core.utils))
+    testImplementation(testFixtures(projects.domain.dice))
+    testImplementation(testFixtures(projects.domain.settings))
+}

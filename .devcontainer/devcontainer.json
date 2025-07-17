@@ -1,0 +1,35 @@
+{
+  "name": "Android",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "args": {
+      "USERNAME": "codespace"
+    }
+  },
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "bash",
+        "terminal.integrated.profiles.linux": {
+          "bash": {
+            "path": "/bin/bash"
+          }
+        }
+      },
+      "extensions": [
+        "tamasfe.even-better-toml"
+      ]
+    }
+  },
+  "features": {
+    "git-lfs": "latest",
+    "github-cli": "latest"
+  },
+  "hostRequirements": {
+    "cpus": 4,
+    "memory": "8gb",
+    "storage": "32gb"
+  },
+  "postCreateCommand": "./gradlew",
+  "remoteUser": "codespace"
+}
