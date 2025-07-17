@@ -43,7 +43,7 @@ jobs:
             --delete 'g:verification-metadata/g:configuration/g:trusted-keys' \
             --delete 'g:verification-metadata/g:components/*' \
             gradle/verification-metadata.xml
-          rm gradle/verification-keyring.keys
+          > gradle/verification-keyring.keys
 
       - uses: ./.github/actions/setup-java
       - uses: ./.github/actions/setup-gradle
