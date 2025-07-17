@@ -38,7 +38,6 @@ jobs:
           sudo apt-get install -y xmlstarlet
           xmlstarlet edit --inplace \
             -N g="https://schema.gradle.org/dependency-verification" \
-            --delete 'g:verification-metadata/g:configuration/g:trusted-artifacts' \
             --delete 'g:verification-metadata/g:configuration/g:ignored-keys' \
             --delete 'g:verification-metadata/g:configuration/g:trusted-keys' \
             --delete 'g:verification-metadata/g:components/*' \
