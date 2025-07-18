@@ -52,7 +52,7 @@ jobs:
             --delete 'g:verification-metadata/g:configuration/g:ignored-keys' \
             --delete 'g:verification-metadata/g:components/*' \
             gradle/verification-metadata.xml
-          rm gradle/verification-keyring.keys
+          > gradle/verification-keyring.keys
           ./gradlew globalCi --write-verification-metadata pgp,sha256 --export-keys
 
       - name: Verification with --dry-run
