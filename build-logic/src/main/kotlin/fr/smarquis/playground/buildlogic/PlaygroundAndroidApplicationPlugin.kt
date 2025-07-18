@@ -6,6 +6,7 @@ import app.cash.licensee.SpdxId
 import fr.smarquis.playground.buildlogic.dsl.apply
 import fr.smarquis.playground.buildlogic.dsl.assign
 import fr.smarquis.playground.buildlogic.dsl.configure
+import fr.smarquis.playground.buildlogic.utils.PlaygroundGlobalCi
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 
@@ -51,5 +52,7 @@ internal class PlaygroundAndroidApplicationPlugin : Plugin<Project> {
             allow(SpdxId.BSD_3_Clause)
             allow(SpdxId.MIT)
         }
+        PlaygroundGlobalCi.addToGlobalCi(project, "assembleRelease")
+        PlaygroundGlobalCi.addToGlobalCi(project, "licensee")
     }
 }

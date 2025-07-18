@@ -8,6 +8,10 @@ on:
         description: PR number, branch, or url
         required: false
         type: string
+      no-dry-run:
+        description: Don't use --dry-run, to execute the corresponding tasks
+        required: false
+        type: boolean
 
 permissions:
   contents: write
@@ -39,7 +43,25 @@ jobs:
           cache-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
       - uses: ./.github/actions/setup-gradle-properties
 
-      - run: ./gradlew --write-verification-metadata pgp,sha256 --export-keys
+      - name: Verification without --dry-run
+        if: inputs.no-dry-run == 'true'
+        run: |
+          sudo apt-get install -y xmlstarlet
+          xmlstarlet edit --inplace \
+            -N g="https://schema.gradle.org/dependency-verification" \
+            --delete 'g:verification-metadata/g:configuration/g:ignored-keys' \
+            --delete 'g:verification-metadata/g:components/*' \
+            gradle/verification-metadata.xml
+          rm gradle/verification-keyring.keys
+          ./gradlew globalCi --write-verification-metadata pgp,sha256 --export-keys
+
+      - name: Verification with --dry-run
+        if: inputs.no-dry-run != 'true'
+        run: |
+          ./gradlew globalCi --write-verification-metadata pgp,sha256 --export-keys --dry-run
+          mv gradle/verification-metadata.dryrun.xml gradle/verification-metadata.xml
+          mv gradle/verification-keyring.dryrun.keys gradle/verification-keyring.keys
+
       - run: |
           # Remove unnecessary version attributes from trusted-key entries
           sed -i 's/<trusted-key\(.*\) version="[^"]*"/<trusted-key\1/g' gradle/verification-metadata.xml

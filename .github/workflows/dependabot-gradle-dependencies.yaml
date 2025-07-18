@@ -36,7 +36,10 @@ jobs:
 
       - id: gradle-signature-verification
         run: |
-          ./gradlew --write-verification-metadata pgp,sha256 --export-keys
+          ./gradlew globalCi --write-verification-metadata pgp,sha256 --export-keys --dry-run
+
+          mv gradle/verification-metadata.dryrun.xml gradle/verification-metadata.xml
+          mv gradle/verification-keyring.dryrun.keys gradle/verification-keyring.keys
 
           # Remove unnecessary version attributes from trusted-key entries
           sed -i 's/<trusted-key\(.*\) version="[^"]*"/<trusted-key\1/g' gradle/verification-metadata.xml
