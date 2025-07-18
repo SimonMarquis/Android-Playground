@@ -18,7 +18,6 @@ public final class fr/smarquis/playground/feature/licenses/LicensesRouteKt {
 }
 
 public final class fr/smarquis/playground/feature/licenses/LicensesViewModel_Factory : dagger/internal/Factory {
-	public fun <init> (Ldagger/internal/Provider;Ldagger/internal/Provider;)V
 	public static fun create (Ldagger/internal/Provider;Ldagger/internal/Provider;)Lfr/smarquis/playground/feature/licenses/LicensesViewModel_Factory;
 	public fun get ()Lfr/smarquis/playground/feature/licenses/LicensesViewModel;
 	public synthetic fun get ()Ljava/lang/Object;
