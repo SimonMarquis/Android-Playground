@@ -9,7 +9,7 @@ on:
         required: false
         type: string
       no-dry-run:
-        description: Don't use --dry-run, to execute the corresponding tasks
+        description: Don't use --dry-run, to execute the tasks
         required: false
         type: boolean
 
