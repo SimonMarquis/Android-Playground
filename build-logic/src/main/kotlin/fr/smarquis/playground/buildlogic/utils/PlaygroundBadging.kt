@@ -52,6 +52,8 @@ internal object PlaygroundBadging {
         project.tasks.register(CI_BADGING_TASK_NAME) {
             group = VERIFICATION_GROUP
             description = "Global lifecycle task to run all $CI_BADGING_TASK_NAME tasks."
+        }.also {
+            PlaygroundGlobalCi.addToGlobalCi(project, it)
         }
 
     fun configureProject(project: Project) = with(project) {

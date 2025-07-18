@@ -51,6 +51,8 @@ internal object PlaygroundTopology {
             projectPath = isolated.path
             dependencies = configurations.flatMap { it.dependencies.withType<ProjectDependency>().map { it.path } }.toSet()
             output = layout.buildDirectory.file("intermediates/$name/topology.txt")
+        }.also {
+            PlaygroundGlobalCi.addToGlobalCi(project, it)
         }
     }
 

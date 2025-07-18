@@ -3,6 +3,7 @@ package fr.smarquis.playground.buildlogic
 import fr.smarquis.playground.buildlogic.dsl.apply
 import fr.smarquis.playground.buildlogic.dsl.withType
 import fr.smarquis.playground.buildlogic.utils.PlaygroundBadging
+import fr.smarquis.playground.buildlogic.utils.PlaygroundGlobalCi
 import fr.smarquis.playground.buildlogic.utils.PlaygroundDependencyLocking
 import fr.smarquis.playground.buildlogic.utils.PlaygroundGraph
 import fr.smarquis.playground.buildlogic.utils.PlaygroundLint
@@ -22,6 +23,7 @@ internal class PlaygroundBasePlugin : Plugin<Project> {
             apply(plugin = "org.gradle.android.cache-fix")
         }
 
+        PlaygroundGlobalCi.configureSubproject(target)
         PlaygroundUnitTests.configureSubproject(target)
         PlaygroundLint.configureSubproject(target)
         PlaygroundBadging.configureProject(target)

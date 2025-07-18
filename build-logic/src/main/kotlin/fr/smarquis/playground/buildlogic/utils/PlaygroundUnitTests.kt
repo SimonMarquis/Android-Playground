@@ -38,6 +38,8 @@ internal object PlaygroundUnitTests {
         project.tasks.register(GLOBAL_CI_UNIT_TEST_TASK_NAME) {
             group = LifecycleBasePlugin.VERIFICATION_GROUP
             description = "Global lifecycle task to run all ciUnitTest tasks."
+        }.also {
+            PlaygroundGlobalCi.addToGlobalCi(project, it)
         }
 
     fun configureSubproject(project: Project) = with(project) {
