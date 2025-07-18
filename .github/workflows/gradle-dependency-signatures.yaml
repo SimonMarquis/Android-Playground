@@ -69,7 +69,7 @@ jobs:
           if ! git diff --quiet --exit-code -- 'gradle/verification-keyring.keys' 'gradle/verification-metadata.xml';
           then
             git commit -m "🤖 Update Gradle dependency signatures" -- 'gradle/verification-keyring.keys' 'gradle/verification-metadata.xml'
-            git show
+            git show --oneline --stat
 
             if [[ -z "${INPUT_REF}" ]]; then
               new_pr_branch="gradle-dependency-signatures/$GITHUB_RUN_ID-$GITHUB_RUN_NUMBER"

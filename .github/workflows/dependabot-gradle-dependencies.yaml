@@ -47,7 +47,7 @@ jobs:
           if ! git diff --quiet --exit-code -- 'gradle/verification-keyring.keys' 'gradle/verification-metadata.xml';
           then
             git commit -m "🤖 Update Gradle dependency signatures" -m "[dependabot skip]" -- 'gradle/verification-keyring.keys' 'gradle/verification-metadata.xml'
-            git show
+            git show --oneline --stat
 
             echo "::notice::UPDATED"
             echo "dirty=true" >> $GITHUB_OUTPUT
@@ -69,7 +69,7 @@ jobs:
           if ! git diff --quiet --exit-code -- ':(glob)**/*gradle.lockfile';
           then
             git commit -m "🤖 Update Gradle dependency lock state" -m "[dependabot skip]" -- ':(glob)**/*gradle.lockfile'
-            git show
+            git show --oneline --stat
 
             echo "::notice::UPDATED"
             echo "dirty=true" >> $GITHUB_OUTPUT
