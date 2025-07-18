@@ -26,7 +26,9 @@ internal object PlaygroundLint {
         project.tasks.register(GLOBAL_CI_LINT_TASK_NAME) {
             group = LifecycleBasePlugin.VERIFICATION_GROUP
             description = "Global lifecycle task to run all ciLint tasks."
-        }.also { PlaygroundGlobalCi.addToGlobalCi(project, it) }
+        }.also {
+            PlaygroundGlobalCi.addToGlobalCi(project, it)
+        }
 
     fun configureSubproject(project: Project) = with(project) {
         val globalTask = rootProject.tasks.named(GLOBAL_CI_LINT_TASK_NAME)
