@@ -59,7 +59,6 @@
          <trusted-key id="32118CF76C9EC5D918E54967CA80D1F0EB6CA4BA" group="^org[.]codehaus($|([.].*))" regex="true"/>
          <trusted-key id="33FD4BFD33554634053D73C0C2148900BCD3C2AF" group="org.jetbrains" name="annotations"/>
          <trusted-key id="34441E504A937F43EB0DAEF96A65176A0FB1CD0B" group="org.codehaus.groovy" name="groovy"/>
-         <trusted-key id="379CE192D401AB61" group="org.jetbrains.intellij.deps" name="trove4j" />
          <trusted-key id="4021EEEAFF5DE8404DCD0A270AA3E5C3D232E79B" group="jakarta.inject" name="jakarta.inject-api"/>
          <trusted-key id="41CD49B4EF5876F9E9F691DABAC30622339994C4" group="org.jspecify" name="jspecify"/>
          <trusted-key id="47504B76CF89C15C0512D9AFE16AB52D79FD224F" group="com.google.api.grpc" name="proto-google-common-protos"/>
@@ -102,6 +101,7 @@
             <trusting group="^org[.]apache($|([.].*))" regex="true"/>
             <trusting group="^org[.]codehaus($|([.].*))" regex="true"/>
          </trusted-key>
+         <trusted-key id="8756C4F765C9AC3CB6B85D62379CE192D401AB61" group="org.jetbrains.intellij.deps" name="trove4j" />
          <trusted-key id="88BE34F94BDB2B5357044E2E3A387D43964143E3">
             <trusting group="org.apache.maven"/>
             <trusting group="org.eclipse.sisu"/>
