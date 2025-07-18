@@ -47,7 +47,7 @@ jobs:
           if ! git diff --quiet --exit-code -- ':(glob)**/*gradle.lockfile';
           then
             git commit -m "🤖 Update Gradle dependency lock state" -- ':(glob)**/*gradle.lockfile'
-            git show
+            git show --oneline --stat
 
             if [[ -z "${INPUT_REF}" ]]; then
               new_pr_branch="gradle-dependency-lock-state/$GITHUB_RUN_ID-$GITHUB_RUN_NUMBER"
