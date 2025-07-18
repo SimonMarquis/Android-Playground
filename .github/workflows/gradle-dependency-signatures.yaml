@@ -8,13 +8,13 @@ on:
         description: PR number, branch, or url
         required: false
         type: string
-      tasks:
+      task:
         description: Gradle task path
         default: globalCi
         required: false
         type: string
       no-dry-run:
-        description: Don't use --dry-run, to execute the tasks
+        description: Don't use --dry-run, to execute the task
         required: false
         type: boolean
 
