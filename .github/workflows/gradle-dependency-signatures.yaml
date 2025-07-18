@@ -8,6 +8,11 @@ on:
         description: PR number, branch, or url
         required: false
         type: string
+      tasks:
+        description: Gradle task path
+        default: globalCi
+        required: false
+        type: string
       no-dry-run:
         description: Don't use --dry-run, to execute the tasks
         required: false
@@ -43,7 +48,7 @@ jobs:
           cache-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
       - uses: ./.github/actions/setup-gradle-properties
 
-      - name: Verification without --dry-run
+      - name: --write-verification-metadata
         if: inputs.no-dry-run == 'true'
         run: |
           sudo apt-get install -y xmlstarlet
@@ -53,14 +58,18 @@ jobs:
             --delete 'g:verification-metadata/g:components/*' \
             gradle/verification-metadata.xml
           > gradle/verification-keyring.keys
-          ./gradlew globalCi --write-verification-metadata pgp,sha256 --export-keys
+          ./gradlew "$TASK" --write-verification-metadata pgp,sha256 --export-keys
+        env:
+          TASK: ${{ inputs.task }}
 
-      - name: Verification with --dry-run
+      - name: --write-verification-metadata --dry-run
         if: inputs.no-dry-run != 'true'
         run: |
-          ./gradlew globalCi --write-verification-metadata pgp,sha256 --export-keys --dry-run
+          ./gradlew "$TASK" --write-verification-metadata pgp,sha256 --export-keys --dry-run
           mv gradle/verification-metadata.dryrun.xml gradle/verification-metadata.xml
           mv gradle/verification-keyring.dryrun.keys gradle/verification-keyring.keys
+        env:
+          TASK: ${{ inputs.task }}
 
       - run: |
           # Remove unnecessary version attributes from trusted-key entries
