@@ -11,6 +11,8 @@
       <trusted-artifacts>
          <trust group="app.cash.paparazzi" name="paparazzi" version="2.0.0-SNAPSHOT" reason="SNAPSHOT verification breaks the build!"/>
          <trust group="app.cash.paparazzi" name="paparazzi-gradle-plugin" version="2.0.0-SNAPSHOT" reason="SNAPSHOT verification breaks the build!"/>
+         <trust file=".*-javadoc[.]jar" regex="true"/>
+         <trust file=".*-sources[.]jar" regex="true"/>
       </trusted-artifacts>
       <trusted-keys>
          <trusted-key id="04543577D6A9CC626239C50C7ECBD740FF06AEB5">
