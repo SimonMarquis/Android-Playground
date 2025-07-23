@@ -13,7 +13,7 @@ import org.gradle.api.Project
 internal class PlaygroundRootPlugin : Plugin<Project> {
 
     override fun apply(target: Project) {
-        require(target == target.rootProject) { "$this must be applied on the root project, but was applied on $target" }
+        require(target.isolated == target.isolated.rootProject) { "$this must be applied on the root project, but was applied on $target" }
         PlaygroundGlobalCi.configureRootProject(target)
         PlaygroundUnitTests.configureRootProject(target)
         PlaygroundLint.configureRootProject(target)

@@ -79,13 +79,13 @@ internal object PlaygroundBadging {
         val updateBadgingTaskName = "update${capitalizedVariantName}Badging"
         tasks.register<Copy>(updateBadgingTaskName) {
             description = "Copies the generated badging file into the main project directory."
-            from(generateBadging.get().badging)
+            from(generateBadging.map { it.badging })
             into(layout.projectDirectory)
         }
 
         val checkBadgingTask = tasks.register<CheckBadgingTask>("check${capitalizedVariantName}Badging") {
             goldenBadging = layout.projectDirectory.file("${variant.name}-badging.txt")
-            generatedBadging = generateBadging.get().badging
+            generatedBadging = generateBadging.flatMap { it.badging }
             updateTask = updateBadgingTaskName
             output = layout.buildDirectory.dir("intermediates/$name")
         }
