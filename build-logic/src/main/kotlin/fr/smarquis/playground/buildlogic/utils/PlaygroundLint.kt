@@ -10,64 +10,45 @@ import fr.smarquis.playground.buildlogic.isAndroidTest
 import fr.smarquis.playground.buildlogic.libs
 import fr.smarquis.playground.buildlogic.playground
 import org.gradle.api.Project
-import org.gradle.api.Task
-import org.gradle.api.tasks.TaskProvider
 import org.gradle.language.base.plugins.LifecycleBasePlugin
 
 /**
  * Inspired by https://github.com/slackhq/foundry
  */
 internal object PlaygroundLint {
-    private const val GLOBAL_CI_LINT_TASK_NAME = "globalCiLint"
     private const val CI_LINT_TASK_NAME = "ciLint"
     private const val LOG = "PlaygroundLint:"
 
-    fun configureRootProject(project: Project): TaskProvider<Task> =
-        project.tasks.register(GLOBAL_CI_LINT_TASK_NAME) {
-            group = LifecycleBasePlugin.VERIFICATION_GROUP
-            description = "Global lifecycle task to run all ciLint tasks."
-        }.also {
-            PlaygroundGlobalCi.addToGlobalCi(project, it)
-        }
-
     fun configureSubproject(project: Project) = with(project) {
-        val globalTask = tasks.register(GLOBAL_CI_LINT_TASK_NAME)
         pluginManager.withPlugin("com.android.base") {
             if (project.isAndroidTest) return@withPlugin // Android Test modules are special, SourceSet with name 'main' not found...
             configureDependencies()
-            createAndroidCiLintTask(globalTask)
+            createAndroidCiLintTask()
         }
         pluginManager.withPlugin("org.jetbrains.kotlin.jvm") {
             apply(plugin = "com.android.lint")
             configureDependencies()
-            createJvmCiLintTask(globalTask)
+            createJvmCiLintTask()
         }
     }
 
-    private fun Project.createJvmCiLintTask(
-        globalTask: TaskProvider<Task>,
-    ) = afterEvaluate {
+    private fun Project.createJvmCiLintTask() = afterEvaluate {
         logger.debug("{} Creating CI lint tasks for project '{}'", LOG, this)
 
         val lint = tasks.named("lint")
         registerCiLintTask(name = "lintDebug", dependency = lint, disabled = true)
         registerCiLintTask(name = "lintRelease", dependency = lint, disabled = true)
-        val ciLint = registerCiLintTask(name = CI_LINT_TASK_NAME, dependency = lint, disabled = true)
-        globalTask.configure { dependsOn(ciLint) }
         configureLintTask(extensions.getByType())
+        val ciLint = registerCiLintTask(name = CI_LINT_TASK_NAME, dependency = lint, disabled = true)
+        PlaygroundGlobalCi.addToGlobalCi(project, ciLint)
     }
 
-    private fun Project.createAndroidCiLintTask(
-        globalTask: TaskProvider<Task>,
-    ) = androidExtension.finalizeDsl { extension ->
+    private fun Project.createAndroidCiLintTask() = androidExtension.finalizeDsl { extension ->
         val variant = playground().ciLintVariant.get().capitalized()
         logger.debug("{} Creating CI lint tasks for project '{}' and variant '{}'", LOG, this, variant)
-        val ciLint = registerCiLintTask(
-            name = CI_LINT_TASK_NAME,
-            dependency = "lint${variant}",
-        )
-        globalTask.configure { dependsOn(ciLint) }
         configureLintTask(extension.lint)
+        val ciLint = registerCiLintTask(name = CI_LINT_TASK_NAME, dependency = "lint${variant}")
+        PlaygroundGlobalCi.addToGlobalCi(project, ciLint)
     }
 
     private fun Project.registerCiLintTask(

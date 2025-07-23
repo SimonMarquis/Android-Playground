@@ -19,8 +19,8 @@
 | `gradlew topologyCheck`                                                   | Checks the topology of project dependencies                                                |
 | `gradlew dependencyLockState --write-locks`                               | Updates dependency lock state                                                              |
 | `gradlew ciBadging -Pplayground.isMinifyEnabled=false`                    | CI badging checks                                                                          |
-| `gradlew globalCiLint`                                                    | CI Lint checks (html/sarif/txt/xml)                                                        |
-| `gradlew globalCiUnitTest`                                                | CI unit tests (html/xml)                                                                   |
+| `gradlew ciLint`                                                          | CI Lint checks (html/sarif/txt/xml)                                                        |
+| `gradlew ciUnitTest`                                                      | CI unit tests (html/xml)                                                                   |
 | `gradlew verifyScreenshots`                                               | Verify screenshot tests images against golden images                                       |
 | `gradlew recordScreenshots`                                               | Record screenshot tests golden images                                                      |
 | `gradlew cleanRecordScreenshots`                                          | Clean and record screenshot tests golden images                                            |
