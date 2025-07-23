@@ -11,8 +11,6 @@ import fr.smarquis.playground.buildlogic.isCi
 import fr.smarquis.playground.buildlogic.libs
 import fr.smarquis.playground.buildlogic.playground
 import org.gradle.api.Project
-import org.gradle.api.Task
-import org.gradle.api.tasks.TaskProvider
 import org.gradle.api.tasks.testing.Test
 import org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL
 import org.gradle.api.tasks.testing.logging.TestLogEvent.FAILED
@@ -29,51 +27,37 @@ import org.jetbrains.kotlin.powerassert.gradle.PowerAssertGradlePlugin
  * Inspired by https://github.com/slackhq/foundry
  */
 internal object PlaygroundUnitTests {
-    private const val GLOBAL_CI_UNIT_TEST_TASK_NAME = "globalCiUnitTest"
     private const val CI_UNIT_TEST_TASK_NAME = "ciUnitTest"
     private const val COMPILE_CI_UNIT_TEST_NAME = "compileCiUnitTest"
     private const val LOG = "PlaygroundUnitTests:"
 
-    fun configureRootProject(project: Project): TaskProvider<Task> =
-        project.tasks.register(GLOBAL_CI_UNIT_TEST_TASK_NAME) {
-            group = LifecycleBasePlugin.VERIFICATION_GROUP
-            description = "Global lifecycle task to run all ciUnitTest tasks."
-        }.also {
-            PlaygroundGlobalCi.addToGlobalCi(project, it)
-        }
-
     fun configureSubproject(project: Project) = with(project) {
         if (isAndroidTest) return@with // Android Test modules are special, they don't have tests...
-        val globalTask = tasks.register(GLOBAL_CI_UNIT_TEST_TASK_NAME)
         pluginManager.withPlugin("com.android.base") {
-            createAndroidCiUnitTestTask(globalTask)
+            createAndroidCiUnitTestTask()
         }
         pluginManager.withPlugin("org.jetbrains.kotlin.jvm") {
-            createJvmCiUnitTestTask(globalTask)
+            createJvmCiUnitTestTask()
         }
         configureTestTasks()
         addTestDependencies()
         applyPowerAssert()
     }
 
-    private fun Project.createJvmCiUnitTestTask(
-        globalTask: TaskProvider<Task>,
-    ) {
+    private fun Project.createJvmCiUnitTestTask() {
         logger.debug("{} Creating CI unit test tasks for project '{}'", LOG, this)
         val ciUnitTest = registerCiUnitTestTask(
             name = CI_UNIT_TEST_TASK_NAME,
             dependencyTaskName = "test",
         )
-        globalTask.configure { dependsOn(ciUnitTest) }
+        PlaygroundGlobalCi.addToGlobalCi(project, ciUnitTest)
         registerCiUnitTestTask(
             name = COMPILE_CI_UNIT_TEST_NAME,
             dependencyTaskName = "testClasses",
         )
     }
 
-    private fun Project.createAndroidCiUnitTestTask(
-        globalTask: TaskProvider<Task>,
-    ) {
+    private fun Project.createAndroidCiUnitTestTask() {
         val variant = playground().ciUnitTestVariant.get().capitalized()
         val variantUnitTestTaskName = "test${variant}UnitTest"
         val variantCompileUnitTestTaskName = "compile${variant}UnitTestSources"
@@ -82,7 +66,7 @@ internal object PlaygroundUnitTests {
             name = CI_UNIT_TEST_TASK_NAME,
             dependencyTaskName = variantUnitTestTaskName,
         )
-        globalTask.configure { dependsOn(ciUnitTest) }
+        PlaygroundGlobalCi.addToGlobalCi(project, ciUnitTest)
         registerCiUnitTestTask(
             name = COMPILE_CI_UNIT_TEST_NAME,
             dependencyTaskName = variantCompileUnitTestTaskName,

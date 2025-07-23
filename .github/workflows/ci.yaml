@@ -117,7 +117,7 @@ jobs:
 
       - name: 🧑‍🔬 Test
         id: test
-        run: ./gradlew globalCiUnitTest verifyScreenshots
+        run: ./gradlew ciUnitTest verifyScreenshots
       - name: 📦 Archive JUnit reports
         if: ${{ !cancelled() && contains(fromJSON('["success", "failure"]'), steps.test.outcome) }}
         uses: ./.github/actions/archive-junit-reports
@@ -151,7 +151,7 @@ jobs:
 
       - name: 🕵️ Lint
         id: lint
-        run: ./gradlew globalCiLint :build-logic:lint --continue
+        run: ./gradlew ciLint :build-logic:lint --continue
       - name: 📦 Archive Lint reports
         if: ${{ !cancelled() && contains(fromJSON('["success", "failure"]'), steps.lint.outcome) }}
         uses: ./.github/actions/archive-lint-reports
