@@ -44,7 +44,7 @@ internal object PlaygroundUnitTests {
 
     fun configureSubproject(project: Project) = with(project) {
         if (isAndroidTest) return@with // Android Test modules are special, they don't have tests...
-        val globalTask = rootProject.tasks.named(GLOBAL_CI_UNIT_TEST_TASK_NAME)
+        val globalTask = tasks.register(GLOBAL_CI_UNIT_TEST_TASK_NAME)
         pluginManager.withPlugin("com.android.base") {
             createAndroidCiUnitTestTask(globalTask)
         }

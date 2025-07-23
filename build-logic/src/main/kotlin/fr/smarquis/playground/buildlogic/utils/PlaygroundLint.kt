@@ -31,7 +31,7 @@ internal object PlaygroundLint {
         }
 
     fun configureSubproject(project: Project) = with(project) {
-        val globalTask = rootProject.tasks.named(GLOBAL_CI_LINT_TASK_NAME)
+        val globalTask = tasks.register(GLOBAL_CI_LINT_TASK_NAME)
         pluginManager.withPlugin("com.android.base") {
             if (project.isAndroidTest) return@withPlugin // Android Test modules are special, SourceSet with name 'main' not found...
             configureDependencies()
