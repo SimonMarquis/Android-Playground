@@ -60,8 +60,8 @@ internal object PlaygroundGraph {
         }
         project.tasks.register<GraphUpdateTask>("graphUpdate") {
             projectPath = project.path
-            input = dumpTask.get().output
-            output = project.run { (if (path == MAIN_PROJECT_PATH) rootProject else this).layout.projectDirectory.file("README.md") }
+            input = dumpTask.flatMap { it.output }
+            output = project.run { (if (path == MAIN_PROJECT_PATH) isolated.rootProject else isolated).projectDirectory.file("README.md") }
         }
     }
 

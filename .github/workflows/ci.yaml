@@ -151,15 +151,25 @@ jobs:
 
       - name: 🕵️ Lint
         id: lint
-        run: ./gradlew globalCiLint --continue
+        run: ./gradlew globalCiLint :build-logic:lint --continue
       - name: 📦 Archive Lint reports
         if: ${{ !cancelled() && contains(fromJSON('["success", "failure"]'), steps.lint.outcome) }}
         uses: ./.github/actions/archive-lint-reports
         with:
-          # hard-coded path to the merged lint report
-          analysis: app/build/reports/lint-results-release.sarif
           html: "**/build/reports/lint-results*.html"
           sarif: "**/build/reports/lint-results*.sarif"
           xml: "**/build/reports/lint-results*.xml"
+      - name: 🔍 Analyze app SARIF report
+        if: ${{ !cancelled() && hashFiles('app/build/reports/lint-results-release.sarif') != '' }}
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: app/build/reports/lint-results-release.sarif
+          category: app
+      - name: 🔍 Analyze build-logic SARIF report
+        if: ${{ !cancelled() && hashFiles('build-logic/build/reports/lint-results.sarif') != '' }}
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: build-logic/build/reports/lint-results.sarif
+          category: build-logic
       - if: ${{ !cancelled() }}
         uses: ./.github/actions/archive-gradle-reports
