@@ -160,16 +160,16 @@ jobs:
           sarif: "**/build/reports/lint-results*.sarif"
           xml: "**/build/reports/lint-results*.xml"
       - name: 🔍 Analyze app SARIF report
-        if: ${{ !cancelled() && hashFiles('app/build/reports/lint-results-release.sarif') != '' }}
+        if: ${{ !cancelled() && hashFiles('app/**/*.sarif') != '' }}
         uses: github/codeql-action/upload-sarif@v3
         with:
-          sarif_file: app/build/reports/lint-results-release.sarif
+          sarif_file: app
           category: app
       - name: 🔍 Analyze build-logic SARIF report
-        if: ${{ !cancelled() && hashFiles('build-logic/build/reports/lint-results.sarif') != '' }}
+        if: ${{ !cancelled() && hashFiles('build-logic/**/*.sarif') != '' }}
         uses: github/codeql-action/upload-sarif@v3
         with:
-          sarif_file: build-logic/build/reports/lint-results.sarif
+          sarif_file: build-logic
           category: build-logic
       - if: ${{ !cancelled() }}
         uses: ./.github/actions/archive-gradle-reports
