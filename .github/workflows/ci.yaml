@@ -62,6 +62,7 @@ jobs:
       - uses: ./.github/actions/setup-gradle-properties
 
       - uses: ./.github/actions/check-gradle-dependency-lock-state
+      - run: ./gradlew :build-logic:validatePlugins --quiet
       - run: ./gradlew licensee --quiet
       - run: ./gradlew topologyCheck --quiet
       - run: ./gradlew apiCheck --quiet
