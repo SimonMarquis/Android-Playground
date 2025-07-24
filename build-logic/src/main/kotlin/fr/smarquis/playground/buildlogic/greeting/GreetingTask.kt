@@ -4,7 +4,9 @@ import org.gradle.api.DefaultTask
 import org.gradle.api.provider.Property
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.TaskAction
+import org.gradle.api.tasks.UntrackedTask
 
+@UntrackedTask(because = "We expect it to print a message every time.")
 public abstract class GreetingTask public constructor() : DefaultTask() {
 
     @get:Input
