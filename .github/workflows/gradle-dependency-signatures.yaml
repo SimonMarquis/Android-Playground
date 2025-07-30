@@ -28,6 +28,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          lfs: true
       - id: setup-bot
         uses: ./.github/actions/setup-bot
         with:
@@ -36,6 +38,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           token: ${{ steps.setup-bot.outputs.token }}
+          lfs: true
       - if: inputs.ref != ''
         run: gh pr checkout "$INPUT_REF"
         env:
@@ -49,7 +52,7 @@ jobs:
       - uses: ./.github/actions/setup-gradle-properties
 
       - name: --write-verification-metadata
-        if: inputs.no-dry-run == 'true'
+        if: inputs.no-dry-run
         run: |
           sudo apt-get install -y xmlstarlet
           xmlstarlet edit --inplace \
@@ -63,7 +66,7 @@ jobs:
           TASK: ${{ inputs.task }}
 
       - name: --write-verification-metadata --dry-run
-        if: inputs.no-dry-run != 'true'
+        if: ${{ !inputs.no-dry-run }}
         run: |
           ./gradlew "$TASK" --write-verification-metadata pgp,sha256 --export-keys --dry-run
           mv gradle/verification-metadata.dryrun.xml gradle/verification-metadata.xml
