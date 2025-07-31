@@ -39,7 +39,7 @@ androidx-compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling
 androidx-core = "androidx.core:core-ktx:1.16.0"
 androidx-datastore = "androidx.datastore:datastore-preferences:1.1.7"
 androidx-datastore-core = "androidx.datastore:datastore-preferences-core:1.1.7"
-androidx-espresso-core = "androidx.test.espresso:espresso-core:3.6.1"
+androidx-espresso-core = "androidx.test.espresso:espresso-core:3.7.0"
 androidx-hilt-navigation-compose = "androidx.hilt:hilt-navigation-compose:1.2.0"
 androidx-junit = "androidx.test.ext:junit:1.2.1"
 androidx-lifecycle-process = "androidx.lifecycle:lifecycle-process:2.9.2"
