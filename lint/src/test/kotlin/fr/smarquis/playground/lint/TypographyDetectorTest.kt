@@ -72,19 +72,19 @@ class TypographyDetectorTest : LintDetectorTest() {
             """
             res/values/strings.xml:3: Warning: Java escaped unicode character can be replaced [TypographyJavaEscapedUnicode]
                 <string name="bullet">Bullet: \u2022</string>
-                                              ^
+                                              ~~~~~~
             res/values/strings.xml:4: Warning: Java escaped unicode character can be replaced [TypographyJavaEscapedUnicode]
                 <string name="trademark">Trademark: \u2122</string>
-                                                    ^
+                                                    ~~~~~~
             res/values/strings.xml:5: Warning: Java escaped unicode character can be replaced [TypographyJavaEscapedUnicode]
                 <string name="copyright">Copyright: \u00A9</string>
-                                                    ^
+                                                    ~~~~~~
             res/values/strings.xml:6: Warning: Java escaped unicode character can be replaced [TypographyJavaEscapedUnicode]
                 <string name="double_quote">Double quote: \u0022OK\u0022</string>
-                                                          ^
+                                                          ~~~~~~
             res/values/strings.xml:6: Warning: Java escaped unicode character can be replaced [TypographyJavaEscapedUnicode]
                 <string name="double_quote">Double quote: \u0022OK\u0022</string>
-                                                                  ^
+                                                                  ~~~~~~
             0 errors, 5 warnings
             """.trimIndent(),
         )
@@ -139,16 +139,16 @@ class TypographyDetectorTest : LintDetectorTest() {
             """
             res/values/strings.xml:3: Warning: Java escaped unicode character can be replaced [TypographyJavaEscapedUnicode]
                 <string name="html">start <b>\u2122</b> end</string>
-                                             ^
+                                             ~~~~~~
             res/values/strings.xml:4: Warning: Java escaped unicode character can be replaced [TypographyJavaEscapedUnicode]
                 <string name="cdata"><![CDATA[start \u2122 end]]></string>
-                                                    ^
+                                                    ~~~~~~
             res/values/strings.xml:6: Warning: Java escaped unicode character can be replaced [TypographyJavaEscapedUnicode]
                     <item quantity="other">start \u2122 end</item>
-                                                 ^
+                                                 ~~~~~~
             res/values/strings.xml:9: Warning: Java escaped unicode character can be replaced [TypographyJavaEscapedUnicode]
                     <item>start \u00A9 end</item>
-                                ^
+                                ~~~~~~
             0 errors, 4 warnings
             """.trimIndent(),
         )
@@ -196,16 +196,16 @@ class TypographyDetectorTest : LintDetectorTest() {
             """
             res/values/strings.xml:3: Warning: Java escaped unicode character can be replaced [TypographyJavaEscapedUnicode]
                 <string name="percent_1">Foo 100\u0025!</string>
-                                                ^
+                                                ~~~~~~
             res/values/strings.xml:4: Warning: Java escaped unicode character can be replaced [TypographyJavaEscapedUnicode]
                 <string name="percent_2" formatted="false">Foo 100\u0025s!</string>
-                                                                  ^
+                                                                  ~~~~~~
             res/values/strings.xml:5: Warning: Java escaped unicode character can be replaced [TypographyJavaEscapedUnicode]
                 <string name="percent_3">Foo %1＄d\u0025!</string>
-                                                 ^
+                                                 ~~~~~~
             res/values/strings.xml:6: Warning: Java escaped unicode character can be replaced [TypographyJavaEscapedUnicode]
                 <string name="percent_4" formatted="true">Foo 10%% or 42\u0025s!</string>
-                                                                        ^
+                                                                        ~~~~~~
             0 errors, 4 warnings
             """.trimIndent(),
         )
@@ -255,25 +255,25 @@ class TypographyDetectorTest : LintDetectorTest() {
             """
             res/values/strings.xml:3: Warning: Typography replacement detected [TypographyReplacement]
                 <string name="right_arrow">start -> end</string>
-                                                 ^
+                                                 ~~
             res/values/strings.xml:4: Warning: Typography replacement detected [TypographyReplacement]
                 <string name="left_arrow">end &lt;- start</string>
-                                              ^
+                                              ~~
             res/values/strings.xml:5: Warning: Typography replacement detected [TypographyReplacement]
                 <string name="right_guillemet">end >> start</string>
-                                                   ^
+                                                   ~~
             res/values/strings.xml:6: Warning: Typography replacement detected [TypographyReplacement]
                 <string name="left_guillemet">end &lt;&lt; start</string>
-                                                  ^
+                                                  ~~
             res/values/strings.xml:7: Warning: Typography replacement detected [TypographyReplacement]
                 <string name="copyright">(c)</string>
-                                         ^
+                                         ~~~
             res/values/strings.xml:8: Warning: Typography replacement detected [TypographyReplacement]
                 <string name="registered">(r)</string>
-                                          ^
+                                          ~~~
             res/values/strings.xml:9: Warning: Typography replacement detected [TypographyReplacement]
                 <string name="trademark">(tm)</string>
-                                         ^
+                                         ~~~~
             0 errors, 7 warnings
             """.trimIndent(),
         )

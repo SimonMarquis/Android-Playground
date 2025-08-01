@@ -38,6 +38,7 @@
             <trusting group="androidx.savedstate"/>
             <trusting group="^androidx[.]compose($|([.].*))" regex="true"/>
             <trusting group="^androidx[.]navigation($|([.].*))" regex="true"/>
+            <trusting group="^androidx[.]test($|([.].*))" regex="true"/>
             <trusting group="^com[.]android($|([.].*))" regex="true"/>
          </trusted-key>
          <trusted-key id="0F07D1201BDDAB67CFB84EB479752DB6C966F0B8" group="com.google.android" name="annotations"/>
@@ -129,6 +130,7 @@
             <trusting group="androidx.appcompat"/>
             <trusting group="androidx.benchmark"/>
             <trusting group="androidx.collection"/>
+            <trusting group="androidx.concurrent"/>
             <trusting group="androidx.core"/>
             <trusting group="androidx.databinding"/>
             <trusting group="androidx.datastore"/>
