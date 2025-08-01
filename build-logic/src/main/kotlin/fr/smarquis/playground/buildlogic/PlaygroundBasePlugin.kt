@@ -1,7 +1,6 @@
 package fr.smarquis.playground.buildlogic
 
 import fr.smarquis.playground.buildlogic.dsl.apply
-import fr.smarquis.playground.buildlogic.dsl.withType
 import fr.smarquis.playground.buildlogic.utils.PlaygroundBadging
 import fr.smarquis.playground.buildlogic.utils.PlaygroundGlobalCi
 import fr.smarquis.playground.buildlogic.utils.PlaygroundDependencyLocking
@@ -12,7 +11,6 @@ import fr.smarquis.playground.buildlogic.utils.PlaygroundTopology
 import fr.smarquis.playground.buildlogic.utils.PlaygroundUnitTests
 import org.gradle.api.Plugin
 import org.gradle.api.Project
-import org.gradle.api.tasks.bundling.AbstractArchiveTask
 
 internal class PlaygroundBasePlugin : Plugin<Project> {
 
@@ -31,18 +29,6 @@ internal class PlaygroundBasePlugin : Plugin<Project> {
         PlaygroundPlatforms.configureProject(target)
         PlaygroundTopology.configureProject(target)
         PlaygroundGraph.configureProject(target)
-
-        configureReproducibleBuilds()
-    }
-
-    /**
-     * https://docs.gradle.org/current/userguide/working_with_files.html#sec:reproducible_archives
-     */
-    private fun Project.configureReproducibleBuilds() {
-        tasks.withType<AbstractArchiveTask>().configureEach {
-            isPreserveFileTimestamps = false
-            isReproducibleFileOrder = true
-        }
     }
 
 }
