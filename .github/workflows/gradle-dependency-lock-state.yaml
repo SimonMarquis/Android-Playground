@@ -18,13 +18,13 @@ jobs:
     if: contains(fromJson(vars.AUTHORIZED_ACTORS || '[]'), github.actor)
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - id: setup-bot
         uses: ./.github/actions/setup-bot
         with:
           app-id: ${{ vars.BOT_APP_ID }}
           private-key: ${{ secrets.BOT_PRIVATE_KEY }}
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           token: ${{ steps.setup-bot.outputs.token }}
       - if: inputs.ref != ''

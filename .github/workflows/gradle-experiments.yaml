@@ -22,7 +22,7 @@ jobs:
     env:
       GIT_REPO: "file://$GITHUB_WORKSPACE"
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           lfs: true
       - uses: ./.github/actions/setup-java
@@ -61,7 +61,7 @@ jobs:
   build-configuration-compatibility:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           lfs: true
       - uses: ./.github/actions/setup-java
