@@ -336,7 +336,7 @@ internal fun LicensesScreenContentLoadingPreview() {
 @Composable
 internal fun LicensesScreenContentFailurePreview() {
     LicensesScreen(
-        uiState = Failure(FileNotFoundException()),
+        uiState = Failure(FileNotFoundException().apply { stackTrace = stackTrace.take(1).toTypedArray() }),
         navigateBack = {},
     )
 }
