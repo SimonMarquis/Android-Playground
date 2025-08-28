@@ -33,6 +33,11 @@ internal class PlaygroundBasePlugin : Plugin<Project> {
         PlaygroundGraph.configureProject(target)
 
         configureReproducibleBuilds()
+        configurations.configureEach {
+            resolutionStrategy.eachDependency {
+                if (requested.group == "com.google.dagger") useVersion("HEAD-SNAPSHOT")
+            }
+        }
     }
 
     /**
