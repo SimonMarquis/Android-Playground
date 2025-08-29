@@ -32,12 +32,7 @@ assignment {
 }
 
 dependencies {
-    compileOnly(plugin(libs.plugins.android.application))
     compileOnly(plugin(libs.plugins.android.cacheFix))
-    compileOnly(plugin(libs.plugins.android.library))
-    compileOnly(plugin(libs.plugins.android.lint))
-    compileOnly(plugin(libs.plugins.android.settings))
-    compileOnly(plugin(libs.plugins.android.test))
     compileOnly(plugin(libs.plugins.androidx.baselineprofile))
     compileOnly(plugin(libs.plugins.androidx.navigation))
     compileOnly(plugin(libs.plugins.artifactsSizeReport))
@@ -52,6 +47,7 @@ dependencies {
     compileOnly(plugin(libs.plugins.licensee))
     compileOnly(plugin(libs.plugins.paparazzi))
 
+    implementation(libs.android.gradle.api)
     implementation(libs.android.tools.common)
     implementation(libs.assertk)
     lintChecks(libs.androidx.lint.gradle)
