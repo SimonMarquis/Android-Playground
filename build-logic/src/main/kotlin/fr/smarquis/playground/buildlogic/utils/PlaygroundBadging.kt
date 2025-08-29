@@ -5,8 +5,8 @@ import assertk.assertions.containsExactly
 import com.android.SdkConstants.FD_BUILD_TOOLS
 import com.android.SdkConstants.FN_AAPT2
 import com.android.build.api.artifact.SingleArtifact
+import com.android.build.api.dsl.ApplicationExtension
 import com.android.build.api.variant.ApplicationAndroidComponentsExtension
-import com.android.build.gradle.BaseExtension
 import fr.smarquis.playground.buildlogic.PlaygroundProperties
 import fr.smarquis.playground.buildlogic.capitalized
 import fr.smarquis.playground.buildlogic.dsl.assign
@@ -63,7 +63,7 @@ internal object PlaygroundBadging {
     }
 
     private fun Project.createAndroidBadgingTasks(
-        baseExtension: BaseExtension = extensions.getByType(),
+        appExtension: ApplicationExtension = extensions.getByType(),
         android: ApplicationAndroidComponentsExtension = extensions.getByType(),
         properties: PlaygroundProperties = playground(),
     ) = android.onVariants { variant ->
@@ -72,7 +72,7 @@ internal object PlaygroundBadging {
         val generateBadging = tasks.register<GenerateBadgingTask>("generate${capitalizedVariantName}Badging") {
             apk = variant.artifacts.get(SingleArtifact.APK_FROM_BUNDLE)
             // TODO: Replace with `sdkComponents.aapt2` when it's available in AGP https://issuetracker.google.com/issues/376815836
-            aapt2 = android.sdkComponents.sdkDirectory.map { it.file("$FD_BUILD_TOOLS/${baseExtension.buildToolsVersion}/$FN_AAPT2") }
+            aapt2 = android.sdkComponents.sdkDirectory.map { it.file("$FD_BUILD_TOOLS/${appExtension.buildToolsVersion}/$FN_AAPT2") }
             badging = layout.buildDirectory.file("outputs/apk_from_bundle/${variant.name}/${variant.name}-badging.txt")
         }
 

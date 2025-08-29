@@ -9,6 +9,7 @@ import fr.smarquis.playground.buildlogic.dsl.getByType
 import fr.smarquis.playground.buildlogic.isAndroidTest
 import fr.smarquis.playground.buildlogic.libs
 import fr.smarquis.playground.buildlogic.playground
+import fr.smarquis.playground.buildlogic.versions
 import org.gradle.api.Project
 import org.gradle.language.base.plugins.LifecycleBasePlugin
 
@@ -70,6 +71,8 @@ internal object PlaygroundLint {
         lint: Lint,
         properties: PlaygroundProperties = playground(),
     ) = lint.apply {
+        targetSdk = versions.targetSdk.toString().toInt()
+
         abortOnError = true
         warningsAsErrors = properties.lintWarningsAsErrors
 

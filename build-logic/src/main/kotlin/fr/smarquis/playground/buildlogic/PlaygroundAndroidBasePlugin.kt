@@ -15,17 +15,18 @@ internal class PlaygroundAndroidBasePlugin : Plugin<Project> {
         apply<AndroidArtifactsInfoPlugin>()
         configureKotlin<KotlinAndroidProjectExtension>()
 
-        androidBase {
+        android {
             namespace = "fr.smarquis.playground." +
                 path.split("""\W""".toRegex()).drop(1).distinct().joinToString(separator = ".").lowercase()
             resourcePrefix = "playground_" +
                 path.split("""\W""".toRegex()).drop(1).distinct().joinToString(separator = "_").lowercase() + "_"
 
-            compileSdkVersion(versions.compileSdk.toString().toInt())
+            compileSdk {
+                version = release(versions.compileSdk.toString().toInt())
+            }
 
             defaultConfig {
                 minSdk = versions.minSdk.toString().toInt()
-                targetSdk = versions.targetSdk.toString().toInt()
                 testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
             }
 
@@ -33,7 +34,7 @@ internal class PlaygroundAndroidBasePlugin : Plugin<Project> {
                 animationsDisabled = true
             }
 
-            packagingOptions {
+            packaging {
                 resources {
                     excludes += "/META-INF/{AL2.0,LGPL2.1}"
                 }
