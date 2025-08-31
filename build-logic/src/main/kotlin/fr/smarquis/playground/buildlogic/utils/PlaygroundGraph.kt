@@ -51,7 +51,7 @@ internal object PlaygroundGraph {
     fun configureProject(project: Project) {
         val dumpTask = project.tasks.register<GraphDumpTask>("graphDump") {
             val graph = measureTimedValue { Graph().invoke(project) }
-                .also { logger.lifecycle("{} Computing graph for project '{}' in {}", LOG, project, it.duration.toString(MILLISECONDS)) }
+                .also { logger.lifecycle("{} Computing graph for project '{}' in {}", LOG, project.path, it.duration.toString(MILLISECONDS)) }
                 .value
             projectPath = project.path
             dependencies = graph.dependencies()
