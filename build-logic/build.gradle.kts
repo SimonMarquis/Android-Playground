@@ -39,7 +39,6 @@ dependencies {
     compileOnly(plugin(libs.plugins.binaryCompatibilityValidator))
     compileOnly(plugin(libs.plugins.develocity))
     compileOnly(plugin(libs.plugins.hilt))
-    compileOnly(plugin(libs.plugins.kotlin.android))
     compileOnly(plugin(libs.plugins.kotlin.compose))
     compileOnly(plugin(libs.plugins.kotlin.jvm))
     compileOnly(plugin(libs.plugins.kotlin.powerAssert))
