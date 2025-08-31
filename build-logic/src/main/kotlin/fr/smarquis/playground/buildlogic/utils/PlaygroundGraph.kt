@@ -4,7 +4,6 @@ import fr.smarquis.playground.buildlogic.associateWithNotNull
 import fr.smarquis.playground.buildlogic.dsl.assign
 import fr.smarquis.playground.buildlogic.dsl.register
 import fr.smarquis.playground.buildlogic.dsl.withType
-import fr.smarquis.playground.buildlogic.measureTimedValue
 import fr.smarquis.playground.buildlogic.utils.MermaidBuilder.toMermaidLiveUrl
 import fr.smarquis.playground.buildlogic.utils.PlaygroundGraph.IGNORED_PROJECTS
 import fr.smarquis.playground.buildlogic.utils.PlaygroundGraph.PluginType
@@ -32,6 +31,7 @@ import kotlin.io.encoding.Base64
 import kotlin.io.encoding.ExperimentalEncodingApi
 import kotlin.text.RegexOption.DOT_MATCHES_ALL
 import kotlin.time.DurationUnit.MILLISECONDS
+import kotlin.time.measureTimedValue
 
 /**
  * Generates module dependency graphs, and add them to their corresponding README.md file.
