@@ -85,7 +85,7 @@ internal object PlaygroundGraph {
         operator fun invoke(project: Project): Graph {
             if (project.path in seen) return this
             seen += project.path
-            plugins.putIfAbsent(project, PluginType.values().firstOrNull { project.pluginManager.hasPlugin(it.id) } ?: Unknown)
+            plugins.putIfAbsent(project, PluginType.entries.firstOrNull { project.pluginManager.hasPlugin(it.id) } ?: Unknown)
             dependencies.compute(project) { _, u -> u.orEmpty() }
             project.configurations
                 .matching { it.name in SUPPORTED_CONFIGURATIONS }
