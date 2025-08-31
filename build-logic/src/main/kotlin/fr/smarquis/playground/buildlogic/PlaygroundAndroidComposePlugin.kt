@@ -10,7 +10,6 @@ import org.jetbrains.kotlin.compose.compiler.gradle.ComposeCompilerGradlePluginE
 internal class PlaygroundAndroidComposePlugin : Plugin<Project> {
 
     override fun apply(target: Project): Unit = with(target) {
-        apply(plugin = "org.jetbrains.kotlin.android")
         apply(plugin = "org.jetbrains.kotlin.plugin.compose")
         apply<PlaygroundAndroidBasePlugin>()
 

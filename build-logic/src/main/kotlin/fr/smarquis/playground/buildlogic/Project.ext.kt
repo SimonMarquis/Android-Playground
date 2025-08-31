@@ -43,7 +43,7 @@ internal val Project.isCi: Boolean
     get() = providers.environmentVariable("CI").map(String::toBoolean).getOrElse(false)
 
 internal fun Project.android(
-    configure: CommonExtension<out BuildFeatures, out BuildType, out DefaultConfig, out ProductFlavor, out AndroidResources, out Installation>.() -> Unit,
+    configure: CommonExtension.() -> Unit,
 ) = when {
     isAndroidApplication -> androidApplication(configure)
     isAndroidLibrary -> androidLibrary(configure)
@@ -56,11 +56,11 @@ internal fun Project.androidLibrary(configure: LibraryExtension.() -> Unit) = co
 internal fun Project.androidTest(configure: TestExtension.() -> Unit) = configure<TestExtension>(configure)
 internal fun Project.androidComponents(configure: ApplicationAndroidComponentsExtension.() -> Unit) = configure<ApplicationAndroidComponentsExtension>(configure)
 
-internal val Project.androidExtension: AndroidComponentsExtension<out CommonExtension<*, *, *, *, *, *>, out VariantBuilder, out Variant>
+internal val Project.androidExtension: AndroidComponentsExtension<out CommonExtension, out VariantBuilder, out Variant>
     get() = androidExtensionNullable
         ?: throw IllegalArgumentException("Failed to find any registered Android extension")
 
-internal val Project.androidExtensionNullable: AndroidComponentsExtension<out CommonExtension<*, *, *, *, *, *>, out VariantBuilder, out Variant>?
+internal val Project.androidExtensionNullable: AndroidComponentsExtension<out CommonExtension, out VariantBuilder, out Variant>?
     get() = extensions.findByType<LibraryAndroidComponentsExtension>()
         ?: extensions.findByType<ApplicationAndroidComponentsExtension>()
         ?: extensions.findByType<TestAndroidComponentsExtension>()
