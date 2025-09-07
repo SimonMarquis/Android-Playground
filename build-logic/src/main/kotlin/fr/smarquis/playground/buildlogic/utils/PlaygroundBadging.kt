@@ -2,10 +2,8 @@ package fr.smarquis.playground.buildlogic.utils
 
 import assertk.assertThat
 import assertk.assertions.containsExactly
-import com.android.SdkConstants.FD_BUILD_TOOLS
-import com.android.SdkConstants.FN_AAPT2
 import com.android.build.api.artifact.SingleArtifact
-import com.android.build.api.dsl.ApplicationExtension
+import com.android.build.api.variant.Aapt2
 import com.android.build.api.variant.ApplicationAndroidComponentsExtension
 import fr.smarquis.playground.buildlogic.PlaygroundProperties
 import fr.smarquis.playground.buildlogic.capitalized
@@ -37,6 +35,7 @@ import org.gradle.api.tasks.TaskProvider
 import org.gradle.language.base.plugins.LifecycleBasePlugin.VERIFICATION_GROUP
 import org.gradle.process.ExecOperations
 import javax.inject.Inject
+import kotlin.text.RegexOption.MULTILINE
 
 /**
  * Inspired by [android/nowinandroid](https://github.com/android/nowinandroid/blob/main/build-logic/convention/src/main/kotlin/com/google/samples/apps/nowinandroid/Badging.kt).
@@ -63,7 +62,6 @@ internal object PlaygroundBadging {
     }
 
     private fun Project.createAndroidBadgingTasks(
-        appExtension: ApplicationExtension = extensions.getByType(),
         android: ApplicationAndroidComponentsExtension = extensions.getByType(),
         properties: PlaygroundProperties = playground(),
     ) = android.onVariants { variant ->
@@ -71,8 +69,7 @@ internal object PlaygroundBadging {
 
         val generateBadging = tasks.register<GenerateBadgingTask>("generate${capitalizedVariantName}Badging") {
             apk = variant.artifacts.get(SingleArtifact.APK_FROM_BUNDLE)
-            // TODO: Replace with `sdkComponents.aapt2` when it's available in AGP https://issuetracker.google.com/issues/376815836
-            aapt2 = android.sdkComponents.sdkDirectory.map { it.file("$FD_BUILD_TOOLS/${appExtension.buildToolsVersion}/$FN_AAPT2") }
+            aapt2 = android.sdkComponents.aapt2.flatMap(Aapt2::executable)
             badging = layout.buildDirectory.file("outputs/apk_from_bundle/${variant.name}/${variant.name}-badging.txt")
         }
 
@@ -127,6 +124,15 @@ internal abstract class GenerateBadgingTask : DefaultTask() {
         execOperations.exec {
             commandLine(aapt2.get().asFile.absolutePath, "dump", "badging", apk.get().asFile.absolutePath)
             standardOutput = badging.asFile.get().outputStream()
+        }.rethrowFailure().assertNormalExitValue()
+        badging.get().asFile.run {
+            readText()
+                // Filter out `versionCode` & `versionName`
+                .replace("""\s*?versionCode='\d+?'""".toRegex(), "")
+                .replace("""\s*?versionName='[0-9.]*?'""".toRegex(), "")
+                // trim trailing whitespaces, but keep newline at end of file
+                .replace("""[^\S\r\n]+$""".toRegex(MULTILINE), "")
+                .let(::writeText)
         }
     }
 }
