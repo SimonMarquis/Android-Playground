@@ -8,9 +8,7 @@ plugins {
 
 android {
     defaultConfig {
-        applicationId = "fr.smarquis.playground"
-        versionCode = 1
-        versionName = "1.0"
+        applicationId = "fr.smarquis.testing"
     }
     baselineProfile {
         dexLayoutOptimization = true
