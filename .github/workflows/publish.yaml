@@ -13,7 +13,6 @@ jobs:
 
   publish:
     if: github.repository == 'SimonMarquis/Android-Playground'
-    name: 📦 Publish
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:

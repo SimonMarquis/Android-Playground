@@ -27,6 +27,7 @@ import com.google.auth.http.HttpCredentialsAdapter
 import com.google.auth.oauth2.GoogleCredentials
 import java.io.FileInputStream
 import java.util.concurrent.TimeUnit.MINUTES
+import javax.annotation.CheckReturnValue
 
 
 GooglePlay()
@@ -69,8 +70,8 @@ private class Publish : CliktCommand() {
                 "aab" -> uploadAab(it).getOrThrow().versionCode
                 else -> error("Unsupported app file extension: $extension")
             }
-            updateTrack(it, uploadedVersionCode)
-        }
+            updateTrack(it, uploadedVersionCode).getOrThrow()
+        }.getOrThrow()
     }
 
     private fun GoogleCredentials.httpRequestInitializer() = HttpRequestInitializer {
@@ -79,6 +80,7 @@ private class Publish : CliktCommand() {
         HttpCredentialsAdapter(this).initialize(it)
     }
 
+    @CheckReturnValue
     private fun AndroidPublisher.edits(action: Edits.(AppEdit) -> Unit) = with(edits()) {
         echo("📝 Creating edit…")
         val appEdit = insert(appId, null).execute()
@@ -96,6 +98,7 @@ private class Publish : CliktCommand() {
         }
     }
 
+    @CheckReturnValue
     private fun Edits.uploadAab(edit: AppEdit): Result<Bundle> = runCatching {
         echo("📡 Uploading ${file.name}…")
         bundles().upload(appId, edit.id, FileContent("application/octet-stream", file)).execute()
@@ -106,6 +109,7 @@ private class Publish : CliktCommand() {
         echo(err = true, message = it)
     }
 
+    @CheckReturnValue
     private fun Edits.uploadApk(edit: AppEdit): Result<Apk> = runCatching {
         echo("📡 Uploading ${file.name}…")
         apks().upload(appId, edit.id, FileContent("application/vnd.android.package-archive", file)).execute()
@@ -116,6 +120,7 @@ private class Publish : CliktCommand() {
         echo(err = true, message = it)
     }
 
+    @CheckReturnValue
     private fun Edits.updateTrack(edit: AppEdit, uploadedVersionCode: Int): Result<Track> = runCatching {
         echo("🛤️ Updating $track track!")
         tracks().update(appId, edit.id, track, track(uploadedVersionCode.toLong())).execute()
