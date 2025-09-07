@@ -49,7 +49,7 @@ dependencies {
 
     compileOnly(libs.android.gradle.api)
     compileOnly(libs.android.tools.common)
-    compileOnly(libs.assertk)
+    implementation(libs.assertk)
     lintChecks(libs.androidx.lint.gradle)
 }
 
