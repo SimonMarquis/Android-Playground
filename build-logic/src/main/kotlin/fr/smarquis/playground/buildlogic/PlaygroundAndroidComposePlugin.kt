@@ -16,7 +16,6 @@ internal class PlaygroundAndroidComposePlugin : Plugin<Project> {
 
         android {
             buildFeatures.compose = true
-            testOptions.unitTests.isIncludeAndroidResources = true
         }
 
         configureComposeCompilerMetrics()

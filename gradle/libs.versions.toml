@@ -10,7 +10,7 @@ agp = "8.13.0"
 android-tools = "31.13.0"
 androidx-benchmark = "1.4.0"
 androidx-navigation = "2.9.3"
-hilt = "2.57.1"
+hilt = "HEAD-SNAPSHOT"
 kotlin = "2.2.10"
 paparazzi = "2.0.0-SNAPSHOT"
 
