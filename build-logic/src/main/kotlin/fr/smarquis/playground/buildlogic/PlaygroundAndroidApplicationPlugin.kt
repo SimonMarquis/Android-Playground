@@ -51,7 +51,6 @@ internal class PlaygroundAndroidApplicationPlugin : Plugin<Project> {
                     signingConfig = signingConfigs.getByName("release")
                     isMinifyEnabled = playground().isMinifyEnabled
                     isShrinkResources = isMinifyEnabled
-                    signingConfig = signingConfigs.getByName("debug")
                     proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
                     // https://github.com/Kotlin/kotlinx.coroutines#avoiding-including-the-debug-infrastructure-in-the-resulting-apk
                     packaging.resources.excludes += "DebugProbesKt.bin"
