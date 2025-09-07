@@ -1,0 +1,65 @@
+name: 🚀 Publish to Google Play
+
+on:
+  push:
+    tags: ['*']
+  workflow_dispatch:
+
+permissions:
+  actions: read
+  contents: read
+
+jobs:
+
+  publish:
+    if: github.repository == 'SimonMarquis/Android-Playground'
+    name: 📦 Publish
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          lfs: true
+      - uses: ./.github/actions/setup-java
+      - uses: ./.github/actions/setup-gradle
+        with:
+          cache-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
+      - uses: ./.github/actions/setup-gradle-properties
+
+      - name: 🔏 Secrets
+        run: |
+          echo "$GOOGLE_PLAY_SERVICE_ACCOUNT" > google-play-service-account.json
+          echo "$SIGNING_RELEASE_PROPERTIES" > signing/release.properties
+          echo "$SIGNING_RELEASE_KEYSTORE" | base64 --decode > signing/release.keystore
+        env:
+          GOOGLE_PLAY_SERVICE_ACCOUNT: ${{ secrets.GOOGLE_PLAY_SERVICE_ACCOUNT }}
+          SIGNING_RELEASE_PROPERTIES: ${{ secrets.SIGNING_RELEASE_PROPERTIES }}
+          SIGNING_RELEASE_KEYSTORE: ${{ secrets.SIGNING_RELEASE_KEYSTORE }}
+
+      - name: 👷 Build
+        run: ./gradlew :app:assembleRelease :app:bundleRelease
+      - name: 📦 Archive app binaries
+        uses: actions/upload-artifact@v4
+        with:
+          name: release
+          path: |
+            app/build/outputs/apk/release
+            app/build/outputs/bundle/release
+            app/build/outputs/mapping/release
+
+      - name: 📤 Upload
+        run: >-
+          ./tools/google-play.main.kts publish
+          --file="app/build/outputs/bundle/release/app-release.aab"
+          --app-id="fr.smarquis.testing"
+          --track="internal"
+          --status="draft"
+          --credentials="google-play-service-account.json"
+
+      - name: ♻️ Cleanup
+        if: always()
+        continue-on-error: true
+        run: |
+          rm -f google-play-service-account.json
+          rm -f signing/release.properties
+          rm -f signing/release.keystore
