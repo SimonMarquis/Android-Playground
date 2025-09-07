@@ -47,9 +47,9 @@ dependencies {
     compileOnly(plugin(libs.plugins.licensee))
     compileOnly(plugin(libs.plugins.paparazzi))
 
-    implementation(libs.android.gradle.api)
-    implementation(libs.android.tools.common)
-    implementation(libs.assertk)
+    compileOnly(libs.android.gradle.api)
+    compileOnly(libs.android.tools.common)
+    compileOnly(libs.assertk)
     lintChecks(libs.androidx.lint.gradle)
 }
 
