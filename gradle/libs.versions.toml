@@ -11,7 +11,7 @@ android-tools = "31.13.0"
 androidx-benchmark = "1.4.1"
 androidx-navigation = "2.9.4"
 hilt = "2.57.1"
-kotlin = "2.2.10"
+kotlin = "2.2.20"
 paparazzi = "2.0.0-SNAPSHOT"
 
 [bundles]
