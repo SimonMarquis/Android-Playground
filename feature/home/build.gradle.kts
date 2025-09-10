@@ -14,7 +14,7 @@ dependencies {
     implementation(projects.core.di)
     implementation(projects.core.ui)
     implementation(libs.androidx.navigation)
-    implementation(libs.androidx.hilt.navigation.compose)
+    implementation(libs.androidx.hilt.lifecycle.viewmodel.compose)
     implementation(libs.hilt.android)
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.kotlinx.datetime)
