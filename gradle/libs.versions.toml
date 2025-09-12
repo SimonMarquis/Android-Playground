@@ -89,7 +89,7 @@ paparazzi = { module = "app.cash.paparazzi:paparazzi", version.ref = "paparazzi"
 
 slack-compose-lint = "com.slack.lint.compose:compose-lint-checks:1.4.2"
 
-testParameterInjector = "com.google.testparameterinjector:test-parameter-injector:1.18"
+testParameterInjector = "com.google.testparameterinjector:test-parameter-injector:1.19"
 
 turbine = "app.cash.turbine:turbine:1.2.1"
 
