@@ -66,7 +66,6 @@ jobs:
       - run: ./gradlew licensee --quiet
       - run: ./gradlew topologyCheck --quiet
       - run: ./gradlew apiCheck --quiet
-      - run: ./gradlew ciBadging -Pplayground.isMinifyEnabled=false --quiet
       - if: ${{ !cancelled() }}
         uses: ./.github/actions/archive-gradle-reports
 
@@ -98,6 +97,8 @@ jobs:
         with:
           name: aar
           path: "**/build/outputs/aar"
+      - name: 📛 Badging
+        run: ./gradlew ciBadging -Pplayground.isMinifyEnabled=false --quiet
       - if: ${{ !cancelled() }}
         uses: ./.github/actions/archive-gradle-reports
 
