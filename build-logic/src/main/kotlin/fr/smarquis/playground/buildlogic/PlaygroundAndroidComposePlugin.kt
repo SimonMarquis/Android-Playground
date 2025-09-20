@@ -14,7 +14,9 @@ internal class PlaygroundAndroidComposePlugin : Plugin<Project> {
         apply(plugin = "org.jetbrains.kotlin.plugin.compose")
         apply<PlaygroundAndroidBasePlugin>()
 
-        android.buildFeatures.compose = true
+        android {
+            buildFeatures.compose = true
+        }
 
         configureComposeCompilerMetrics()
 
