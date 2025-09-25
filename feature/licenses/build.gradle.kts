@@ -12,6 +12,7 @@ dependencies {
     api(projects.domain.licenses)
     implementation(projects.core.di)
     implementation(projects.core.ui)
+    implementation(libs.androidx.compose.material.icons)
     implementation(libs.androidx.navigation)
     implementation(libs.androidx.hilt.lifecycle.viewmodel.compose)
     implementation(libs.hilt.android)
