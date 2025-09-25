@@ -1,9 +1,9 @@
 public final class fr/smarquis/playground/feature/licenses/ComposableSingletons$LicensesScreenKt {
 	public static final field INSTANCE Lfr/smarquis/playground/feature/licenses/ComposableSingletons$LicensesScreenKt;
 	public fun <init> ()V
-	public final fun getLambda$-1462941838$licenses_release ()Lkotlin/jvm/functions/Function2;
 	public final fun getLambda$-2089006031$licenses_release ()Lkotlin/jvm/functions/Function2;
 	public final fun getLambda$-712087148$licenses_release ()Lkotlin/jvm/functions/Function3;
+	public final fun getLambda$647749521$licenses_release ()Lkotlin/jvm/functions/Function2;
 }
 
 public final class fr/smarquis/playground/feature/licenses/LicensesRoute {

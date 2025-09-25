@@ -2,7 +2,7 @@ public final class fr/smarquis/playground/feature/home/ComposableSingletons$Home
 	public static final field INSTANCE Lfr/smarquis/playground/feature/home/ComposableSingletons$HomeScreenKt;
 	public fun <init> ()V
 	public final fun getLambda$-781337648$home_release ()Lkotlin/jvm/functions/Function3;
-	public final fun getLambda$1155040227$home_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$105668226$home_release ()Lkotlin/jvm/functions/Function2;
 	public final fun getLambda$804303530$home_release ()Lkotlin/jvm/functions/Function2;
 }
 
