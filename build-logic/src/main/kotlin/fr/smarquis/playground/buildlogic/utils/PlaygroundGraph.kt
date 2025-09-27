@@ -4,7 +4,6 @@ import fr.smarquis.playground.buildlogic.associateWithNotNull
 import fr.smarquis.playground.buildlogic.dsl.assign
 import fr.smarquis.playground.buildlogic.dsl.register
 import fr.smarquis.playground.buildlogic.dsl.withType
-import fr.smarquis.playground.buildlogic.measureTimedValue
 import fr.smarquis.playground.buildlogic.utils.MermaidBuilder.toMermaidLiveUrl
 import fr.smarquis.playground.buildlogic.utils.PlaygroundGraph.IGNORED_PROJECTS
 import fr.smarquis.playground.buildlogic.utils.PlaygroundGraph.PluginType
@@ -32,6 +31,7 @@ import kotlin.io.encoding.Base64
 import kotlin.io.encoding.ExperimentalEncodingApi
 import kotlin.text.RegexOption.DOT_MATCHES_ALL
 import kotlin.time.DurationUnit.MILLISECONDS
+import kotlin.time.measureTimedValue
 
 /**
  * Generates module dependency graphs, and add them to their corresponding README.md file.
@@ -51,7 +51,7 @@ internal object PlaygroundGraph {
     fun configureProject(project: Project) {
         val dumpTask = project.tasks.register<GraphDumpTask>("graphDump") {
             val graph = measureTimedValue { Graph().invoke(project) }
-                .also { logger.lifecycle("{} Computing graph for project '{}' in {}", LOG, this, it.duration.toString(MILLISECONDS)) }
+                .also { logger.lifecycle("{} Computing graph for project '{}' in {}", LOG, project.path, it.duration.toString(MILLISECONDS)) }
                 .value
             projectPath = project.path
             dependencies = graph.dependencies()
@@ -85,7 +85,7 @@ internal object PlaygroundGraph {
         operator fun invoke(project: Project): Graph {
             if (project.path in seen) return this
             seen += project.path
-            plugins.putIfAbsent(project, PluginType.values().firstOrNull { project.pluginManager.hasPlugin(it.id) } ?: Unknown)
+            plugins.putIfAbsent(project, PluginType.entries.firstOrNull { project.pluginManager.hasPlugin(it.id) } ?: Unknown)
             dependencies.compute(project) { _, u -> u.orEmpty() }
             project.configurations
                 .matching { it.name in SUPPORTED_CONFIGURATIONS }

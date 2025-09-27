@@ -11,7 +11,7 @@ inputs:
 runs:
   using: composite
   steps:
-    - uses: gradle/actions/setup-gradle@ac638b010cf58a27ee6c972d7336334ccaf61c96 # v4.4.1
+    - uses: gradle/actions/setup-gradle@ed408507eac070d1f99cc633dbcf757c94c7933a # v4.4.3
       with:
         add-job-summary-as-pr-comment: on-failure
         cache-cleanup: on-success
