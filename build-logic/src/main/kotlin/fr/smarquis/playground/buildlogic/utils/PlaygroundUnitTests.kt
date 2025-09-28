@@ -84,6 +84,7 @@ internal object PlaygroundUnitTests {
     private fun Project.configureTestTasks(
         properties: PlaygroundProperties = playground(),
     ) = tasks.withType<Test>().configureEach {
+        useJUnit()
         maxHeapSize = "1g"
         // https://docs.gradle.org/current/userguide/performance.html#parallel_test_execution
         maxParallelForks = (Runtime.getRuntime().availableProcessors() / 2).coerceAtLeast(1)
