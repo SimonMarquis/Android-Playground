@@ -17,7 +17,7 @@ import fr.smarquis.playground.feature.licenses.addLicensesRoute
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalComposeUiApi::class)
 @Composable
-internal fun PlaygroundApp() = AndroidPlaygroundTheme {
+internal fun PlaygroundApp(): Unit = AndroidPlaygroundTheme {
     val navController = rememberNavController()
     NavHost(
         navController = navController,
