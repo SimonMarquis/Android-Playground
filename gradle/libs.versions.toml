@@ -96,7 +96,7 @@ turbine = "app.cash.turbine:turbine:1.2.1"
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
-android-cacheFix = "org.gradle.android.cache-fix:3.0.1"
+android-cacheFix = "org.gradle.android.cache-fix:3.0.2"
 android-library = { id = "com.android.library", version.ref = "agp" }
 android-lint = { id = "com.android.lint", version.ref = "agp" }
 android-settings = { id = "com.android.settings", version.ref = "agp" }
