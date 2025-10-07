@@ -69,6 +69,7 @@
          <trusted-key id="32118CF76C9EC5D918E54967CA80D1F0EB6CA4BA">
             <trusting group="org.codehaus.mojo"/>
             <trusting group="org.codehaus.plexus" name="plexus-interpolation"/>
+            <trusting group="org.codehaus.plexus" name="plexus-utils" version="3.6.0"/>
          </trusted-key>
          <trusted-key id="33FD4BFD33554634053D73C0C2148900BCD3C2AF" group="org.jetbrains" name="annotations"/>
          <trusted-key id="34441E504A937F43EB0DAEF96A65176A0FB1CD0B" group="org.codehaus.groovy" name="groovy"/>
@@ -118,6 +119,7 @@
          </trusted-key>
          <trusted-key id="84789D24DF77A32433CE1F079EB80E92EB2135B1">
             <trusting group="org.codehaus.mojo"/>
+            <trusting group="org.codehaus.plexus" name="plexus"/>
             <trusting group="^org[.]apache($|([.].*))" regex="true"/>
          </trusted-key>
          <trusted-key id="8756C4F765C9AC3CB6B85D62379CE192D401AB61" group="org.jetbrains.intellij.deps" name="trove4j"/>
