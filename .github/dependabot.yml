@@ -5,8 +5,8 @@ updates:
   - package-ecosystem: github-actions
     open-pull-requests-limit: 10
     directories:
+      - /
       - /.github/actions/*
-      - /.github/workflows/*
     schedule:
       interval: daily
   - package-ecosystem: gradle
@@ -26,11 +26,6 @@ updates:
           - com.android.lint
           - com.android.settings
           - com.android.test
-      kotlin-ksp:
-        patterns:
-          - org.jetbrains.kotlin:*
-          - org.jetbrains.kotlin.jvm
-          - com.google.devtools.ksp
 registries:
   maven-google:
     type: maven-repository

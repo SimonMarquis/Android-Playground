@@ -5,14 +5,14 @@ runs:
   using: composite
   steps:
     - name: Archive HTML report
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v5
       with:
         name: paparazzi-html
         path: '**/build/reports/paparazzi'
         if-no-files-found: ignore
     - name: Archive failures & deltas
       id: artifact-failures-and-deltas
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v5
       with:
         name: paparazzi-failures
         path: '**/build/paparazzi/failures/*.png'

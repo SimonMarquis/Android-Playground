@@ -89,12 +89,12 @@ jobs:
         id: build
         run: ./gradlew assembleRelease
       - name: 📦 Archive APKs
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: apk
           path: "**/build/outputs/apk/**/*.apk"
       - name: 📦 Archive AARs
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: aar
           path: "**/build/outputs/aar"
@@ -162,13 +162,13 @@ jobs:
           xml: "**/build/reports/lint-results*.xml"
       - name: 🔍 Analyze app SARIF report
         if: ${{ !cancelled() && hashFiles('app/**/*.sarif') != '' }}
-        uses: github/codeql-action/upload-sarif@v3
+        uses: github/codeql-action/upload-sarif@v4
         with:
           sarif_file: app
           category: app
       - name: 🔍 Analyze build-logic SARIF report
         if: ${{ !cancelled() && hashFiles('build-logic/**/*.sarif') != '' }}
-        uses: github/codeql-action/upload-sarif@v3
+        uses: github/codeql-action/upload-sarif@v4
         with:
           sarif_file: build-logic
           category: build-logic
