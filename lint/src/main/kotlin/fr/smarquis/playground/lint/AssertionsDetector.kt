@@ -8,112 +8,218 @@ import com.android.tools.lint.detector.api.JavaContext
 import com.android.tools.lint.detector.api.Scope.JAVA_FILE
 import com.android.tools.lint.detector.api.Scope.TEST_SOURCES
 import com.android.tools.lint.detector.api.Severity
+import com.android.tools.lint.detector.api.isJava
 import com.intellij.psi.PsiMethod
+import fr.smarquis.playground.lint.AssertionsDetector.EqualityAssertionReplacement.Binary
+import fr.smarquis.playground.lint.AssertionsDetector.EqualityAssertionReplacement.UnaryNull
+import org.jetbrains.kotlin.utils.addToStdlib.UnsafeCastFunction
 import org.jetbrains.uast.UBinaryExpression
 import org.jetbrains.uast.UBinaryExpressionWithType
 import org.jetbrains.uast.UBlockExpression
 import org.jetbrains.uast.UCallExpression
+import org.jetbrains.uast.UElement
 import org.jetbrains.uast.UExpression
 import org.jetbrains.uast.ULambdaExpression
 import org.jetbrains.uast.UReturnExpression
 import org.jetbrains.uast.UastBinaryExpressionWithTypeKind.InstanceCheck
+import org.jetbrains.uast.UastBinaryOperator
 import org.jetbrains.uast.UastBinaryOperator.Companion.EQUALS
 import org.jetbrains.uast.UastBinaryOperator.Companion.IDENTITY_EQUALS
 import org.jetbrains.uast.UastBinaryOperator.Companion.IDENTITY_NOT_EQUALS
 import org.jetbrains.uast.UastBinaryOperator.Companion.NOT_EQUALS
-import org.jetbrains.uast.java.isJava
+import org.jetbrains.uast.isNullLiteral
+import org.jetbrains.uast.kotlin.KotlinBinaryExpressionWithTypeKinds.NEGATED_INSTANCE_CHECK
 import org.jetbrains.uast.skipParenthesizedExprDown
 import java.util.EnumSet
 
 public class AssertionsDetector : Detector(), Detector.UastScanner {
 
-    override fun getApplicableUastTypes(): List<Class<UCallExpression>> = listOf(UCallExpression::class.java)
+    override fun getApplicableUastTypes(): List<Class<out UElement>> = listOf(UCallExpression::class.java)
 
     override fun createUastHandler(context: JavaContext): UElementHandler? {
         if (!context.isTestSource) return null
         return object : UElementHandler() {
             override fun visitCallExpression(node: UCallExpression) {
                 // Avoid enforcing kotlin-test use in java sources
-                if (isJava(node.javaPsi?.language)) return
+                if (node.javaPsi?.language?.let(::isJava) == true) return
                 val psiMethod = node.resolve() ?: return
-                // Kotlin assert
-                if (psiMethod.name == "assert" && psiMethod.containingClass?.qualifiedName?.startsWith("kotlin.") == true) {
-                    return context.report(
-                        issue = KOTLIN_ASSERT_ISSUE,
-                        scope = node,
-                        location = context.getLocation(node),
-                        message = "Use `kotlin.test` assertion",
-                    )
-                }
-                // JUnit assertions
-                for (assertionClass in setOf("org.junit.Assert", "junit.framework.Assert")) {
-                    if (context.evaluator.isMemberInClass(psiMethod, assertionClass)) {
-                        return context.report(
-                            issue = JUNIT_ASSERTION_ISSUE,
-                            scope = node,
-                            location = context.getLocation(node),
-                            message = "Use `kotlin.test` assertion",
-                        )
-                    }
-                }
-                // Boolean assertion instead of type assertion
-                typeAssertionMap[node.methodName ?: psiMethod.name]?.let report@{ replacement ->
-                    val assertion = context.computeBooleanAssertion(node, psiMethod)
-                    if (assertion.expression !is UBinaryExpressionWithType) return@report
-                    if (assertion.expression.operationKind !is InstanceCheck) return@report
-                    return context.report(
-                        issue = KOTLIN_TYPE_ASSERTION_ISSUE,
-                        scope = node,
-                        location = context.getLocation(node),
-                        message = "Replace boolean assertion with `${replacement.substringAfterLast(".")}`",
-                        quickfixData = fix()
-                            .replace().all()
-                            .with(
-                                buildString {
-                                    append(replacement.substringAfterLast("."))
-                                    append("<").append(assertion.expression.type.canonicalText).append(">")
-                                    append("(")
-                                    append(assertion.expression.operand.asSourceString())
-                                    if (assertion.message != null) append(", message = ").append(assertion.message.asSourceString())
-                                    append(")")
-                                },
-                            )
-                            .shortenNames(true).reformat(true)
-                            .imports(replacement)
-                            .autoFix().build(),
-                    )
-                }
-                // Boolean assertion instead of equality assertion
-                equalityAssertionMap[node.methodName ?: psiMethod.name]?.let report@{ replacements ->
-                    val assertion = context.computeBooleanAssertion(node, psiMethod)
-                    if (assertion.expression !is UBinaryExpression) return@report
-                    val replacement = replacements[assertion.expression.operator] ?: return@report
-                    return context.report(
-                        issue = KOTLIN_EQUALITY_ASSERTION_ISSUE,
-                        scope = node,
-                        location = context.getLocation(node),
-                        message = "Replace boolean assertion with `${replacement.substringAfterLast(".")}`",
-                        quickfixData = fix()
-                            .replace().all().with(
-                                buildString {
-                                    append(replacement.substringAfterLast("."))
-                                    append("(expected = ").append(assertion.expression.rightOperand.asSourceString())
-                                    append(", actual = ").append(assertion.expression.leftOperand.asSourceString())
-                                    if (assertion.message != null) append(", message = ").append(assertion.message.asSourceString())
-                                    append(")")
-                                },
-                            )
-                            .shortenNames(true).reformat(true)
-                            .imports(replacement)
-                            .autoFix().build(),
-                    )
-                }
+                checkJunitAssertion(context, node, psiMethod)
+                checkKotlinAssert(context, node, psiMethod)
+                checkTypeAssertion(context, node, psiMethod)
+                checkEqualityAssertion(context, node, psiMethod)
             }
         }
     }
 
+    private fun checkJunitAssertion(context: JavaContext, node: UCallExpression, psiMethod: PsiMethod) {
+        for (assertionClass in setOf("org.junit.Assert", "junit.framework.Assert")) {
+            if (!context.evaluator.isMemberInClass(psiMethod, assertionClass)) continue
+            context.report(
+                issue = JUNIT_ASSERTION_ISSUE,
+                scope = node,
+                location = context.getLocation(node),
+                message = "Use `kotlin.test` assertion",
+            )
+        }
+    }
+
+    private fun checkKotlinAssert(context: JavaContext, node: UCallExpression, psiMethod: PsiMethod) {
+        if (psiMethod.name != "assert") return
+        if (psiMethod.containingClass?.qualifiedName?.startsWith("kotlin.") != true) return
+        context.report(
+            issue = KOTLIN_ASSERT_ISSUE,
+            scope = node,
+            location = context.getLocation(node),
+            message = "Use `kotlin.test` assertion",
+        )
+    }
+
+    @Suppress("UnstableApiUsage")
+    private fun checkTypeAssertion(context: JavaContext, node: UCallExpression, psiMethod: PsiMethod) {
+        if (psiMethod.name != "assertFalse" && psiMethod.name != "assertTrue") return
+        val assertion = context.computeBooleanAssertion(node, psiMethod)
+        if (assertion.expression !is UBinaryExpressionWithType) return
+        if (assertion.expression.operationKind !is InstanceCheck) return
+        val replacement = when (psiMethod.name) {
+            "assertFalse" -> when (assertion.expression.operationKind) {
+                InstanceCheck.INSTANCE -> "kotlin.test.assertIsNot"
+                NEGATED_INSTANCE_CHECK -> "kotlin.test.assertIs"
+                else -> return
+            }
+
+            "assertTrue" -> when (assertion.expression.operationKind) {
+                InstanceCheck.INSTANCE -> "kotlin.test.assertIs"
+                NEGATED_INSTANCE_CHECK -> "kotlin.test.assertIsNot"
+                else -> return
+            }
+
+            else -> return
+        }
+        context.report(
+            issue = KOTLIN_TYPE_ASSERTION_ISSUE,
+            scope = node,
+            location = context.getLocation(node),
+            message = "Replace boolean assertion with `${replacement.substringAfterLast(".")}`",
+            quickfixData = fix()
+                .replace().all()
+                .with(
+                    buildString {
+                        append(replacement.substringAfterLast("."))
+                        append("<").append(assertion.expression.type.canonicalText).append(">")
+                        append("(")
+                        append(assertion.expression.operand.asSourceString())
+                        if (assertion.message != null) append(", message = ").append(assertion.message.asSourceString())
+                        append(")")
+                    },
+                )
+                .imports(replacement)
+                .shortenNames(true).reformat(true).autoFix()
+                .build(),
+        )
+    }
+
+    private fun checkEqualityAssertion(context: JavaContext, node: UCallExpression, psiMethod: PsiMethod) {
+        val assertion = context.computeBooleanAssertion(node, psiMethod)
+        if (assertion.expression !is UBinaryExpression) return
+        val replacement = when {
+            assertion.expression.leftOperand.isNullLiteral() -> UnaryNull(
+                fqfn = psiMethod.simplifiedNullableAssertion(assertion.expression.operator) ?: return,
+                actual = assertion.expression.rightOperand,
+            )
+
+            assertion.expression.rightOperand.isNullLiteral() -> UnaryNull(
+                fqfn = psiMethod.simplifiedNullableAssertion(assertion.expression.operator) ?: return,
+                actual = assertion.expression.leftOperand,
+            )
+
+            else -> Binary(
+                fqfn = psiMethod.simplifiedBinaryAssertion(assertion.expression.operator) ?: return,
+                expected = assertion.expression.rightOperand,
+                actual = assertion.expression.leftOperand,
+            )
+        }
+
+        return context.report(
+            issue = KOTLIN_EQUALITY_ASSERTION_ISSUE,
+            scope = node,
+            location = context.getLocation(node),
+            message = "Replace boolean assertion with `${replacement.fqfn.substringAfterLast(".")}`",
+            quickfixData = fix()
+                .replace().all().with(
+                    buildString {
+                        append(replacement.fqfn.substringAfterLast("."))
+                        when (replacement) {
+                            is UnaryNull -> {
+                                append("(").append(replacement.actual.asSourceString())
+                            }
+
+                            is Binary -> {
+                                val param = if ("assertNot" in replacement.fqfn) "illegal" else "expected"
+                                append("($param = ").append(replacement.expected.asSourceString())
+                                append(", actual = ").append(replacement.actual.asSourceString())
+                            }
+                        }
+                        if (assertion.message != null) append(", message = ").append(assertion.message.asSourceString())
+                        append(")")
+                    },
+                )
+                .imports(replacement.fqfn)
+                .shortenNames(true).reformat(true).autoFix()
+                .build(),
+        )
+    }
+
+    private fun PsiMethod.simplifiedNullableAssertion(operator: UastBinaryOperator): String? = when (name) {
+        "assertTrue" -> when (operator) {
+            EQUALS -> "kotlin.test.assertNull"
+            NOT_EQUALS -> "kotlin.test.assertNotNull"
+            IDENTITY_EQUALS -> "kotlin.test.assertNull"
+            IDENTITY_NOT_EQUALS -> "kotlin.test.assertNotNull"
+            else -> null
+        }
+
+        "assertFalse" -> when (operator) {
+            EQUALS -> "kotlin.test.assertNotNull"
+            NOT_EQUALS -> "kotlin.test.assertNull"
+            IDENTITY_EQUALS -> "kotlin.test.assertNotNull"
+            IDENTITY_NOT_EQUALS -> "kotlin.test.assertNull"
+            else -> null
+        }
+
+        else -> null
+    }
+
+    private fun PsiMethod.simplifiedBinaryAssertion(operator: UastBinaryOperator): String? = when (name) {
+        "assertTrue" -> when (operator) {
+            EQUALS -> "kotlin.test.assertEquals"
+            NOT_EQUALS -> "kotlin.test.assertNotEquals"
+            IDENTITY_EQUALS -> "kotlin.test.assertSame"
+            IDENTITY_NOT_EQUALS -> "kotlin.test.assertNotSame"
+            else -> null
+        }
+
+        "assertFalse" -> when (operator) {
+            EQUALS -> "kotlin.test.assertNotEquals"
+            NOT_EQUALS -> "kotlin.test.assertEquals"
+            IDENTITY_EQUALS -> "kotlin.test.assertNotSame"
+            IDENTITY_NOT_EQUALS -> "kotlin.test.assertSame"
+            else -> null
+        }
+
+        else -> null
+    }
+
+    public sealed class EqualityAssertionReplacement {
+        public abstract val fqfn: String
+
+        public class UnaryNull(override val fqfn: String, public val actual: UExpression) : EqualityAssertionReplacement()
+        public class Binary(override val fqfn: String, public val expected: UExpression, public val actual: UExpression) :
+            EqualityAssertionReplacement()
+    }
+
     private data class BooleanAssertion(val expression: UExpression?, val message: UExpression?)
 
+    @OptIn(UnsafeCastFunction::class)
     private fun JavaContext.computeBooleanAssertion(call: UCallExpression, method: PsiMethod) = evaluator
         .computeArgumentMapping(call, method)
         .entries.associateBy(keySelector = { it.value.name }, valueTransform = { it.key })
@@ -141,7 +247,7 @@ public class AssertionsDetector : Detector(), Detector.UastScanner {
             explanation = "Prefer using `kotlin.test` assertions instead of JUnit's in Kotlin unit tests.",
             category = Category.CORRECTNESS,
             priority = 5,
-            severity = Severity.WARNING,
+            severity = Severity.ERROR,
             implementation = implementation<AssertionsDetector>(EnumSet.of(JAVA_FILE, TEST_SOURCES)),
         )
 
@@ -164,10 +270,6 @@ public class AssertionsDetector : Detector(), Detector.UastScanner {
             severity = Severity.ERROR,
             implementation = implementation<AssertionsDetector>(EnumSet.of(JAVA_FILE, TEST_SOURCES)),
         )
-        private val typeAssertionMap = mapOf(
-            "assertTrue" to "kotlin.test.assertIs",
-            "assertFalse" to "kotlin.test.assertIsNot",
-        )
 
         /**
          * Based on Kotlin's [`ReplaceAssertBooleanWithAssertEquality`](https://www.jetbrains.com/help/inspectopedia/ReplaceAssertBooleanWithAssertEquality.html), but smarter!
@@ -181,20 +283,6 @@ public class AssertionsDetector : Detector(), Detector.UastScanner {
             severity = Severity.ERROR,
             implementation = implementation<AssertionsDetector>(EnumSet.of(JAVA_FILE, TEST_SOURCES)),
         )
-        private val equalityAssertionMap = mapOf(
-            "assertTrue" to mapOf(
-                EQUALS to "kotlin.test.assertEquals",
-                NOT_EQUALS to "kotlin.test.assertNotEquals",
-                IDENTITY_EQUALS to "kotlin.test.assertSame",
-                IDENTITY_NOT_EQUALS to "kotlin.test.assertNotSame",
-            ),
-            "assertFalse" to mapOf(
-                EQUALS to "kotlin.test.assertNotEquals",
-                NOT_EQUALS to "kotlin.test.assertEquals",
-                IDENTITY_EQUALS to "kotlin.test.assertNotSame",
-                IDENTITY_NOT_EQUALS to "kotlin.test.assertSame",
-            ),
-        )
-    }
 
+    }
 }

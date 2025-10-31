@@ -67,6 +67,7 @@
   - Prefer using `kotlin.test` assertions instead of JUnit's in Kotlin unit tests.
   - Prefer using `kotlin.test` assertions instead of `assert` in unit tests. Its execution requires a specific JVM option to be enabled on the JVM.
   - Prefer using `assertIs` and `assertIsNot` assertions when checking for types instead of boolean assertions.
+  - Prefer using `assertNull`/`assertNotNull` assertions when checking for null/non-null values instead of equality assertions.
   - Prefer using `assertEquals`/`assertSame` and `assertNotEquals`/`assertNotSame` assertions when checking for equality instead of boolean assertions.
 
 </details>
