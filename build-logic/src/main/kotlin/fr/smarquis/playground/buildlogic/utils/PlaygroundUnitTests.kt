@@ -1,11 +1,16 @@
 package fr.smarquis.playground.buildlogic.utils
 
+import com.android.build.api.dsl.TestedExtension
 import fr.smarquis.playground.buildlogic.PlaygroundProperties
+import fr.smarquis.playground.buildlogic.androidApplication
+import fr.smarquis.playground.buildlogic.androidLibrary
 import fr.smarquis.playground.buildlogic.capitalized
 import fr.smarquis.playground.buildlogic.dsl.apply
 import fr.smarquis.playground.buildlogic.dsl.assign
 import fr.smarquis.playground.buildlogic.dsl.configure
 import fr.smarquis.playground.buildlogic.dsl.withType
+import fr.smarquis.playground.buildlogic.isAndroidApplication
+import fr.smarquis.playground.buildlogic.isAndroidLibrary
 import fr.smarquis.playground.buildlogic.isAndroidTest
 import fr.smarquis.playground.buildlogic.isCi
 import fr.smarquis.playground.buildlogic.libs
@@ -58,9 +63,9 @@ internal object PlaygroundUnitTests {
     }
 
     private fun Project.createAndroidCiUnitTestTask() {
-        val variant = playground().ciUnitTestVariant.get().capitalized()
-        val variantUnitTestTaskName = "test${variant}UnitTest"
-        val variantCompileUnitTestTaskName = "compile${variant}UnitTestSources"
+        val variant = playground().ciUnitTestVariant.get()
+        val variantUnitTestTaskName = "test${variant.capitalized()}UnitTest"
+        val variantCompileUnitTestTaskName = "compile${variant.capitalized()}UnitTestSources"
         logger.debug("{} Creating CI unit test tasks for project '{}' and variant '{}'", LOG, this, variant)
         val ciUnitTest = registerCiUnitTestTask(
             name = CI_UNIT_TEST_TASK_NAME,
@@ -71,6 +76,13 @@ internal object PlaygroundUnitTests {
             name = COMPILE_CI_UNIT_TEST_NAME,
             dependencyTaskName = variantCompileUnitTestTaskName,
         )
+        val configureTestBuildType = fun TestedExtension.() {
+            testBuildType = playground().ciUnitTestVariant.get()
+        }
+        when {
+            isAndroidApplication -> androidApplication(configureTestBuildType)
+            isAndroidLibrary -> androidLibrary(configureTestBuildType)
+        }
     }
 
     private fun Project.registerCiUnitTestTask(
