@@ -1,12 +1,10 @@
 package fr.smarquis.playground.app
 
 import android.app.Application
-import android.content.Context
 import android.content.pm.ApplicationInfo.FLAG_DEBUGGABLE
 import androidx.lifecycle.ProcessLifecycleOwner
 import androidx.lifecycle.lifecycleScope
 import dagger.hilt.android.HiltAndroidApp
-import dagger.hilt.android.qualifiers.ApplicationContext
 import fr.smarquis.playground.core.android.ProfileVerifierLogger
 import fr.smarquis.playground.core.android.StrictMode
 import fr.smarquis.playground.core.android.UncaughtExceptionHandler
@@ -18,11 +16,6 @@ import javax.inject.Inject
 
 @HiltAndroidApp
 public class PlaygroundApplication : Application() {
-
-    // FIXME: https://github.com/google/dagger/issues/3601
-    @Inject
-    @ApplicationContext
-    public lateinit var context: Context
 
     @Inject
     public lateinit var settingsSource: SettingsSource
