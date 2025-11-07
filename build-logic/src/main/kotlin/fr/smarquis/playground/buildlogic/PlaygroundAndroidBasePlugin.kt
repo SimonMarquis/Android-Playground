@@ -27,19 +27,16 @@ internal class PlaygroundAndroidBasePlugin : Plugin<Project> {
             defaultConfig.minSdk = versions.minSdk.toString().toInt()
             defaultConfig.testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
-            testOptions {
-                animationsDisabled = true
-            }
+            testOptions.animationsDisabled = true
 
             packaging.resources {
                 excludes += "/META-INF/{AL2.0,LGPL2.1}"
             }
 
-            compileOptions {
-                sourceCompatibility = JavaVersion.VERSION_11
-                targetCompatibility = JavaVersion.VERSION_11
-                isCoreLibraryDesugaringEnabled = true
-            }
+            compileOptions.sourceCompatibility = JavaVersion.VERSION_11
+            compileOptions.targetCompatibility = JavaVersion.VERSION_11
+            compileOptions.isCoreLibraryDesugaringEnabled = true
+
             buildTypes.configureEach {
                 vcsInfo.include = false
             }
