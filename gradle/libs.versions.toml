@@ -7,7 +7,7 @@ targetSdk = "36"
 compileSdk = "36"
 
 agp = "8.13.0"
-android-tools = "31.13.0"
+android-tools = "31.13.1"
 androidx-benchmark = "1.4.1"
 androidx-navigation = "2.9.6"
 hilt = "2.57.2"
