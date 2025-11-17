@@ -11,7 +11,7 @@ android-tools = "31.13.2"
 androidx-benchmark = "1.4.1"
 androidx-lifecycle = "2.10.0"
 hilt = "2.57.2"
-kotlin = "2.3.0"
+kotlin = "2.3.20-Beta1"
 navigation3 = "1.0.0"
 paparazzi = "2.0.0-alpha02"
 

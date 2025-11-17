@@ -9,10 +9,10 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOf
 import kotlin.experimental.ExperimentalTypeInference
 
-public class SimpleLicensesRepository(
+class SimpleLicensesRepository(
     override val licenses: Flow<ImmutableList<ArtifactDetail>>
 ) : LicensesRepository {
     constructor(licenses: ImmutableList<ArtifactDetail>):this(flowOf(licenses))
     @OptIn(ExperimentalTypeInference::class)
-    constructor(@BuilderInference block: suspend FlowCollector<ImmutableList<ArtifactDetail>>.() -> Unit):this(flow(block))
+    constructor(block: suspend FlowCollector<ImmutableList<ArtifactDetail>>.() -> Unit):this(flow(block))
 }

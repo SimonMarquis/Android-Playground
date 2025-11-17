@@ -47,10 +47,10 @@ class HomeViewModelTest {
         vm.rolls.test {
             assertThat(awaitItem()).isSameInstanceAs(initial)
 
-            vm.roll()
+            val _ = vm.roll()
             assertThat(awaitItem()).isEqualTo(persistentListOf(ONE, TWO, THREE, FOUR))
 
-            vm.reset()
+            val _ = vm.reset()
             assertThat(awaitItem()).isEmpty()
             ensureAllEventsConsumed()
         }
@@ -67,7 +67,7 @@ class HomeViewModelTest {
         /* When / Then */
         vm.settings.test {
             assertThat(awaitItem()).isSameInstanceAs(initial)
-            vm.update(new)
+            val _ = vm.update(new)
             assertThat(awaitItem()).isSameInstanceAs(new)
             ensureAllEventsConsumed()
         }
