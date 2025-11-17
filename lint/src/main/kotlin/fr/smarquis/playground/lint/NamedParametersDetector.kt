@@ -70,7 +70,7 @@ public class NamedParametersDetector : Detector(), SourceCodeScanner {
         val arguments = evaluator.computeArgumentMapping(node, method)
         val names = arguments.values.associateBy { it.name }
         arguments.forEach { (expression, value) ->
-            expression.safeCast<USimpleNameReferenceExpression>()?.identifier
+            val _ = expression.safeCast<USimpleNameReferenceExpression>()?.identifier
                 ?.let(names::get) // Search matching parameter
                 ?.takeUnless { it.parameterIndex() == value.parameterIndex() }
                 ?: return@forEach
