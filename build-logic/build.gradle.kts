@@ -34,7 +34,6 @@ assignment {
 dependencies {
     compileOnly(plugin(libs.plugins.android.cacheFix))
     compileOnly(plugin(libs.plugins.androidx.baselineprofile))
-    compileOnly(plugin(libs.plugins.androidx.navigation))
     compileOnly(plugin(libs.plugins.artifactsSizeReport))
     compileOnly(plugin(libs.plugins.binaryCompatibilityValidator))
     compileOnly(plugin(libs.plugins.develocity))

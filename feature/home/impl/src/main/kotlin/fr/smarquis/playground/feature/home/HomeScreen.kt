@@ -69,8 +69,10 @@ import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import fr.smarquis.playground.core.di.DisplayMetrics
 import fr.smarquis.playground.core.ui.PlaygroundTheme
 import fr.smarquis.playground.core.ui.asAnnotatedString
+import fr.smarquis.playground.core.utils.navigation.BackStack
 import fr.smarquis.playground.domain.dice.Dice
 import fr.smarquis.playground.domain.settings.Settings
+import fr.smarquis.playground.feature.fr.smarquis.playground.feature.licenses.Licenses
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.datetime.LocalDateTime
@@ -78,6 +80,13 @@ import kotlin.text.Typography.times
 
 @Composable
 internal fun HomeScreen(
+    backStack: BackStack,
+) = HomeScreen(
+    navigateToLicenses = { backStack.add(Licenses) },
+)
+
+@Composable
+private fun HomeScreen(
     navigateToLicenses: () -> Unit,
     modifier: Modifier = Modifier,
     viewModel: HomeViewModel = hiltViewModel(),
@@ -99,7 +108,7 @@ internal fun HomeScreen(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-internal fun HomeScreenContent(
+private fun HomeScreenContent(
     navigateToLicenses: () -> Unit,
     rolls: ImmutableList<Dice>,
     settings: Settings,
@@ -135,7 +144,7 @@ internal fun HomeScreenContent(
                         DropdownMenu(expanded = expanded, onDismissRequest = { expanded = false }) {
                             DropdownMenuItem(
                                 text = { Text(stringResource(R.string.playground_feature_home_oss_licenses)) },
-                                onClick = { expanded = false ; navigateToLicenses() },
+                                onClick = { expanded = false; navigateToLicenses() },
                             )
                         }
                     }
