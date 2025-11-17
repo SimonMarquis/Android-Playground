@@ -97,8 +97,16 @@ internal inline fun <reified T : KotlinBaseExtension> Project.configureKotlin(
         }.apply {
             jvmTarget = JvmTarget.JVM_11
             allWarningsAsErrors = properties.warningsAsErrors
-            // https://kotlinlang.org/docs/whatsnew22.html#new-defaulting-rules-for-use-site-annotation-targets
-            freeCompilerArgs.add("-Xannotation-default-target=param-property")
+            freeCompilerArgs.addAll(
+                // https://kotlinlang.org/docs/whatsnew22.html#new-defaulting-rules-for-use-site-annotation-targets
+                "-Xannotation-default-target=param-property",
+                // https://kotlinlang.org/docs/whatsnew-eap.html#unused-return-value-checker
+                "-Xreturn-value-checker=full",
+                // https://kotlinlang.org/docs/whatsnew2220.html#data-flow-based-exhaustiveness-checks-for-when-expressions
+                "-Xdata-flow-based-exhaustiveness",
+                // https://kotlinlang.org/docs/whatsnew2220.html#support-for-reified-types-in-catch-clauses
+                "-Xallow-reified-type-in-catch",
+            )
         }
         explicitApi()
         configure()
