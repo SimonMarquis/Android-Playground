@@ -5,6 +5,7 @@ plugins {
 }
 
 dependencies {
+    api(libs.androidx.navigation3.runtime)
     api(libs.kotlinx.datetime)
     implementation(libs.kotlinx.coroutines.core)
     implementation(projects.core.di)

@@ -49,6 +49,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
@@ -65,6 +66,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.navigation3.runtime.NavKey
 import app.cash.licensee.ArtifactDetail
 import app.cash.licensee.SpdxLicense
 import fr.smarquis.playground.core.ui.PlaygroundTheme
@@ -77,6 +79,13 @@ import kotlin.text.Typography.bullet
 
 @Composable
 internal fun LicensesScreen(
+    backstack: SnapshotStateList<NavKey>,
+) = LicensesScreen(
+    navigateBack = { backstack.removeLastOrNull() },
+)
+
+@Composable
+private fun LicensesScreen(
     modifier: Modifier = Modifier,
     viewModel: LicensesViewModel = hiltViewModel(),
     navigateBack: () -> Unit,
@@ -91,7 +100,7 @@ internal fun LicensesScreen(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-internal fun LicensesScreen(
+private fun LicensesScreen(
     uiState: UiState,
     modifier: Modifier = Modifier,
     navigateBack: () -> Unit,

@@ -1,31 +1,16 @@
 plugins {
-    alias(libs.plugins.playground.android.library)
-    alias(libs.plugins.playground.android.compose)
-    alias(libs.plugins.playground.screenshots)
-    alias(libs.plugins.androidx.navigation)
+    alias(libs.plugins.playground.kotlin.jvm)
     alias(libs.plugins.kotlin.serialization)
-    alias(libs.plugins.ksp)
-    alias(libs.plugins.hilt)
 }
 
 dependencies {
-    api(projects.domain.dice)
-    api(projects.domain.settings)
-    implementation(projects.core.di)
-    implementation(projects.core.ui)
-    implementation(libs.androidx.compose.material.icons)
-    implementation(libs.androidx.navigation)
-    implementation(libs.androidx.hilt.lifecycle.viewmodel.compose)
-    implementation(libs.hilt.android)
-    implementation(libs.kotlinx.serialization.json)
-    implementation(libs.kotlinx.datetime)
-    ksp(libs.hilt.compiler)
-    ksp(libs.hilt.compiler.android)
-    testImplementation(libs.kotlinx.coroutines.test)
-    testImplementation(libs.turbine)
-    testImplementation(libs.testParameterInjector)
-    testImplementation(testFixtures(projects.core.ui))
-    testImplementation(testFixtures(projects.core.utils))
-    testImplementation(testFixtures(projects.domain.dice))
-    testImplementation(testFixtures(projects.domain.settings))
+    implementation(libs.androidx.navigation3.runtime)
+}
+
+kotlin {
+    @OptIn(org.jetbrains.kotlin.gradle.dsl.abi.ExperimentalAbiValidation::class)
+    abiValidation {
+        // Use the set() function to ensure compatibility with older Gradle versions
+        enabled.set(true)
+    }
 }
