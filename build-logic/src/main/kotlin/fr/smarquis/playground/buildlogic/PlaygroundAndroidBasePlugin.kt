@@ -1,7 +1,6 @@
 package fr.smarquis.playground.buildlogic
 
 import fr.smarquis.playground.buildlogic.dsl.apply
-import io.github.cdsap.agp.artifacts.AndroidArtifactsInfoPlugin
 import org.gradle.api.JavaVersion
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -12,7 +11,7 @@ internal class PlaygroundAndroidBasePlugin : Plugin<Project> {
     override fun apply(target: Project): Unit = with(target) {
         apply(plugin = "org.jetbrains.kotlin.android")
         apply<PlaygroundBasePlugin>()
-        apply<AndroidArtifactsInfoPlugin>()
+        // apply<AndroidArtifactsInfoPlugin>()
         configureKotlin<KotlinAndroidProjectExtension>()
 
         android {
