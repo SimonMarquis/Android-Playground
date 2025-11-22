@@ -10,7 +10,6 @@ import org.jetbrains.kotlin.gradle.dsl.KotlinAndroidProjectExtension
 internal class PlaygroundAndroidBasePlugin : Plugin<Project> {
 
     override fun apply(target: Project): Unit = with(target) {
-        apply(plugin = "org.jetbrains.kotlin.android")
         apply<PlaygroundBasePlugin>()
         apply<AndroidArtifactsInfoPlugin>()
         configureKotlin<KotlinAndroidProjectExtension>()
@@ -24,26 +23,19 @@ internal class PlaygroundAndroidBasePlugin : Plugin<Project> {
                 version = release(versions.compileSdk.toString().toInt())
             }
 
-            defaultConfig {
-                minSdk = versions.minSdk.toString().toInt()
-                testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+            defaultConfig.minSdk = versions.minSdk.toString().toInt()
+            defaultConfig.testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+            testOptions.animationsDisabled = true
+
+            packaging.resources {
+                excludes += "/META-INF/{AL2.0,LGPL2.1}"
             }
 
-            testOptions {
-                animationsDisabled = true
-            }
+            compileOptions.sourceCompatibility = JavaVersion.VERSION_11
+            compileOptions.targetCompatibility = JavaVersion.VERSION_11
+            compileOptions.isCoreLibraryDesugaringEnabled = true
 
-            packaging {
-                resources {
-                    excludes += "/META-INF/{AL2.0,LGPL2.1}"
-                }
-            }
-
-            compileOptions {
-                sourceCompatibility = JavaVersion.VERSION_11
-                targetCompatibility = JavaVersion.VERSION_11
-                isCoreLibraryDesugaringEnabled = true
-            }
             buildTypes.configureEach {
                 vcsInfo.include = false
             }
