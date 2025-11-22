@@ -15,10 +15,9 @@ internal class PlaygroundAndroidBasePlugin : Plugin<Project> {
         configureKotlin<KotlinAndroidProjectExtension>()
 
         android {
-            namespace = "fr.smarquis.playground." +
-                path.split("""\W""".toRegex()).drop(1).distinct().joinToString(separator = ".").lowercase()
-            resourcePrefix = "playground_" +
-                path.split("""\W""".toRegex()).drop(1).distinct().joinToString(separator = "_").lowercase() + "_"
+            val parts = path.split("""\W""".toRegex()).drop(1).distinct().dropLastWhile { it == "impl" }
+            namespace = "fr.smarquis.playground." + parts.joinToString(separator = ".").lowercase()
+            resourcePrefix = "playground_" + parts.joinToString(separator = "_").lowercase() + "_"
 
             compileSdk {
                 version = release(versions.compileSdk.toString().toInt())
