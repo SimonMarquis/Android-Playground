@@ -46,6 +46,7 @@ dependencies {
     compileOnly(plugin(libs.plugins.ksp))
     compileOnly(plugin(libs.plugins.licensee))
     compileOnly(plugin(libs.plugins.paparazzi))
+    implementation(plugin(libs.plugins.dagp))
 
     compileOnly(libs.android.gradle.api)
     compileOnly(libs.android.tools.common)
