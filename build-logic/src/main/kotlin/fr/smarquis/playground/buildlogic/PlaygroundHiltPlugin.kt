@@ -2,6 +2,7 @@ package fr.smarquis.playground.buildlogic
 
 import com.google.devtools.ksp.gradle.KspExtension
 import dagger.hilt.android.plugin.HiltExtension
+import dagger.hilt.android.plugin.HiltGradlePlugin
 import fr.smarquis.playground.buildlogic.dsl.apply
 import fr.smarquis.playground.buildlogic.dsl.configure
 import fr.smarquis.playground.buildlogic.dsl.withType
@@ -15,7 +16,7 @@ internal class PlaygroundHiltPlugin : Plugin<Project> {
         apply<PlaygroundKspPlugin>()
 
         pluginManager.withPlugin("com.android.base") {
-            apply(plugin = "com.google.dagger.hilt.android")
+            apply<HiltGradlePlugin>()
             extensions.configure<HiltExtension> {
                 enableAggregatingTask = true
             }
