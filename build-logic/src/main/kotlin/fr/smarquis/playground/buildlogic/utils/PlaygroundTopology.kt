@@ -19,10 +19,14 @@ import org.gradle.api.provider.Property
 import org.gradle.api.provider.SetProperty
 import org.gradle.api.tasks.CacheableTask
 import org.gradle.api.tasks.Input
+import org.gradle.api.tasks.InputFile
 import org.gradle.api.tasks.OutputFile
+import org.gradle.api.tasks.PathSensitive
+import org.gradle.api.tasks.PathSensitivity.NONE
 import org.gradle.api.tasks.TaskAction
 import org.gradle.language.base.plugins.LifecycleBasePlugin.VERIFICATION_GROUP
 import org.intellij.lang.annotations.Language
+import java.io.File
 import java.lang.System.lineSeparator
 import javax.inject.Inject
 
@@ -50,6 +54,7 @@ internal object PlaygroundTopology {
         logger.debug("{} Creating $TASK_NAME task for project '{}'", LOG, this)
         tasks.register<CheckTopologyTask>(TASK_NAME) {
             projectPath = isolated.path
+            projectBuildFile = buildFile
             dependencies = configurations.flatMap { it.dependencies.withType<ProjectDependency>().map { it.path } }.toSet()
             output = layout.buildDirectory.file("intermediates/$name/topology.txt")
         }.also {
@@ -65,6 +70,10 @@ internal abstract class CheckTopologyTask : DefaultTask() {
 
     @get:Input
     abstract val projectPath: Property<String>
+
+    @get:InputFile
+    @get:PathSensitive(NONE)
+    abstract val projectBuildFile: Property<File>
 
     @get:Input
     abstract val dependencies: SetProperty<String>
@@ -96,7 +105,7 @@ internal abstract class CheckTopologyTask : DefaultTask() {
             val exception = GradleException("Missing topology rule for project ${projectPath.get()}!")
             problems.reporter.throwing(exception, problemId) {
                 contextualLabel(exception.message.orEmpty())
-                fileLocation(project.buildFile.absolutePath)
+                fileLocation(projectBuildFile.get().absolutePath)
                 solution(
                     """
                     Make sure the project path is following the conventions, or update the topology rules in ${PlaygroundTopology::class}.
@@ -116,7 +125,7 @@ internal abstract class CheckTopologyTask : DefaultTask() {
             val exception = GradleException("Topology rule violations for project ${projectPath.get()}! $violations")
             problems.reporter.throwing(exception, problemId) {
                 contextualLabel(exception.message.orEmpty())
-                fileLocation(project.buildFile.absolutePath)
+                fileLocation(projectBuildFile.get().absolutePath)
                 solution(
                     """
                     Fix the project dependencies, or update the topology rules in ${PlaygroundTopology::class}.
