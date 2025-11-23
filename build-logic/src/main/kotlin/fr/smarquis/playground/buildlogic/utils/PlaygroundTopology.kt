@@ -26,7 +26,6 @@ import org.gradle.api.tasks.PathSensitivity.NONE
 import org.gradle.api.tasks.TaskAction
 import org.gradle.language.base.plugins.LifecycleBasePlugin.VERIFICATION_GROUP
 import org.intellij.lang.annotations.Language
-import java.io.File
 import java.lang.System.lineSeparator
 import javax.inject.Inject
 
@@ -54,7 +53,7 @@ internal object PlaygroundTopology {
         logger.debug("{} Creating $TASK_NAME task for project '{}'", LOG, this)
         tasks.register<CheckTopologyTask>(TASK_NAME) {
             projectPath = isolated.path
-            projectBuildFile = buildFile
+            projectBuildFile.set(buildFile)
             dependencies = configurations.flatMap { it.dependencies.withType<ProjectDependency>().map { it.path } }.toSet()
             output = layout.buildDirectory.file("intermediates/$name/topology.txt")
         }.also {
@@ -73,7 +72,7 @@ internal abstract class CheckTopologyTask : DefaultTask() {
 
     @get:InputFile
     @get:PathSensitive(NONE)
-    abstract val projectBuildFile: Property<File>
+    abstract val projectBuildFile: RegularFileProperty
 
     @get:Input
     abstract val dependencies: SetProperty<String>
@@ -105,7 +104,7 @@ internal abstract class CheckTopologyTask : DefaultTask() {
             val exception = GradleException("Missing topology rule for project ${projectPath.get()}!")
             problems.reporter.throwing(exception, problemId) {
                 contextualLabel(exception.message.orEmpty())
-                fileLocation(projectBuildFile.get().absolutePath)
+                fileLocation(projectBuildFile.asFile.get().absolutePath)
                 solution(
                     """
                     Make sure the project path is following the conventions, or update the topology rules in ${PlaygroundTopology::class}.
@@ -125,7 +124,7 @@ internal abstract class CheckTopologyTask : DefaultTask() {
             val exception = GradleException("Topology rule violations for project ${projectPath.get()}! $violations")
             problems.reporter.throwing(exception, problemId) {
                 contextualLabel(exception.message.orEmpty())
-                fileLocation(projectBuildFile.get().absolutePath)
+                fileLocation(projectBuildFile.asFile.get().absolutePath)
                 solution(
                     """
                     Fix the project dependencies, or update the topology rules in ${PlaygroundTopology::class}.
