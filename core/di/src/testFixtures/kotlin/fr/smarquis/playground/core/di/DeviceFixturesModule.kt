@@ -11,7 +11,7 @@ import fr.smarquis.playground.core.di.qualifier.DeviceSdkInt
 
 @Module
 @InstallIn(SingletonComponent::class)
-public object DeviceFixturesModule {
+object DeviceFixturesModule {
     @Provides @DeviceManufacturer fun providesDeviceManufacturer(): String = "Test"
     @Provides @DeviceModel fun providesDeviceModel(): String = "Test"
     @Provides @DeviceProduct fun providesDeviceProduct(): String = "Test"
