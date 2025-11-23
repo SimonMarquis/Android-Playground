@@ -2,6 +2,7 @@ package fr.smarquis.playground.buildlogic
 
 import fr.smarquis.playground.buildlogic.dsl.apply
 import fr.smarquis.playground.buildlogic.utils.PlaygroundBadging
+import fr.smarquis.playground.buildlogic.utils.PlaygroundDependencyAnalysis
 import fr.smarquis.playground.buildlogic.utils.PlaygroundDependencyLocking
 import fr.smarquis.playground.buildlogic.utils.PlaygroundGlobalCi
 import fr.smarquis.playground.buildlogic.utils.PlaygroundGraph
@@ -30,6 +31,7 @@ internal class PlaygroundBasePlugin : Plugin<Project> {
         PlaygroundPlatforms.configureProject(target)
         PlaygroundTopology.configureProject(target)
         PlaygroundGraph.configureProject(target)
+        PlaygroundDependencyAnalysis.configureProject(target)
     }
 
 }

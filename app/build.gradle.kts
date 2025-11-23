@@ -18,8 +18,6 @@ android {
 dependencies {
     baselineProfile(projects.profiling)
 
-    implementation(libs.androidx.core)
-    implementation(libs.androidx.datastore)
     implementation(libs.androidx.navigation)
     implementation(libs.androidx.lifecycle.process)
     implementation(libs.androidx.profileinstaller)
@@ -33,6 +31,7 @@ dependencies {
     implementation(projects.core.di)
     implementation(projects.core.ui)
     implementation(projects.domain.dice)
+    implementation(projects.domain.licenses)
     implementation(projects.domain.settings)
     implementation(projects.data.dice)
     implementation(projects.data.licenses)
