@@ -36,6 +36,7 @@
             <trusting group="androidx.lifecycle"/>
             <trusting group="androidx.lint" name="lint-gradle" version="1.0.0-alpha04"/>
             <trusting group="androidx.lint" name="lint-gradle" version="1.0.0-alpha05"/>
+            <trusting group="androidx.navigation3"/>
             <trusting group="androidx.navigationevent"/>
             <trusting group="androidx.savedstate"/>
             <trusting group="^androidx[.]compose($|([.].*))" regex="true"/>

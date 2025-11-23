@@ -37,6 +37,7 @@ internal object PlaygroundTopology {
         ":core:.*".rules(":core:.*"),
         ":data:.*".rules(":domain:.*", ":core:.*"),
         ":feature:.*".rules(":domain:.*", ":core:.*"),
+        ":feature:[^:]+:impl".rules(":feature:[^:]+$"),
         ":profiling".rules(":app"),
     )
 
