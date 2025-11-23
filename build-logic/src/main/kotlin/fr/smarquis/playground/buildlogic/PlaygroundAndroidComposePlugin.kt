@@ -6,12 +6,14 @@ import fr.smarquis.playground.buildlogic.dsl.configure
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.jetbrains.kotlin.compose.compiler.gradle.ComposeCompilerGradlePluginExtension
+import org.jetbrains.kotlin.compose.compiler.gradle.ComposeCompilerGradleSubplugin
+import org.jetbrains.kotlin.gradle.plugin.KotlinAndroidPluginWrapper
 
 internal class PlaygroundAndroidComposePlugin : Plugin<Project> {
 
     override fun apply(target: Project): Unit = with(target) {
-        apply(plugin = "org.jetbrains.kotlin.android")
-        apply(plugin = "org.jetbrains.kotlin.plugin.compose")
+        apply<KotlinAndroidPluginWrapper>()
+        apply<ComposeCompilerGradleSubplugin>()
         apply<PlaygroundAndroidBasePlugin>()
 
         android {

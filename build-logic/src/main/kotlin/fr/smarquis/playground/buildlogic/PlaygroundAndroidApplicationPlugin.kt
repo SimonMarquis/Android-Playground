@@ -4,6 +4,7 @@ import app.cash.licensee.LicenseeExtension
 import app.cash.licensee.LicenseePlugin
 import app.cash.licensee.SpdxId
 import com.android.build.api.dsl.ApkSigningConfig
+import com.android.build.gradle.AppPlugin
 import fr.smarquis.playground.buildlogic.dsl.apply
 import fr.smarquis.playground.buildlogic.dsl.assign
 import fr.smarquis.playground.buildlogic.dsl.configure
@@ -18,7 +19,7 @@ import org.gradle.api.Project
 internal class PlaygroundAndroidApplicationPlugin : Plugin<Project> {
 
     override fun apply(target: Project) = with(target) {
-        apply(plugin = "com.android.application")
+        apply<AppPlugin>()
         apply<PlaygroundAndroidBasePlugin>()
         apply<LicenseePlugin>()
 
