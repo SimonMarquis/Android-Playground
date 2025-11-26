@@ -9,31 +9,33 @@
 
 #### 🐘 Gradle
 
-| Task                                                                      | Description                                                                                 |
-|---------------------------------------------------------------------------|---------------------------------------------------------------------------------------------|
-| `gradlew assembleDebug`                                                   | Build debug APK                                                                             |
-| `gradlew assembleRelease`                                                 | Build release APK (optimized & minified)                                                    |
-| `gradlew apiCheck`                                                        | Checks project public API ([BCV](https://github.com/Kotlin/binary-compatibility-validator)) |
-| `gradlew apiDump`                                                         | Dumps project public API ([BCV](https://github.com/Kotlin/binary-compatibility-validator))  |
-| `gradlew licensee`                                                        | Runs [Licensee](https://github.com/cashapp/licensee) dependency license validation          |
-| `gradlew topologyCheck`                                                   | Checks the topology of project dependencies                                                 |
-| `gradlew dependencyLockState --write-locks`                               | Updates dependency lock state                                                               |
-| `gradlew ciBadging -Pplayground.isMinifyEnabled=false`                    | CI badging checks                                                                           |
-| `gradlew ciLint`                                                          | CI Lint checks (html/sarif/txt/xml)                                                         |
-| `gradlew ciUnitTest`                                                      | CI unit tests (html/xml)                                                                    |
-| `gradlew verifyScreenshots`                                               | Verify screenshot tests images against golden images                                        |
-| `gradlew recordScreenshots`                                               | Record screenshot tests golden images                                                       |
-| `gradlew cleanRecordScreenshots`                                          | Clean and record screenshot tests golden images                                             |
-| `gradlew generateBaselineProfile`                                         | Generates Baseline & Startup profiles                                                       |
-| `gradlew connectedBenchmarkAndroidTest`                                   | Runs benchmark tests                                                                        |
-| `gradlew assembleRelease -Pplayground.compose.compilerMetrics`            | Compose compiler metrics                                                                    |
-| `gradlew assembleRelease -Pplayground.compose.compilerReports`            | Compose compiler reports                                                                    |
-| `gradlew globalCi --write-verification-metadata pgp,sha256 --export-keys` | Generates verification metadata & keyring                                                   |
-| `gradlew graphDump`                                                       | Dumps project dependencies to a mermaid file                                                |
-| `gradlew graphUpdate`                                                     | Updates Markdown file with the corresponding dependency graph                               |
-| `gradlew buildHealth`                                                     | Generates a build health report with [DAGP][DAGP]                                           |
+| Task                                                                      | Description                                                   |
+|---------------------------------------------------------------------------|---------------------------------------------------------------|
+| `gradlew assembleDebug`                                                   | Build debug APK                                               |
+| `gradlew assembleRelease`                                                 | Build release APK (optimized & minified)                      |
+| `gradlew checkLegacyAbi`                                                  | Checks project public API ([BCV][BCV])                        |
+| `gradlew updateLegacyAbi`                                                 | Dumps project public API ([BCV][BCV])                         |
+| `gradlew licensee`                                                        | Runs [Licensee][Licensee] dependency license validation       |
+| `gradlew topologyCheck`                                                   | Checks the topology of project dependencies                   |
+| `gradlew dependencyLockState --write-locks`                               | Updates dependency lock state                                 |
+| `gradlew ciBadging -Pplayground.isMinifyEnabled=false`                    | CI badging checks                                             |
+| `gradlew ciLint`                                                          | CI Lint checks (html/sarif/txt/xml)                           |
+| `gradlew ciUnitTest`                                                      | CI unit tests (html/xml)                                      |
+| `gradlew verifyScreenshots`                                               | Verify screenshot tests images against golden images          |
+| `gradlew recordScreenshots`                                               | Record screenshot tests golden images                         |
+| `gradlew cleanRecordScreenshots`                                          | Clean and record screenshot tests golden images               |
+| `gradlew generateBaselineProfile`                                         | Generates Baseline & Startup profiles                         |
+| `gradlew connectedBenchmarkAndroidTest`                                   | Runs benchmark tests                                          |
+| `gradlew assembleRelease -Pplayground.compose.compilerMetrics`            | Compose compiler metrics                                      |
+| `gradlew assembleRelease -Pplayground.compose.compilerReports`            | Compose compiler reports                                      |
+| `gradlew globalCi --write-verification-metadata pgp,sha256 --export-keys` | Generates verification metadata & keyring                     |
+| `gradlew graphDump`                                                       | Dumps project dependencies to a mermaid file                  |
+| `gradlew graphUpdate`                                                     | Updates Markdown file with the corresponding dependency graph |
+| `gradlew buildHealth`                                                     | Generates a build health report with [DAGP][DAGP]             |
 
+[BCV]: https://kotlinlang.org/docs/gradle-binary-compatibility-validation.html
 [DAGP]: https://github.com/autonomousapps/dependency-analysis-gradle-plugin
+[Licensee]: https://github.com/cashapp/licensee
 
 #### 🐙 GitHub workflows
 

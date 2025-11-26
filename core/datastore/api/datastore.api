@@ -1,0 +1,9 @@
+public final class fr/smarquis/playground/core/datastore/DataStore_extKt {
+	public static final fun get (Landroidx/datastore/core/DataStore;Landroidx/datastore/preferences/core/Preferences$Key;)Lkotlinx/coroutines/flow/Flow;
+	public static final fun safe (Landroidx/datastore/core/DataStore;)Lkotlinx/coroutines/flow/Flow;
+}
+
+public final class fr/smarquis/playground/core/datastore/di/HiltWrapper_DataStoreModule {
+	public fun <init> ()V
+}
+

@@ -30,6 +30,8 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.dsl.KotlinAndroidProjectExtension
 import org.jetbrains.kotlin.gradle.dsl.KotlinBaseExtension
 import org.jetbrains.kotlin.gradle.dsl.KotlinJvmProjectExtension
+import org.jetbrains.kotlin.gradle.dsl.abi.AbiValidationExtension
+import org.jetbrains.kotlin.gradle.dsl.abi.ExperimentalAbiValidation
 
 
 internal val Project.isMultiplatform: Boolean get() = pluginManager.hasPlugin("org.jetbrains.kotlin.multiplatform")
@@ -90,11 +92,28 @@ internal inline fun <reified T : KotlinBaseExtension> Project.configureKotlin(
         targetCompatibility = JavaVersion.VERSION_11
     }
     configure<T> {
-        when (this) {
-            is KotlinAndroidProjectExtension -> compilerOptions
-            is KotlinJvmProjectExtension -> compilerOptions
+        val kotlin = when (this) {
+            is KotlinAndroidProjectExtension -> this
+            is KotlinJvmProjectExtension -> this
             else -> TODO("Unsupported project extension $this ${T::class}")
-        }.apply {
+        }
+        @OptIn(ExperimentalAbiValidation::class)
+        kotlin.extensions.configure<AbiValidationExtension> {
+            enabled = true
+            filters {
+                excluded {
+                    this.annotatedWith.addAll(
+                        "**.*Generated*",
+                    )
+                    this.byNames.addAll(
+                        // "**.Hilt_*",
+                        "**.internal.**",
+                        "hilt_aggregated_deps.**",
+                    )
+                }
+            }
+        }
+        kotlin.compilerOptions {
             jvmTarget = JvmTarget.JVM_11
             allWarningsAsErrors = properties.warningsAsErrors
             // https://kotlinlang.org/docs/whatsnew22.html#new-defaulting-rules-for-use-site-annotation-targets

@@ -1,0 +1,4 @@
+public final class fr/smarquis/playground/data/settings/HiltWrapper_SettingsSourceModule {
+	public fun <init> ()V
+}
+

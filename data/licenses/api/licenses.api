@@ -1,0 +1,4 @@
+public final class fr/smarquis/playground/data/licenses/HiltWrapper_LicensesRepositoryModule {
+	public fun <init> ()V
+}
+
