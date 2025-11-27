@@ -106,7 +106,7 @@ android-lint = { id = "com.android.lint", version.ref = "agp" }
 android-settings = { id = "com.android.settings", version.ref = "agp" }
 android-test = { id = "com.android.test", version.ref = "agp" }
 androidx-baselineprofile = { id = "androidx.baselineprofile", version.ref = "androidx-benchmark" }
-artifactsSizeReport = "io.github.cdsap.android-artifacts-size-report:0.1.1"
+artifactsSizeReport = "io.github.cdsap.android-artifacts-size-report:0.2.1"
 binaryCompatibilityValidator = "org.jetbrains.kotlinx.binary-compatibility-validator:0.18.1"
 dagp = "com.autonomousapps.dependency-analysis:3.5.1"
 develocity = "com.gradle.develocity:4.2.2"
