@@ -2,13 +2,15 @@ package fr.smarquis.playground.buildlogic
 
 import fr.smarquis.playground.buildlogic.dsl.apply
 import fr.smarquis.playground.buildlogic.utils.PlaygroundBadging
-import fr.smarquis.playground.buildlogic.utils.PlaygroundGlobalCi
+import fr.smarquis.playground.buildlogic.utils.PlaygroundDependencyAnalysis
 import fr.smarquis.playground.buildlogic.utils.PlaygroundDependencyLocking
+import fr.smarquis.playground.buildlogic.utils.PlaygroundGlobalCi
 import fr.smarquis.playground.buildlogic.utils.PlaygroundGraph
 import fr.smarquis.playground.buildlogic.utils.PlaygroundLint
 import fr.smarquis.playground.buildlogic.utils.PlaygroundPlatforms
 import fr.smarquis.playground.buildlogic.utils.PlaygroundTopology
 import fr.smarquis.playground.buildlogic.utils.PlaygroundUnitTests
+import org.gradle.android.AndroidCacheFixPlugin
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 
@@ -18,7 +20,7 @@ internal class PlaygroundBasePlugin : Plugin<Project> {
         if (isJavaPlatform) return@with
 
         pluginManager.withPlugin("com.android.base") {
-            apply(plugin = "org.gradle.android.cache-fix")
+            apply<AndroidCacheFixPlugin>()
         }
 
         PlaygroundGlobalCi.configureSubproject(target)
@@ -29,6 +31,7 @@ internal class PlaygroundBasePlugin : Plugin<Project> {
         PlaygroundPlatforms.configureProject(target)
         PlaygroundTopology.configureProject(target)
         PlaygroundGraph.configureProject(target)
+        PlaygroundDependencyAnalysis.configureProject(target)
     }
 
 }

@@ -25,10 +25,12 @@ baselineProfile {
 }
 
 dependencies {
-    implementation(libs.androidx.junit)
-    implementation(libs.androidx.espresso.core)
-    implementation(libs.androidx.uiautomator)
+    implementation(libs.androidx.annotations)
     implementation(libs.androidx.benchmark)
+    implementation(libs.androidx.junit)
+    implementation(libs.androidx.test.monitor)
+    implementation(libs.androidx.test.runner)
+    implementation(libs.androidx.uiautomator)
 }
 
 @Suppress("UnstableApiUsage")

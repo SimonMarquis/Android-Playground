@@ -34,7 +34,6 @@ assignment {
 dependencies {
     compileOnly(plugin(libs.plugins.android.cacheFix))
     compileOnly(plugin(libs.plugins.androidx.baselineprofile))
-    compileOnly(plugin(libs.plugins.androidx.navigation))
     compileOnly(plugin(libs.plugins.artifactsSizeReport))
     compileOnly(plugin(libs.plugins.binaryCompatibilityValidator))
     compileOnly(plugin(libs.plugins.develocity))
@@ -45,6 +44,7 @@ dependencies {
     compileOnly(plugin(libs.plugins.ksp))
     compileOnly(plugin(libs.plugins.licensee))
     compileOnly(plugin(libs.plugins.paparazzi))
+    implementation(plugin(libs.plugins.dagp))
 
     compileOnly(libs.android.gradle.api)
     compileOnly(libs.android.tools.common)

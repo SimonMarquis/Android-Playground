@@ -1,6 +1,7 @@
 package fr.smarquis.playground.buildlogic.utils
 
 import com.android.build.api.dsl.Lint
+import com.android.build.gradle.LintPlugin
 import fr.smarquis.playground.buildlogic.PlaygroundProperties
 import fr.smarquis.playground.buildlogic.androidExtension
 import fr.smarquis.playground.buildlogic.capitalized
@@ -27,7 +28,7 @@ internal object PlaygroundLint {
             createAndroidCiLintTask()
         }
         pluginManager.withPlugin("org.jetbrains.kotlin.jvm") {
-            apply(plugin = "com.android.lint")
+            apply<LintPlugin>()
             configureDependencies()
             createJvmCiLintTask()
         }

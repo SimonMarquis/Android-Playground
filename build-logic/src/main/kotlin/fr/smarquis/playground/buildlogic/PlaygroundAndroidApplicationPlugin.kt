@@ -4,6 +4,7 @@ import app.cash.licensee.LicenseeExtension
 import app.cash.licensee.LicenseePlugin
 import app.cash.licensee.SpdxId
 import com.android.build.api.dsl.ApkSigningConfig
+import com.android.build.gradle.AppPlugin
 import fr.smarquis.playground.buildlogic.dsl.apply
 import fr.smarquis.playground.buildlogic.dsl.assign
 import fr.smarquis.playground.buildlogic.dsl.configure
@@ -18,7 +19,7 @@ import org.gradle.api.Project
 internal class PlaygroundAndroidApplicationPlugin : Plugin<Project> {
 
     override fun apply(target: Project) = with(target) {
-        apply(plugin = "com.android.application")
+        apply<AppPlugin>()
         apply<PlaygroundAndroidBasePlugin>()
         apply<LicenseePlugin>()
 
@@ -49,9 +50,13 @@ internal class PlaygroundAndroidApplicationPlugin : Plugin<Project> {
                 }
                 release {
                     signingConfig = signingConfigs.getByName("release")
-                    isMinifyEnabled = playground().isMinifyEnabled
-                    isShrinkResources = isMinifyEnabled
-                    proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+                    @Suppress("UnstableApiUsage")
+                    optimization {
+                        enable = playground().isMinifyEnabled
+                        keepRules {
+                            files.addAll(getDefaultProguardFile("proguard-android-optimize.txt"), file("proguard-rules.pro"))
+                        }
+                    }
                     // https://github.com/Kotlin/kotlinx.coroutines#avoiding-including-the-debug-infrastructure-in-the-resulting-apk
                     packaging.resources.excludes += "DebugProbesKt.bin"
                 }

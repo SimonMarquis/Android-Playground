@@ -68,6 +68,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.cash.licensee.ArtifactDetail
 import app.cash.licensee.SpdxLicense
 import fr.smarquis.playground.core.ui.PlaygroundTheme
+import fr.smarquis.playground.core.utils.navigation.BackStack
 import fr.smarquis.playground.feature.licenses.UiState.Failure
 import fr.smarquis.playground.feature.licenses.UiState.Loading
 import fr.smarquis.playground.feature.licenses.UiState.Success
@@ -77,6 +78,13 @@ import kotlin.text.Typography.bullet
 
 @Composable
 internal fun LicensesScreen(
+    backStack: BackStack,
+) = LicensesScreen(
+    navigateBack = { backStack.removeLastOrNull() },
+)
+
+@Composable
+private fun LicensesScreen(
     modifier: Modifier = Modifier,
     viewModel: LicensesViewModel = hiltViewModel(),
     navigateBack: () -> Unit,
@@ -91,7 +99,7 @@ internal fun LicensesScreen(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-internal fun LicensesScreen(
+private fun LicensesScreen(
     uiState: UiState,
     modifier: Modifier = Modifier,
     navigateBack: () -> Unit,
