@@ -13,7 +13,7 @@ androidx-lifecycle = "2.10.0"
 hilt = "2.57.2"
 kotlin = "2.2.21"
 navigation3 = "1.0.0"
-paparazzi = "2.0.0-SNAPSHOT"
+paparazzi = "2.0.0-alpha02"
 
 [bundles]
 
