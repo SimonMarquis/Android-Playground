@@ -109,7 +109,7 @@ androidx-baselineprofile = { id = "androidx.baselineprofile", version.ref = "and
 artifactsSizeReport = "io.github.cdsap.android-artifacts-size-report:0.2.1"
 binaryCompatibilityValidator = "org.jetbrains.kotlinx.binary-compatibility-validator:0.18.1"
 dagp = "com.autonomousapps.dependency-analysis:3.5.1"
-develocity = "com.gradle.develocity:4.2.2"
+develocity = "com.gradle.develocity:4.3"
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-assignment = { id = "org.jetbrains.kotlin.plugin.assignment", version.ref = "kotlin" }
