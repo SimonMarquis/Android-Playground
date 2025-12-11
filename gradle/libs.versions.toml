@@ -6,8 +6,8 @@ targetSdk = "36"
 #noinspection GradleVersionCatalogSort
 compileSdk = "36"
 
-agp = "9.0.0-beta04"
-android-tools = "32.0.0-beta04"
+agp = "9.0.0-beta05"
+android-tools = "32.0.0-beta05"
 androidx-benchmark = "1.4.1"
 androidx-lifecycle = "2.10.0"
 hilt = "2.57.2"
