@@ -20,7 +20,7 @@ paparazzi = "2.0.0-alpha02"
 [libraries]
 android-desugarJdkLibs = "com.android.tools:desugar_jdk_libs:2.1.5"
 android-gradle-api = { module = "com.android.tools.build:gradle-api", version.ref = "agp" }
-android-security-lint = "com.android.security.lint:lint:1.0.3"
+android-security-lint = "com.android.security.lint:lint:1.0.4"
 android-tools-common = { module = "com.android.tools:common", version.ref = "android-tools" }
 
 androidx-activity-compose = "androidx.activity:activity-compose:1.12.1"
