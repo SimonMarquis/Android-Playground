@@ -6,8 +6,8 @@ targetSdk = "36"
 #noinspection GradleVersionCatalogSort
 compileSdk = "36"
 
-agp = "8.13.2"
-android-tools = "31.13.2"
+agp = "9.0.0-beta05"
+android-tools = "32.0.0-beta05"
 androidx-benchmark = "1.4.1"
 androidx-lifecycle = "2.10.0"
 hilt = "2.57.2"
@@ -111,7 +111,6 @@ binaryCompatibilityValidator = "org.jetbrains.kotlinx.binary-compatibility-valid
 dagp = "com.autonomousapps.dependency-analysis:3.5.1"
 develocity = "com.gradle.develocity:4.3"
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-assignment = { id = "org.jetbrains.kotlin.plugin.assignment", version.ref = "kotlin" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
