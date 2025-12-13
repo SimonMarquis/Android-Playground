@@ -16,6 +16,7 @@ runs:
         # - gradle-reports-[job#id]
         name: ${{ format(format('gradle-reports-[{0}]', inputs.id == '' && '{0}' || '{0}#{1}'), github.job, inputs.id) }}
         path: |
+          build/reports/configuration-cache/**/*.html
           build/reports/dependency-configuration-cache
           build/reports/dependency-verification
           build/reports/problems/problems-report.html

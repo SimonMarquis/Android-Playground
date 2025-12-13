@@ -11,7 +11,7 @@ android-tools = "31.13.2"
 androidx-benchmark = "1.4.1"
 androidx-lifecycle = "2.10.0"
 hilt = "2.57.2"
-kotlin = "2.2.21"
+kotlin = "2.3.0-RC"
 navigation3 = "1.0.0"
 paparazzi = "2.0.0-alpha02"
 
@@ -118,7 +118,7 @@ kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlin-powerAssert = { id = "org.jetbrains.kotlin.plugin.power-assert", version.ref = "kotlin" }
 kotlin-sam = { id = "org.jetbrains.kotlin.plugin.sam.with.receiver", version.ref = "kotlin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
-ksp = "com.google.devtools.ksp:2.3.3"
+ksp = "com.google.devtools.ksp:2.3.4-SNAPSHOT"
 licensee = "app.cash.licensee:1.14.1"
 paparazzi = { id = "app.cash.paparazzi", version.ref = "paparazzi" }
 
