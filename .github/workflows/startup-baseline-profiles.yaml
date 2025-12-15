@@ -44,7 +44,7 @@ jobs:
         run: ./gradlew generateBaselineProfile
 
       - name: 📦 Archive Profiles
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: baseline-profiles
           path: "**/generated/baselineProfiles/*-prof.txt"

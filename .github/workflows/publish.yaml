@@ -38,7 +38,7 @@ jobs:
       - name: 👷 Build
         run: ./gradlew :app:assembleRelease :app:bundleRelease
       - name: 📦 Archive app binaries
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: release
           path: |
