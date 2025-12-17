@@ -23,7 +23,7 @@ android-gradle-api = { module = "com.android.tools.build:gradle-api", version.re
 android-security-lint = "com.android.security.lint:lint:1.0.4"
 android-tools-common = { module = "com.android.tools:common", version.ref = "android-tools" }
 
-androidx-activity-compose = "androidx.activity:activity-compose:1.12.1"
+androidx-activity-compose = "androidx.activity:activity-compose:1.12.2"
 androidx-annotations = "androidx.annotation:annotation:1.9.1"
 androidx-appcompat = "androidx.appcompat:appcompat:1.7.1"
 androidx-benchmark = { module = "androidx.benchmark:benchmark-macro-junit4", version.ref = "androidx-benchmark" }
