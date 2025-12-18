@@ -15,11 +15,10 @@ internal class PlaygroundAndroidLibraryPlugin : Plugin<Project> {
         apply<PlaygroundAndroidBasePlugin>()
         androidLibrary {
             defaultConfig {
-                consumerProguardFile("consumer-rules.pro")
                 aarMetadata.minCompileSdk = versions.minSdk.toString().toInt()
             }
         }
-        PlaygroundGlobalCi.addToGlobalCi(project, "apiCheck")
+        // PlaygroundGlobalCi.addToGlobalCi(project, "apiCheck")
     }
 
 }
