@@ -6,29 +6,29 @@ targetSdk = "36"
 #noinspection GradleVersionCatalogSort
 compileSdk = "36"
 
-agp = "8.13.1"
-android-tools = "31.13.1"
+agp = "8.13.2"
+android-tools = "31.13.2"
 androidx-benchmark = "1.4.1"
 androidx-lifecycle = "2.10.0"
 hilt = "2.57.2"
-kotlin = "2.2.21"
+kotlin = "2.3.0"
 navigation3 = "1.0.0"
-paparazzi = "2.0.0-SNAPSHOT"
+paparazzi = "2.0.0-alpha02"
 
 [bundles]
 
 [libraries]
 android-desugarJdkLibs = "com.android.tools:desugar_jdk_libs:2.1.5"
 android-gradle-api = { module = "com.android.tools.build:gradle-api", version.ref = "agp" }
-android-security-lint = "com.android.security.lint:lint:1.0.3"
+android-security-lint = "com.android.security.lint:lint:1.0.4"
 android-tools-common = { module = "com.android.tools:common", version.ref = "android-tools" }
 
-androidx-activity-compose = "androidx.activity:activity-compose:1.12.0"
+androidx-activity-compose = "androidx.activity:activity-compose:1.12.2"
 androidx-annotations = "androidx.annotation:annotation:1.9.1"
 androidx-appcompat = "androidx.appcompat:appcompat:1.7.1"
 androidx-benchmark = { module = "androidx.benchmark:benchmark-macro-junit4", version.ref = "androidx-benchmark" }
 androidx-collection = "androidx.collection:collection:1.5.0"
-androidx-compose-bom = "androidx.compose:compose-bom:2025.11.01"
+androidx-compose-bom = "androidx.compose:compose-bom:2025.12.01"
 androidx-compose-foundations = { module = "androidx.compose.foundation:foundation" }
 androidx-compose-material-icons = { module = "androidx.compose.material:material-icons-core" }
 androidx-compose-runtime = { module = "androidx.compose.runtime:runtime" }
@@ -69,6 +69,7 @@ javax-inject = "javax.inject:javax.inject:1"
 junit = "junit:junit:4.13.2"
 
 kotlin-bom = { module = "org.jetbrains.kotlin:kotlin-bom", version.ref = "kotlin" }
+kotlin-metadata = { module = "org.jetbrains.kotlin:kotlin-metadata-jvm" }
 kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect" }
 kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib" }
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test" }
@@ -106,9 +107,9 @@ android-lint = { id = "com.android.lint", version.ref = "agp" }
 android-settings = { id = "com.android.settings", version.ref = "agp" }
 android-test = { id = "com.android.test", version.ref = "agp" }
 androidx-baselineprofile = { id = "androidx.baselineprofile", version.ref = "androidx-benchmark" }
-artifactsSizeReport = "io.github.cdsap.android-artifacts-size-report:0.1.1"
-dagp = "com.autonomousapps.dependency-analysis:3.5.0"
-develocity = "com.gradle.develocity:4.2.2"
+artifactsSizeReport = "io.github.cdsap.android-artifacts-size-report:0.2.1"
+dagp = "com.autonomousapps.dependency-analysis:3.5.1"
+develocity = "com.gradle.develocity:4.3"
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-assignment = { id = "org.jetbrains.kotlin.plugin.assignment", version.ref = "kotlin" }
@@ -117,7 +118,7 @@ kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlin-powerAssert = { id = "org.jetbrains.kotlin.plugin.power-assert", version.ref = "kotlin" }
 kotlin-sam = { id = "org.jetbrains.kotlin.plugin.sam.with.receiver", version.ref = "kotlin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
-ksp = "com.google.devtools.ksp:2.3.3"
+ksp = "com.google.devtools.ksp:2.3.4"
 licensee = "app.cash.licensee:1.14.1"
 paparazzi = { id = "app.cash.paparazzi", version.ref = "paparazzi" }
 

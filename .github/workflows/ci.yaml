@@ -89,12 +89,12 @@ jobs:
         id: build
         run: ./gradlew assembleRelease
       - name: 📦 Archive APKs
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: apk
           path: "**/build/outputs/apk/**/*.apk"
       - name: 📦 Archive AARs
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: aar
           path: "**/build/outputs/aar"

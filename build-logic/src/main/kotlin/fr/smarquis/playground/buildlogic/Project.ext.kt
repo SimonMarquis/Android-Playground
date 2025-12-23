@@ -116,8 +116,6 @@ internal inline fun <reified T : KotlinBaseExtension> Project.configureKotlin(
         kotlin.compilerOptions {
             jvmTarget = JvmTarget.JVM_11
             allWarningsAsErrors = properties.warningsAsErrors
-            // https://kotlinlang.org/docs/whatsnew22.html#new-defaulting-rules-for-use-site-annotation-targets
-            freeCompilerArgs.add("-Xannotation-default-target=param-property")
         }
         explicitApi()
         configure()
