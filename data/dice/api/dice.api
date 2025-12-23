@@ -1,0 +1,4 @@
+public final class fr/smarquis/playground/data/dice/HiltWrapper_DiceSourceModule {
+	public fun <init> ()V
+}
+
