@@ -1,0 +1,23 @@
+public final class fr/smarquis/playground/feature/home/ComposableSingletons$HomeScreenKt {
+	public static final field INSTANCE Lfr/smarquis/playground/feature/home/ComposableSingletons$HomeScreenKt;
+	public fun <init> ()V
+	public final fun getLambda$-781337648$impl_release ()Lkotlin/jvm/functions/Function3;
+	public final fun getLambda$105668226$impl_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$804303530$impl_release ()Lkotlin/jvm/functions/Function2;
+}
+
+public final class fr/smarquis/playground/feature/home/HiltWrapper_HomeModule {
+	public fun <init> ()V
+}
+
+public final class fr/smarquis/playground/feature/home/HomeViewModel_HiltModules {
+}
+
+public abstract class fr/smarquis/playground/feature/home/HomeViewModel_HiltModules$BindsModule {
+	public abstract fun binds (Lfr/smarquis/playground/feature/home/HomeViewModel;)Landroidx/lifecycle/ViewModel;
+}
+
+public final class fr/smarquis/playground/feature/home/HomeViewModel_HiltModules$KeyModule {
+	public static fun provide ()Z
+}
+
