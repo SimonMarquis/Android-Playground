@@ -1,0 +1,28 @@
+public final class fr/smarquis/playground/domain/dice/Dice : java/lang/Enum {
+	public static final field Companion Lfr/smarquis/playground/domain/dice/Dice$Companion;
+	public static final field FIVE Lfr/smarquis/playground/domain/dice/Dice;
+	public static final field FOUR Lfr/smarquis/playground/domain/dice/Dice;
+	public static final field ONE Lfr/smarquis/playground/domain/dice/Dice;
+	public static final field SIX Lfr/smarquis/playground/domain/dice/Dice;
+	public static final field THREE Lfr/smarquis/playground/domain/dice/Dice;
+	public static final field TWO Lfr/smarquis/playground/domain/dice/Dice;
+	public final fun getEmoji ()Ljava/lang/String;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lfr/smarquis/playground/domain/dice/Dice;
+	public static fun values ()[Lfr/smarquis/playground/domain/dice/Dice;
+}
+
+public final class fr/smarquis/playground/domain/dice/Dice$Companion {
+	public final fun getDEFAULT ()Lfr/smarquis/playground/domain/dice/Dice;
+}
+
+public abstract interface class fr/smarquis/playground/domain/dice/DiceRoller {
+	public abstract fun invoke ()Lfr/smarquis/playground/domain/dice/Dice;
+}
+
+public abstract interface class fr/smarquis/playground/domain/dice/DiceSource {
+	public abstract fun getRolls ()Lkotlinx/coroutines/flow/Flow;
+	public abstract fun reset (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun roll (Lfr/smarquis/playground/domain/dice/Dice;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+

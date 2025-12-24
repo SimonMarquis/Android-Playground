@@ -100,6 +100,7 @@ internal class PlaygroundLibraries(catalog: VersionCatalog) {
     val `hilt-compiler` by catalog
     val `javax-inject` by catalog
     val junit by catalog
+    val `kotlin-metadata` by catalog
     val `kotlin-test` by catalog
     val `slack-compose-lint` by catalog
 

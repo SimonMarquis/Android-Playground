@@ -1,0 +1,5 @@
+public final class fr/smarquis/playground/feature/fr/smarquis/playground/feature/licenses/Licenses : androidx/navigation3/runtime/NavKey {
+	public static final field INSTANCE Lfr/smarquis/playground/feature/fr/smarquis/playground/feature/licenses/Licenses;
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+

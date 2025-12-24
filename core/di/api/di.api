@@ -1,0 +1,112 @@
+public final class dagger/DaggerExtensionsKt {
+	public static final fun getValue (Ldagger/Lazy;Ljava/lang/Object;Lkotlin/reflect/KProperty;)Ljava/lang/Object;
+	public static final fun getValue (Ljavax/inject/Provider;Ljava/lang/Object;Lkotlin/reflect/KProperty;)Ljava/lang/Object;
+}
+
+public abstract interface class fr/smarquis/playground/core/di/AssetManager {
+	public abstract fun open (Ljava/lang/String;)Ljava/io/InputStream;
+}
+
+public abstract interface class fr/smarquis/playground/core/di/CoroutineContextProvider {
+	public fun default ()Lkotlin/coroutines/CoroutineContext;
+	public fun io ()Lkotlin/coroutines/CoroutineContext;
+	public fun main ()Lkotlin/coroutines/CoroutineContext;
+	public fun mainImmediate ()Lkotlin/coroutines/CoroutineContext;
+	public fun unconfined ()Lkotlin/coroutines/CoroutineContext;
+}
+
+public final class fr/smarquis/playground/core/di/CoroutineContextProvider$DefaultImpls {
+	public static fun default (Lfr/smarquis/playground/core/di/CoroutineContextProvider;)Lkotlin/coroutines/CoroutineContext;
+	public static fun io (Lfr/smarquis/playground/core/di/CoroutineContextProvider;)Lkotlin/coroutines/CoroutineContext;
+	public static fun main (Lfr/smarquis/playground/core/di/CoroutineContextProvider;)Lkotlin/coroutines/CoroutineContext;
+	public static fun mainImmediate (Lfr/smarquis/playground/core/di/CoroutineContextProvider;)Lkotlin/coroutines/CoroutineContext;
+	public static fun unconfined (Lfr/smarquis/playground/core/di/CoroutineContextProvider;)Lkotlin/coroutines/CoroutineContext;
+}
+
+public final class fr/smarquis/playground/core/di/CoroutinesModuleKt {
+	public static final fun asCoroutineContextProvider (Lkotlin/coroutines/CoroutineContext;)Lfr/smarquis/playground/core/di/CoroutineContextProvider;
+}
+
+public abstract interface class fr/smarquis/playground/core/di/CurrentTimeProvider {
+	public static final field Companion Lfr/smarquis/playground/core/di/CurrentTimeProvider$Companion;
+	public abstract fun currentTimeMillis ()J
+}
+
+public final class fr/smarquis/playground/core/di/CurrentTimeProvider$Companion {
+	public final fun getSYSTEM ()Lfr/smarquis/playground/core/di/CurrentTimeProvider;
+}
+
+public final class fr/smarquis/playground/core/di/DisplayMetrics {
+	public fun <init> (III)V
+	public final fun component1 ()I
+	public final fun component2 ()I
+	public final fun component3 ()I
+	public final fun copy (III)Lfr/smarquis/playground/core/di/DisplayMetrics;
+	public static synthetic fun copy$default (Lfr/smarquis/playground/core/di/DisplayMetrics;IIIILjava/lang/Object;)Lfr/smarquis/playground/core/di/DisplayMetrics;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getDensityDpi ()I
+	public final fun getHeightPixels ()I
+	public final fun getWidthPixels ()I
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public abstract interface class fr/smarquis/playground/core/di/FileManager {
+	public abstract fun deleteFile (Ljava/lang/String;)Z
+	public abstract fun invoke (Ljava/lang/String;)Ljava/io/File;
+	public abstract fun openFileInput (Ljava/lang/String;)Ljava/io/FileInputStream;
+	public abstract fun openFileOutput (Ljava/lang/String;)Ljava/io/FileOutputStream;
+}
+
+public final class fr/smarquis/playground/core/di/HiltWrapper_CoroutinesModule {
+	public fun <init> ()V
+}
+
+public abstract interface annotation class fr/smarquis/playground/core/di/qualifier/AppPackageName : java/lang/annotation/Annotation {
+}
+
+public abstract interface annotation class fr/smarquis/playground/core/di/qualifier/AppVersionCode : java/lang/annotation/Annotation {
+}
+
+public abstract interface annotation class fr/smarquis/playground/core/di/qualifier/AppVersionName : java/lang/annotation/Annotation {
+}
+
+public abstract interface annotation class fr/smarquis/playground/core/di/qualifier/CurrentTime : java/lang/annotation/Annotation {
+}
+
+public abstract interface annotation class fr/smarquis/playground/core/di/qualifier/DeviceManufacturer : java/lang/annotation/Annotation {
+}
+
+public abstract interface annotation class fr/smarquis/playground/core/di/qualifier/DeviceModel : java/lang/annotation/Annotation {
+}
+
+public abstract interface annotation class fr/smarquis/playground/core/di/qualifier/DeviceProduct : java/lang/annotation/Annotation {
+}
+
+public abstract interface annotation class fr/smarquis/playground/core/di/qualifier/DeviceRelease : java/lang/annotation/Annotation {
+}
+
+public abstract interface annotation class fr/smarquis/playground/core/di/qualifier/DeviceSdkInt : java/lang/annotation/Annotation {
+}
+
+public abstract interface annotation class fr/smarquis/playground/core/di/qualifier/Dispatcher : java/lang/annotation/Annotation {
+	public abstract fun type ()Lfr/smarquis/playground/core/di/qualifier/Dispatcher$Type;
+}
+
+public final class fr/smarquis/playground/core/di/qualifier/Dispatcher$Type : java/lang/Enum {
+	public static final field Default Lfr/smarquis/playground/core/di/qualifier/Dispatcher$Type;
+	public static final field IO Lfr/smarquis/playground/core/di/qualifier/Dispatcher$Type;
+	public static final field Main Lfr/smarquis/playground/core/di/qualifier/Dispatcher$Type;
+	public static final field MainImmediate Lfr/smarquis/playground/core/di/qualifier/Dispatcher$Type;
+	public static final field Unconfined Lfr/smarquis/playground/core/di/qualifier/Dispatcher$Type;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lfr/smarquis/playground/core/di/qualifier/Dispatcher$Type;
+	public static fun values ()[Lfr/smarquis/playground/core/di/qualifier/Dispatcher$Type;
+}
+
+public abstract interface annotation class fr/smarquis/playground/core/di/qualifier/FirstInstallTime : java/lang/annotation/Annotation {
+}
+
+public abstract interface annotation class fr/smarquis/playground/core/di/qualifier/LastUpdateTime : java/lang/annotation/Annotation {
+}
+

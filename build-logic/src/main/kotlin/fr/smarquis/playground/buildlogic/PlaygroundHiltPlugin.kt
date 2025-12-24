@@ -35,6 +35,7 @@ internal class PlaygroundHiltPlugin : Plugin<Project> {
         dependencies.add("implementation", libs.hilt)
         dependencies.add("implementation", libs.`javax-inject`)
         dependencies.add("ksp", libs.`hilt-compiler`)
+        dependencies.add("ksp", libs.`kotlin-metadata`)
         if (isAndroid) dependencies.add("implementation", libs.`hilt-android`)
 
         tasks.withType<JavaCompile>().configureEach {
