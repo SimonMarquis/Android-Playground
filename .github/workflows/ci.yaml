@@ -65,7 +65,7 @@ jobs:
       - run: ./gradlew :build-logic:validatePlugins --quiet
       - run: ./gradlew licensee --quiet
       - run: ./gradlew topologyCheck --quiet
-      #- run: ./gradlew apiCheck --quiet
+      #- run: ./gradlew checkLegacyAbi --quiet
       - run: ./gradlew ciBadging -Pplayground.isMinifyEnabled=false --quiet
       - if: ${{ !cancelled() }}
         uses: ./.github/actions/archive-gradle-reports
@@ -89,12 +89,12 @@ jobs:
         id: build
         run: ./gradlew assembleRelease
       - name: 📦 Archive APKs
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: apk
           path: "**/build/outputs/apk/**/*.apk"
       - name: 📦 Archive AARs
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: aar
           path: "**/build/outputs/aar"

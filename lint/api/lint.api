@@ -1,0 +1,120 @@
+public final class fr/smarquis/playground/lint/AssertionsDetector : com/android/tools/lint/detector/api/Detector, com/android/tools/lint/detector/api/Detector$UastScanner {
+	public static final field Companion Lfr/smarquis/playground/lint/AssertionsDetector$Companion;
+	public fun <init> ()V
+	public fun createUastHandler (Lcom/android/tools/lint/detector/api/JavaContext;)Lcom/android/tools/lint/client/api/UElementHandler;
+	public fun getApplicableUastTypes ()Ljava/util/List;
+}
+
+public final class fr/smarquis/playground/lint/AssertionsDetector$Companion {
+	public final fun getJUNIT_ASSERTION_ISSUE ()Lcom/android/tools/lint/detector/api/Issue;
+	public final fun getKOTLIN_ASSERT_ISSUE ()Lcom/android/tools/lint/detector/api/Issue;
+	public final fun getKOTLIN_EQUALITY_ASSERTION_ISSUE ()Lcom/android/tools/lint/detector/api/Issue;
+	public final fun getKOTLIN_TYPE_ASSERTION_ISSUE ()Lcom/android/tools/lint/detector/api/Issue;
+}
+
+public abstract class fr/smarquis/playground/lint/AssertionsDetector$EqualityAssertionReplacement {
+	public abstract fun getFqfn ()Ljava/lang/String;
+}
+
+public final class fr/smarquis/playground/lint/AssertionsDetector$EqualityAssertionReplacement$Binary : fr/smarquis/playground/lint/AssertionsDetector$EqualityAssertionReplacement {
+	public fun <init> (Ljava/lang/String;Lorg/jetbrains/uast/UExpression;Lorg/jetbrains/uast/UExpression;)V
+	public final fun getActual ()Lorg/jetbrains/uast/UExpression;
+	public final fun getExpected ()Lorg/jetbrains/uast/UExpression;
+	public fun getFqfn ()Ljava/lang/String;
+}
+
+public final class fr/smarquis/playground/lint/AssertionsDetector$EqualityAssertionReplacement$UnaryNull : fr/smarquis/playground/lint/AssertionsDetector$EqualityAssertionReplacement {
+	public fun <init> (Ljava/lang/String;Lorg/jetbrains/uast/UExpression;)V
+	public final fun getActual ()Lorg/jetbrains/uast/UExpression;
+	public fun getFqfn ()Ljava/lang/String;
+}
+
+public final class fr/smarquis/playground/lint/GradleVersionCatalogDetector : com/android/tools/lint/detector/api/Detector, com/android/tools/lint/client/api/TomlScanner, com/android/tools/lint/detector/api/GradleScanner {
+	public static final field Companion Lfr/smarquis/playground/lint/GradleVersionCatalogDetector$Companion;
+	public fun <init> ()V
+	public fun visitTomlDocument (Lcom/android/tools/lint/client/api/TomlContext;Lcom/android/tools/lint/client/api/LintTomlDocument;)V
+}
+
+public final class fr/smarquis/playground/lint/GradleVersionCatalogDetector$Companion {
+	public final fun getDEPENDENCY_NAME ()Lcom/android/tools/lint/detector/api/Issue;
+	public final fun getSIMPLIFICATION ()Lcom/android/tools/lint/detector/api/Issue;
+	public final fun getSORT ()Lcom/android/tools/lint/detector/api/Issue;
+	public final fun getVERSION_INLINING ()Lcom/android/tools/lint/detector/api/Issue;
+}
+
+public final class fr/smarquis/playground/lint/NamedParametersDetector : com/android/tools/lint/detector/api/Detector, com/android/tools/lint/detector/api/SourceCodeScanner {
+	public static final field Companion Lfr/smarquis/playground/lint/NamedParametersDetector$Companion;
+	public fun <init> ()V
+	public fun createUastHandler (Lcom/android/tools/lint/detector/api/JavaContext;)Lcom/android/tools/lint/client/api/UElementHandler;
+	public fun getApplicableUastTypes ()Ljava/util/List;
+}
+
+public final class fr/smarquis/playground/lint/NamedParametersDetector$Companion {
+	public final fun getMISMATCHED_NAMED_PARAMETERS ()Lcom/android/tools/lint/detector/api/Issue;
+	public final fun getMISSING_NAMED_PARAMETERS ()Lcom/android/tools/lint/detector/api/Issue;
+}
+
+public final class fr/smarquis/playground/lint/ReplaceMethodCallDetector : com/android/tools/lint/detector/api/Detector, com/android/tools/lint/detector/api/SourceCodeScanner {
+	public static final field Companion Lfr/smarquis/playground/lint/ReplaceMethodCallDetector$Companion;
+	public fun <init> ()V
+	public fun getApplicableMethodNames ()Ljava/util/List;
+	public fun visitMethodCall (Lcom/android/tools/lint/detector/api/JavaContext;Lorg/jetbrains/uast/UCallExpression;Lcom/intellij/psi/PsiMethod;)V
+}
+
+public final class fr/smarquis/playground/lint/ReplaceMethodCallDetector$Companion {
+	public final fun getISSUE ()Lcom/android/tools/lint/detector/api/Issue;
+}
+
+public final class fr/smarquis/playground/lint/TestMethodBannedWordsDetector : com/android/tools/lint/detector/api/Detector, com/android/tools/lint/detector/api/SourceCodeScanner {
+	public static final field Companion Lfr/smarquis/playground/lint/TestMethodBannedWordsDetector$Companion;
+	public fun <init> ()V
+	public fun applicableAnnotations ()Ljava/util/List;
+	public fun visitAnnotationUsage (Lcom/android/tools/lint/detector/api/JavaContext;Lorg/jetbrains/uast/UElement;Lcom/android/tools/lint/detector/api/AnnotationInfo;Lcom/android/tools/lint/detector/api/AnnotationUsageInfo;)V
+}
+
+public final class fr/smarquis/playground/lint/TestMethodBannedWordsDetector$Companion {
+	public final fun getISSUE ()Lcom/android/tools/lint/detector/api/Issue;
+}
+
+public final class fr/smarquis/playground/lint/TypographyDetector : com/android/tools/lint/detector/api/ResourceXmlDetector {
+	public static final field Companion Lfr/smarquis/playground/lint/TypographyDetector$Companion;
+	public fun <init> ()V
+	public fun appliesTo (Lcom/android/resources/ResourceFolderType;)Z
+	public synthetic fun getApplicableElements ()Ljava/util/Collection;
+	public fun getApplicableElements ()Ljava/util/List;
+	public fun visitElement (Lcom/android/tools/lint/detector/api/XmlContext;Lorg/w3c/dom/Element;)V
+}
+
+public final class fr/smarquis/playground/lint/TypographyDetector$Companion {
+	public final fun getCURLY_QUOTE_ISSUE ()Lcom/android/tools/lint/detector/api/Issue;
+	public final fun getESCAPED_UNICODE_ISSUE ()Lcom/android/tools/lint/detector/api/Issue;
+	public final fun getREPLACEMENT_ISSUE ()Lcom/android/tools/lint/detector/api/Issue;
+}
+
+public final class xoxo/XmlDocument {
+	public final fun getRoot ()Lxoxo/XmlElement;
+}
+
+public final class xoxo/XmlElement : xoxo/XmlNode {
+	public fun asDomNode ()Lorg/w3c/dom/Element;
+	public synthetic fun asDomNode ()Lorg/w3c/dom/Node;
+	public final fun getChildElements ()Ljava/util/List;
+	public final fun getChildren ()Ljava/util/List;
+	public final fun getName ()Ljava/lang/String;
+}
+
+public abstract interface class xoxo/XmlNode {
+	public abstract fun asDomNode ()Lorg/w3c/dom/Node;
+}
+
+public final class xoxo/XmlText : xoxo/XmlNode {
+	public synthetic fun asDomNode ()Lorg/w3c/dom/Node;
+	public fun asDomNode ()Lorg/w3c/dom/Text;
+	public final fun getContent ()Ljava/lang/String;
+}
+
+public final class xoxo/XoxoKt {
+	public static final fun toXmlNode (Lorg/w3c/dom/Node;)Lxoxo/XmlNode;
+	public static final fun walk (Lxoxo/XmlNode;)Lkotlin/sequences/Sequence;
+}
+

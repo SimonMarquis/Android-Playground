@@ -10,21 +10,6 @@ public final class fr/smarquis/playground/feature/licenses/HiltWrapper_LicensesM
 	public fun <init> ()V
 }
 
-public final class fr/smarquis/playground/feature/licenses/LicensesModule_ProvidesEntryFactory : dagger/internal/Factory {
-	public fun <init> ()V
-	public static fun create ()Lfr/smarquis/playground/feature/licenses/LicensesModule_ProvidesEntryFactory;
-	public synthetic fun get ()Ljava/lang/Object;
-	public fun get ()Lkotlin/jvm/functions/Function2;
-	public static fun providesEntry ()Lkotlin/jvm/functions/Function2;
-}
-
-public final class fr/smarquis/playground/feature/licenses/LicensesViewModel_Factory : dagger/internal/Factory {
-	public static fun create (Ldagger/internal/Provider;Ldagger/internal/Provider;)Lfr/smarquis/playground/feature/licenses/LicensesViewModel_Factory;
-	public fun get ()Lfr/smarquis/playground/feature/licenses/LicensesViewModel;
-	public synthetic fun get ()Ljava/lang/Object;
-	public static fun newInstance (Lfr/smarquis/playground/domain/licenses/LicensesRepository;Lkotlin/coroutines/CoroutineContext;)Lfr/smarquis/playground/feature/licenses/LicensesViewModel;
-}
-
 public final class fr/smarquis/playground/feature/licenses/LicensesViewModel_HiltModules {
 }
 
@@ -34,35 +19,5 @@ public abstract class fr/smarquis/playground/feature/licenses/LicensesViewModel_
 
 public final class fr/smarquis/playground/feature/licenses/LicensesViewModel_HiltModules$KeyModule {
 	public static fun provide ()Z
-}
-
-public final class fr/smarquis/playground/feature/licenses/LicensesViewModel_HiltModules_BindsModule_Binds_LazyMapKey {
-	public static field lazyClassKeyName Ljava/lang/String;
-	public fun <init> ()V
-}
-
-public final class fr/smarquis/playground/feature/licenses/LicensesViewModel_HiltModules_KeyModule_ProvideFactory : dagger/internal/Factory {
-	public fun <init> ()V
-	public static fun create ()Lfr/smarquis/playground/feature/licenses/LicensesViewModel_HiltModules_KeyModule_ProvideFactory;
-	public fun get ()Ljava/lang/Boolean;
-	public synthetic fun get ()Ljava/lang/Object;
-	public static fun provide ()Z
-}
-
-public final class fr/smarquis/playground/feature/licenses/LicensesViewModel_HiltModules_KeyModule_Provide_LazyMapKey {
-	public static field lazyClassKeyName Ljava/lang/String;
-	public fun <init> ()V
-}
-
-public class hilt_aggregated_deps/_fr_smarquis_playground_feature_licenses_HiltWrapper_LicensesModule {
-	public fun <init> ()V
-}
-
-public class hilt_aggregated_deps/_fr_smarquis_playground_feature_licenses_LicensesViewModel_HiltModules_BindsModule {
-	public fun <init> ()V
-}
-
-public class hilt_aggregated_deps/_fr_smarquis_playground_feature_licenses_LicensesViewModel_HiltModules_KeyModule {
-	public fun <init> ()V
 }
 

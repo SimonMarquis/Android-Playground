@@ -1,17 +1,3 @@
-public final class fr/smarquis/playground/core/android/AndroidAssetManager_Factory : dagger/internal/Factory {
-	public static fun create (Ldagger/internal/Provider;)Lfr/smarquis/playground/core/android/AndroidAssetManager_Factory;
-	public fun get ()Lfr/smarquis/playground/core/android/AndroidAssetManager;
-	public synthetic fun get ()Ljava/lang/Object;
-	public static fun newInstance (Landroid/content/res/AssetManager;)Lfr/smarquis/playground/core/android/AndroidAssetManager;
-}
-
-public final class fr/smarquis/playground/core/android/AndroidFileManager_Factory : dagger/internal/Factory {
-	public static fun create (Ldagger/internal/Provider;)Lfr/smarquis/playground/core/android/AndroidFileManager_Factory;
-	public fun get ()Lfr/smarquis/playground/core/android/AndroidFileManager;
-	public synthetic fun get ()Ljava/lang/Object;
-	public static fun newInstance (Landroid/app/Application;)Lfr/smarquis/playground/core/android/AndroidFileManager;
-}
-
 public final class fr/smarquis/playground/core/android/Context_extKt {
 	public static final fun packageInfo (Landroid/content/Context;)Landroid/content/pm/PackageInfo;
 	public static final fun versionCode (Landroid/content/Context;)Ljava/lang/Long;
@@ -21,14 +7,6 @@ public final class fr/smarquis/playground/core/android/Context_extKt {
 public final class fr/smarquis/playground/core/android/ProfileVerifierLogger {
 	public fun <init> ()V
 	public final fun invoke ()Lkotlinx/coroutines/Job;
-}
-
-public final class fr/smarquis/playground/core/android/ProfileVerifierLogger_Factory : dagger/internal/Factory {
-	public fun <init> ()V
-	public static fun create ()Lfr/smarquis/playground/core/android/ProfileVerifierLogger_Factory;
-	public fun get ()Lfr/smarquis/playground/core/android/ProfileVerifierLogger;
-	public synthetic fun get ()Ljava/lang/Object;
-	public static fun newInstance ()Lfr/smarquis/playground/core/android/ProfileVerifierLogger;
 }
 
 public final class fr/smarquis/playground/core/android/StrictMode {
@@ -46,88 +24,6 @@ public final class fr/smarquis/playground/core/android/UncaughtExceptionHandler 
 	public final fun uninstall ()V
 }
 
-public final class fr/smarquis/playground/core/android/di/AppModule_ProvidesAppPackageNameFactory : dagger/internal/Factory {
-	public static fun create (Ldagger/internal/Provider;)Lfr/smarquis/playground/core/android/di/AppModule_ProvidesAppPackageNameFactory;
-	public synthetic fun get ()Ljava/lang/Object;
-	public fun get ()Ljava/lang/String;
-	public static fun providesAppPackageName (Landroid/app/Application;)Ljava/lang/String;
-}
-
-public final class fr/smarquis/playground/core/android/di/AppModule_ProvidesAppVersionCodeFactory : dagger/internal/Factory {
-	public static fun create (Ldagger/internal/Provider;)Lfr/smarquis/playground/core/android/di/AppModule_ProvidesAppVersionCodeFactory;
-	public fun get ()Ljava/lang/Long;
-	public synthetic fun get ()Ljava/lang/Object;
-	public static fun providesAppVersionCode (Landroid/app/Application;)J
-}
-
-public final class fr/smarquis/playground/core/android/di/AppModule_ProvidesAppVersionNameFactory : dagger/internal/Factory {
-	public static fun create (Ldagger/internal/Provider;)Lfr/smarquis/playground/core/android/di/AppModule_ProvidesAppVersionNameFactory;
-	public synthetic fun get ()Ljava/lang/Object;
-	public fun get ()Ljava/lang/String;
-	public static fun providesAppVersionName (Landroid/app/Application;)Ljava/lang/String;
-}
-
-public final class fr/smarquis/playground/core/android/di/CoreAndroidModule_Companion_ProvidesDisplayMetricsFactory : dagger/internal/Factory {
-	public static fun create (Ldagger/internal/Provider;)Lfr/smarquis/playground/core/android/di/CoreAndroidModule_Companion_ProvidesDisplayMetricsFactory;
-	public fun get ()Lfr/smarquis/playground/core/di/DisplayMetrics;
-	public synthetic fun get ()Ljava/lang/Object;
-	public static fun providesDisplayMetrics (Landroid/app/Application;)Lfr/smarquis/playground/core/di/DisplayMetrics;
-}
-
-public final class fr/smarquis/playground/core/android/di/CoreAndroidModule_Companion_ProvidesPackageInfoFactory : dagger/internal/Factory {
-	public static fun create (Ldagger/internal/Provider;)Lfr/smarquis/playground/core/android/di/CoreAndroidModule_Companion_ProvidesPackageInfoFactory;
-	public fun get ()Landroid/content/pm/PackageInfo;
-	public synthetic fun get ()Ljava/lang/Object;
-	public static fun providesPackageInfo (Landroid/app/Application;)Landroid/content/pm/PackageInfo;
-}
-
-public final class fr/smarquis/playground/core/android/di/CoreAndroidModule_Companion_ProvidesRealAssetManagerFactory : dagger/internal/Factory {
-	public static fun create (Ldagger/internal/Provider;)Lfr/smarquis/playground/core/android/di/CoreAndroidModule_Companion_ProvidesRealAssetManagerFactory;
-	public fun get ()Landroid/content/res/AssetManager;
-	public synthetic fun get ()Ljava/lang/Object;
-	public static fun providesRealAssetManager (Landroid/app/Application;)Landroid/content/res/AssetManager;
-}
-
-public final class fr/smarquis/playground/core/android/di/DeviceModule_ProvidesDeviceManufacturerFactory : dagger/internal/Factory {
-	public fun <init> ()V
-	public static fun create ()Lfr/smarquis/playground/core/android/di/DeviceModule_ProvidesDeviceManufacturerFactory;
-	public synthetic fun get ()Ljava/lang/Object;
-	public fun get ()Ljava/lang/String;
-	public static fun providesDeviceManufacturer ()Ljava/lang/String;
-}
-
-public final class fr/smarquis/playground/core/android/di/DeviceModule_ProvidesDeviceModelFactory : dagger/internal/Factory {
-	public fun <init> ()V
-	public static fun create ()Lfr/smarquis/playground/core/android/di/DeviceModule_ProvidesDeviceModelFactory;
-	public synthetic fun get ()Ljava/lang/Object;
-	public fun get ()Ljava/lang/String;
-	public static fun providesDeviceModel ()Ljava/lang/String;
-}
-
-public final class fr/smarquis/playground/core/android/di/DeviceModule_ProvidesDeviceProductFactory : dagger/internal/Factory {
-	public fun <init> ()V
-	public static fun create ()Lfr/smarquis/playground/core/android/di/DeviceModule_ProvidesDeviceProductFactory;
-	public synthetic fun get ()Ljava/lang/Object;
-	public fun get ()Ljava/lang/String;
-	public static fun providesDeviceProduct ()Ljava/lang/String;
-}
-
-public final class fr/smarquis/playground/core/android/di/DeviceModule_ProvidesDeviceReleaseFactory : dagger/internal/Factory {
-	public fun <init> ()V
-	public static fun create ()Lfr/smarquis/playground/core/android/di/DeviceModule_ProvidesDeviceReleaseFactory;
-	public synthetic fun get ()Ljava/lang/Object;
-	public fun get ()Ljava/lang/String;
-	public static fun providesDeviceRelease ()Ljava/lang/String;
-}
-
-public final class fr/smarquis/playground/core/android/di/DeviceModule_ProvidesDeviceSdkIntFactory : dagger/internal/Factory {
-	public fun <init> ()V
-	public static fun create ()Lfr/smarquis/playground/core/android/di/DeviceModule_ProvidesDeviceSdkIntFactory;
-	public fun get ()Ljava/lang/Integer;
-	public synthetic fun get ()Ljava/lang/Object;
-	public static fun providesDeviceSdkInt ()I
-}
-
 public final class fr/smarquis/playground/core/android/di/HiltWrapper_AppModule {
 	public fun <init> ()V
 }
@@ -141,50 +37,6 @@ public final class fr/smarquis/playground/core/android/di/HiltWrapper_DeviceModu
 }
 
 public final class fr/smarquis/playground/core/android/di/HiltWrapper_InstantsModule {
-	public fun <init> ()V
-}
-
-public final class fr/smarquis/playground/core/android/di/InstantsModule_ProvidesFirstInstallLocalDateTimeFactory : dagger/internal/Factory {
-	public static fun create (Ldagger/internal/Provider;)Lfr/smarquis/playground/core/android/di/InstantsModule_ProvidesFirstInstallLocalDateTimeFactory;
-	public synthetic fun get ()Ljava/lang/Object;
-	public fun get ()Lkotlinx/datetime/LocalDateTime;
-	public static fun providesFirstInstallLocalDateTime (J)Lkotlinx/datetime/LocalDateTime;
-}
-
-public final class fr/smarquis/playground/core/android/di/InstantsModule_ProvidesFirstInstallTimeFactory : dagger/internal/Factory {
-	public static fun create (Ldagger/internal/Provider;)Lfr/smarquis/playground/core/android/di/InstantsModule_ProvidesFirstInstallTimeFactory;
-	public fun get ()Ljava/lang/Long;
-	public synthetic fun get ()Ljava/lang/Object;
-	public static fun providesFirstInstallTime (Landroid/content/pm/PackageInfo;)J
-}
-
-public final class fr/smarquis/playground/core/android/di/InstantsModule_ProvidesLastUpdateLocalDateTimeFactory : dagger/internal/Factory {
-	public static fun create (Ldagger/internal/Provider;)Lfr/smarquis/playground/core/android/di/InstantsModule_ProvidesLastUpdateLocalDateTimeFactory;
-	public synthetic fun get ()Ljava/lang/Object;
-	public fun get ()Lkotlinx/datetime/LocalDateTime;
-	public static fun providesLastUpdateLocalDateTime (J)Lkotlinx/datetime/LocalDateTime;
-}
-
-public final class fr/smarquis/playground/core/android/di/InstantsModule_ProvidesLastUpdateTimeFactory : dagger/internal/Factory {
-	public static fun create (Ldagger/internal/Provider;)Lfr/smarquis/playground/core/android/di/InstantsModule_ProvidesLastUpdateTimeFactory;
-	public fun get ()Ljava/lang/Long;
-	public synthetic fun get ()Ljava/lang/Object;
-	public static fun providesLastUpdateTime (Landroid/content/pm/PackageInfo;)J
-}
-
-public class hilt_aggregated_deps/_fr_smarquis_playground_core_android_di_HiltWrapper_AppModule {
-	public fun <init> ()V
-}
-
-public class hilt_aggregated_deps/_fr_smarquis_playground_core_android_di_HiltWrapper_CoreAndroidModule {
-	public fun <init> ()V
-}
-
-public class hilt_aggregated_deps/_fr_smarquis_playground_core_android_di_HiltWrapper_DeviceModule {
-	public fun <init> ()V
-}
-
-public class hilt_aggregated_deps/_fr_smarquis_playground_core_android_di_HiltWrapper_InstantsModule {
 	public fun <init> ()V
 }
 
