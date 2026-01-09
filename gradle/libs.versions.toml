@@ -6,8 +6,8 @@ targetSdk = "36"
 #noinspection GradleVersionCatalogSort
 compileSdk = "36"
 
-agp = "8.13.2"
-android-tools = "31.13.2"
+agp = "9.0.0-rc03"
+android-tools = "32.0.0-rc03"
 androidx-benchmark = "1.4.1"
 androidx-lifecycle = "2.10.0"
 hilt = "2.57.2"
@@ -69,7 +69,7 @@ javax-inject = "javax.inject:javax.inject:1"
 junit = "junit:junit:4.13.2"
 
 kotlin-bom = { module = "org.jetbrains.kotlin:kotlin-bom", version.ref = "kotlin" }
-kotlin-metadata = { module = "org.jetbrains.kotlin:kotlin-metadata-jvm" }
+kotlin-metadata = { module = "org.jetbrains.kotlin:kotlin-metadata-jvm", version.ref = "kotlin" } # not provided in the BoM
 kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect" }
 kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib" }
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test" }
@@ -111,7 +111,6 @@ artifactsSizeReport = "io.github.cdsap.android-artifacts-size-report:0.2.1"
 dagp = "com.autonomousapps.dependency-analysis:3.5.1"
 develocity = "com.gradle.develocity:4.3"
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-assignment = { id = "org.jetbrains.kotlin.plugin.assignment", version.ref = "kotlin" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
