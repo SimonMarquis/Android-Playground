@@ -92,7 +92,8 @@ internal inline fun <reified T : KotlinBaseExtension> Project.configureKotlin(
             else -> TODO("Unsupported project extension $this ${T::class}")
         }
         @OptIn(ExperimentalAbiValidation::class)
-        kotlin.extensions.configure<AbiValidationExtension> {
+        // FIXME: https://issuetracker.google.com/issues/474474278
+        kotlin.extensions.findByType<AbiValidationExtension>()?.apply {
             enabled = true
             filters {
                 excluded {
