@@ -51,7 +51,7 @@ internal object PlaygroundPlatforms {
         "lintChecks", "lintDebug", "lintRelease",
     )
 
-    private val testConfigurationRegex = "(androidTest|unitTest|instrumentedTest|jvmTest|androidUnitTest)".toRegex(IGNORE_CASE)
+    private val testConfigurationRegex = "(androidTest|unitTest|instrumentedTest|jvmTest|androidUnitTest|testApi)".toRegex(IGNORE_CASE)
 
     /**
      * Best effort fuzzy matching on known configuration names that we want to opt into platforming.
