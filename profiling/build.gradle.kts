@@ -12,8 +12,9 @@ android {
     testOptions.managedDevices.localDevices {
         create("gmd") {
             device = "Pixel 6"
-            apiLevel = 34
+            apiLevel = 35
             systemImageSource = "aosp-atd"
+            testedAbi = "arm64-v8a"
         }
     }
     experimentalProperties["android.experimental.self-instrumenting"] = true
