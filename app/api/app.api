@@ -26,16 +26,13 @@ public final class fr/smarquis/playground/app/PlaygroundActivity : androidx/acti
 
 public final class fr/smarquis/playground/app/PlaygroundApplication : android/app/Application {
 	public static final field $stable I
-	public field context Landroid/content/Context;
 	public field profileVerifierLogger Lfr/smarquis/playground/core/android/ProfileVerifierLogger;
 	public field settingsSource Lfr/smarquis/playground/domain/settings/SettingsSource;
 	public fun <init> ()V
-	public final fun getContext ()Landroid/content/Context;
 	public final fun getProfileVerifierLogger ()Lfr/smarquis/playground/core/android/ProfileVerifierLogger;
 	public final fun getSettingsSource ()Lfr/smarquis/playground/domain/settings/SettingsSource;
 	public final fun isDebuggable ()Z
 	public fun onCreate ()V
-	public final fun setContext (Landroid/content/Context;)V
 	public final fun setProfileVerifierLogger (Lfr/smarquis/playground/core/android/ProfileVerifierLogger;)V
 	public final fun setSettingsSource (Lfr/smarquis/playground/domain/settings/SettingsSource;)V
 }
