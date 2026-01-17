@@ -116,6 +116,26 @@ internal inline fun <reified T : KotlinBaseExtension> Project.configureKotlin(
         kotlin.compilerOptions {
             jvmTarget = JvmTarget.JVM_11
             allWarningsAsErrors = properties.warningsAsErrors
+            freeCompilerArgs.addAll(
+                // https://kotlinlang.org/docs/whatsnew21.html#non-local-break-and-continue
+                "-Xnon-local-break-continue",
+                // https://kotlinlang.org/docs/whatsnew21.html#multi-dollar-string-interpolation
+                "-Xmulti-dollar-interpolation",
+                // https://kotlinlang.org/docs/whatsnew21.html#guard-conditions-in-when-with-a-subject
+                "-Xwhen-guards",
+                // https://kotlinlang.org/docs/whatsnew22.html#support-for-nested-type-aliases
+                "-Xnested-type-aliases",
+                // https://kotlinlang.org/docs/whatsnew22.html#new-defaulting-rules-for-use-site-annotation-targets
+                "-Xannotation-default-target=param-property",
+                // https://kotlinlang.org/docs/whatsnew-eap.html#unused-return-value-checker
+                "-Xreturn-value-checker=full",
+                // https://kotlinlang.org/docs/whatsnew2220.html#data-flow-based-exhaustiveness-checks-for-when-expressions
+                "-Xdata-flow-based-exhaustiveness",
+                // https://kotlinlang.org/docs/whatsnew2220.html#support-for-reified-types-in-catch-clauses
+                "-Xallow-reified-type-in-catch",
+                // https://kotlinlang.org/docs/whatsnew23.html#explicit-backing-fields
+                "-Xexplicit-backing-fields",
+            )
         }
         explicitApi()
         configure()
