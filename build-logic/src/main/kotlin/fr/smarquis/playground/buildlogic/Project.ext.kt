@@ -15,6 +15,7 @@ import fr.smarquis.playground.buildlogic.dsl.assign
 import fr.smarquis.playground.buildlogic.dsl.configure
 import fr.smarquis.playground.buildlogic.dsl.findByType
 import fr.smarquis.playground.buildlogic.dsl.getByType
+import fr.smarquis.playground.buildlogic.utils.PlaygroundGlobalCi
 import org.gradle.api.JavaVersion
 import org.gradle.api.Project
 import org.gradle.api.artifacts.VersionCatalog
@@ -96,6 +97,7 @@ internal inline fun <reified T : KotlinBaseExtension> Project.configureKotlin(
         //  - https://issuetracker.google.com/issues/474474278
         //  - https://youtrack.jetbrains.com/issue/KT-83410
         kotlin.extensions.findByType<AbiValidationExtension>()?.apply {
+            PlaygroundGlobalCi.addToGlobalCi(project = this@configureKotlin, "checkLegacyAbi")
             enabled = true
             filters {
                 excluded {
