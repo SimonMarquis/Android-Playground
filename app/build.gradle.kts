@@ -10,9 +10,10 @@ android {
     defaultConfig {
         applicationId = "fr.smarquis.testing"
     }
-    baselineProfile {
-        dexLayoutOptimization = true
-    }
+}
+
+baselineProfile {
+    dexLayoutOptimization = true
 }
 
 dependencies {
