@@ -14,5 +14,5 @@ public class SimpleLicensesRepository(
 ) : LicensesRepository {
     constructor(licenses: ImmutableList<ArtifactDetail>):this(flowOf(licenses))
     @OptIn(ExperimentalTypeInference::class)
-    constructor(@BuilderInference block: suspend FlowCollector<ImmutableList<ArtifactDetail>>.() -> Unit):this(flow(block))
+    constructor(block: suspend FlowCollector<ImmutableList<ArtifactDetail>>.() -> Unit):this(flow(block))
 }
