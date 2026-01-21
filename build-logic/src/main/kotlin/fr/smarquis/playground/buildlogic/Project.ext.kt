@@ -100,7 +100,7 @@ internal inline fun <reified T : KotlinBaseExtension> Project.configureKotlin(
             PlaygroundGlobalCi.addToGlobalCi(project = this@configureKotlin, "checkLegacyAbi")
             enabled = true
             filters {
-                excluded {
+                exclude {
                     this.annotatedWith.addAll(
                         "**.*Generated*",
                     )
