@@ -18,7 +18,13 @@ runs:
         path: '**/build/paparazzi/failures/*.png'
         if-no-files-found: ignore
     - if: ${{ steps.artifact-failures-and-deltas.outputs.artifact-id != '' && github.event_name == 'pull_request' }}
-      run: gh pr comment "$PR_NUMBER" --body "[📸 Paparazzi deltas & golden images]($ARTIFACT_URL)"
+      run: |
+        tee --append "$GITHUB_STEP_SUMMARY" << EOF >/dev/null || true
+        **🚨 UI regression detected!**
+        - [📦 Download Paparazzi deltas & golden images]($ARTIFACT_URL)
+        - [📸 Regenerate Golden images with workflow]($GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/workflows/paparazzi-golden-images.yaml)
+        EOF
+        gh pr comment "$PR_NUMBER" --body-file "$GITHUB_STEP_SUMMARY"
       shell: bash
       env:
         GITHUB_TOKEN: ${{ github.token }}
