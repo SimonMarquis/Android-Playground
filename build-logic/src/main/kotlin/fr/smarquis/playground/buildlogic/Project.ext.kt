@@ -97,7 +97,7 @@ internal inline fun <reified T : KotlinBaseExtension> Project.configureKotlin(
         //  - https://issuetracker.google.com/issues/474474278
         //  - https://youtrack.jetbrains.com/issue/KT-83410
         kotlin.extensions.findByType<AbiValidationExtension>()?.apply {
-            PlaygroundGlobalCi.addToGlobalCi(project = this@configureKotlin, "checkLegacyAbi")
+            PlaygroundGlobalCi.addToGlobalCi(project = this@configureKotlin, "checkKotlinAbi")
             enabled = true
             filters {
                 exclude {
