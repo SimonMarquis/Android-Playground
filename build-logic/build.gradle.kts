@@ -1,5 +1,5 @@
-import org.gradle.api.JavaVersion.VERSION_17
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17
+import org.gradle.api.JavaVersion.VERSION_21
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_21
 
 plugins {
     alias(libs.plugins.kotlin.jvm)
@@ -12,14 +12,14 @@ plugins {
 group = "fr.smarquis.playground.buildlogic"
 
 java {
-    sourceCompatibility = VERSION_17
-    targetCompatibility = VERSION_17
+    sourceCompatibility = VERSION_21
+    targetCompatibility = VERSION_21
 }
 
 kotlin {
     compilerOptions {
         allWarningsAsErrors = providers.gradleProperty("playground.warningsAsErrors").map(String::toBoolean).getOrElse(true)
-        jvmTarget = JVM_17
+        jvmTarget = JVM_21
     }
     explicitApi()
 }
