@@ -16,7 +16,7 @@ internal class PlaygroundAndroidLibraryPlugin : Plugin<Project> {
                 aarMetadata.minCompileSdk = versions.minSdk.toString().toInt()
             }
         }
-        // PlaygroundGlobalCi.addToGlobalCi(project, "checkLegacyAbi")
+        PlaygroundGlobalCi.addToGlobalCi(project, "checkLegacyAbi")
     }
 
 }
