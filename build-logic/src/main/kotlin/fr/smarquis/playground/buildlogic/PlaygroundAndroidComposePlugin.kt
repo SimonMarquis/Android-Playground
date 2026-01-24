@@ -12,7 +12,6 @@ import org.jetbrains.kotlin.gradle.plugin.KotlinAndroidPluginWrapper
 internal class PlaygroundAndroidComposePlugin : Plugin<Project> {
 
     override fun apply(target: Project): Unit = with(target) {
-        apply<KotlinAndroidPluginWrapper>()
         apply<ComposeCompilerGradleSubplugin>()
         apply<PlaygroundAndroidBasePlugin>()
 

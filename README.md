@@ -29,8 +29,8 @@
 | `gradlew assembleRelease -Pplayground.compose.compilerMetrics`            | Compose compiler metrics                                      |
 | `gradlew assembleRelease -Pplayground.compose.compilerReports`            | Compose compiler reports                                      |
 | `gradlew globalCi --write-verification-metadata pgp,sha256 --export-keys` | Generates verification metadata & keyring                     |
-| `gradlew graphDump`                                                       | Dumps project dependencies to a mermaid file                  |
-| `gradlew graphUpdate`                                                     | Updates Markdown file with the corresponding dependency graph |
+| `gradlew graphDump -Dorg.gradle.unsafe.isolated-projects=false`           | Dumps project dependencies to a mermaid file                  |
+| `gradlew graphUpdate -Dorg.gradle.unsafe.isolated-projects=false`         | Updates Markdown file with the corresponding dependency graph |
 | `gradlew buildHealth`                                                     | Generates a build health report with [DAGP][DAGP]             |
 
 [BCV]: https://kotlinlang.org/docs/gradle-binary-compatibility-validation.html

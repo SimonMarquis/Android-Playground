@@ -16,6 +16,7 @@ runs:
         \`\`\`diff
         $(git diff --unified=0 -- ':(glob)**/*gradle.lockfile' | grep -E '^(diff|[+-][^+-])')
         \`\`\`
+        [▶️ Update lockfile with workflow]($GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/workflows/gradle-dependency-lock-state.yaml)
         EOF
 
         [[ -n $PR_NUMBER ]] && gh pr comment "$PR_NUMBER" --body-file "$GITHUB_STEP_SUMMARY"

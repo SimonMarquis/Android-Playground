@@ -161,8 +161,8 @@ class AssertionsDetectorTest : LintDetectorTest() {
                 "test/MyTest.kt",
                 """
                 import org.junit.Test
-                import kotlin.test.assertFalse
-                import kotlin.test.assertTrue
+                import kotlinx.test.assertFalse
+                import kotlinx.test.assertTrue
     
                 class MyTest(val any: Any) {
                     @Test
@@ -285,145 +285,145 @@ class AssertionsDetectorTest : LintDetectorTest() {
         .expectFixDiffs(
             """
             Autofix for test/MyTest.kt line 8: Replace with assertIs<java.lang.String>(any):
-            @@ -2,0 +3 @@
+            @@ -1,0 +2 @@
             +import kotlin.test.assertIs
             @@ -8 +9 @@
             -        assertTrue(any is String)
             +        assertIs<String>(any)
             Autofix for test/MyTest.kt line 9: Replace with assertIsNot<java.lang.String>(any):
-            @@ -2,0 +3 @@
+            @@ -1,0 +2 @@
             +import kotlin.test.assertIsNot
             @@ -9 +10 @@
             -        assertTrue(any !is String)
             +        assertIsNot<String>(any)
             Autofix for test/MyTest.kt line 10: Replace with assertIs<java.lang.String>(any):
-            @@ -2,0 +3 @@
+            @@ -1,0 +2 @@
             +import kotlin.test.assertIs
             @@ -10 +11 @@
             -        assertTrue(actual = any is String)
             +        assertIs<String>(any)
             Autofix for test/MyTest.kt line 11: Replace with assertIsNot<java.lang.String>(any):
-            @@ -2,0 +3 @@
+            @@ -1,0 +2 @@
             +import kotlin.test.assertIsNot
             @@ -11 +12 @@
             -        assertTrue(actual = any !is String)
             +        assertIsNot<String>(any)
             Autofix for test/MyTest.kt line 12: Replace with assertIs<java.lang.String>(any, message = "any is String"):
-            @@ -2,0 +3 @@
+            @@ -1,0 +2 @@
             +import kotlin.test.assertIs
             @@ -12 +13 @@
             -        assertTrue(actual = any is String, message = "any is String")
             +        assertIs<String>(any, message = "any is String")
             Autofix for test/MyTest.kt line 13: Replace with assertIsNot<java.lang.String>(any, message = "any !is String"):
-            @@ -2,0 +3 @@
+            @@ -1,0 +2 @@
             +import kotlin.test.assertIsNot
             @@ -13 +14 @@
             -        assertTrue(actual = any !is String, message = "any !is String")
             +        assertIsNot<String>(any, message = "any !is String")
             Autofix for test/MyTest.kt line 14: Replace with assertIs<java.lang.String>(any):
-            @@ -2,0 +3 @@
+            @@ -1,0 +2 @@
             +import kotlin.test.assertIs
             @@ -14 +15 @@
             -        assertTrue { any is String }
             +        assertIs<String>(any)
             Autofix for test/MyTest.kt line 15: Replace with assertIsNot<java.lang.String>(any):
-            @@ -2,0 +3 @@
+            @@ -1,0 +2 @@
             +import kotlin.test.assertIsNot
             @@ -15 +16 @@
             -        assertTrue { any !is String }
             +        assertIsNot<String>(any)
             Autofix for test/MyTest.kt line 16: Replace with assertIs<java.lang.String>(any, message = "any is String"):
-            @@ -2,0 +3 @@
+            @@ -1,0 +2 @@
             +import kotlin.test.assertIs
             @@ -16 +17 @@
             -        assertTrue(message = "any is String") { any is String }
             +        assertIs<String>(any, message = "any is String")
             Autofix for test/MyTest.kt line 17: Replace with assertIsNot<java.lang.String>(any, message = "any !is String"):
-            @@ -2,0 +3 @@
+            @@ -1,0 +2 @@
             +import kotlin.test.assertIsNot
             @@ -17 +18 @@
             -        assertTrue(message = "any !is String") { any !is String }
             +        assertIsNot<String>(any, message = "any !is String")
             Autofix for test/MyTest.kt line 18: Replace with assertIs<java.lang.String>(any, message = "any is String"):
-            @@ -2,0 +3 @@
+            @@ -1,0 +2 @@
             +import kotlin.test.assertIs
             @@ -18 +19 @@
             -        assertTrue(message = "any is String", block = { any is String })
             +        assertIs<String>(any, message = "any is String")
             Autofix for test/MyTest.kt line 19: Replace with assertIsNot<java.lang.String>(any, message = "any !is String"):
-            @@ -2,0 +3 @@
+            @@ -1,0 +2 @@
             +import kotlin.test.assertIsNot
             @@ -19 +20 @@
             -        assertTrue(message = "any !is String", block = { any !is String })
             +        assertIsNot<String>(any, message = "any !is String")
             Autofix for test/MyTest.kt line 25: Replace with assertIsNot<java.lang.String>(any):
-            @@ -2,0 +3 @@
+            @@ -1,0 +2 @@
             +import kotlin.test.assertIsNot
             @@ -25 +26 @@
             -        assertFalse(any is String)
             +        assertIsNot<String>(any)
             Autofix for test/MyTest.kt line 26: Replace with assertIs<java.lang.String>(any):
-            @@ -2,0 +3 @@
+            @@ -1,0 +2 @@
             +import kotlin.test.assertIs
             @@ -26 +27 @@
             -        assertFalse(any !is String)
             +        assertIs<String>(any)
             Autofix for test/MyTest.kt line 27: Replace with assertIsNot<java.lang.String>(any):
-            @@ -2,0 +3 @@
+            @@ -1,0 +2 @@
             +import kotlin.test.assertIsNot
             @@ -27 +28 @@
             -        assertFalse(actual = any is String)
             +        assertIsNot<String>(any)
             Autofix for test/MyTest.kt line 28: Replace with assertIs<java.lang.String>(any):
-            @@ -2,0 +3 @@
+            @@ -1,0 +2 @@
             +import kotlin.test.assertIs
             @@ -28 +29 @@
             -        assertFalse(actual = any !is String)
             +        assertIs<String>(any)
             Autofix for test/MyTest.kt line 29: Replace with assertIsNot<java.lang.String>(any, message = "any is String"):
-            @@ -2,0 +3 @@
+            @@ -1,0 +2 @@
             +import kotlin.test.assertIsNot
             @@ -29 +30 @@
             -        assertFalse(actual = any is String, message = "any is String")
             +        assertIsNot<String>(any, message = "any is String")
             Autofix for test/MyTest.kt line 30: Replace with assertIs<java.lang.String>(any, message = "any !is String"):
-            @@ -2,0 +3 @@
+            @@ -1,0 +2 @@
             +import kotlin.test.assertIs
             @@ -30 +31 @@
             -        assertFalse(actual = any !is String, message = "any !is String")
             +        assertIs<String>(any, message = "any !is String")
             Autofix for test/MyTest.kt line 31: Replace with assertIsNot<java.lang.String>(any):
-            @@ -2,0 +3 @@
+            @@ -1,0 +2 @@
             +import kotlin.test.assertIsNot
             @@ -31 +32 @@
             -        assertFalse { any is String }
             +        assertIsNot<String>(any)
             Autofix for test/MyTest.kt line 32: Replace with assertIs<java.lang.String>(any):
-            @@ -2,0 +3 @@
+            @@ -1,0 +2 @@
             +import kotlin.test.assertIs
             @@ -32 +33 @@
             -        assertFalse { any !is String }
             +        assertIs<String>(any)
             Autofix for test/MyTest.kt line 33: Replace with assertIsNot<java.lang.String>(any, message = "any is String"):
-            @@ -2,0 +3 @@
+            @@ -1,0 +2 @@
             +import kotlin.test.assertIsNot
             @@ -33 +34 @@
             -        assertFalse(message = "any is String") { any is String }
             +        assertIsNot<String>(any, message = "any is String")
             Autofix for test/MyTest.kt line 34: Replace with assertIs<java.lang.String>(any, message = "any !is String"):
-            @@ -2,0 +3 @@
+            @@ -1,0 +2 @@
             +import kotlin.test.assertIs
             @@ -34 +35 @@
             -        assertFalse(message = "any !is String") { any !is String }
             +        assertIs<String>(any, message = "any !is String")
             Autofix for test/MyTest.kt line 35: Replace with assertIsNot<java.lang.String>(any, message = "any is String"):
-            @@ -2,0 +3 @@
+            @@ -1,0 +2 @@
             +import kotlin.test.assertIsNot
             @@ -35 +36 @@
             -        assertFalse(message = "any is String", block = { any is String })
             +        assertIsNot<String>(any, message = "any is String")
             Autofix for test/MyTest.kt line 36: Replace with assertIs<java.lang.String>(any, message = "any !is String"):
-            @@ -2,0 +3 @@
+            @@ -1,0 +2 @@
             +import kotlin.test.assertIs
             @@ -36 +37 @@
             -        assertFalse(message = "any !is String", block = { any !is String })
@@ -442,8 +442,8 @@ class AssertionsDetectorTest : LintDetectorTest() {
                 "test/MyTest.kt",
                 """
                 import org.junit.Test
-                import kotlin.test.assertFalse
-                import kotlin.test.assertTrue
+                import kotlinx.test.assertFalse
+                import kotlinx.test.assertTrue
     
                 class MyTest(val a: Any, val b: Any) {
                     @Test
@@ -565,13 +565,13 @@ class AssertionsDetectorTest : LintDetectorTest() {
             -        assertTrue(a == b)
             +        assertEquals(expected = b, actual = a)
             Autofix for test/MyTest.kt line 9: Replace with assertSame(expected = b, actual = a):
-            @@ -2,0 +3 @@
+            @@ -1,0 +2 @@
             +import kotlin.test.assertSame
             @@ -9 +10 @@
             -        assertTrue(a === b)
             +        assertSame(expected = b, actual = a)
             Autofix for test/MyTest.kt line 10: Replace with assertNotSame(illegal = b, actual = a):
-            @@ -2,0 +3 @@
+            @@ -1,0 +2 @@
             +import kotlin.test.assertNotSame
             @@ -10 +11 @@
             -        assertTrue(a !== b)
@@ -607,85 +607,85 @@ class AssertionsDetectorTest : LintDetectorTest() {
             -        assertTrue(message = "a == b", block = { a == b })
             +        assertEquals(expected = b, actual = a, message = "a == b")
             Autofix for test/MyTest.kt line 20: Replace with assertNotEquals(illegal = b, actual = a):
-            @@ -2,0 +3 @@
+            @@ -1,0 +2 @@
             +import kotlin.test.assertNotEquals
             @@ -20 +21 @@
             -        assertFalse(a == b)
             +        assertNotEquals(illegal = b, actual = a)
             Autofix for test/MyTest.kt line 21: Replace with assertNotSame(illegal = b, actual = a):
-            @@ -2,0 +3 @@
+            @@ -1,0 +2 @@
             +import kotlin.test.assertNotSame
             @@ -21 +22 @@
             -        assertFalse(a === b)
             +        assertNotSame(illegal = b, actual = a)
             Autofix for test/MyTest.kt line 22: Replace with assertSame(expected = b, actual = a):
-            @@ -2,0 +3 @@
+            @@ -1,0 +2 @@
             +import kotlin.test.assertSame
             @@ -22 +23 @@
             -        assertFalse(a !== b)
             +        assertSame(expected = b, actual = a)
             Autofix for test/MyTest.kt line 23: Replace with assertNotEquals(illegal = b, actual = a):
-            @@ -2,0 +3 @@
+            @@ -1,0 +2 @@
             +import kotlin.test.assertNotEquals
             @@ -23 +24 @@
             -        assertFalse(actual = a == b)
             +        assertNotEquals(illegal = b, actual = a)
             Autofix for test/MyTest.kt line 24: Replace with assertNotEquals(illegal = b, actual = a, message = "a == b"):
-            @@ -2,0 +3 @@
+            @@ -1,0 +2 @@
             +import kotlin.test.assertNotEquals
             @@ -24 +25 @@
             -        assertFalse(actual = a == b, message = "a == b")
             +        assertNotEquals(illegal = b, actual = a, message = "a == b")
             Autofix for test/MyTest.kt line 25: Replace with assertNotEquals(illegal = b, actual = a):
-            @@ -2,0 +3 @@
+            @@ -1,0 +2 @@
             +import kotlin.test.assertNotEquals
             @@ -25 +26 @@
             -        assertFalse { a == b }
             +        assertNotEquals(illegal = b, actual = a)
             Autofix for test/MyTest.kt line 26: Replace with assertNotEquals(illegal = b, actual = a, message = "a == b"):
-            @@ -2,0 +3 @@
+            @@ -1,0 +2 @@
             +import kotlin.test.assertNotEquals
             @@ -26 +27 @@
             -        assertFalse(message = "a == b") { a == b }
             +        assertNotEquals(illegal = b, actual = a, message = "a == b")
             Autofix for test/MyTest.kt line 27: Replace with assertNotEquals(illegal = b, actual = a, message = "a == b"):
-            @@ -2,0 +3 @@
+            @@ -1,0 +2 @@
             +import kotlin.test.assertNotEquals
             @@ -27 +28 @@
             -        assertFalse(message = "a == b", block = { a == b })
             +        assertNotEquals(illegal = b, actual = a, message = "a == b")
             Autofix for test/MyTest.kt line 32: Replace with assertNull(a):
-            @@ -2,0 +3 @@
+            @@ -1,0 +2 @@
             +import kotlin.test.assertNull
             @@ -32 +33 @@
             -        assertTrue(a == null)
             +        assertNull(a)
             Autofix for test/MyTest.kt line 33: Replace with assertNull(a):
-            @@ -2,0 +3 @@
+            @@ -1,0 +2 @@
             +import kotlin.test.assertNull
             @@ -33 +34 @@
             -        assertTrue(a === null)
             +        assertNull(a)
             Autofix for test/MyTest.kt line 34: Replace with assertNotNull(a):
-            @@ -2,0 +3 @@
+            @@ -1,0 +2 @@
             +import kotlin.test.assertNotNull
             @@ -34 +35 @@
             -        assertTrue(a !== null)
             +        assertNotNull(a)
             Autofix for test/MyTest.kt line 35: Replace with assertNotNull(b):
-            @@ -2,0 +3 @@
+            @@ -1,0 +2 @@
             +import kotlin.test.assertNotNull
             @@ -35 +36 @@
             -        assertFalse(null == b)
             +        assertNotNull(b)
             Autofix for test/MyTest.kt line 36: Replace with assertNotNull(b):
-            @@ -2,0 +3 @@
+            @@ -1,0 +2 @@
             +import kotlin.test.assertNotNull
             @@ -36 +37 @@
             -        assertFalse(null === b)
             +        assertNotNull(b)
             Autofix for test/MyTest.kt line 37: Replace with assertNull(b):
-            @@ -2,0 +3 @@
+            @@ -1,0 +2 @@
             +import kotlin.test.assertNull
             @@ -37 +38 @@
             -        assertFalse(null !== b)
@@ -720,7 +720,7 @@ class AssertionsDetectorTest : LintDetectorTest() {
 
         private val KOTLIN_TEST_STUBS = TestFiles.kotlin(
             """
-            package kotlin.test
+            package kotlinx.test // Using kotlinx.test instead of kotlin.test to work around this issue: https://issuetracker.google.com/issues/458722689
 
             fun <T> assertEquals(expected: T, actual: T) = Unit
             fun assertTrue(actual: Boolean, message: String? = null) = Unit

@@ -210,7 +210,7 @@ class TypographyDetectorTest : LintDetectorTest() {
             """.trimIndent(),
         )
         .expectFixDiffs(
-            """
+            $$"""
             Autofix for res/values/strings.xml line 3: Replace \u0025 with %:
             @@ -3 +3
             -     <string name="percent_1">Foo 100\u0025!</string>
@@ -221,8 +221,8 @@ class TypographyDetectorTest : LintDetectorTest() {
             +     <string name="percent_2" formatted="false">Foo 100%s!</string>
             Autofix for res/values/strings.xml line 5: Replace \u0025 with %%:
             @@ -5 +5
-            -     <string name="percent_3">Foo %1${'$'}d\u0025!</string>
-            +     <string name="percent_3">Foo %1${'$'}d%%!</string>
+            -     <string name="percent_3">Foo %1$d\u0025!</string>
+            +     <string name="percent_3">Foo %1$d%%!</string>
             Autofix for res/values/strings.xml line 6: Replace \u0025 with %%:
             @@ -6 +6
             -     <string name="percent_4" formatted="true">Foo 10%% or 42\u0025s!</string>

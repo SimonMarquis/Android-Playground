@@ -6,14 +6,14 @@ targetSdk = "36"
 #noinspection GradleVersionCatalogSort
 compileSdk = "36"
 
-agp = "8.13.2"
-android-tools = "31.13.2"
-androidx-benchmark = "1.4.1"
+agp = "9.0.0"
+android-tools = "32.0.0"
+androidx-benchmark = "1.5.0-alpha01"
 androidx-lifecycle = "2.10.0"
-hilt = "2.58"
+hilt = "2.59"
 kotlin = "2.3.10-RC"
 navigation3 = "1.0.0"
-paparazzi = "2.0.0-alpha02"
+paparazzi = "2.0.0-alpha04"
 
 [bundles]
 
@@ -69,10 +69,10 @@ javax-inject = "javax.inject:javax.inject:1"
 junit = "junit:junit:4.13.2"
 
 kotlin-bom = { module = "org.jetbrains.kotlin:kotlin-bom", version.ref = "kotlin" }
-kotlin-metadata = { module = "org.jetbrains.kotlin:kotlin-metadata-jvm" }
+kotlin-metadata = { module = "org.jetbrains.kotlin:kotlin-metadata-jvm", version.ref = "kotlin" } # not provided in the BoM
 kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect" }
 kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib" }
-kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test" }
+kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test-junit" }
 
 kotlinx-collections = "org.jetbrains.kotlinx:kotlinx-collections-immutable:0.4.0"
 kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android" }
@@ -81,7 +81,7 @@ kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-c
 kotlinx-coroutines-guava = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-guava" }
 kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test" }
 kotlinx-datetime = "org.jetbrains.kotlinx:kotlinx-datetime:0.7.1-0.6.x-compat"
-kotlinx-serialization-bom = "org.jetbrains.kotlinx:kotlinx-serialization-bom:1.9.0"
+kotlinx-serialization-bom = "org.jetbrains.kotlinx:kotlinx-serialization-bom:1.10.0"
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json" }
 
 lint = { module = "com.android.tools.lint:lint", version.ref = "android-tools" }
@@ -111,7 +111,6 @@ artifactsSizeReport = "io.github.cdsap.android-artifacts-size-report:0.2.1"
 dagp = "com.autonomousapps.dependency-analysis:3.5.1"
 develocity = "com.gradle.develocity:4.3.1"
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-assignment = { id = "org.jetbrains.kotlin.plugin.assignment", version.ref = "kotlin" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
