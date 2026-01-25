@@ -51,7 +51,8 @@ internal fun Project.android(
 internal fun Project.androidApplication(configure: ApplicationExtension.() -> Unit) = configure<ApplicationExtension>(configure)
 internal fun Project.androidLibrary(configure: LibraryExtension.() -> Unit) = configure<LibraryExtension>(configure)
 internal fun Project.androidTest(configure: TestExtension.() -> Unit) = configure<TestExtension>(configure)
-internal fun Project.androidComponents(configure: ApplicationAndroidComponentsExtension.() -> Unit) = configure<ApplicationAndroidComponentsExtension>(configure)
+internal fun Project.androidApplicationComponents(configure: ApplicationAndroidComponentsExtension.() -> Unit) = configure<ApplicationAndroidComponentsExtension>(configure)
+internal fun Project.androidLibraryComponents(configure: LibraryAndroidComponentsExtension.() -> Unit) = configure<LibraryAndroidComponentsExtension>(configure)
 
 internal val Project.androidExtension: AndroidComponentsExtension<out CommonExtension, out VariantBuilder, out Variant>
     get() = androidExtensionNullable
