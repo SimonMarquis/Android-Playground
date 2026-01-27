@@ -102,6 +102,7 @@ internal class PlaygroundLibraries(catalog: VersionCatalog) {
     val junit by catalog
     val `kotlin-metadata` by catalog
     val `kotlin-test` by catalog
+    val `kotlin-test-junit` by catalog
     val `slack-compose-lint` by catalog
 
     val boms: Set<Provider<MinimalExternalModuleDependency>> by lazy {

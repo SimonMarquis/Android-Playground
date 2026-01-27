@@ -9,6 +9,7 @@ import fr.smarquis.playground.buildlogic.dsl.apply
 import fr.smarquis.playground.buildlogic.dsl.assign
 import fr.smarquis.playground.buildlogic.dsl.configure
 import fr.smarquis.playground.buildlogic.dsl.withType
+import fr.smarquis.playground.buildlogic.isAndroid
 import fr.smarquis.playground.buildlogic.isAndroidApplication
 import fr.smarquis.playground.buildlogic.isAndroidLibrary
 import fr.smarquis.playground.buildlogic.isAndroidTest
@@ -131,7 +132,8 @@ internal object PlaygroundUnitTests {
     }
 
     private fun Project.addTestDependencies() {
-        dependencies.add("testImplementation", libs.`kotlin-test`)
+        // https://issuetracker.google.com/issues/443080559#comment12
+        dependencies.add("testImplementation", if (isAndroid) libs.`kotlin-test-junit` else libs.`kotlin-test`)
         dependencies.add("testImplementation", libs.assertk)
         dependencies.add("testImplementation", libs.junit)
     }
