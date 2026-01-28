@@ -96,7 +96,7 @@ paparazzi = { module = "app.cash.paparazzi:paparazzi", version.ref = "paparazzi"
 
 slack-compose-lint = "com.slack.lint.compose:compose-lint-checks:1.4.2"
 
-testParameterInjector = "com.google.testparameterinjector:test-parameter-injector:1.20"
+testParameterInjector = "com.google.testparameterinjector:test-parameter-injector:1.21"
 
 turbine = "app.cash.turbine:turbine:1.2.1"
 
@@ -110,7 +110,7 @@ android-test = { id = "com.android.test", version.ref = "agp" }
 androidx-baselineprofile = { id = "androidx.baselineprofile", version.ref = "androidx-benchmark" }
 artifactsSizeReport = "io.github.cdsap.android-artifacts-size-report:0.2.1"
 dagp = "com.autonomousapps.dependency-analysis:3.5.1"
-develocity = "com.gradle.develocity:4.3.1"
+develocity = "com.gradle.develocity:4.3.2"
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 kotlin-assignment = { id = "org.jetbrains.kotlin.plugin.assignment", version.ref = "kotlin" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
@@ -118,7 +118,7 @@ kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlin-powerAssert = { id = "org.jetbrains.kotlin.plugin.power-assert", version.ref = "kotlin" }
 kotlin-sam = { id = "org.jetbrains.kotlin.plugin.sam.with.receiver", version.ref = "kotlin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
-ksp = "com.google.devtools.ksp:2.3.4"
+ksp = "com.google.devtools.ksp:2.3.5"
 licensee = "app.cash.licensee:1.14.1"
 paparazzi = { id = "app.cash.paparazzi", version.ref = "paparazzi" }
 
