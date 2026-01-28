@@ -540,6 +540,11 @@
             <pgp value="638DBA7FF338F537EACB7AC0AE1B9D6007DDFA7C"/>
          </artifact>
       </component>
+      <component group="com.google.testparameterinjector" name="test-parameter-injector" version="1.21">
+         <artifact name="test-parameter-injector-1.21.jar">
+            <pgp value="638DBA7FF338F537EACB7AC0AE1B9D6007DDFA7C"/>
+         </artifact>
+      </component>
       <component group="com.googlecode.juniversalchardet" name="juniversalchardet" version="1.0.3">
          <artifact name="juniversalchardet-1.0.3.jar">
             <pgp value="31BAE2E51D95E0F8AD9B7BCC40A3C4432BD7308C"/>
