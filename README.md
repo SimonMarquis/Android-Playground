@@ -13,8 +13,8 @@
 |---------------------------------------------------------------------------|---------------------------------------------------------------|
 | `gradlew assembleDebug`                                                   | Build debug APK                                               |
 | `gradlew assembleRelease`                                                 | Build release APK (optimized & minified)                      |
-| `gradlew checkLegacyAbi`                                                  | Checks project public API ([BCV][BCV])                        |
-| `gradlew updateLegacyAbi`                                                 | Dumps project public API ([BCV][BCV])                         |
+| `gradlew checkKotlinAbi`                                                  | Checks project public API ([BCV][BCV])                        |
+| `gradlew updateKotlinAbi`                                                 | Dumps project public API ([BCV][BCV])                         |
 | `gradlew licensee`                                                        | Runs [Licensee][Licensee] dependency license validation       |
 | `gradlew topologyCheck`                                                   | Checks the topology of project dependencies                   |
 | `gradlew dependencyLockState --write-locks`                               | Updates dependency lock state                                 |
