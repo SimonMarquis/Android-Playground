@@ -1,12 +1,12 @@
-FROM eclipse-temurin:21-jdk
+FROM eclipse-temurin:25-alpine
 
 LABEL maintainer="Simon Marquis <contact@simon-marquis.fr>"
 LABEL description="A Docker image for Android devs."
 LABEL version="1.0.0"
 
-ARG CMD_LINE_VERSION=12700392
-ARG ANDROID_VERSION=35
-ARG ANDROID_BUILD_TOOLS_VERSION=35.0.1
+ARG CMD_LINE_VERSION=14742923
+ARG ANDROID_VERSION=36.1.0
+ARG ANDROID_BUILD_TOOLS_VERSION=36.1
 
 ARG USERNAME=devcontainer
 ARG USER_UID=1234
