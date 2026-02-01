@@ -1,4 +1,4 @@
-FROM eclipse-temurin:25-alpine
+FROM eclipse-temurin:25
 
 LABEL maintainer="Simon Marquis <contact@simon-marquis.fr>"
 LABEL description="A Docker image for Android devs."
