@@ -124,7 +124,7 @@ jobs:
         uses: ./.github/actions/archive-junit-reports
         with:
           html: "**/build/reports/tests/test*"
-          xml: "**/build/test-results/test*/**.xml"
+          xml: "**/build/test-results/**/TEST-*.xml"
       - name: 📦 Archive Paparazzi reports
         if: ${{ !cancelled() && contains(fromJSON('["success", "failure"]'), steps.test.outcome) }}
         uses: ./.github/actions/archive-paparazzi-reports
