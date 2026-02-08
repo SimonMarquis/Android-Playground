@@ -39,7 +39,7 @@ jobs:
           cache-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
       - uses: ./.github/actions/setup-gradle-properties
 
-      - run: ./gradlew dependencyLockState --write-locks --no-configuration-cache > /dev/null
+      - run: ./gradlew dependencyLockState --write-locks --no-configuration-cache -Dorg.gradle.unsafe.isolated-projects=false > /dev/null
       - run: |
           if ! git diff --quiet --exit-code -- ':(glob)**/*gradle.lockfile';
           then

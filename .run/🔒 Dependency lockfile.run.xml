@@ -6,6 +6,7 @@
       <option name="externalSystemIdString" value="GRADLE" />
       <option name="scriptParameters" value="--write-locks" />
       <option name="scriptParameters" value="--no-configuration-cache" />
+      <option name="scriptParameters" value="-Dorg.gradle.unsafe.isolated-projects=false" />
       <option name="taskDescriptions">
         <list />
       </option>
