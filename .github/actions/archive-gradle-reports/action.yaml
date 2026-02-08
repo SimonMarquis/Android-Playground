@@ -14,7 +14,7 @@ runs:
         # Format unique identifiers:
         # - gradle-reports-[job]
         # - gradle-reports-[job#id]
-        name: ${{ format(format('gradle-reports-[{0}]', inputs.id == '' && '{0}' || '{0}#{1}'), github.job, inputs.id) }}
+        name: ${{ format(format('gradle-reports-[{0}]', case(inputs.id == '', '{0}', '{0}#{1}')), github.job, inputs.id) }}
         path: |
           build/reports/configuration-cache/**/*.html
           build/reports/dependency-configuration-cache
