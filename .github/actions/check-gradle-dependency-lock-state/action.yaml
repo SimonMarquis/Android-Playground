@@ -4,7 +4,7 @@ description: Check Gradle dependency lock state
 runs:
   using: composite
   steps:
-    - run: ./gradlew dependencyLockState --write-locks > /dev/null
+    - run: ./gradlew dependencyLockState --write-locks --no-configuration-cache > /dev/null
       shell: bash
     - run: git diff --quiet --exit-code -- ':(glob)**/*gradle.lockfile'
       shell: bash

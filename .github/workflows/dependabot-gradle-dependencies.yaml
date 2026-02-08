@@ -61,7 +61,7 @@ jobs:
 
       - id: gradle-dependency-lock-state
         run: |
-          ./gradlew dependencyLockState --write-locks > /dev/null
+          ./gradlew dependencyLockState --write-locks --no-configuration-cache > /dev/null
 
           if ! git diff --quiet --exit-code -- ':(glob)**/*gradle.lockfile';
           then
