@@ -8,7 +8,7 @@ compileSdk = "36"
 
 agp = "9.0.0"
 android-tools = "32.0.0"
-androidx-benchmark = "1.5.0-alpha02"
+androidx-benchmark = "1.5.0-alpha03"
 androidx-lifecycle = "2.10.0"
 hilt = "2.59"
 kotlin = "2.3.10"
