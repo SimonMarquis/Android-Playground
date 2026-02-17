@@ -41,6 +41,12 @@ internal abstract class PlaygroundBasePlugin : Plugin<Project> {
         PlaygroundTopology.configureProject(target)
         PlaygroundGraph.configureProject(target, startParameter, buildFeatures)
         PlaygroundDependencyAnalysis.configureProject(target)
+
+        configurations.configureEach {
+            resolutionStrategy.eachDependency {
+                if (requested.group == "com.google.dagger") useVersion("HEAD-SNAPSHOT")
+            }
+        }
     }
 
 }
