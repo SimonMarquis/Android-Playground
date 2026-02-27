@@ -9,7 +9,7 @@ inputs:
 runs:
   using: composite
   steps:
-    - uses: actions/upload-artifact@v6
+    - uses: actions/upload-artifact@v7
       with:
         # Format unique identifiers:
         # - gradle-reports-[job]
