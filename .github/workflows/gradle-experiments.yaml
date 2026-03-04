@@ -10,7 +10,7 @@ permissions:
 
 env:
   DEVELOCITY_URL: https://scans.gradle.com
-  TASKS: checkLegacyAbi licensee assembleRelease ciUnitTest ciLint verifyScreenshots
+  TASKS: checkKotlinAbi licensee assembleRelease ciUnitTest ciLint verifyScreenshots
 
 jobs:
   build-cache-compatibility:
