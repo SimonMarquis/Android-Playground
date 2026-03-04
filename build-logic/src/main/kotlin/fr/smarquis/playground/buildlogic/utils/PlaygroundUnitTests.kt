@@ -125,6 +125,9 @@ internal object PlaygroundUnitTests {
             junitXml.includeSystemOutLog = false
             junitXml.includeSystemErrLog = false
             junitXml.mergeReruns = true
+            // Disable HTML reports until Paparazzi supports Gradle 9.3+ APIs
+            // https://github.com/cashapp/paparazzi/issues/2182
+            html.required = false
         }
 
         // Use `-Pplayground.rerun-tests` to force re-run tests
