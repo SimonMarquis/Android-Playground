@@ -19,6 +19,7 @@ updates:
     groups:
       android-build-tools:
         patterns:
+          - com.android.tools:*
           - com.android.tools.build:*
           - com.android.tools.lint:*
           - com.android.application

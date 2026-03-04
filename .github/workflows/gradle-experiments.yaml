@@ -70,7 +70,8 @@ jobs:
           cache-disabled: true
       - uses: ./.github/actions/setup-gradle-properties
       - name: Warmup # i.e. store initial Android cache like .config/.android/cache
-        run: ./gradlew ${{ env.TASKS }} --no-configuration-cache --dry-run --no-daemon
+        # The configuration cache cannot be disabled when isolated projects is enabled
+        run: ./gradlew ${{ env.TASKS }} -Dorg.gradle.unsafe.isolated-projects=false --no-configuration-cache --dry-run --no-daemon
       - name: Run configuration cache experiment
         uses: gradle/develocity-build-validation-scripts/.github/actions/gradle/experiment-config-cache@343067513709cbf234b163a04c9a4b349b641452 # v2.8
         with:

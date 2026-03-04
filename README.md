@@ -29,8 +29,8 @@
 | `gradlew assembleRelease -Pplayground.compose.compilerMetrics`            | Compose compiler metrics                                      |
 | `gradlew assembleRelease -Pplayground.compose.compilerReports`            | Compose compiler reports                                      |
 | `gradlew globalCi --write-verification-metadata pgp,sha256 --export-keys` | Generates verification metadata & keyring                     |
-| `gradlew graphDump`                                                       | Dumps project dependencies to a mermaid file                  |
-| `gradlew graphUpdate`                                                     | Updates Markdown file with the corresponding dependency graph |
+| `gradlew graphDump -Dorg.gradle.unsafe.isolated-projects=false`           | Dumps project dependencies to a mermaid file                  |
+| `gradlew graphUpdate -Dorg.gradle.unsafe.isolated-projects=false`         | Updates Markdown file with the corresponding dependency graph |
 | `gradlew buildHealth`                                                     | Generates a build health report with [DAGP][DAGP]             |
 
 [BCV]: https://kotlinlang.org/docs/gradle-binary-compatibility-validation.html
@@ -47,7 +47,6 @@
 - [![🐘 Gradle dependency signatures](https://github.com/SimonMarquis/Android-Playground/actions/workflows/gradle-dependency-signatures.yaml/badge.svg)](https://github.com/SimonMarquis/Android-Playground/actions/workflows/gradle-dependency-signatures.yaml)
 - [![🐘 Gradle dependency submission](https://github.com/SimonMarquis/Android-Playground/actions/workflows/gradle-dependency-submission.yaml/badge.svg)](https://github.com/SimonMarquis/Android-Playground/actions/workflows/gradle-dependency-submission.yaml)
 - [![🐘 Gradle experiments](https://github.com/SimonMarquis/Android-Playground/actions/workflows/gradle-experiments.yaml/badge.svg)](https://github.com/SimonMarquis/Android-Playground/actions/workflows/gradle-experiments.yaml)
-- [![🐘 Gradle Wrapper updater](https://github.com/SimonMarquis/Android-Playground/actions/workflows/gradle-wrapper-updater.yaml/badge.svg)](https://github.com/SimonMarquis/Android-Playground/actions/workflows/gradle-wrapper-updater.yaml)
 - [![📸 Paparazzi Golden Images](https://github.com/SimonMarquis/Android-Playground/actions/workflows/paparazzi-golden-images.yaml/badge.svg)](https://github.com/SimonMarquis/Android-Playground/actions/workflows/paparazzi-golden-images.yaml)
 - [![⚡ Startup & Baseline Profiles](https://github.com/SimonMarquis/Android-Playground/actions/workflows/startup-baseline-profiles.yaml/badge.svg)](https://github.com/SimonMarquis/Android-Playground/actions/workflows/startup-baseline-profiles.yaml)
 - [![🚀 Publish to Google Play](https://github.com/SimonMarquis/Android-Playground/actions/workflows/publish.yaml/badge.svg)](https://github.com/SimonMarquis/Android-Playground/actions/workflows/publish.yaml)
