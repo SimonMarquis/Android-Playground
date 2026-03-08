@@ -11,7 +11,7 @@ android-tools = "32.1.0"
 androidx-benchmark = "1.5.0-alpha03"
 androidx-lifecycle = "2.10.0"
 hilt = "2.59.2"
-kotlin = "2.3.10"
+kgp = "2.3.10"
 navigation3 = "1.0.1"
 paparazzi = "2.0.0-alpha04"
 
@@ -68,8 +68,8 @@ hilt-compiler-android = { module = "com.google.dagger:hilt-android-compiler", ve
 javax-inject = "javax.inject:javax.inject:1"
 junit = "junit:junit:4.13.2"
 
-kotlin-bom = { module = "org.jetbrains.kotlin:kotlin-bom", version.ref = "kotlin" }
-kotlin-metadata = { module = "org.jetbrains.kotlin:kotlin-metadata-jvm", version.ref = "kotlin" } # not provided in the BoM
+kotlin-bom = { module = "org.jetbrains.kotlin:kotlin-bom", version.ref = "kgp" }
+kotlin-metadata = { module = "org.jetbrains.kotlin:kotlin-metadata-jvm", version.ref = "kgp" } # not provided in the BoM
 kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect" }
 kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib" }
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test" }
@@ -112,12 +112,12 @@ artifactsSizeReport = "io.github.cdsap.android-artifacts-size-report:0.2.1"
 dagp = "com.autonomousapps.dependency-analysis:3.6.1"
 develocity = "com.gradle.develocity:4.3.2"
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
-kotlin-assignment = { id = "org.jetbrains.kotlin.plugin.assignment", version.ref = "kotlin" }
-kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
-kotlin-powerAssert = { id = "org.jetbrains.kotlin.plugin.power-assert", version.ref = "kotlin" }
-kotlin-sam = { id = "org.jetbrains.kotlin.plugin.sam.with.receiver", version.ref = "kotlin" }
-kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+kotlin-assignment = { id = "org.jetbrains.kotlin.plugin.assignment", version.ref = "kgp" }
+kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kgp" }
+kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kgp" }
+kotlin-powerAssert = { id = "org.jetbrains.kotlin.plugin.power-assert", version.ref = "kgp" }
+kotlin-sam = { id = "org.jetbrains.kotlin.plugin.sam.with.receiver", version.ref = "kgp" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kgp" }
 ksp = "com.google.devtools.ksp:2.3.6"
 licensee = "app.cash.licensee:1.14.1"
 paparazzi = { id = "app.cash.paparazzi", version.ref = "paparazzi" }
