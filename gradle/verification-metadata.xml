@@ -23,6 +23,7 @@
          <trusted-key id="0E225917414670F4442C250DFD533C07C264648F">
             <trusting group="androidx.core"/>
             <trusting group="androidx.databinding"/>
+            <trusting group="androidx.datastore"/>
             <trusting group="^androidx[.]compose($|([.].*))" regex="true"/>
             <trusting group="^com[.]android($|([.].*))" regex="true"/>
             <trusting group="^com[.]android[.]tools($|([.].*))" regex="true"/>
