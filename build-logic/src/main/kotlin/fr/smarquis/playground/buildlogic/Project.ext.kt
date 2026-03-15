@@ -113,6 +113,7 @@ internal inline fun <reified T : KotlinBaseExtension> Project.configureKotlin(
                 }
             }
         }
+        jvmToolchain(25)
         kotlin.compilerOptions {
             jvmTarget = JvmTarget.JVM_11
             allWarningsAsErrors = properties.warningsAsErrors
