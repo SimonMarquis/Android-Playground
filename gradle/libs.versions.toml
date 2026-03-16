@@ -11,7 +11,7 @@ android-tools = "32.1.0"
 androidx-benchmark = "1.5.0-alpha04"
 androidx-lifecycle = "2.10.0"
 hilt = "2.59.2"
-kgp = "2.3.10"
+kgp = "2.3.20"
 navigation3 = "1.0.1"
 paparazzi = "2.0.0-alpha04"
 
