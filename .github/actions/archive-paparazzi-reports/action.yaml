@@ -17,9 +17,14 @@ runs:
         name: paparazzi-failures
         path: '**/build/paparazzi/failures/*.png'
         if-no-files-found: ignore
+    - if: ${{ !cancelled() }}
+      uses: ./.github/actions/minimize-comments
+      with:
+        marker: "<!-- playground: archive-paparazzi-reports -->"
     - if: ${{ steps.artifact-failures-and-deltas.outputs.artifact-id != '' && github.event_name == 'pull_request' }}
       run: |
         tee --append "$GITHUB_STEP_SUMMARY" << EOF >/dev/null || true
+        <!-- playground: archive-paparazzi-reports -->
         **🚨 UI regression detected!**
         - [📦 Download Paparazzi deltas & golden images]($ARTIFACT_URL)
         - [📸 Regenerate Golden images with workflow]($GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/workflows/paparazzi-golden-images.yaml)

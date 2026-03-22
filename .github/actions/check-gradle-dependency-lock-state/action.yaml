@@ -9,9 +9,14 @@ runs:
     - run: git diff --quiet --exit-code -- ':(glob)**/*gradle.lockfile'
       shell: bash
       id: check
+    - if: ${{ !cancelled() }}
+      uses: ./.github/actions/minimize-comments
+      with:
+        marker: "<!-- playground: check-gradle-dependency-lock-state -->"
     - if: ${{ failure() && steps.check.conclusion == 'failure' }}
       run: |
         tee --append "$GITHUB_STEP_SUMMARY" << EOF >/dev/null || true
+        <!-- playground: check-gradle-dependency-lock-state -->
         **🐘 Gradle dependency lock state violations detected!**
         \`\`\`diff
         $(git diff --unified=0 -- ':(glob)**/*gradle.lockfile' | grep -E '^(diff|[+-][^+-])')
