@@ -33,13 +33,13 @@ runs:
             }
           }`;
           
-          const mutation = `mutation($id:ID!){minimizeComment(input:{subjectId:$id,classifier:OUTDATED}){clientMutationId}}`;
+          const mutation = `mutation($id:ID!){minimizeComment(input:{subjectId:$id,classifier:OUTDATED}){clientMutationId minimizedComment{isMinimized minimizedReason}}}`;
           const commentsToMinimize = ((await github.graphql(query, { owner, repo, number: Number(process.env.PR_NUMBER) }))
             .repository?.pullRequest?.comments?.nodes || [])
             .filter(c => c.body.includes(process.env.MARKER) && !c.isMinimized)
             .map(async c =>
               github.graphql(mutation, { id: c.id })
-                .then(() => core.info(`Successfully minimized (id:${c.id}, url:${c.url})`))
+                .then(r => core.info(`Successfully minimized: ${JSON.stringify(r)}`))
                 .catch(e => core.error(`Failed to minimize (id:${c.id}, url:${c.url}, error:${e?.message || e})`))
             );
 
