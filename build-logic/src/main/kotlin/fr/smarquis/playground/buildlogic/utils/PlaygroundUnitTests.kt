@@ -132,6 +132,14 @@ internal object PlaygroundUnitTests {
 
         // Use `-Pplayground.rerun-tests` to force re-run tests
         if (properties.isRerunTest) outputs.upToDateWhen { false }
+
+        jvmArgs(
+            // A restricted method in java.lang.System has been called
+            // java.lang.System::load has been called by com.android.layoutlib.bridge.Bridge in an unnamed module (file:/home/runner/.gradle/caches/[...]/transformed/layoutlib-16.1.1.jar)
+            // Use --enable-native-access=ALL-UNNAMED to avoid a warning for callers in this module
+            // Restricted methods will be blocked in a future release unless native access is enabled
+            "--enable-native-access=ALL-UNNAMED"
+        )
     }
 
     private fun Project.addTestDependencies() {
