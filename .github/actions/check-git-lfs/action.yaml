@@ -7,10 +7,15 @@ runs:
     - run: git lfs fsck --pointers
       shell: bash
       id: fsck
+    - if: ${{ !cancelled() }}
+      uses: ./.github/actions/minimize-comments
+      with:
+        marker: "<!-- playground: check-git-lfs -->"
     - if: ${{ failure() && steps.fsck.conclusion == 'failure' && github.event_name == 'pull_request' }}
       shell: bash
       run: |
         tee --append "$GITHUB_STEP_SUMMARY" << EOF >/dev/null || true
+        <!-- playground: check-git-lfs -->
         **🚨 Git LFS violations detected! Please re-commit these files with \`git-lfs\`:**
         \`\`\`
         $(git lfs fsck --pointers)
