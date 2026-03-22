@@ -7,7 +7,7 @@ inputs:
     required: true
   pr-number:
     description: PR number
-    default: ${{ github.event.issue.number || github.event.pull_request.number }}
+    default: ${{ github.event.issue.number || github.event.pull_request.number || '' }}
     required: true
   token:
     description: GitHub Token
@@ -18,6 +18,7 @@ runs:
   using: composite
   steps:
     - uses: actions/github-script@v8
+      if: inputs.pr-number != ''
       env:
         MARKER: ${{ inputs.marker }}
         PR_NUMBER: ${{ inputs.pr-number }}

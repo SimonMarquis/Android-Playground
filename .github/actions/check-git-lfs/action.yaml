@@ -7,7 +7,7 @@ runs:
     - run: git lfs fsck --pointers
       shell: bash
       id: fsck
-    - if: ${{ !cancelled() }}
+    - if: ${{ !cancelled() && github.event_name == 'pull_request' }}
       uses: ./.github/actions/minimize-comments
       with:
         marker: "<!-- playground: check-git-lfs -->"
