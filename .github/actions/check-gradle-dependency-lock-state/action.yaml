@@ -9,7 +9,7 @@ runs:
     - run: git diff --quiet --exit-code -- ':(glob)**/*gradle.lockfile'
       shell: bash
       id: check
-    - if: ${{ !cancelled() }}
+    - if: ${{ !cancelled() && github.event_name == 'pull_request' }}
       uses: ./.github/actions/minimize-comments
       with:
         marker: "<!-- playground: check-gradle-dependency-lock-state -->"
