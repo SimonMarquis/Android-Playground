@@ -118,7 +118,7 @@ kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kgp" }
 kotlin-powerAssert = { id = "org.jetbrains.kotlin.plugin.power-assert", version.ref = "kgp" }
 kotlin-sam = { id = "org.jetbrains.kotlin.plugin.sam.with.receiver", version.ref = "kgp" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kgp" }
-ksp = "com.google.devtools.ksp:2.3.6"
+ksp = "com.google.devtools.ksp:2.3.7"
 licensee = "app.cash.licensee:1.14.1"
 paparazzi = { id = "app.cash.paparazzi", version.ref = "paparazzi" }
 
