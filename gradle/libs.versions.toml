@@ -2,9 +2,9 @@
 #noinspection GradleVersionCatalogSort
 minSdk = "24"
 #noinspection GradleVersionCatalogSort
-targetSdk = "36"
+targetSdk = "37"
 #noinspection GradleVersionCatalogSort
-compileSdk = "36"
+compileSdk = "37"
 
 agp = "9.2.0"
 android-tools = "32.2.0"
