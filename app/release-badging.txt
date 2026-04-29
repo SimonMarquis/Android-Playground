@@ -1,6 +1,6 @@
-package: name='fr.smarquis.testing' platformBuildVersionName='16' platformBuildVersionCode='36' compileSdkVersion='36' compileSdkVersionCodename='16'
+package: name='fr.smarquis.testing' platformBuildVersionName='17' platformBuildVersionCode='37' compileSdkVersion='37' compileSdkVersionCodename='17'
 minSdkVersion:'24'
-targetSdkVersion:'36'
+targetSdkVersion:'37'
 uses-permission: name='fr.smarquis.testing.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION'
 application-label:'🛝'
 application-icon-160:'res/mipmap-anydpi-v26/playground_app_ic_launcher.xml'

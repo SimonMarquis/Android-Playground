@@ -1,11 +1,17 @@
 package fr.smarquis.playground.buildlogic.utils
 
+import com.android.build.api.dsl.TestedExtension
 import fr.smarquis.playground.buildlogic.PlaygroundProperties
+import fr.smarquis.playground.buildlogic.androidApplication
+import fr.smarquis.playground.buildlogic.androidLibrary
 import fr.smarquis.playground.buildlogic.capitalized
 import fr.smarquis.playground.buildlogic.dsl.apply
 import fr.smarquis.playground.buildlogic.dsl.assign
 import fr.smarquis.playground.buildlogic.dsl.configure
 import fr.smarquis.playground.buildlogic.dsl.withType
+import fr.smarquis.playground.buildlogic.isAndroid
+import fr.smarquis.playground.buildlogic.isAndroidApplication
+import fr.smarquis.playground.buildlogic.isAndroidLibrary
 import fr.smarquis.playground.buildlogic.isAndroidTest
 import fr.smarquis.playground.buildlogic.isCi
 import fr.smarquis.playground.buildlogic.libs
@@ -58,9 +64,9 @@ internal object PlaygroundUnitTests {
     }
 
     private fun Project.createAndroidCiUnitTestTask() {
-        val variant = playground().ciUnitTestVariant.get().capitalized()
-        val variantUnitTestTaskName = "test${variant}UnitTest"
-        val variantCompileUnitTestTaskName = "compile${variant}UnitTestSources"
+        val variant = playground().ciUnitTestVariant.get()
+        val variantUnitTestTaskName = "test${variant.capitalized()}UnitTest"
+        val variantCompileUnitTestTaskName = "compile${variant.capitalized()}UnitTestSources"
         logger.debug("{} Creating CI unit test tasks for project '{}' and variant '{}'", LOG, this, variant)
         val ciUnitTest = registerCiUnitTestTask(
             name = CI_UNIT_TEST_TASK_NAME,
@@ -71,6 +77,13 @@ internal object PlaygroundUnitTests {
             name = COMPILE_CI_UNIT_TEST_NAME,
             dependencyTaskName = variantCompileUnitTestTaskName,
         )
+        val configureTestBuildType = fun TestedExtension.() {
+            testBuildType = playground().ciUnitTestVariant.get()
+        }
+        when {
+            isAndroidApplication -> androidApplication(configureTestBuildType)
+            isAndroidLibrary -> androidLibrary(configureTestBuildType)
+        }
     }
 
     private fun Project.registerCiUnitTestTask(
@@ -112,14 +125,26 @@ internal object PlaygroundUnitTests {
             junitXml.includeSystemOutLog = false
             junitXml.includeSystemErrLog = false
             junitXml.mergeReruns = true
+            // Disable HTML reports until Paparazzi supports Gradle 9.3+ APIs
+            // https://github.com/cashapp/paparazzi/issues/2182
+            html.required = false
         }
 
         // Use `-Pplayground.rerun-tests` to force re-run tests
         if (properties.isRerunTest) outputs.upToDateWhen { false }
+
+        jvmArgs(
+            // A restricted method in java.lang.System has been called
+            // java.lang.System::load has been called by com.android.layoutlib.bridge.Bridge in an unnamed module (file:/home/runner/.gradle/caches/[...]/transformed/layoutlib-16.1.1.jar)
+            // Use --enable-native-access=ALL-UNNAMED to avoid a warning for callers in this module
+            // Restricted methods will be blocked in a future release unless native access is enabled
+            "--enable-native-access=ALL-UNNAMED"
+        )
     }
 
     private fun Project.addTestDependencies() {
-        dependencies.add("testImplementation", libs.`kotlin-test`)
+        // https://issuetracker.google.com/issues/443080559#comment12
+        dependencies.add("testImplementation", if (isAndroid) libs.`kotlin-test-junit` else libs.`kotlin-test`)
         dependencies.add("testImplementation", libs.assertk)
         dependencies.add("testImplementation", libs.junit)
     }

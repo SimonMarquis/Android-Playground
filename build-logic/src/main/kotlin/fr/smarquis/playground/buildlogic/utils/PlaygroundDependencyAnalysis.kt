@@ -13,6 +13,11 @@ internal object PlaygroundDependencyAnalysis {
         apply<DependencyAnalysisPlugin>()
         extensions.configure<DependencyAnalysisExtension> {
             useTypesafeProjectAccessors(true)
+            abi {
+                exclusions {
+                    ignoreGeneratedCode()
+                }
+            }
             usage {
                 analysis {
                     checkSuperClasses(true)
@@ -27,6 +32,11 @@ internal object PlaygroundDependencyAnalysis {
     fun configureProject(project: Project) = with(project) {
         apply<DependencyAnalysisPlugin>()
         extensions.configure<DependencyAnalysisSubExtension> {
+            abi {
+                exclusions {
+                    ignoreGeneratedCode()
+                }
+            }
             issues {
                 onAny {
                     exclude(

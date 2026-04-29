@@ -1,15 +1,9 @@
 package fr.smarquis.playground.buildlogic
 
-import com.android.build.api.dsl.AndroidResources
 import com.android.build.api.dsl.ApplicationExtension
-import com.android.build.api.dsl.BuildFeatures
-import com.android.build.api.dsl.BuildType
 import com.android.build.api.dsl.CommonExtension
-import com.android.build.api.dsl.DefaultConfig
-import com.android.build.api.dsl.Installation
 import com.android.build.api.dsl.LibraryExtension
 import com.android.build.api.dsl.Lint
-import com.android.build.api.dsl.ProductFlavor
 import com.android.build.api.dsl.TestExtension
 import com.android.build.api.variant.AndroidComponentsExtension
 import com.android.build.api.variant.ApplicationAndroidComponentsExtension
@@ -21,6 +15,7 @@ import fr.smarquis.playground.buildlogic.dsl.assign
 import fr.smarquis.playground.buildlogic.dsl.configure
 import fr.smarquis.playground.buildlogic.dsl.findByType
 import fr.smarquis.playground.buildlogic.dsl.getByType
+import fr.smarquis.playground.buildlogic.utils.PlaygroundGlobalCi
 import org.gradle.api.JavaVersion
 import org.gradle.api.Project
 import org.gradle.api.artifacts.VersionCatalog
@@ -45,7 +40,7 @@ internal val Project.isCi: Boolean
     get() = providers.environmentVariable("CI").map(String::toBoolean).getOrElse(false)
 
 internal fun Project.android(
-    configure: CommonExtension<out BuildFeatures, out BuildType, out DefaultConfig, out ProductFlavor, out AndroidResources, out Installation>.() -> Unit,
+    configure: CommonExtension.() -> Unit,
 ) = when {
     isAndroidApplication -> androidApplication(configure)
     isAndroidLibrary -> androidLibrary(configure)
@@ -56,13 +51,14 @@ internal fun Project.android(
 internal fun Project.androidApplication(configure: ApplicationExtension.() -> Unit) = configure<ApplicationExtension>(configure)
 internal fun Project.androidLibrary(configure: LibraryExtension.() -> Unit) = configure<LibraryExtension>(configure)
 internal fun Project.androidTest(configure: TestExtension.() -> Unit) = configure<TestExtension>(configure)
-internal fun Project.androidComponents(configure: ApplicationAndroidComponentsExtension.() -> Unit) = configure<ApplicationAndroidComponentsExtension>(configure)
+internal fun Project.androidApplicationComponents(configure: ApplicationAndroidComponentsExtension.() -> Unit) = configure<ApplicationAndroidComponentsExtension>(configure)
+internal fun Project.androidLibraryComponents(configure: LibraryAndroidComponentsExtension.() -> Unit) = configure<LibraryAndroidComponentsExtension>(configure)
 
-internal val Project.androidExtension: AndroidComponentsExtension<out CommonExtension<*, *, *, *, *, *>, out VariantBuilder, out Variant>
+internal val Project.androidExtension: AndroidComponentsExtension<out CommonExtension, out VariantBuilder, out Variant>
     get() = androidExtensionNullable
         ?: throw IllegalArgumentException("Failed to find any registered Android extension")
 
-internal val Project.androidExtensionNullable: AndroidComponentsExtension<out CommonExtension<*, *, *, *, *, *>, out VariantBuilder, out Variant>?
+internal val Project.androidExtensionNullable: AndroidComponentsExtension<out CommonExtension, out VariantBuilder, out Variant>?
     get() = extensions.findByType<LibraryAndroidComponentsExtension>()
         ?: extensions.findByType<ApplicationAndroidComponentsExtension>()
         ?: extensions.findByType<TestAndroidComponentsExtension>()
@@ -98,10 +94,14 @@ internal inline fun <reified T : KotlinBaseExtension> Project.configureKotlin(
             else -> TODO("Unsupported project extension $this ${T::class}")
         }
         @OptIn(ExperimentalAbiValidation::class)
-        kotlin.extensions.configure<AbiValidationExtension> {
+        // FIXME:
+        //  - https://issuetracker.google.com/issues/474474278
+        //  - https://youtrack.jetbrains.com/issue/KT-83410
+        kotlin.extensions.findByType<AbiValidationExtension>()?.apply {
+            PlaygroundGlobalCi.addToGlobalCi(project = this@configureKotlin, "checkKotlinAbi")
             enabled = true
             filters {
-                excluded {
+                exclude {
                     this.annotatedWith.addAll(
                         "**.*Generated*",
                     )
@@ -113,6 +113,7 @@ internal inline fun <reified T : KotlinBaseExtension> Project.configureKotlin(
                 }
             }
         }
+        jvmToolchain(25)
         kotlin.compilerOptions {
             jvmTarget = JvmTarget.JVM_11
             allWarningsAsErrors = properties.warningsAsErrors

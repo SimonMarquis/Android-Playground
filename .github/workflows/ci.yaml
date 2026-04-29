@@ -65,7 +65,7 @@ jobs:
       - run: ./gradlew :build-logic:validatePlugins --quiet
       - run: ./gradlew licensee --quiet
       - run: ./gradlew topologyCheck --quiet
-      - run: ./gradlew checkLegacyAbi --quiet
+      - run: ./gradlew checkKotlinAbi --quiet
       - run: ./gradlew ciBadging -Pplayground.isMinifyEnabled=false --quiet
       - if: ${{ !cancelled() }}
         uses: ./.github/actions/archive-gradle-reports
@@ -89,12 +89,12 @@ jobs:
         id: build
         run: ./gradlew assembleRelease
       - name: 📦 Archive APKs
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: apk
           path: "**/build/outputs/apk/**/*.apk"
       - name: 📦 Archive AARs
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: aar
           path: "**/build/outputs/aar"
@@ -124,7 +124,7 @@ jobs:
         uses: ./.github/actions/archive-junit-reports
         with:
           html: "**/build/reports/tests/test*"
-          xml: "**/build/test-results/test*/**.xml"
+          xml: "**/build/test-results/**/TEST-*.xml"
       - name: 📦 Archive Paparazzi reports
         if: ${{ !cancelled() && contains(fromJSON('["success", "failure"]'), steps.test.outcome) }}
         uses: ./.github/actions/archive-paparazzi-reports

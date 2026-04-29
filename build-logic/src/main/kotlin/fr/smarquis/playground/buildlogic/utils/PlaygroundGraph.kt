@@ -13,10 +13,14 @@ import fr.smarquis.playground.buildlogic.utils.PlaygroundGraph.PluginType.Androi
 import fr.smarquis.playground.buildlogic.utils.PlaygroundGraph.PluginType.Jvm
 import fr.smarquis.playground.buildlogic.utils.PlaygroundGraph.PluginType.Unknown
 import fr.smarquis.playground.buildlogic.utils.PlaygroundGraph.SUPPORTED_CONFIGURATIONS
+import org.gradle.StartParameter
 import org.gradle.api.DefaultTask
+import org.gradle.api.GradleException
 import org.gradle.api.Project
+import org.gradle.api.Task
 import org.gradle.api.artifacts.Configuration
 import org.gradle.api.artifacts.ProjectDependency
+import org.gradle.api.configuration.BuildFeatures
 import org.gradle.api.file.RegularFileProperty
 import org.gradle.api.provider.MapProperty
 import org.gradle.api.provider.Property
@@ -48,8 +52,13 @@ internal object PlaygroundGraph {
     private val IGNORED_PROJECTS = setOf(":platform")
     private val SUPPORTED_CONFIGURATIONS = setOf("api", "implementation", "baselineProfile", "testedApks")
 
-    fun configureProject(project: Project) {
-        val dumpTask = project.tasks.register<GraphDumpTask>("graphDump") {
+    fun configureProject(project: Project, startParameter: StartParameter, buildFeatures: BuildFeatures) {
+        val isolatedProjects = buildFeatures.isolatedProjects.active.getOrElse(false)
+        val isGraphTask = startParameter.taskNames.any { path -> path.substringAfterLast(":")
+            .let { it == GraphDumpTask.NAME || it == GraphUpdateTask.NAME } }
+        if (isolatedProjects && isGraphTask) throw GradleException("Graph-related tasks are not supported with isolated projects! Rerun with `-Dorg.gradle.unsafe.isolated-projects=false`.")
+        val dumpTask = project.tasks.register<GraphDumpTask>(GraphDumpTask.NAME) {
+            if (isolatedProjects) return@register disable()
             val graph = measureTimedValue { Graph().invoke(project) }
                 .also { logger.lifecycle("{} Computing graph for project '{}' in {}", LOG, project.path, it.duration.toString(MILLISECONDS)) }
                 .value
@@ -58,12 +67,15 @@ internal object PlaygroundGraph {
             plugins = graph.plugins()
             output = project.layout.buildDirectory.file("mermaid.txt")
         }
-        project.tasks.register<GraphUpdateTask>("graphUpdate") {
+        project.tasks.register<GraphUpdateTask>(GraphUpdateTask.NAME) {
+            if (isolatedProjects) return@register disable()
             projectPath = project.path
             input = dumpTask.flatMap { it.output }
             output = project.run { (if (path == MAIN_PROJECT_PATH) isolated.rootProject else isolated).projectDirectory.file("README.md") }
         }
     }
+
+    private fun Task.disable() { enabled = false }
 
     /**
      * Declaration order is important, as only the first match will be retained.
@@ -107,6 +119,10 @@ internal object PlaygroundGraph {
 @CacheableTask
 private abstract class GraphDumpTask : DefaultTask() {
 
+    companion object {
+        const val NAME = "graphDump"
+    }
+
     @get:Input
     abstract val projectPath: Property<String>
 
@@ -135,6 +151,10 @@ private abstract class GraphDumpTask : DefaultTask() {
 
 @CacheableTask
 private abstract class GraphUpdateTask : DefaultTask() {
+
+    companion object {
+        const val NAME = "graphUpdate"
+    }
 
     @get:Input
     abstract val projectPath: Property<String>

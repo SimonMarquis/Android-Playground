@@ -1,0 +1,47 @@
+name: 💬 Minimize comments
+description: Minimize comments based on a marker
+
+inputs:
+  marker:
+    description: Comment marker
+    required: true
+  pr-number:
+    description: PR number
+    default: ${{ github.event.issue.number || github.event.pull_request.number || '' }}
+    required: true
+  token:
+    description: GitHub Token
+    default: ${{ github.token }}
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - uses: actions/github-script@v9
+      if: inputs.pr-number != ''
+      env:
+        MARKER: ${{ inputs.marker }}
+        PR_NUMBER: ${{ inputs.pr-number }}
+      with:
+        github-token: ${{ inputs.token }}
+        script: |
+          const { owner, repo } = context.repo;
+          const query = `query($owner:String!,$repo:String!,$number:Int!){
+            repository(owner:$owner,name:$repo){
+              pullRequest(number:$number){
+                comments(last:100){ nodes{id body isMinimized url} }
+              }
+            }
+          }`;
+          
+          const mutation = `mutation($id:ID!){minimizeComment(input:{subjectId:$id,classifier:OUTDATED}){clientMutationId minimizedComment{isMinimized minimizedReason}}}`;
+          const commentsToMinimize = ((await github.graphql(query, { owner, repo, number: Number(process.env.PR_NUMBER) }))
+            .repository?.pullRequest?.comments?.nodes || [])
+            .filter(c => c.body.includes(process.env.MARKER) && !c.isMinimized)
+            .map(async c =>
+              github.graphql(mutation, { id: c.id })
+                .then(r => core.info(`Successfully minimized: ${JSON.stringify(r)}`))
+                .catch(e => core.error(`Failed to minimize (id:${c.id}, url:${c.url}, error:${e?.message || e})`))
+            );
+
+          await Promise.all(commentsToMinimize);

@@ -22,9 +22,11 @@ public operator fun Paparazzi.invoke(
     composable: @Composable () -> Unit,
 ): Unit = snapshot {
     CompositionLocalProvider(LocalInspectionMode provides true) {
-        AndroidPlaygroundTheme(darkTheme = theme == Dark) {
-            composable()
-        }
+        AndroidPlaygroundTheme(
+            darkTheme = theme == Dark,
+            dynamicColor = false,
+            content = composable
+        )
     }
 }
 
