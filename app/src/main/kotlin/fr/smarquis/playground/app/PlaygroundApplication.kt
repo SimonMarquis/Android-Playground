@@ -25,8 +25,8 @@ public class PlaygroundApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        registerSettings()
-        profileVerifierLogger()
+        val _ = registerSettings()
+        val _ = profileVerifierLogger()
     }
 
     public fun isDebuggable(): Boolean = 0 != applicationInfo.flags and FLAG_DEBUGGABLE

@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.FlowCollector
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOf
 
-public class SimpleLicensesRepository(
+class SimpleLicensesRepository(
     override val licenses: Flow<ImmutableList<ArtifactDetail>>
 ) : LicensesRepository {
     constructor(licenses: ImmutableList<ArtifactDetail>):this(flowOf(licenses))
