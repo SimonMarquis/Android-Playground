@@ -7,7 +7,6 @@ import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.jetbrains.kotlin.compose.compiler.gradle.ComposeCompilerGradlePluginExtension
 import org.jetbrains.kotlin.compose.compiler.gradle.ComposeCompilerGradleSubplugin
-import org.jetbrains.kotlin.gradle.plugin.KotlinAndroidPluginWrapper
 
 internal class PlaygroundAndroidComposePlugin : Plugin<Project> {
 

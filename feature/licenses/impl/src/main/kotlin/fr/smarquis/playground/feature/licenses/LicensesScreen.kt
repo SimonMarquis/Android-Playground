@@ -63,10 +63,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow.Companion.Ellipsis
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.cash.licensee.ArtifactDetail
 import app.cash.licensee.SpdxLicense
+import dev.zacsweers.metrox.viewmodel.metroViewModel
 import fr.smarquis.playground.core.ui.PlaygroundTheme
 import fr.smarquis.playground.core.utils.navigation.BackStack
 import fr.smarquis.playground.feature.licenses.UiState.Failure
@@ -86,7 +86,7 @@ internal fun LicensesScreen(
 @Composable
 private fun LicensesScreen(
     modifier: Modifier = Modifier,
-    viewModel: LicensesViewModel = hiltViewModel(),
+    viewModel: LicensesViewModel = metroViewModel(),
     navigateBack: () -> Unit,
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()

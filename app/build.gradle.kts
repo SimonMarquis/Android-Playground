@@ -2,7 +2,7 @@ plugins {
     idea
     alias(libs.plugins.playground.android.application)
     alias(libs.plugins.playground.android.compose)
-    alias(libs.plugins.playground.hilt)
+    alias(libs.plugins.playground.metro)
     alias(libs.plugins.androidx.baselineprofile)
 }
 
@@ -27,10 +27,12 @@ dependencies {
     implementation(libs.androidx.navigation3.runtime)
     implementation(libs.androidx.splashscreen)
     implementation(libs.kotlinx.datetime)
+    implementation(libs.metrox.viewmodel.compose)
 
     implementation(projects.feature.home.impl)
     implementation(projects.feature.licenses.impl)
     implementation(projects.core.android)
+    implementation(projects.core.datastore)
     implementation(projects.core.di)
     implementation(projects.core.ui)
     implementation(projects.core.utils)

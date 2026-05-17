@@ -106,9 +106,7 @@ internal inline fun <reified T : KotlinBaseExtension> Project.configureKotlin(
                         "**.*Generated*",
                     )
                     this.byNames.addAll(
-                        // "**.Hilt_*",
                         "**.internal.**",
-                        "hilt_aggregated_deps.**",
                     )
                 }
             }

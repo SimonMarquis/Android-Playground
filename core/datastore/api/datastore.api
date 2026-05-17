@@ -3,7 +3,26 @@ public final class fr/smarquis/playground/core/datastore/DataStore_extKt {
 	public static final fun safe (Landroidx/datastore/core/DataStore;)Lkotlinx/coroutines/flow/Flow;
 }
 
-public final class fr/smarquis/playground/core/datastore/di/HiltWrapper_DataStoreModule {
-	public fun <init> ()V
+public final class fr/smarquis/playground/core/datastore/di/DataStoreBindings {
+	public static final field INSTANCE Lfr/smarquis/playground/core/datastore/di/DataStoreBindings;
+}
+
+public final class fr/smarquis/playground/core/datastore/di/DataStoreBindings$ProvidesDataStoreMetroFactory : dev/zacsweers/metro/internal/Factory {
+	public static final field Companion Lfr/smarquis/playground/core/datastore/di/DataStoreBindings$ProvidesDataStoreMetroFactory$Companion;
+	public synthetic fun <init> (Ldev/zacsweers/metro/Provider;Ldev/zacsweers/metro/Provider;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public static final fun create (Ldev/zacsweers/metro/Provider;Ldev/zacsweers/metro/Provider;)Ldev/zacsweers/metro/internal/Factory;
+	public final fun invoke ()Landroidx/datastore/core/DataStore;
+	public synthetic fun invoke ()Ljava/lang/Object;
+	public final fun mirrorFunction (Lkotlin/coroutines/CoroutineContext;Lfr/smarquis/playground/core/di/FileManager;)Landroidx/datastore/core/DataStore;
+	public static final fun providesDataStore (Lkotlin/coroutines/CoroutineContext;Lfr/smarquis/playground/core/di/FileManager;)Landroidx/datastore/core/DataStore;
+}
+
+public final class fr/smarquis/playground/core/datastore/di/DataStoreBindings$ProvidesDataStoreMetroFactory$Companion {
+	public final fun create (Ldev/zacsweers/metro/Provider;Ldev/zacsweers/metro/Provider;)Ldev/zacsweers/metro/internal/Factory;
+	public final fun providesDataStore (Lkotlin/coroutines/CoroutineContext;Lfr/smarquis/playground/core/di/FileManager;)Landroidx/datastore/core/DataStore;
+}
+
+public final class metro/hints/FrSmarquisPlaygroundCoreDatastoreDiDataStoreBindingsAppScopeKt {
+	public static final synthetic fun AppScope (Lfr/smarquis/playground/core/datastore/di/DataStoreBindings;)V
 }
 

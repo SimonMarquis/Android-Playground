@@ -1,5 +1,6 @@
 package fr.smarquis.playground.feature.home
 
+import dev.zacsweers.metro.Inject
 import fr.smarquis.playground.core.di.DisplayMetrics
 import fr.smarquis.playground.core.di.qualifier.AppPackageName
 import fr.smarquis.playground.core.di.qualifier.AppVersionCode
@@ -12,10 +13,10 @@ import fr.smarquis.playground.core.di.qualifier.DeviceRelease
 import fr.smarquis.playground.core.di.qualifier.DeviceSdkInt
 import fr.smarquis.playground.core.di.qualifier.FirstInstallTime
 import fr.smarquis.playground.core.di.qualifier.LastUpdateTime
-import kotlinx.datetime.LocalDateTime
-import javax.inject.Inject
+import kotlin.time.Instant
 
-internal data class HomeData @Inject constructor(
+@Inject
+internal data class HomeData(
     @AppPackageName val packageName: String,
     @AppVersionCode val versionCode: Long,
     @AppVersionName val versionName: String,
@@ -26,9 +27,9 @@ internal data class HomeData @Inject constructor(
     @DeviceSdkInt val deviceSdkInt: Int,
     @DeviceRelease val deviceRelease: String,
 
-    @FirstInstallTime val firstInstallTime: LocalDateTime,
-    @LastUpdateTime val lastUpdateTime: LocalDateTime,
-    @CurrentTime val currentTime: LocalDateTime,
+    @FirstInstallTime val firstInstallTime: Instant,
+    @LastUpdateTime val lastUpdateTime: Instant,
+    @CurrentTime val currentTime: Instant,
 
     val displayMetrics: DisplayMetrics,
 )

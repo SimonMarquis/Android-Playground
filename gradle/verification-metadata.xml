@@ -60,7 +60,6 @@
             <trusting group="^app[.]cash($|([.].*))" regex="true"/>
             <trusting group="^com[.]squareup($|([.].*))" regex="true"/>
          </trusted-key>
-         <trusted-key id="24D04176586361FDA94EE0315F7786DF73E61F56" group="com.google.devtools.ksp"/>
          <trusted-key id="2DB4F1EF0FA761ECC4EA935C86FDC7E2A11262CB" group="org.apache.commons"/>
          <trusted-key id="32118CF76C9EC5D918E54967CA80D1F0EB6CA4BA" group="^org[.]codehaus($|([.].*))" regex="true"/>
          <trusted-key id="33FD4BFD33554634053D73C0C2148900BCD3C2AF" group="org.jetbrains" name="annotations"/>
@@ -77,7 +76,6 @@
             <trusting group="androidx.tracing"/>
          </trusted-key>
          <trusted-key id="84789D24DF77A32433CE1F079EB80E92EB2135B1" group="org.apache.maven"/>
-         <trusted-key id="95115197C5227C0887299D000F9FE62F88E938D8" group="com.google.dagger"/>
          <trusted-key id="A413F67D71BEEC23ADD0CE0ACB43338E060CF9FA" group="org.jacoco"/>
          <trusted-key id="A5BD02B93E7A40482EB1D66A5F69AD087600B22C" group="org.ow2.asm"/>
          <trusted-key id="A5F483CD733A4EBAEA378B2AE88979FB9B30ACF2">
