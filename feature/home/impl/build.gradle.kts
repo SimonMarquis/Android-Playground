@@ -19,7 +19,6 @@ dependencies {
     implementation(libs.androidx.navigation3.runtime)
     implementation(libs.androidx.lifecycle.runtime.compose)
     implementation(libs.kotlinx.serialization.json)
-    implementation(libs.kotlinx.datetime)
     implementation(libs.metrox.viewmodel.compose)
     testImplementation(libs.kotlinx.coroutines.test)
     testImplementation(libs.turbine)

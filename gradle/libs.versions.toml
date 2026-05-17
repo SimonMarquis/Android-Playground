@@ -74,7 +74,6 @@ kotlinx-coroutines-bom = "org.jetbrains.kotlinx:kotlinx-coroutines-bom:1.11.0"
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core" }
 kotlinx-coroutines-guava = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-guava" }
 kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test" }
-kotlinx-datetime = "org.jetbrains.kotlinx:kotlinx-datetime:0.8.0-0.6.x-compat"
 kotlinx-serialization-bom = "org.jetbrains.kotlinx:kotlinx-serialization-bom:1.11.0"
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json" }
 

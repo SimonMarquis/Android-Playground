@@ -26,7 +26,6 @@ dependencies {
     implementation(libs.androidx.navigation3.ui)
     implementation(libs.androidx.navigation3.runtime)
     implementation(libs.androidx.splashscreen)
-    implementation(libs.kotlinx.datetime)
     implementation(libs.metrox.viewmodel.compose)
 
     implementation(projects.feature.home.impl)
