@@ -18,7 +18,10 @@ internal class PlaygroundMetroPlugin : Plugin<Project> {
         extensions.configure<MetroPluginExtension>("metro") {
             contributesAsInject = true
             generateContributionProviders = true
+            desugaredProviderSeverity = DiagnosticSeverity.WARN
             nonPublicContributionSeverity = DiagnosticSeverity.WARN
+            publicScopedProviderSeverity = DiagnosticSeverity.WARN
+            unusedGraphInputsSeverity = DiagnosticSeverity.WARN
         }
 
         dependencies.add("api", libs.`metro-runtime`)
