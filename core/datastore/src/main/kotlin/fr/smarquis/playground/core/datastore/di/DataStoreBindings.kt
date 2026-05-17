@@ -22,7 +22,7 @@ import kotlin.coroutines.CoroutineContext
 public object DataStoreBindings {
     @Provides
     @SingleIn(AppScope::class)
-    internal fun providesDataStore(
+    private fun providesDataStore(
         @Dispatcher(IO) context: CoroutineContext,
         fileManager: FileManager,
     ): DataStore<Preferences> = PreferenceDataStoreFactory.create(
