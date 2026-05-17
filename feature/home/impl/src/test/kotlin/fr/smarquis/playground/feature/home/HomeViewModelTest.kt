@@ -1,5 +1,6 @@
 package fr.smarquis.playground.feature.home
 
+import android.util.DisplayMetrics.DENSITY_XXXHIGH
 import app.cash.turbine.test
 import assertk.assertThat
 import assertk.assertions.isEmpty
@@ -21,13 +22,11 @@ import kotlinx.collections.immutable.persistentListOf
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.runTest
-import kotlinx.datetime.LocalDateTime
-import kotlinx.datetime.TimeZone
-import kotlinx.datetime.toLocalDateTime
 import org.junit.Rule
 import kotlin.test.Test
 import kotlin.time.Clock
 import kotlin.time.ExperimentalTime
+import kotlin.time.Instant
 
 @OptIn(ExperimentalCoroutinesApi::class, ExperimentalTime::class)
 class HomeViewModelTest {
@@ -77,7 +76,7 @@ class HomeViewModelTest {
         diceRoller: DiceRoller = DiceRoller(Dice.entries::random),
         initialRolls: PersistentList<Dice> = persistentListOf(),
         initialSettings: Settings = Settings(),
-        now: LocalDateTime = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault()),
+        now: Instant = Clock.System.now(),
     ) = HomeViewModel(
         diceRoller = diceRoller,
         diceSource = SimpleDiceSource(initialRolls),
@@ -97,7 +96,7 @@ class HomeViewModelTest {
             displayMetrics = DisplayMetrics(
                 widthPixels = 1080,
                 heightPixels = 1920,
-                densityDpi = 640,
+                densityDpi = DENSITY_XXXHIGH,
             ),
         ),
     )

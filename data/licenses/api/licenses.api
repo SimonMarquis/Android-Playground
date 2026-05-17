@@ -1,4 +1,33 @@
-public final class fr/smarquis/playground/data/licenses/HiltWrapper_LicensesRepositoryModule {
+public final class fr/smarquis/playground/data/licenses/LicensesRepositoryImpl : fr/smarquis/playground/domain/licenses/LicensesRepository {
+	public fun <init> (Lfr/smarquis/playground/core/di/AssetManager;Lkotlin/coroutines/CoroutineContext;)V
+	public fun getLicenses ()Lkotlinx/coroutines/flow/Flow;
+}
+
+public abstract class fr/smarquis/playground/data/licenses/LicensesRepositoryImplContributions {
+}
+
+public final class fr/smarquis/playground/data/licenses/LicensesRepositoryImplContributions$ToAppScope {
+	public static final field INSTANCE Lfr/smarquis/playground/data/licenses/LicensesRepositoryImplContributions$ToAppScope;
+	public final fun provideLicensesRepositoryImplAsLicensesRepository (Lfr/smarquis/playground/core/di/AssetManager;Lkotlin/coroutines/CoroutineContext;)Lfr/smarquis/playground/domain/licenses/LicensesRepository;
+}
+
+public final class fr/smarquis/playground/data/licenses/LicensesRepositoryImplContributions$ToAppScope$ProvideLicensesRepositoryImplAsLicensesRepositoryMetroFactory : dev/zacsweers/metro/internal/Factory {
+	public static final field Companion Lfr/smarquis/playground/data/licenses/LicensesRepositoryImplContributions$ToAppScope$ProvideLicensesRepositoryImplAsLicensesRepositoryMetroFactory$Companion;
+	public synthetic fun <init> (Ldev/zacsweers/metro/Provider;Ldev/zacsweers/metro/Provider;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public static final fun create (Ldev/zacsweers/metro/Provider;Ldev/zacsweers/metro/Provider;)Ldev/zacsweers/metro/internal/Factory;
+	public final fun invoke ()Lfr/smarquis/playground/domain/licenses/LicensesRepository;
+	public synthetic fun invoke ()Ljava/lang/Object;
+	public final fun mirrorFunction (Lfr/smarquis/playground/core/di/AssetManager;Lkotlin/coroutines/CoroutineContext;)Lfr/smarquis/playground/domain/licenses/LicensesRepository;
+	public static final fun provideLicensesRepositoryImplAsLicensesRepository (Lfr/smarquis/playground/core/di/AssetManager;Lkotlin/coroutines/CoroutineContext;)Lfr/smarquis/playground/domain/licenses/LicensesRepository;
+}
+
+public final class fr/smarquis/playground/data/licenses/LicensesRepositoryImplContributions$ToAppScope$ProvideLicensesRepositoryImplAsLicensesRepositoryMetroFactory$Companion {
 	public fun <init> ()V
+	public final fun create (Ldev/zacsweers/metro/Provider;Ldev/zacsweers/metro/Provider;)Ldev/zacsweers/metro/internal/Factory;
+	public final fun provideLicensesRepositoryImplAsLicensesRepository (Lfr/smarquis/playground/core/di/AssetManager;Lkotlin/coroutines/CoroutineContext;)Lfr/smarquis/playground/domain/licenses/LicensesRepository;
+}
+
+public final class metro/hints/FrSmarquisPlaygroundDataLicensesLicensesRepositoryImplContributionsToAppScopeAppScopeKt {
+	public static final synthetic fun AppScope (Lfr/smarquis/playground/data/licenses/LicensesRepositoryImplContributions$ToAppScope;)V
 }
 

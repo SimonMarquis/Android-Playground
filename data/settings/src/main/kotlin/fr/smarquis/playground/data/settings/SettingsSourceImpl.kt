@@ -4,6 +4,9 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
+import dev.zacsweers.metro.AppScope
+import dev.zacsweers.metro.ContributesBinding
+import dev.zacsweers.metro.SingleIn
 import fr.smarquis.playground.core.datastore.get
 import fr.smarquis.playground.domain.settings.Settings
 import fr.smarquis.playground.domain.settings.SettingsSource
@@ -11,12 +14,13 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.distinctUntilChanged
-import javax.inject.Inject
 
 private val StrictModeKey = booleanPreferencesKey("strict-mode")
 private val UncaughtExceptionHandlerKey = booleanPreferencesKey("uncaught-exception-handler")
 
-internal class SettingsSourceImpl @Inject constructor(
+@ContributesBinding(AppScope::class)
+@SingleIn(AppScope::class)
+public class SettingsSourceImpl(
     private val datastore: DataStore<Preferences>,
 ) : SettingsSource {
 

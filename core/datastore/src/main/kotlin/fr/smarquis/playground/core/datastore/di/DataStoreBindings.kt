@@ -5,30 +5,29 @@ import androidx.datastore.core.handlers.ReplaceFileCorruptionHandler
 import androidx.datastore.preferences.core.PreferenceDataStoreFactory
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.emptyPreferences
-import dagger.Module
-import dagger.Provides
-import dagger.hilt.InstallIn
-import dagger.hilt.components.SingletonComponent
+import dev.zacsweers.metro.AppScope
+import dev.zacsweers.metro.BindingContainer
+import dev.zacsweers.metro.ContributesTo
+import dev.zacsweers.metro.Provides
+import dev.zacsweers.metro.SingleIn
 import fr.smarquis.playground.core.di.FileManager
 import fr.smarquis.playground.core.di.qualifier.Dispatcher
+import fr.smarquis.playground.core.di.qualifier.Dispatcher.Type.IO
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
-import javax.inject.Singleton
 import kotlin.coroutines.CoroutineContext
 
-@Module
-@InstallIn(SingletonComponent::class)
-internal object DataStoreModule {
-
-    @Singleton
+@ContributesTo(AppScope::class)
+@BindingContainer
+public object DataStoreBindings {
     @Provides
-    fun providesDataStore(
-        @Dispatcher(Dispatcher.Type.IO) context: CoroutineContext,
+    @SingleIn(AppScope::class)
+    private fun providesDataStore(
+        @Dispatcher(IO) context: CoroutineContext,
         fileManager: FileManager,
     ): DataStore<Preferences> = PreferenceDataStoreFactory.create(
         corruptionHandler = ReplaceFileCorruptionHandler { emptyPreferences() },
         scope = CoroutineScope(context + SupervisorJob()),
         produceFile = { fileManager("datastore/datastore.preferences_pb") },
     )
-
 }

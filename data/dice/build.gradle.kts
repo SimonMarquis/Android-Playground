@@ -1,6 +1,6 @@
 plugins {
     alias(libs.plugins.playground.kotlin.jvm)
-    alias(libs.plugins.playground.hilt)
+    alias(libs.plugins.playground.metro)
 }
 
 dependencies {

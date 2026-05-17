@@ -1,6 +1,6 @@
 plugins {
     alias(libs.plugins.playground.android.library)
-    alias(libs.plugins.playground.hilt)
+    alias(libs.plugins.playground.metro)
 }
 
 dependencies {
@@ -8,6 +8,6 @@ dependencies {
     implementation(libs.androidx.lifecycle.process)
     implementation(libs.androidx.profileinstaller)
     implementation(libs.kotlinx.coroutines.guava)
+    implementation(libs.metrox.viewmodel)
     implementation(projects.core.di)
-    implementation(projects.core.utils)
 }

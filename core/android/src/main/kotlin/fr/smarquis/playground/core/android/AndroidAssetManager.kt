@@ -1,9 +1,12 @@
 package fr.smarquis.playground.core.android
 
+import dev.zacsweers.metro.AppScope
+import dev.zacsweers.metro.ContributesBinding
 import fr.smarquis.playground.core.di.AssetManager
-import javax.inject.Inject
+import java.io.InputStream
 import android.content.res.AssetManager as RealAssetManager
 
-internal class AndroidAssetManager @Inject constructor(private val manager: RealAssetManager) : AssetManager {
-    override fun open(name: String) = manager.open(name)
+@ContributesBinding(AppScope::class)
+public class AndroidAssetManager(private val manager: RealAssetManager) : AssetManager {
+    override fun open(name: String): InputStream = manager.open(name)
 }

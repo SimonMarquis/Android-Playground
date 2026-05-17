@@ -65,18 +65,18 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
+import dev.zacsweers.metrox.viewmodel.metroViewModel
 import fr.smarquis.playground.core.di.DisplayMetrics
 import fr.smarquis.playground.core.ui.PlaygroundTheme
 import fr.smarquis.playground.core.ui.asAnnotatedString
 import fr.smarquis.playground.core.utils.navigation.BackStack
 import fr.smarquis.playground.domain.dice.Dice
 import fr.smarquis.playground.domain.settings.Settings
-import fr.smarquis.playground.feature.fr.smarquis.playground.feature.licenses.Licenses
+import fr.smarquis.playground.feature.licenses.Licenses
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
-import kotlinx.datetime.LocalDateTime
 import kotlin.text.Typography.times
+import kotlin.time.Instant
 
 @Composable
 internal fun HomeScreen(
@@ -89,7 +89,7 @@ internal fun HomeScreen(
 private fun HomeScreen(
     navigateToLicenses: () -> Unit,
     modifier: Modifier = Modifier,
-    viewModel: HomeViewModel = hiltViewModel(),
+    viewModel: HomeViewModel = metroViewModel(),
 ) {
     val rolls: ImmutableList<Dice> by viewModel.rolls.collectAsState()
     val settings: Settings by viewModel.settings.collectAsState()
@@ -389,9 +389,9 @@ internal fun HomeScreenContentPreview() {
             deviceProduct = "product",
             deviceSdkInt = 35,
             deviceRelease = "15",
-            firstInstallTime = LocalDateTime.parse("2025-01-01T12:34:56"),
-            lastUpdateTime = LocalDateTime.parse("2025-01-02T12:34:56"),
-            currentTime = LocalDateTime.parse("2025-01-03T12:34:56"),
+            firstInstallTime = Instant.parse("2025-01-01T12:34:56Z"),
+            lastUpdateTime = Instant.parse("2025-01-02T12:34:56Z"),
+            currentTime = Instant.parse("2025-01-03T12:34:56Z"),
             displayMetrics = DisplayMetrics(
                 widthPixels = 1080,
                 heightPixels = 1920,

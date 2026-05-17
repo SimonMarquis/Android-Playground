@@ -32,11 +32,6 @@ internal object PlaygroundDependencyAnalysis {
     fun configureProject(project: Project) = with(project) {
         apply<DependencyAnalysisPlugin>()
         extensions.configure<DependencyAnalysisSubExtension> {
-            abi {
-                exclusions {
-                    ignoreGeneratedCode()
-                }
-            }
             issues {
                 onAny {
                     exclude(

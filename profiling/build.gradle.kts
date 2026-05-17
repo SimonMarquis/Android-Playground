@@ -1,4 +1,3 @@
-import com.android.build.api.dsl.ManagedVirtualDevice
 import com.android.build.api.variant.BuiltArtifacts
 
 plugins {

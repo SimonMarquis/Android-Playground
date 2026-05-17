@@ -1,8 +1,3 @@
-public final class dagger/DaggerExtensionsKt {
-	public static final fun getValue (Ldagger/Lazy;Ljava/lang/Object;Lkotlin/reflect/KProperty;)Ljava/lang/Object;
-	public static final fun getValue (Ljavax/inject/Provider;Ljava/lang/Object;Lkotlin/reflect/KProperty;)Ljava/lang/Object;
-}
-
 public abstract interface class fr/smarquis/playground/core/di/AssetManager {
 	public abstract fun open (Ljava/lang/String;)Ljava/io/InputStream;
 }
@@ -23,7 +18,71 @@ public final class fr/smarquis/playground/core/di/CoroutineContextProvider$Defau
 	public static fun unconfined (Lfr/smarquis/playground/core/di/CoroutineContextProvider;)Lkotlin/coroutines/CoroutineContext;
 }
 
-public final class fr/smarquis/playground/core/di/CoroutinesModuleKt {
+public final class fr/smarquis/playground/core/di/CoroutinesBindings {
+	public static final field INSTANCE Lfr/smarquis/playground/core/di/CoroutinesBindings;
+	public final fun providesDefault ()Lkotlin/coroutines/CoroutineContext;
+	public final fun providesIo ()Lkotlin/coroutines/CoroutineContext;
+	public final fun providesMain ()Lkotlin/coroutines/CoroutineContext;
+	public final fun providesMainImmediate ()Lkotlin/coroutines/CoroutineContext;
+	public final fun providesProvider ()Lfr/smarquis/playground/core/di/CoroutineContextProvider;
+	public final fun providesUnconfined ()Lkotlin/coroutines/CoroutineContext;
+}
+
+public final class fr/smarquis/playground/core/di/CoroutinesBindings$ProvidesDefaultMetroFactory : dev/zacsweers/metro/internal/Factory {
+	public static final field INSTANCE Lfr/smarquis/playground/core/di/CoroutinesBindings$ProvidesDefaultMetroFactory;
+	public static final fun create ()Ldev/zacsweers/metro/internal/Factory;
+	public synthetic fun invoke ()Ljava/lang/Object;
+	public final fun invoke ()Lkotlin/coroutines/CoroutineContext;
+	public final fun mirrorFunction ()Lkotlin/coroutines/CoroutineContext;
+	public static final fun providesDefault ()Lkotlin/coroutines/CoroutineContext;
+}
+
+public final class fr/smarquis/playground/core/di/CoroutinesBindings$ProvidesIoMetroFactory : dev/zacsweers/metro/internal/Factory {
+	public static final field INSTANCE Lfr/smarquis/playground/core/di/CoroutinesBindings$ProvidesIoMetroFactory;
+	public static final fun create ()Ldev/zacsweers/metro/internal/Factory;
+	public synthetic fun invoke ()Ljava/lang/Object;
+	public final fun invoke ()Lkotlin/coroutines/CoroutineContext;
+	public final fun mirrorFunction ()Lkotlin/coroutines/CoroutineContext;
+	public static final fun providesIo ()Lkotlin/coroutines/CoroutineContext;
+}
+
+public final class fr/smarquis/playground/core/di/CoroutinesBindings$ProvidesMainImmediateMetroFactory : dev/zacsweers/metro/internal/Factory {
+	public static final field INSTANCE Lfr/smarquis/playground/core/di/CoroutinesBindings$ProvidesMainImmediateMetroFactory;
+	public static final fun create ()Ldev/zacsweers/metro/internal/Factory;
+	public synthetic fun invoke ()Ljava/lang/Object;
+	public final fun invoke ()Lkotlin/coroutines/CoroutineContext;
+	public final fun mirrorFunction ()Lkotlin/coroutines/CoroutineContext;
+	public static final fun providesMainImmediate ()Lkotlin/coroutines/CoroutineContext;
+}
+
+public final class fr/smarquis/playground/core/di/CoroutinesBindings$ProvidesMainMetroFactory : dev/zacsweers/metro/internal/Factory {
+	public static final field INSTANCE Lfr/smarquis/playground/core/di/CoroutinesBindings$ProvidesMainMetroFactory;
+	public static final fun create ()Ldev/zacsweers/metro/internal/Factory;
+	public synthetic fun invoke ()Ljava/lang/Object;
+	public final fun invoke ()Lkotlin/coroutines/CoroutineContext;
+	public final fun mirrorFunction ()Lkotlin/coroutines/CoroutineContext;
+	public static final fun providesMain ()Lkotlin/coroutines/CoroutineContext;
+}
+
+public final class fr/smarquis/playground/core/di/CoroutinesBindings$ProvidesProviderMetroFactory : dev/zacsweers/metro/internal/Factory {
+	public static final field INSTANCE Lfr/smarquis/playground/core/di/CoroutinesBindings$ProvidesProviderMetroFactory;
+	public static final fun create ()Ldev/zacsweers/metro/internal/Factory;
+	public final fun invoke ()Lfr/smarquis/playground/core/di/CoroutineContextProvider;
+	public synthetic fun invoke ()Ljava/lang/Object;
+	public final fun mirrorFunction ()Lfr/smarquis/playground/core/di/CoroutineContextProvider;
+	public static final fun providesProvider ()Lfr/smarquis/playground/core/di/CoroutineContextProvider;
+}
+
+public final class fr/smarquis/playground/core/di/CoroutinesBindings$ProvidesUnconfinedMetroFactory : dev/zacsweers/metro/internal/Factory {
+	public static final field INSTANCE Lfr/smarquis/playground/core/di/CoroutinesBindings$ProvidesUnconfinedMetroFactory;
+	public static final fun create ()Ldev/zacsweers/metro/internal/Factory;
+	public synthetic fun invoke ()Ljava/lang/Object;
+	public final fun invoke ()Lkotlin/coroutines/CoroutineContext;
+	public final fun mirrorFunction ()Lkotlin/coroutines/CoroutineContext;
+	public static final fun providesUnconfined ()Lkotlin/coroutines/CoroutineContext;
+}
+
+public final class fr/smarquis/playground/core/di/CoroutinesBindingsKt {
 	public static final fun asCoroutineContextProvider (Lkotlin/coroutines/CoroutineContext;)Lfr/smarquis/playground/core/di/CoroutineContextProvider;
 }
 
@@ -56,10 +115,6 @@ public abstract interface class fr/smarquis/playground/core/di/FileManager {
 	public abstract fun invoke (Ljava/lang/String;)Ljava/io/File;
 	public abstract fun openFileInput (Ljava/lang/String;)Ljava/io/FileInputStream;
 	public abstract fun openFileOutput (Ljava/lang/String;)Ljava/io/FileOutputStream;
-}
-
-public final class fr/smarquis/playground/core/di/HiltWrapper_CoroutinesModule {
-	public fun <init> ()V
 }
 
 public abstract interface annotation class fr/smarquis/playground/core/di/qualifier/AppPackageName : java/lang/annotation/Annotation {
@@ -108,5 +163,9 @@ public abstract interface annotation class fr/smarquis/playground/core/di/qualif
 }
 
 public abstract interface annotation class fr/smarquis/playground/core/di/qualifier/LastUpdateTime : java/lang/annotation/Annotation {
+}
+
+public final class metro/hints/FrSmarquisPlaygroundCoreDiCoroutinesBindingsAppScopeKt {
+	public static final synthetic fun AppScope (Lfr/smarquis/playground/core/di/CoroutinesBindings;)V
 }
 

@@ -14,12 +14,13 @@ import androidx.profileinstaller.ProfileVerifier.CompilationStatus.RESULT_CODE_E
 import androidx.profileinstaller.ProfileVerifier.CompilationStatus.RESULT_CODE_NO_PROFILE_INSTALLED
 import androidx.profileinstaller.ProfileVerifier.CompilationStatus.RESULT_CODE_PROFILE_ENQUEUED_FOR_COMPILATION
 import androidx.profileinstaller.ProfileVerifier.CompilationStatus.ResultCode
+import dev.zacsweers.metro.Inject
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.guava.await
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
-public class ProfileVerifierLogger @Inject constructor() {
+@Inject
+public class ProfileVerifierLogger {
 
     public operator fun invoke(): Job = ProcessLifecycleOwner.get().lifecycleScope.launch {
         val status = ProfileVerifier.getCompilationStatusAsync().await()

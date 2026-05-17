@@ -1,10 +1,12 @@
 package fr.smarquis.playground.data.dice
 
-import androidx.annotation.VisibleForTesting
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.byteArrayPreferencesKey
 import androidx.datastore.preferences.core.edit
+import dev.zacsweers.metro.AppScope
+import dev.zacsweers.metro.ContributesBinding
+import dev.zacsweers.metro.SingleIn
 import fr.smarquis.playground.core.datastore.get
 import fr.smarquis.playground.core.di.qualifier.Dispatcher
 import fr.smarquis.playground.core.di.qualifier.Dispatcher.Type.Default
@@ -18,13 +20,16 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
-import javax.inject.Inject
+import org.jetbrains.annotations.VisibleForTesting
 import kotlin.coroutines.CoroutineContext
 
 @VisibleForTesting
 internal val RollsPreferenceKey = byteArrayPreferencesKey("rolls")
 
-internal class DiceSourceImpl @Inject constructor(
+
+@ContributesBinding(AppScope::class)
+@SingleIn(AppScope::class)
+public class DiceSourceImpl(
     private val datastore: DataStore<Preferences>,
     @Dispatcher(Default) private val dispatcher: CoroutineContext,
 ) : DiceSource {

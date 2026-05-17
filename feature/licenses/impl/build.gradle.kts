@@ -3,8 +3,7 @@ plugins {
     alias(libs.plugins.playground.android.compose)
     alias(libs.plugins.playground.screenshots)
     alias(libs.plugins.kotlin.serialization)
-    alias(libs.plugins.ksp)
-    alias(libs.plugins.hilt)
+    alias(libs.plugins.playground.metro)
 }
 
 dependencies {
@@ -15,12 +14,9 @@ dependencies {
     implementation(projects.core.utils)
     implementation(libs.androidx.compose.material.icons)
     implementation(libs.androidx.navigation3.runtime)
-    implementation(libs.androidx.hilt.lifecycle.viewmodel.compose)
-    implementation(libs.hilt.android)
     implementation(libs.kotlinx.collections)
     implementation(libs.kotlinx.serialization.json)
-    ksp(libs.hilt.compiler)
-    ksp(libs.hilt.compiler.android)
+    implementation(libs.metrox.viewmodel.compose)
     testImplementation(libs.kotlinx.coroutines.test)
     testImplementation(libs.testParameterInjector)
     testImplementation(libs.turbine)

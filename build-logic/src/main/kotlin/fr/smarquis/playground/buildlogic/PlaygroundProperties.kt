@@ -95,11 +95,8 @@ internal class PlaygroundLibraries(catalog: VersionCatalog) {
     val `android-security-lint` by catalog
     val `android-desugarJdkLibs` by catalog
     val assertk by catalog
-    val hilt by catalog
-    val `hilt-android` by catalog
-    val `hilt-compiler` by catalog
-    val `javax-inject` by catalog
     val junit by catalog
+    val `metro-runtime` by catalog
     val `kotlin-metadata` by catalog
     val `kotlin-test` by catalog
     val `kotlin-test-junit` by catalog

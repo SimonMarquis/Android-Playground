@@ -1,9 +1,9 @@
 package fr.smarquis.playground.core.di
 
-import dagger.Module
-import dagger.Provides
-import dagger.hilt.InstallIn
-import dagger.hilt.components.SingletonComponent
+import dev.zacsweers.metro.AppScope
+import dev.zacsweers.metro.BindingContainer
+import dev.zacsweers.metro.ContributesTo
+import dev.zacsweers.metro.Provides
 import fr.smarquis.playground.core.di.qualifier.Dispatcher
 import fr.smarquis.playground.core.di.qualifier.Dispatcher.Type.Default
 import fr.smarquis.playground.core.di.qualifier.Dispatcher.Type.IO
@@ -13,26 +13,27 @@ import fr.smarquis.playground.core.di.qualifier.Dispatcher.Type.Unconfined
 import kotlinx.coroutines.Dispatchers
 import kotlin.coroutines.CoroutineContext
 
-@Module @InstallIn(SingletonComponent::class)
-internal object CoroutinesModule {
+@ContributesTo(AppScope::class)
+@BindingContainer
+public object CoroutinesBindings {
 
     @Provides @Dispatcher(Main)
-    fun providesMain(): CoroutineContext = Dispatchers.Main
+    public fun providesMain(): CoroutineContext = Dispatchers.Main
 
     @Provides @Dispatcher(MainImmediate)
-    fun providesMainImmediate(): CoroutineContext = Dispatchers.Main.immediate
+    public fun providesMainImmediate(): CoroutineContext = Dispatchers.Main.immediate
 
     @Provides @Dispatcher(Default)
-    fun providesDefault(): CoroutineContext = Dispatchers.Default
+    public fun providesDefault(): CoroutineContext = Dispatchers.Default
 
     @Provides @Dispatcher(IO)
-    fun providesIo(): CoroutineContext = Dispatchers.IO
+    public fun providesIo(): CoroutineContext = Dispatchers.IO
 
     @Provides @Dispatcher(Unconfined)
-    fun providesUnconfined(): CoroutineContext = Dispatchers.Unconfined
+    public fun providesUnconfined(): CoroutineContext = Dispatchers.Unconfined
 
     @Provides
-    fun providesProvider(): CoroutineContextProvider = object : CoroutineContextProvider {}
+    public fun providesProvider(): CoroutineContextProvider = object : CoroutineContextProvider {}
 
 }
 

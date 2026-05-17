@@ -1,4 +1,4 @@
-package fr.smarquis.playground.feature.fr.smarquis.playground.feature.licenses
+package fr.smarquis.playground.feature.licenses
 
 import androidx.annotation.Keep
 import androidx.navigation3.runtime.NavKey

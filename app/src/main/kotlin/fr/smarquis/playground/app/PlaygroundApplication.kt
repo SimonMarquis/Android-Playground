@@ -4,18 +4,22 @@ import android.app.Application
 import android.content.pm.ApplicationInfo.FLAG_DEBUGGABLE
 import androidx.lifecycle.ProcessLifecycleOwner
 import androidx.lifecycle.lifecycleScope
-import dagger.hilt.android.HiltAndroidApp
+import dev.zacsweers.metro.Inject
+import dev.zacsweers.metro.createGraphFactory
+import fr.smarquis.playground.app.di.AppGraph
 import fr.smarquis.playground.core.android.ProfileVerifierLogger
 import fr.smarquis.playground.core.android.StrictMode
 import fr.smarquis.playground.core.android.UncaughtExceptionHandler
 import fr.smarquis.playground.domain.settings.SettingsSource
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import javax.inject.Inject
 
 
-@HiltAndroidApp
 public class PlaygroundApplication : Application() {
+
+    public val graph: AppGraph by lazy {
+        createGraphFactory<AppGraph.Factory>().create(this)
+    }
 
     @Inject
     public lateinit var settingsSource: SettingsSource
@@ -25,6 +29,7 @@ public class PlaygroundApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
+        graph.inject(this)
         registerSettings()
         profileVerifierLogger()
     }
