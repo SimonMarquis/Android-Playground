@@ -21,7 +21,7 @@ internal class PlaygroundMetroPlugin : Plugin<Project> {
             nonPublicContributionSeverity = DiagnosticSeverity.WARN
         }
 
-        dependencies.add("implementation", libs.`metro-runtime`)
+        dependencies.add("api", libs.`metro-runtime`)
     }
 
 }

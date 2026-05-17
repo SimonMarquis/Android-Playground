@@ -17,7 +17,6 @@ dependencies {
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.compose.material.icons)
     implementation(libs.androidx.navigation3.runtime)
-    implementation(libs.androidx.lifecycle.runtime.compose)
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.metrox.viewmodel.compose)
     testImplementation(libs.kotlinx.coroutines.test)

@@ -14,7 +14,6 @@ dependencies {
     implementation(projects.core.utils)
     implementation(libs.androidx.compose.material.icons)
     implementation(libs.androidx.navigation3.runtime)
-    implementation(libs.androidx.lifecycle.runtime.compose)
     implementation(libs.kotlinx.collections)
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.metrox.viewmodel.compose)
