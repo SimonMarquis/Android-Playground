@@ -11,8 +11,6 @@ import fr.smarquis.playground.app.PlaygroundApplication
 
 @DependencyGraph(AppScope::class)
 public interface AppGraph : ViewModelGraph {
-    public val application: Application
-    public val viewModelFactory: MetroViewModelFactory
     public fun inject(application: PlaygroundApplication)
     public fun inject(activity: PlaygroundActivity)
 
