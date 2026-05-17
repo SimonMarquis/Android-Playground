@@ -33,7 +33,7 @@ jobs:
       - id: setup-bot
         uses: ./.github/actions/setup-bot
         with:
-          app-id: ${{ vars.BOT_APP_ID }}
+          client-id: ${{ vars.BOT_CLIENT_ID }}
           private-key: ${{ secrets.BOT_PRIVATE_KEY }}
       - uses: actions/checkout@v6
         with:
