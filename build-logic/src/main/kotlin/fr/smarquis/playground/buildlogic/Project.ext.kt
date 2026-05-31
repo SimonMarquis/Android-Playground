@@ -124,6 +124,12 @@ internal inline fun <reified T : KotlinBaseExtension> Project.configureKotlin(
                 "-Xallow-reified-type-in-catch",
                 // https://kotlinlang.org/docs/whatsnew23.html#explicit-backing-fields
                 "-Xexplicit-backing-fields",
+                // https://kotlinlang.org/docs/whatsnew2320.html#name-based-destructuring
+                "-Xname-based-destructuring=only-syntax",
+                // https://kotlinlang.org/docs/whatsnew2320.html#name-based-destructuring
+                "-Xcollection-literals",
+                // https://kotlinlang.org/docs/whatsnew-eap.html#improved-compile-time-constants
+                "-XIntrinsic-const-evaluation",
             )
         }
         explicitApi()
