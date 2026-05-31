@@ -69,6 +69,7 @@ kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-t
 kotlinx-serialization-bom = "org.jetbrains.kotlinx:kotlinx-serialization-bom:1.11.0"
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json" }
 
+lint = { module = "com.android.tools.lint:lint", version.ref = "android-tools" }
 lint-api = { module = "com.android.tools.lint:lint-api", version.ref = "android-tools" }
 lint-checks = { module = "com.android.tools.lint:lint-checks", version.ref = "android-tools" }
 lint-tests = { module = "com.android.tools.lint:lint-tests", version.ref = "android-tools" }
