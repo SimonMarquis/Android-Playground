@@ -12,5 +12,6 @@ dependencies {
     compileOnly(libs.kotlin.stdlib)
     compileOnly(libs.lint.api)
     compileOnly(libs.lint.checks)
+    testImplementation(libs.lint)
     testImplementation(libs.lint.tests)
 }
