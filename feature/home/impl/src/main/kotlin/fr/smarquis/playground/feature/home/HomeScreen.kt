@@ -137,7 +137,7 @@ private fun HomeScreenContent(
                 modifier = Modifier.fillMaxWidth(),
                 windowInsets = WindowInsets.safeDrawing.only(Horizontal + Top),
                 scrollBehavior = scrollBehavior,
-                actions = @Suppress("AssignedValueIsNeverRead") {
+                actions = {
                     var expanded by remember { mutableStateOf(false) }
                     IconButton(onClick = { expanded = !expanded }) {
                         Icon(imageVector = Icons.Default.MoreVert, contentDescription = "More")
