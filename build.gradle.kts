@@ -8,7 +8,6 @@ plugins {
     alias(libs.plugins.android.cacheFix) apply false
     alias(libs.plugins.android.library) apply false
     alias(libs.plugins.android.lint) apply false
-    alias(libs.plugins.android.settings) apply false
     alias(libs.plugins.android.test) apply false
     alias(libs.plugins.androidx.baselineprofile) apply false
     alias(libs.plugins.artifactsSizeReport) apply false
