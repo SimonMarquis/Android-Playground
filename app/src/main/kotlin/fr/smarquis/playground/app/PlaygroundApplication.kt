@@ -37,6 +37,7 @@ public class PlaygroundApplication : Application() {
     public fun isDebuggable(): Boolean = 0 != applicationInfo.flags and FLAG_DEBUGGABLE
 
     // NOTE: this could be moved to an app Initializer
+    @IgnorableReturnValue
     private fun registerSettings() = settingsSource
         .settings
         .onEach {
