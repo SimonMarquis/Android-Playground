@@ -93,19 +93,19 @@ internal inline fun <reified T : KotlinBaseExtension> Project.configureKotlin(
             is KotlinJvmProjectExtension -> this
             else -> TODO("Unsupported project extension $this ${T::class}")
         }
-        @OptIn(ExperimentalAbiValidation::class)
+
         // FIXME:
         //  - https://issuetracker.google.com/issues/474474278
         //  - https://youtrack.jetbrains.com/issue/KT-83410
-        kotlin.extensions.findByType<AbiValidationExtension>()?.apply {
-            PlaygroundGlobalCi.addToGlobalCi(project = this@configureKotlin, "checkKotlinAbi")
-            enabled = true
+        @OptIn(ExperimentalAbiValidation::class)
+        if (kotlin !is KotlinAndroidProjectExtension) abiValidation {
+            PlaygroundGlobalCi.addToGlobalCi(project = this@configureKotlin, checkTaskProvider)
             filters {
                 exclude {
-                    this.annotatedWith.addAll(
+                    annotatedWith.addAll(
                         "**.*Generated*",
                     )
-                    this.byNames.addAll(
+                    byNames.addAll(
                         "**.internal.**",
                     )
                 }
