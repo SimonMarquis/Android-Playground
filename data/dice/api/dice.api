@@ -16,7 +16,7 @@ public final class fr/smarquis/playground/data/dice/DiceSourceImplContributions$
 public final class fr/smarquis/playground/data/dice/DiceSourceImplContributions$ToAppScope$ProvideDiceSourceImplAsDiceSourceMetroFactory : dev/zacsweers/metro/internal/Factory {
 	public static final field Companion Lfr/smarquis/playground/data/dice/DiceSourceImplContributions$ToAppScope$ProvideDiceSourceImplAsDiceSourceMetroFactory$Companion;
 	public synthetic fun <init> (Ldev/zacsweers/metro/Provider;Ldev/zacsweers/metro/Provider;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
-	public static final fun create (Ldev/zacsweers/metro/Provider;Ldev/zacsweers/metro/Provider;)Ldev/zacsweers/metro/internal/Factory;
+	public static final fun create (Ldev/zacsweers/metro/Provider;Ldev/zacsweers/metro/Provider;)Lfr/smarquis/playground/data/dice/DiceSourceImplContributions$ToAppScope$ProvideDiceSourceImplAsDiceSourceMetroFactory;
 	public final fun invoke ()Lfr/smarquis/playground/domain/dice/DiceSource;
 	public synthetic fun invoke ()Ljava/lang/Object;
 	public final fun mirrorFunction (Landroidx/datastore/core/DataStore;Lkotlin/coroutines/CoroutineContext;)Lfr/smarquis/playground/domain/dice/DiceSource;
@@ -25,7 +25,7 @@ public final class fr/smarquis/playground/data/dice/DiceSourceImplContributions$
 
 public final class fr/smarquis/playground/data/dice/DiceSourceImplContributions$ToAppScope$ProvideDiceSourceImplAsDiceSourceMetroFactory$Companion {
 	public fun <init> ()V
-	public final fun create (Ldev/zacsweers/metro/Provider;Ldev/zacsweers/metro/Provider;)Ldev/zacsweers/metro/internal/Factory;
+	public final fun create (Ldev/zacsweers/metro/Provider;Ldev/zacsweers/metro/Provider;)Lfr/smarquis/playground/data/dice/DiceSourceImplContributions$ToAppScope$ProvideDiceSourceImplAsDiceSourceMetroFactory;
 	public final fun provideDiceSourceImplAsDiceSource (Landroidx/datastore/core/DataStore;Lkotlin/coroutines/CoroutineContext;)Lfr/smarquis/playground/domain/dice/DiceSource;
 }
 
@@ -44,7 +44,7 @@ public final class fr/smarquis/playground/data/dice/RandomDiceRollerContribution
 
 public final class fr/smarquis/playground/data/dice/RandomDiceRollerContributions$ToAppScope$ProvideRandomDiceRollerAsDiceRollerMetroFactory : dev/zacsweers/metro/internal/Factory {
 	public static final field INSTANCE Lfr/smarquis/playground/data/dice/RandomDiceRollerContributions$ToAppScope$ProvideRandomDiceRollerAsDiceRollerMetroFactory;
-	public static final fun create ()Ldev/zacsweers/metro/internal/Factory;
+	public static final fun create ()Lfr/smarquis/playground/data/dice/RandomDiceRollerContributions$ToAppScope$ProvideRandomDiceRollerAsDiceRollerMetroFactory;
 	public final fun invoke ()Lfr/smarquis/playground/domain/dice/DiceRoller;
 	public synthetic fun invoke ()Ljava/lang/Object;
 	public final fun mirrorFunction ()Lfr/smarquis/playground/domain/dice/DiceRoller;

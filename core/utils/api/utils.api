@@ -6,7 +6,7 @@ public final class fr/smarquis/playground/core/utils/di/InstantsBindings {
 
 public final class fr/smarquis/playground/core/utils/di/InstantsBindings$ProvidesClockMetroFactory : dev/zacsweers/metro/internal/Factory {
 	public static final field INSTANCE Lfr/smarquis/playground/core/utils/di/InstantsBindings$ProvidesClockMetroFactory;
-	public static final fun create ()Ldev/zacsweers/metro/internal/Factory;
+	public static final fun create ()Lfr/smarquis/playground/core/utils/di/InstantsBindings$ProvidesClockMetroFactory;
 	public synthetic fun invoke ()Ljava/lang/Object;
 	public final fun invoke ()Lkotlin/time/Clock;
 	public final fun mirrorFunction ()Lkotlin/time/Clock;
@@ -16,7 +16,7 @@ public final class fr/smarquis/playground/core/utils/di/InstantsBindings$Provide
 public final class fr/smarquis/playground/core/utils/di/InstantsBindings$ProvidesCurrentTimeMetroFactory : dev/zacsweers/metro/internal/Factory {
 	public static final field Companion Lfr/smarquis/playground/core/utils/di/InstantsBindings$ProvidesCurrentTimeMetroFactory$Companion;
 	public synthetic fun <init> (Ldev/zacsweers/metro/Provider;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
-	public static final fun create (Ldev/zacsweers/metro/Provider;)Ldev/zacsweers/metro/internal/Factory;
+	public static final fun create (Ldev/zacsweers/metro/Provider;)Lfr/smarquis/playground/core/utils/di/InstantsBindings$ProvidesCurrentTimeMetroFactory;
 	public synthetic fun invoke ()Ljava/lang/Object;
 	public final fun invoke ()Lkotlin/time/Instant;
 	public final fun mirrorFunction (Lkotlin/time/Clock;)Lkotlin/time/Instant;
@@ -24,7 +24,7 @@ public final class fr/smarquis/playground/core/utils/di/InstantsBindings$Provide
 }
 
 public final class fr/smarquis/playground/core/utils/di/InstantsBindings$ProvidesCurrentTimeMetroFactory$Companion {
-	public final fun create (Ldev/zacsweers/metro/Provider;)Ldev/zacsweers/metro/internal/Factory;
+	public final fun create (Ldev/zacsweers/metro/Provider;)Lfr/smarquis/playground/core/utils/di/InstantsBindings$ProvidesCurrentTimeMetroFactory;
 	public final fun providesCurrentTime (Lkotlin/time/Clock;)Lkotlin/time/Instant;
 }
 
