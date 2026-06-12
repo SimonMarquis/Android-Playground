@@ -115,6 +115,16 @@ internal inline fun <reified T : KotlinBaseExtension> Project.configureKotlin(
         kotlin.compilerOptions {
             jvmTarget = JvmTarget.JVM_11
             allWarningsAsErrors = properties.warningsAsErrors
+            freeCompilerArgs.addAll(
+                // https://kotlinlang.org/docs/whatsnew-eap.html#unused-return-value-checker
+                "-Xreturn-value-checker=full",
+                // https://kotlinlang.org/docs/whatsnew2320.html#name-based-destructuring
+                "-Xname-based-destructuring=only-syntax",
+                // https://kotlinlang.org/docs/whatsnew2320.html#name-based-destructuring
+                "-Xcollection-literals",
+                // https://kotlinlang.org/docs/whatsnew-eap.html#improved-compile-time-constants
+                "-XIntrinsic-const-evaluation",
+            )
         }
         explicitApi()
         configure()

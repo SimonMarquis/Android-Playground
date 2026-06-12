@@ -22,6 +22,7 @@ import kotlinx.coroutines.launch
 @Inject
 public class ProfileVerifierLogger {
 
+    @IgnorableReturnValue
     public operator fun invoke(): Job = ProcessLifecycleOwner.get().lifecycleScope.launch {
         val status = ProfileVerifier.getCompilationStatusAsync().await()
         Log.d("ProfileInstaller", status.profileInstallResultCode.asString())

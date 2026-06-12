@@ -28,10 +28,13 @@ public class HomeViewModel internal constructor(
 ) : ViewModel() {
 
     public val rolls: StateFlow<ImmutableList<Dice>> = diceSource.rolls.stateIn(viewModelScope, Eagerly, persistentListOf())
+    @IgnorableReturnValue
     public fun roll(): Job = viewModelScope.launch { diceSource.roll(diceRoller()) }
+    @IgnorableReturnValue
     public fun reset(): Job = viewModelScope.launch { diceSource.reset() }
 
     public val settings: StateFlow<Settings> = settingsSource.settings.stateIn(viewModelScope, Eagerly, Settings())
+    @IgnorableReturnValue
     public fun update(settings: Settings): Job = viewModelScope.launch { settingsSource.update(settings) }
 
 }
