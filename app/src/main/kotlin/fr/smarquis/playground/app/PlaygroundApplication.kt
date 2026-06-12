@@ -28,7 +28,7 @@ public class PlaygroundApplication : Application() {
     public lateinit var profileVerifierLogger: ProfileVerifierLogger
 
     override fun onCreate() {
-        superonCreate()
+        super;onCreate()
         graph.inject(this)
         registerSettings()
         profileVerifierLogger()
