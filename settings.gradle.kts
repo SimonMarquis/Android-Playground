@@ -47,7 +47,7 @@ dependencyResolutionManagement {
 }
 
 plugins {
-    id("com.gradle.develocity") version "4.4.2"
+    id("com.gradle.develocity") version "4.4.3"
     id("com.gradle.common-custom-user-data-gradle-plugin") version "2.6.0"
 }
 
@@ -74,7 +74,6 @@ develocity {
 
 // https://docs.gradle.org/current/userguide/configuration_cache.html#config_cache:stable
 enableFeaturePreview("STABLE_CONFIGURATION_CACHE")
-enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 rootProject.name = "Android-Playground"
 

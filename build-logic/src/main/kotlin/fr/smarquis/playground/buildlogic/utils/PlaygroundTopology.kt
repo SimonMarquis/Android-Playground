@@ -14,7 +14,6 @@ import org.gradle.api.file.RegularFileProperty
 import org.gradle.api.problems.ProblemGroup
 import org.gradle.api.problems.ProblemId
 import org.gradle.api.problems.Problems
-import org.gradle.api.problems.Severity
 import org.gradle.api.provider.Property
 import org.gradle.api.provider.SetProperty
 import org.gradle.api.tasks.CacheableTask
@@ -111,7 +110,6 @@ internal abstract class CheckTopologyTask : DefaultTask() {
                     Rules: ${RULES.keys}
                     """.trimIndent(),
                 )
-                severity(Severity.ERROR)
                 withException(exception)
             }
         }
@@ -131,7 +129,6 @@ internal abstract class CheckTopologyTask : DefaultTask() {
                     Matching rules: $matchingRules
                     """.trimIndent(),
                 )
-                severity(Severity.ERROR)
                 withException(exception)
             }
         }

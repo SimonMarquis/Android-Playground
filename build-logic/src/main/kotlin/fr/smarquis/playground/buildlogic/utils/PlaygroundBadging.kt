@@ -20,7 +20,6 @@ import org.gradle.api.file.RegularFileProperty
 import org.gradle.api.problems.ProblemGroup
 import org.gradle.api.problems.ProblemId
 import org.gradle.api.problems.Problems
-import org.gradle.api.problems.Severity
 import org.gradle.api.provider.Property
 import org.gradle.api.tasks.CacheableTask
 import org.gradle.api.tasks.Copy
@@ -176,7 +175,6 @@ internal abstract class CheckBadgingTask : DefaultTask() {
                 contextualLabel(exception.message.orEmpty())
                 fileLocation(generatedBadging.get().asFile.absolutePath)
                 solution("If this change is intended, run the `${updateTask.get()}` task.")
-                severity(Severity.ERROR)
                 withException(exception)
             }
         }
