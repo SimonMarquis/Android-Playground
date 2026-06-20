@@ -4,11 +4,11 @@ plugins {
 }
 
 dependencies {
-    api(projects.domain.dice)
-    implementation(projects.core.datastore)
-    implementation(projects.core.di)
+    api(project(":domain:dice"))
+    implementation(project(":core:datastore"))
+    implementation(project(":core:di"))
     implementation(libs.kotlinx.coroutines.core)
     testImplementation(libs.kotlinx.coroutines.test)
-    testImplementation(testFixtures(projects.core.datastore))
-    testImplementation(testFixtures(projects.core.utils))
+    testImplementation(testFixtures(project(":core:datastore")))
+    testImplementation(testFixtures(project(":core:utils")))
 }

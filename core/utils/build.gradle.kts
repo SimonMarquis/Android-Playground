@@ -7,7 +7,7 @@ plugins {
 dependencies {
     api(libs.androidx.navigation3.runtime)
     implementation(libs.kotlinx.coroutines.core)
-    implementation(projects.core.di)
+    implementation(project(":core:di"))
     testFixturesImplementation(libs.kotlinx.coroutines.test)
     testFixturesImplementation(libs.junit)
 }

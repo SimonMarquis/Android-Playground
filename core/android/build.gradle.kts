@@ -9,5 +9,5 @@ dependencies {
     implementation(libs.androidx.profileinstaller)
     implementation(libs.kotlinx.coroutines.guava)
     implementation(libs.metrox.viewmodel)
-    implementation(projects.core.di)
+    implementation(project(":core:di"))
 }
