@@ -17,7 +17,7 @@ baselineProfile {
 }
 
 dependencies {
-    baselineProfile(projects.profiling)
+    baselineProfile(project(":profiling"))
 
     implementation(libs.androidx.lifecycle.process)
     implementation(libs.androidx.lifecycle.viewmodel.navigation3)
@@ -28,21 +28,21 @@ dependencies {
     implementation(libs.androidx.splashscreen)
     implementation(libs.metrox.viewmodel.compose)
 
-    implementation(projects.feature.home.impl)
-    implementation(projects.feature.licenses.impl)
-    implementation(projects.core.android)
-    implementation(projects.core.datastore)
-    implementation(projects.core.di)
-    implementation(projects.core.ui)
-    implementation(projects.core.utils)
-    implementation(projects.domain.dice)
-    implementation(projects.domain.licenses)
-    implementation(projects.domain.settings)
-    implementation(projects.data.dice)
-    implementation(projects.data.licenses)
-    implementation(projects.data.settings)
+    implementation(project(":feature:home:impl"))
+    implementation(project(":feature:licenses:impl"))
+    implementation(project(":core:android"))
+    implementation(project(":core:datastore"))
+    implementation(project(":core:di"))
+    implementation(project(":core:ui"))
+    implementation(project(":core:utils"))
+    implementation(project(":domain:dice"))
+    implementation(project(":domain:licenses"))
+    implementation(project(":domain:settings"))
+    implementation(project(":data:dice"))
+    implementation(project(":data:licenses"))
+    implementation(project(":data:settings"))
 
-    compileOnly(projects.lint) {
+    compileOnly(project(":lint")) {
         isTransitive = false
         because(
             """

@@ -7,11 +7,11 @@ plugins {
 }
 
 dependencies {
-    api(projects.domain.licenses)
-    api(projects.feature.licenses)
-    implementation(projects.core.di)
-    implementation(projects.core.ui)
-    implementation(projects.core.utils)
+    api(project(":domain:licenses"))
+    api(project(":feature:licenses"))
+    implementation(project(":core:di"))
+    implementation(project(":core:ui"))
+    implementation(project(":core:utils"))
     implementation(libs.androidx.compose.material.icons)
     implementation(libs.androidx.navigation3.runtime)
     implementation(libs.kotlinx.collections)
@@ -20,7 +20,7 @@ dependencies {
     testImplementation(libs.kotlinx.coroutines.test)
     testImplementation(libs.testParameterInjector)
     testImplementation(libs.turbine)
-    testImplementation(testFixtures(projects.core.ui))
-    testImplementation(testFixtures(projects.domain.licenses))
-    testImplementation(testFixtures(projects.core.utils))
+    testImplementation(testFixtures(project(":core:ui")))
+    testImplementation(testFixtures(project(":domain:licenses")))
+    testImplementation(testFixtures(project(":core:utils")))
 }
