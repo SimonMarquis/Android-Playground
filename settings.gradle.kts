@@ -74,7 +74,6 @@ develocity {
 
 // https://docs.gradle.org/current/userguide/configuration_cache.html#config_cache:stable
 enableFeaturePreview("STABLE_CONFIGURATION_CACHE")
-enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 rootProject.name = "Android-Playground"
 
