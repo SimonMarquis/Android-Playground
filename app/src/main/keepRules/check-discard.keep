@@ -1,0 +1,14 @@
+##########################################################################################
+# Check Discard (use `-whyareyoukeeping <class_specification>` to debug)                 #
+# https://developer.android.com/topic/performance/app-optimization/troubleshooting-rules #
+##########################################################################################
+
+# Check @Preview methods have been removed
+-keepclassmembers,allowshrinking class * { @androidx.compose.ui.tooling.preview.Preview <methods>; }
+-checkdiscard class * { @androidx.compose.ui.tooling.preview.Preview <methods>; }
+
+# Check @TestOnly classes & methods have been removed
+-keep,allowshrinking @org.jetbrains.annotations.TestOnly class * { *; }
+-checkdiscard @org.jetbrains.annotations.TestOnly class * { *; }
+-keepclassmembers,allowshrinking class * { @org.jetbrains.annotations.TestOnly <methods>; }
+-checkdiscard class * { @org.jetbrains.annotations.TestOnly <methods>; }

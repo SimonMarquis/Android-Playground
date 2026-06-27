@@ -1,2 +1,6 @@
 # Remove null-checks
 -processkotlinnullchecks remove
+
+# Produce useful obfuscated stack traces
+-renamesourcefileattribute SourceFile
+-keepattributes SourceFile,LineNumberTable
