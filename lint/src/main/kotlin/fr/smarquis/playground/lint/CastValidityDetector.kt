@@ -14,6 +14,7 @@ import com.android.tools.lint.detector.api.SourceCodeScanner
 import org.jetbrains.kotlin.analysis.api.KaExperimentalApi
 import org.jetbrains.kotlin.analysis.api.analyze
 import org.jetbrains.kotlin.analysis.api.renderer.types.impl.KaTypeRendererForSource.WITH_SHORT_NAMES
+import org.jetbrains.kotlin.analysis.api.types.KaType
 import org.jetbrains.kotlin.psi.KtBinaryExpressionWithTypeRHS
 import org.jetbrains.kotlin.psi.KtPsiUtil
 import org.jetbrains.kotlin.types.Variance.INVARIANT
@@ -30,25 +31,23 @@ public class CastValidityDetector : Detector(), SourceCodeScanner {
             val kt = node.sourcePsi as? KtBinaryExpressionWithTypeRHS ?: return
             if (!KtPsiUtil.isCast(kt)) return
 
-            @OptIn(KaExperimentalApi::class)
             analyze(kt) {
                 val fromType = kt.left.expressionType ?: return@analyze
                 val toType = kt.right?.type ?: return@analyze
 
                 if (fromType.isSubtypeOf(toType)) return
-
-
-                val from = fromType.render(renderer = WITH_SHORT_NAMES, position = INVARIANT)
-                val to = toType.render(renderer = WITH_SHORT_NAMES, position = INVARIANT)
-
                 val isImpossible = !toType.isSubtypeOf(fromType)
                 if (!isImpossible && KtPsiUtil.isSafeCast(kt)) return
 
+                @OptIn(KaExperimentalApi::class)
+                fun KaType.shortName() = render(WITH_SHORT_NAMES, INVARIANT)
+                val (issue, prefix) = if (isImpossible) IMPOSSIBLE_CAST to "Impossible" else UNSAFE_CAST to "Unsafe"
+
                 Incident(context)
-                    .issue(if (isImpossible) IMPOSSIBLE_CAST else UNSAFE_CAST)
+                    .issue(issue)
                     .scope(node)
                     .location(context.getLocation(node))
-                    .message("${if (isImpossible) "Impossible" else "Unsafe"} cast from `$from` to `$to`")
+                    .message("$prefix cast from `${fromType.shortName()}` to `${toType.shortName()}`")
                     .report()
             }
         }
