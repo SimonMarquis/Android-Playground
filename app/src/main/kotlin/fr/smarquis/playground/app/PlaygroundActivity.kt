@@ -1,5 +1,6 @@
 package fr.smarquis.playground.app
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -22,6 +23,7 @@ public class PlaygroundActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()
+        @SuppressLint("UnsafeCast")
         (application as PlaygroundApplication).graph.inject(this)
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()

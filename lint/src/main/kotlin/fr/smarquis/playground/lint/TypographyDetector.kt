@@ -92,6 +92,7 @@ public class TypographyDetector : ResourceXmlDetector() {
     override fun visitElement(context: XmlContext, element: Element) {
         if (SdkUtils.isServiceKey(element.getAttribute(ATTR_NAME))) return
 
+        @Suppress("UnsafeCast")
         val xmlElement = element.toXmlNode() as XmlElement
         when (xmlElement.name) {
             TAG_STRING -> xmlElement.checkText(context)
