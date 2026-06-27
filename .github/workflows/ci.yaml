@@ -90,6 +90,7 @@ jobs:
         run: >-
           ./gradlew assembleRelease
           -Dcom.android.tools.r8.dumptracetodirectory=build/r8-traces
+          --rerun-tasks
       - name: 📦 Archive APKs
         uses: actions/upload-artifact@v7
         with:
