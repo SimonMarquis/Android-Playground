@@ -88,7 +88,7 @@
 - <details><summary><a href="https://github.com/SimonMarquis/Android-Playground/blob/main/lint/src/main/kotlin/fr/smarquis/playground/lint/NamedParametersDetector.kt">NamedParametersDetector</a></summary>
 
   - Not specifying parameters name using the same type can lead to unexpected results when refactoring methods signature.  
-    Enforcing explicit named parameters also helps detecting mistakes during code review.  
+    Enforcing explicit named parameters also helps to detect mistakes during code review.  
     Quick fix: `⌥⏎` (macOS) or `Alt+Enter` (Windows/Linux) ➝ `Add names to call arguments`.
   - Using a variable for a function call parameter while another parameter with the exact same name exists is probably a bug.
 
@@ -102,16 +102,23 @@
 
 - <details><summary><a href="https://github.com/SimonMarquis/Android-Playground/blob/main/lint/src/main/kotlin/fr/smarquis/playground/lint/TestMethodBannedWordsDetector.kt">TestMethodBannedWordsDetector</a></summary>
 
-  - Test methods name should not contains banned words.
+  - Test methods name should not contain banned words.
     The default behavior checks for `failure,failed` words to reduce collisions when searching through logs.
 
 </details>
 
 - <details><summary><a href="https://github.com/SimonMarquis/Android-Playground/blob/main/lint/src/main/kotlin/fr/smarquis/playground/lint/TypographyDetector.kt">TypographyDetector</a></summary>
 
-  - Escaped character are impossible to decipher for a human. Using unescaped character is generally self explanatory.
+  - Escaped character are impossible to decipher for a human. Using unescaped character is generally self-explanatory.
   - Typography can be replaced with a better alternative.
   - Curly quotes must be replaced with straight quote as Talkback does not properly handle them.
+
+</details>
+
+- <details><summary><a href="https://github.com/SimonMarquis/Android-Playground/blob/main/lint/src/main/kotlin/fr/smarquis/playground/lint/CastValidityDetector.kt">CastValidityDetector</a></summary>
+
+  - Impossible cast expressions where the source and target types have no possible runtime compatibility (e.g. `A as B` where `A` and `B` are unrelated final classes).
+  - Unsafe cast expressions that are type-compatible in general but not guaranteed to succeed at runtime (e.g. `Any as String`).
 
 </details>
 

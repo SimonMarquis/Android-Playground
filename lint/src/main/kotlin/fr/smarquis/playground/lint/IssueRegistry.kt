@@ -15,6 +15,8 @@ internal class IssueRegistry : IssueRegistry() {
         AssertionsDetector.KOTLIN_ASSERT_ISSUE,
         AssertionsDetector.KOTLIN_TYPE_ASSERTION_ISSUE,
         AssertionsDetector.KOTLIN_EQUALITY_ASSERTION_ISSUE,
+        CastValidityDetector.IMPOSSIBLE_CAST,
+        CastValidityDetector.UNSAFE_CAST,
         *GradleVersionCatalogDetector.ISSUES,
         NamedParametersDetector.MISMATCHED_NAMED_PARAMETERS,
         NamedParametersDetector.MISSING_NAMED_PARAMETERS,
