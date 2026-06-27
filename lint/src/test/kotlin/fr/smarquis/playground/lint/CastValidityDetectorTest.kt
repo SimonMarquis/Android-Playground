@@ -46,12 +46,9 @@ internal class CastValidityDetectorTest : LintDetectorTest() {
                     open class A
                     class B: A()
 
-                    fun safe(a: A) {
-                        a as B
-                    }
-
-                    fun nullsafe(a: A) {
-                        a as? B
+                    fun test(a: A) {
+                        a as? B // ok
+                        a as B  // ko
                     }
                     """,
             ).indented(),
@@ -59,13 +56,10 @@ internal class CastValidityDetectorTest : LintDetectorTest() {
         .run()
         .expect(
             """
-                src/A.kt:5: Warning: Unsafe cast from A to B [UnsafeCast]
-                    a as B
-                    ~~~~~~
-                src/A.kt:9: Warning: Unsafe cast from A to B [UnsafeCast]
-                    a as? B
-                    ~~~~~~~
-                0 errors, 2 warnings
+            src/A.kt:6: Warning: Unsafe cast from A to B [UnsafeCast]
+                a as B  // ko
+                ~~~~~~
+            0 errors, 1 warning
                 """.trimIndent(),
         )
         .cleanup()

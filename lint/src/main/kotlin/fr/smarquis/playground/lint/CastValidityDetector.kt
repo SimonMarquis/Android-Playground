@@ -42,6 +42,7 @@ public class CastValidityDetector : Detector(), SourceCodeScanner {
                 val to = toType.render(renderer = WITH_SHORT_NAMES, position = INVARIANT)
 
                 val isImpossible = !toType.isSubtypeOf(fromType)
+                if (!isImpossible && KtPsiUtil.isSafeCast(kt)) return
 
                 Incident(context)
                     .issue(if (isImpossible) IMPOSSIBLE_CAST else UNSAFE_CAST)
@@ -58,7 +59,7 @@ public class CastValidityDetector : Detector(), SourceCodeScanner {
             id = "ImpossibleCast",
             briefDescription = "Cast between unrelated types can never succeed",
             explanation = """
-                Reports Kotlin cast expressions where the source and target types have no possible runtime compatibility. \
+                Reports Kotlin cast expressions (`as`/`as?`) where the source and target types have no possible runtime compatibility. \
                 These casts are always invalid according to the Kotlin type system (e.g. `A as B` where `A` and `B` are unrelated final classes).
             """.trimIndent(),
             category = CORRECTNESS,
@@ -70,7 +71,7 @@ public class CastValidityDetector : Detector(), SourceCodeScanner {
             id = "UnsafeCast",
             briefDescription = "Cast that may fail at runtime",
             explanation = """
-                Reports Kotlin cast expressions that are type-compatible in general but not guaranteed to succeed at runtime. \
+                Reports Kotlin unsafe cast expressions (`as`) that are type-compatible in general but not guaranteed to succeed at runtime. \
                 These include casts from broader types (e.g. `Any`) to more specific types (e.g. `String`).
             """.trimIndent(),
             category = CORRECTNESS,
