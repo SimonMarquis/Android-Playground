@@ -38,10 +38,10 @@ public class CastValidityDetector : Detector(), SourceCodeScanner {
                 if (fromType.isSubtypeOf(toType)) return
                 val isImpossible = !toType.isSubtypeOf(fromType)
                 if (!isImpossible && KtPsiUtil.isSafeCast(kt)) return
+                val (issue, prefix) = if (isImpossible) IMPOSSIBLE_CAST to "Impossible" else UNSAFE_CAST to "Unsafe"
 
                 @OptIn(KaExperimentalApi::class)
                 fun KaType.shortName() = render(WITH_SHORT_NAMES, INVARIANT)
-                val (issue, prefix) = if (isImpossible) IMPOSSIBLE_CAST to "Impossible" else UNSAFE_CAST to "Unsafe"
 
                 Incident(context)
                     .issue(issue)
