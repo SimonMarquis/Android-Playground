@@ -23,5 +23,6 @@ internal inline fun <reified T : Detector> implementation(
     vararg scopes: EnumSet<Scope>,
 ): Implementation = Implementation(T::class.java, scope, *scopes)
 
+@Suppress("UnsafeCast")
 internal inline fun <reified T : Any> Any?.cast(): T = this as T
 internal inline fun <reified T : Any> Any?.safeCast(): T? = this as? T
