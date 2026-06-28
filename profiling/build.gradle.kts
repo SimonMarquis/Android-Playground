@@ -7,7 +7,7 @@ plugins {
 
 @Suppress("UnstableApiUsage")
 android {
-    targetProjectPath = project(":app").path
+    targetProjectPath = ":app"
     testOptions.managedDevices.localDevices {
         create("gmd") {
             device = "Pixel 6"
