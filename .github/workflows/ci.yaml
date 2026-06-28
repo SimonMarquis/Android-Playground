@@ -38,13 +38,14 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v7
-      - uses: ./.github/actions/check-git-lfs
-      - uses: ./.github/actions/setup-java
-      - uses: ./.github/actions/setup-gradle
-        with:
-          cache-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
-      - uses: ./.github/actions/setup-gradle-properties
+      - parallel:
+        - uses: actions/checkout@v7
+        - uses: ./.github/actions/check-git-lfs
+        - uses: ./.github/actions/setup-java
+        - uses: ./.github/actions/setup-gradle
+          with:
+            cache-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
+        - uses: ./.github/actions/setup-gradle-properties
 
   checks:
     name: 👮 Checks
@@ -52,14 +53,15 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v7
-        with:
-          lfs: true
-      - uses: ./.github/actions/setup-java
-      - uses: ./.github/actions/setup-gradle
-        with:
-          cache-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
-      - uses: ./.github/actions/setup-gradle-properties
+      - parallel:
+        - uses: actions/checkout@v7
+          with:
+            lfs: true
+        - uses: ./.github/actions/setup-java
+        - uses: ./.github/actions/setup-gradle
+          with:
+            cache-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
+        - uses: ./.github/actions/setup-gradle-properties
 
       - uses: ./.github/actions/check-gradle-dependency-lock-state
       - run: ./gradlew :build-logic:validatePlugins --quiet
@@ -76,14 +78,15 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v7
-        with:
-          lfs: true
-      - uses: ./.github/actions/setup-java
-      - uses: ./.github/actions/setup-gradle
-        with:
-          cache-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
-      - uses: ./.github/actions/setup-gradle-properties
+      - parallel:
+        - uses: actions/checkout@v7
+          with:
+            lfs: true
+        - uses: ./.github/actions/setup-java
+        - uses: ./.github/actions/setup-gradle
+          with:
+            cache-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
+        - uses: ./.github/actions/setup-gradle-properties
 
       - name: 👷 Build
         id: build
@@ -107,14 +110,15 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v7
-        with:
-          lfs: true
-      - uses: ./.github/actions/setup-java
-      - uses: ./.github/actions/setup-gradle
-        with:
-          cache-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
-      - uses: ./.github/actions/setup-gradle-properties
+      - parallel:
+        - uses: actions/checkout@v7
+          with:
+            lfs: true
+        - uses: ./.github/actions/setup-java
+        - uses: ./.github/actions/setup-gradle
+          with:
+            cache-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
+        - uses: ./.github/actions/setup-gradle-properties
 
       - name: 🧑‍🔬 Test
         id: test
@@ -143,12 +147,13 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v7
-      - uses: ./.github/actions/setup-java
-      - uses: ./.github/actions/setup-gradle
-        with:
-          cache-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
-      - uses: ./.github/actions/setup-gradle-properties
+      - parallel:
+        - uses: actions/checkout@v7
+        - uses: ./.github/actions/setup-java
+        - uses: ./.github/actions/setup-gradle
+          with:
+            cache-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
+        - uses: ./.github/actions/setup-gradle-properties
 
       - name: 🕵️ Lint
         id: lint
