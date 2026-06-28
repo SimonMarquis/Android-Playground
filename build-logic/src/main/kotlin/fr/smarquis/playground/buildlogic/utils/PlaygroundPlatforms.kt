@@ -12,7 +12,7 @@ import kotlin.text.RegexOption.IGNORE_CASE
  */
 internal object PlaygroundPlatforms {
 
-    private fun Project.platform() = project(":platform")
+    private fun Project.platform() = dependencyFactory.createProjectDependency(":platform")
 
     fun logBillOfMaterials(project: Project) {
         val boms = project.libs.boms

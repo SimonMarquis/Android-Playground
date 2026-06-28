@@ -65,7 +65,7 @@ internal object PlaygroundLint {
 
     private fun Project.configureDependencies() {
         dependencies.add("lintChecks", libs.`android-security-lint`)
-        dependencies.add("lintChecks", project(":lint"))
+        dependencies.add("lintChecks", dependencyFactory.createProjectDependency(":lint"))
     }
 
     private fun Project.configureLintTask(
