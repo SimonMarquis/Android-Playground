@@ -38,14 +38,14 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
+      - uses: actions/checkout@v7
       - parallel:
-        - uses: actions/checkout@v7
+        - uses: ./.github/actions/check-git-lfs
         - uses: ./.github/actions/setup-java
         - uses: ./.github/actions/setup-gradle
           with:
             cache-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
         - uses: ./.github/actions/setup-gradle-properties
-      - uses: ./.github/actions/check-git-lfs
 
   checks:
     name: 👮 Checks
@@ -53,10 +53,10 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
+      - uses: actions/checkout@v7
+        with:
+          lfs: true
       - parallel:
-        - uses: actions/checkout@v7
-          with:
-            lfs: true
         - uses: ./.github/actions/setup-java
         - uses: ./.github/actions/setup-gradle
           with:
@@ -78,10 +78,10 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
+      - uses: actions/checkout@v7
+        with:
+          lfs: true
       - parallel:
-        - uses: actions/checkout@v7
-          with:
-            lfs: true
         - uses: ./.github/actions/setup-java
         - uses: ./.github/actions/setup-gradle
           with:
@@ -110,10 +110,10 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
+      - uses: actions/checkout@v7
+        with:
+          lfs: true
       - parallel:
-        - uses: actions/checkout@v7
-          with:
-            lfs: true
         - uses: ./.github/actions/setup-java
         - uses: ./.github/actions/setup-gradle
           with:
@@ -147,8 +147,8 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
+      - uses: actions/checkout@v7
       - parallel:
-        - uses: actions/checkout@v7
         - uses: ./.github/actions/setup-java
         - uses: ./.github/actions/setup-gradle
           with:
