@@ -8,7 +8,7 @@ compileSdk = "37"
 
 agp = "9.2.1"
 android-tools = "32.2.1"
-androidx-benchmark = "1.5.0-alpha06"
+androidx-benchmark = "1.5.0-alpha07"
 androidx-lifecycle = "2.11.0"
 kgp = "2.4.0"
 metro = "1.2.1"
