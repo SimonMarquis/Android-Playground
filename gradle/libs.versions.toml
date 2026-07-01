@@ -50,7 +50,7 @@ androidx-profileinstaller = "androidx.profileinstaller:profileinstaller:1.4.1"
 androidx-splashscreen = "androidx.core:core-splashscreen:1.2.0"
 androidx-test-monitor = "androidx.test:monitor:1.8.0"
 androidx-test-runner = "androidx.test:runner:1.7.0"
-androidx-uiautomator = "androidx.test.uiautomator:uiautomator:2.3.0"
+androidx-uiautomator = "androidx.test.uiautomator:uiautomator:2.4.0"
 
 assertk = "com.willowtreeapps.assertk:assertk:0.28.1"
 
