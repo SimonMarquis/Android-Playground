@@ -165,7 +165,7 @@ public abstract interface annotation class fr/smarquis/playground/core/di/qualif
 public abstract interface annotation class fr/smarquis/playground/core/di/qualifier/LastUpdateTime : java/lang/annotation/Annotation {
 }
 
-public final class metro/hints/FrSmarquisPlaygroundCoreDiCoroutinesBindingsAppScopeKt {
-	public static final synthetic fun AppScope (Lfr/smarquis/playground/core/di/CoroutinesBindings;)V
+public final class metro/hints/FrSmarquisPlaygroundCoreDiCoroutinesBindingsDev_zacsweers_metro_AppScopeKt {
+	public static final synthetic fun dev_zacsweers_metro_AppScope (Lfr/smarquis/playground/core/di/CoroutinesBindings;)V
 }
 

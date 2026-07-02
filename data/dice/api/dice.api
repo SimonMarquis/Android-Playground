@@ -51,11 +51,11 @@ public final class fr/smarquis/playground/data/dice/RandomDiceRollerContribution
 	public static final fun provideRandomDiceRollerAsDiceRoller ()Lfr/smarquis/playground/domain/dice/DiceRoller;
 }
 
-public final class metro/hints/FrSmarquisPlaygroundDataDiceDiceSourceImplContributionsToAppScopeAppScopeKt {
-	public static final synthetic fun AppScope (Lfr/smarquis/playground/data/dice/DiceSourceImplContributions$ToAppScope;)V
+public final class metro/hints/FrSmarquisPlaygroundDataDiceDiceSourceImplContributionsToAppScopeDev_zacsweers_metro_AppScopeKt {
+	public static final synthetic fun dev_zacsweers_metro_AppScope (Lfr/smarquis/playground/data/dice/DiceSourceImplContributions$ToAppScope;)V
 }
 
-public final class metro/hints/FrSmarquisPlaygroundDataDiceRandomDiceRollerContributionsToAppScopeAppScopeKt {
-	public static final synthetic fun AppScope (Lfr/smarquis/playground/data/dice/RandomDiceRollerContributions$ToAppScope;)V
+public final class metro/hints/FrSmarquisPlaygroundDataDiceRandomDiceRollerContributionsToAppScopeDev_zacsweers_metro_AppScopeKt {
+	public static final synthetic fun dev_zacsweers_metro_AppScope (Lfr/smarquis/playground/data/dice/RandomDiceRollerContributions$ToAppScope;)V
 }
 

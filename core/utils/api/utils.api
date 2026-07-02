@@ -28,7 +28,7 @@ public final class fr/smarquis/playground/core/utils/di/InstantsBindings$Provide
 	public final fun providesCurrentTime (Lkotlin/time/Clock;)Lkotlin/time/Instant;
 }
 
-public final class metro/hints/FrSmarquisPlaygroundCoreUtilsDiInstantsBindingsAppScopeKt {
-	public static final synthetic fun AppScope (Lfr/smarquis/playground/core/utils/di/InstantsBindings;)V
+public final class metro/hints/FrSmarquisPlaygroundCoreUtilsDiInstantsBindingsDev_zacsweers_metro_AppScopeKt {
+	public static final synthetic fun dev_zacsweers_metro_AppScope (Lfr/smarquis/playground/core/utils/di/InstantsBindings;)V
 }
 

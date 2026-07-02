@@ -22,7 +22,7 @@ public final class fr/smarquis/playground/core/datastore/di/DataStoreBindings$Pr
 	public final fun providesDataStore (Lkotlin/coroutines/CoroutineContext;Lfr/smarquis/playground/core/di/FileManager;)Landroidx/datastore/core/DataStore;
 }
 
-public final class metro/hints/FrSmarquisPlaygroundCoreDatastoreDiDataStoreBindingsAppScopeKt {
-	public static final synthetic fun AppScope (Lfr/smarquis/playground/core/datastore/di/DataStoreBindings;)V
+public final class metro/hints/FrSmarquisPlaygroundCoreDatastoreDiDataStoreBindingsDev_zacsweers_metro_AppScopeKt {
+	public static final synthetic fun dev_zacsweers_metro_AppScope (Lfr/smarquis/playground/core/datastore/di/DataStoreBindings;)V
 }
 
