@@ -27,7 +27,7 @@ public final class fr/smarquis/playground/data/licenses/LicensesRepositoryImplCo
 	public final fun provideLicensesRepositoryImplAsLicensesRepository (Lfr/smarquis/playground/core/di/AssetManager;Lkotlin/coroutines/CoroutineContext;)Lfr/smarquis/playground/domain/licenses/LicensesRepository;
 }
 
-public final class metro/hints/FrSmarquisPlaygroundDataLicensesLicensesRepositoryImplContributionsToAppScopeAppScopeKt {
-	public static final synthetic fun AppScope (Lfr/smarquis/playground/data/licenses/LicensesRepositoryImplContributions$ToAppScope;)V
+public final class metro/hints/FrSmarquisPlaygroundDataLicensesLicensesRepositoryImplContributionsToAppScopeDev_zacsweers_metro_AppScopeKt {
+	public static final synthetic fun dev_zacsweers_metro_AppScope (Lfr/smarquis/playground/data/licenses/LicensesRepositoryImplContributions$ToAppScope;)V
 }
 

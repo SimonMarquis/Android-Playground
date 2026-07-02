@@ -28,7 +28,7 @@ public final class fr/smarquis/playground/data/settings/SettingsSourceImplContri
 	public final fun provideSettingsSourceImplAsSettingsSource (Landroidx/datastore/core/DataStore;)Lfr/smarquis/playground/domain/settings/SettingsSource;
 }
 
-public final class metro/hints/FrSmarquisPlaygroundDataSettingsSettingsSourceImplContributionsToAppScopeAppScopeKt {
-	public static final synthetic fun AppScope (Lfr/smarquis/playground/data/settings/SettingsSourceImplContributions$ToAppScope;)V
+public final class metro/hints/FrSmarquisPlaygroundDataSettingsSettingsSourceImplContributionsToAppScopeDev_zacsweers_metro_AppScopeKt {
+	public static final synthetic fun dev_zacsweers_metro_AppScope (Lfr/smarquis/playground/data/settings/SettingsSourceImplContributions$ToAppScope;)V
 }
 
