@@ -97,7 +97,7 @@ android-lint = { id = "com.android.lint", version.ref = "agp" }
 android-test = { id = "com.android.test", version.ref = "agp" }
 androidx-baselineprofile = { id = "androidx.baselineprofile", version.ref = "androidx-benchmark" }
 artifactsSizeReport = "io.github.cdsap.android-artifacts-size-report:0.2.1"
-dagp = "com.autonomousapps.dependency-analysis:3.16.1"
+dagp = "com.autonomousapps.dependency-analysis:3.17.0"
 develocity = "com.gradle.develocity:4.5.0"
 kotlin-assignment = { id = "org.jetbrains.kotlin.plugin.assignment", version.ref = "kgp" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kgp" }
