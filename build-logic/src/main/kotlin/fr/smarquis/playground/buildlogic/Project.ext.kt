@@ -84,8 +84,8 @@ internal inline fun <reified T : KotlinBaseExtension> Project.configureKotlin(
     crossinline configure: T.() -> Unit = {},
 ) {
     configure<JavaPluginExtension> {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     configure<T> {
         val kotlin = when (this) {
@@ -113,7 +113,7 @@ internal inline fun <reified T : KotlinBaseExtension> Project.configureKotlin(
         }
         jvmToolchain(25)
         kotlin.compilerOptions {
-            jvmTarget = JvmTarget.JVM_11
+            jvmTarget = JvmTarget.JVM_17
             allWarningsAsErrors = properties.warningsAsErrors
         }
         explicitApi()
