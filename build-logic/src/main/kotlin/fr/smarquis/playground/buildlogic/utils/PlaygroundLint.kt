@@ -78,10 +78,6 @@ internal object PlaygroundLint {
         warningsAsErrors = properties.lintWarningsAsErrors
 
         explainIssues = true
-        textReport = true
-        xmlReport = true
-        htmlReport = true
-        sarifReport = true
 
         checkDependencies = true
         checkReleaseBuilds = false
