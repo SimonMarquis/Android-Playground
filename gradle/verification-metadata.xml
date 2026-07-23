@@ -563,6 +563,11 @@
             <pgp value="A6D6C97108B8585F91B158748671A8DF71296252"/>
          </artifact>
       </component>
+      <component group="com.squareup.okio" name="okio-jvm" version="3.18.0">
+         <artifact name="okio-jvm-3.18.0.jar">
+            <pgp value="5DD80B0DDCCBE005F0A47FD66751E1A6E2001B8D"/>
+         </artifact>
+      </component>
       <component group="com.sun.activation" name="javax.activation" version="1.2.0">
          <artifact name="javax.activation-1.2.0.jar">
             <pgp value="4F7E32D440EF90A83011A8FC6425559C47CC79C4"/>
