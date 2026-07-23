@@ -15,7 +15,7 @@ runs:
       uses: actions/upload-artifact@v7
       with:
         name: paparazzi-failures
-        path: '**/build/paparazzi/failures/*.png'
+        path: '**/build/paparazzi/failures/*/*.png'
         if-no-files-found: ignore
     - if: ${{ !cancelled() && github.event_name == 'pull_request' }}
       uses: ./.github/actions/minimize-comments
