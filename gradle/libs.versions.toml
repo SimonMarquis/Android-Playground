@@ -79,7 +79,7 @@ metro-runtime = { module = "dev.zacsweers.metro:runtime", version.ref = "metro" 
 metrox-viewmodel = { module = "dev.zacsweers.metro:metrox-viewmodel", version.ref = "metro" }
 metrox-viewmodel-compose = { module = "dev.zacsweers.metro:metrox-viewmodel-compose", version.ref = "metro" }
 
-okio = "com.squareup.okio:okio:3.17.0"
+okio = "com.squareup.okio:okio:3.18.0"
 
 paparazzi = { module = "app.cash.paparazzi:paparazzi", version.ref = "paparazzi" }
 
