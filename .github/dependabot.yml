@@ -9,6 +9,8 @@ updates:
       - /.github/actions/*
     schedule:
       interval: daily
+    cooldown:
+      default-days: 0
   - package-ecosystem: gradle
     open-pull-requests-limit: 10
     directory: /
@@ -27,6 +29,8 @@ updates:
           - com.android.lint
           - com.android.settings
           - com.android.test
+    cooldown:
+      default-days: 0
 registries:
   maven-google:
     type: maven-repository
