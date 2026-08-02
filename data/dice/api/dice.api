@@ -17,9 +17,9 @@ public final class fr/smarquis/playground/data/dice/DiceSourceImplContributions$
 	public static final field Companion Lfr/smarquis/playground/data/dice/DiceSourceImplContributions$ToAppScope$ProvideDiceSourceImplAsDiceSourceMetroFactory$Companion;
 	public synthetic fun <init> (Ldev/zacsweers/metro/Provider;Ldev/zacsweers/metro/Provider;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public static final fun create (Ldev/zacsweers/metro/Provider;Ldev/zacsweers/metro/Provider;)Lfr/smarquis/playground/data/dice/DiceSourceImplContributions$ToAppScope$ProvideDiceSourceImplAsDiceSourceMetroFactory;
+	public final fun declarationMirror (Landroidx/datastore/core/DataStore;Lkotlin/coroutines/CoroutineContext;)Lfr/smarquis/playground/domain/dice/DiceSource;
 	public final fun invoke ()Lfr/smarquis/playground/domain/dice/DiceSource;
 	public synthetic fun invoke ()Ljava/lang/Object;
-	public final fun mirrorFunction (Landroidx/datastore/core/DataStore;Lkotlin/coroutines/CoroutineContext;)Lfr/smarquis/playground/domain/dice/DiceSource;
 	public static final fun provideDiceSourceImplAsDiceSource (Landroidx/datastore/core/DataStore;Lkotlin/coroutines/CoroutineContext;)Lfr/smarquis/playground/domain/dice/DiceSource;
 }
 
@@ -45,9 +45,9 @@ public final class fr/smarquis/playground/data/dice/RandomDiceRollerContribution
 public final class fr/smarquis/playground/data/dice/RandomDiceRollerContributions$ToAppScope$ProvideRandomDiceRollerAsDiceRollerMetroFactory : dev/zacsweers/metro/internal/Factory {
 	public static final field INSTANCE Lfr/smarquis/playground/data/dice/RandomDiceRollerContributions$ToAppScope$ProvideRandomDiceRollerAsDiceRollerMetroFactory;
 	public static final fun create ()Lfr/smarquis/playground/data/dice/RandomDiceRollerContributions$ToAppScope$ProvideRandomDiceRollerAsDiceRollerMetroFactory;
+	public final fun declarationMirror ()Lfr/smarquis/playground/domain/dice/DiceRoller;
 	public final fun invoke ()Lfr/smarquis/playground/domain/dice/DiceRoller;
 	public synthetic fun invoke ()Ljava/lang/Object;
-	public final fun mirrorFunction ()Lfr/smarquis/playground/domain/dice/DiceRoller;
 	public static final fun provideRandomDiceRollerAsDiceRoller ()Lfr/smarquis/playground/domain/dice/DiceRoller;
 }
 
