@@ -11,9 +11,9 @@ public final class fr/smarquis/playground/core/datastore/di/DataStoreBindings$Pr
 	public static final field Companion Lfr/smarquis/playground/core/datastore/di/DataStoreBindings$ProvidesDataStoreMetroFactory$Companion;
 	public synthetic fun <init> (Ldev/zacsweers/metro/Provider;Ldev/zacsweers/metro/Provider;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public static final fun create (Ldev/zacsweers/metro/Provider;Ldev/zacsweers/metro/Provider;)Lfr/smarquis/playground/core/datastore/di/DataStoreBindings$ProvidesDataStoreMetroFactory;
+	public final fun declarationMirror (Lkotlin/coroutines/CoroutineContext;Lfr/smarquis/playground/core/di/FileManager;)Landroidx/datastore/core/DataStore;
 	public final fun invoke ()Landroidx/datastore/core/DataStore;
 	public synthetic fun invoke ()Ljava/lang/Object;
-	public final fun mirrorFunction (Lkotlin/coroutines/CoroutineContext;Lfr/smarquis/playground/core/di/FileManager;)Landroidx/datastore/core/DataStore;
 	public static final fun providesDataStore (Lkotlin/coroutines/CoroutineContext;Lfr/smarquis/playground/core/di/FileManager;)Landroidx/datastore/core/DataStore;
 }
 
