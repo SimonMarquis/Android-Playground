@@ -1,0 +1,33 @@
+name: 📋 Check Kotlin Binary Compatibility Validation
+description: Check Kotlin Binary Compatibility Validation and comment on PRs
+
+runs:
+  using: composite
+  steps:
+    - run: ./gradlew updateKotlinAbi > /dev/null
+      shell: bash
+    - run: git diff --quiet --exit-code -- ':(glob)**/api/*.api'
+      shell: bash
+      id: check
+    - if: ${{ !cancelled() && github.event_name == 'pull_request' }}
+      uses: ./.github/actions/minimize-comments
+      with:
+        marker: "<!-- playground: check-kotlin-binary-compatibility-validation -->"
+    - if: ${{ failure() && steps.check.conclusion == 'failure' }}
+      run: |
+        tee --append "$GITHUB_STEP_SUMMARY" << EOF >/dev/null || true
+        <!-- playground: check-kotlin-binary-compatibility-validation -->
+        **📋 Kotlin Binary Compatibility Validation violations detected!**
+        \`\`\`diff
+        $(git diff --unified=0 -- ':(glob)**/api/*.api' | grep -E '^(diff|[+-][^+-])')
+        \`\`\`
+        - 🖥️ Run \`gradlew updateKotlinAbi\` locally
+        - [▶️ Update with workflow]($GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/workflows/kotlin-binary-compatibility-validation.yaml)
+        EOF
+
+        [[ -n $PR_NUMBER ]] && gh pr comment "$PR_NUMBER" --body-file "$GITHUB_STEP_SUMMARY"
+      shell: bash
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
+        PR_NUMBER: ${{ case(github.event_name == 'pull_request', github.event.pull_request.number, '') }}
+      continue-on-error: true

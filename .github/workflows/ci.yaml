@@ -67,7 +67,7 @@ jobs:
       - run: ./gradlew :build-logic:validatePlugins --quiet
       - run: ./gradlew licensee --quiet
       - run: ./gradlew topologyCheck --quiet
-      - run: ./gradlew checkKotlinAbi --quiet
+      - uses: ./.github/actions/check-kotlin-binary-compatibility-validation
       - run: ./gradlew ciBadging -Pplayground.isMinifyEnabled=false --dependency-verification=strict --quiet
       - if: ${{ !cancelled() }}
         uses: ./.github/actions/archive-gradle-reports
