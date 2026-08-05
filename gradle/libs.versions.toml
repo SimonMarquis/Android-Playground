@@ -83,7 +83,7 @@ okio = "com.squareup.okio:okio:3.18.1"
 
 paparazzi = { module = "app.cash.paparazzi:paparazzi", version.ref = "paparazzi" }
 
-slack-compose-lint = "com.slack.lint.compose:compose-lint-checks:1.5.3"
+slack-compose-lint = "com.slack.lint.compose:compose-lint-checks:1.5.4"
 
 testParameterInjector = "com.google.testparameterinjector:test-parameter-injector:1.22"
 
