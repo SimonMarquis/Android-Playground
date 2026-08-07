@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<verification-metadata xmlns="https://schema.gradle.org/dependency-verification" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://schema.gradle.org/dependency-verification https://schema.gradle.org/dependency-verification/dependency-verification-1.3.xsd">
+<verification-metadata xmlns="https://schema.gradle.org/dependency-verification" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://schema.gradle.org/dependency-verification https://schema.gradle.org/dependency-verification/dependency-verification-1.4.xsd">
    <configuration>
       <verify-metadata>false</verify-metadata>
       <verify-signatures>true</verify-signatures>
@@ -526,6 +526,11 @@
       </component>
       <component group="com.slack.lint.compose" name="compose-lint-checks" version="1.5.3">
          <artifact name="compose-lint-checks-1.5.3.jar">
+            <pgp value="719F7C29985A8E95F58F47194D8159D6A1159B69"/>
+         </artifact>
+      </component>
+      <component group="com.slack.lint.compose" name="compose-lint-checks" version="1.5.4">
+         <artifact name="compose-lint-checks-1.5.4.jar">
             <pgp value="719F7C29985A8E95F58F47194D8159D6A1159B69"/>
          </artifact>
       </component>
