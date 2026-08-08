@@ -135,7 +135,12 @@ internal object PlaygroundUnitTests {
             // java.lang.System::load has been called by com.android.layoutlib.bridge.Bridge in an unnamed module (file:/home/runner/.gradle/caches/[...]/transformed/layoutlib-16.1.1.jar)
             // Use --enable-native-access=ALL-UNNAMED to avoid a warning for callers in this module
             // Restricted methods will be blocked in a future release unless native access is enabled
-            "--enable-native-access=ALL-UNNAMED"
+            "--enable-native-access=ALL-UNNAMED",
+            // Suppress "Use of Memory-Access Methods" on JDK 24+ https://openjdk.org/jeps/498
+            // A terminally deprecated method in sun.misc.Unsafe has been called
+            // sun.misc.Unsafe::objectFieldOffset has been called by [...]
+            // sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+            "--sun-misc-unsafe-memory-access=allow",
         )
     }
 
