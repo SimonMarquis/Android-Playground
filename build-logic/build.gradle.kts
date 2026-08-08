@@ -88,10 +88,6 @@ private fun NamedDomainObjectContainer<PluginDeclaration>.create(
 lint {
     abortOnError = true
     explainIssues = true
-    textReport = true
-    xmlReport = true
-    htmlReport = true
-    sarifReport = true
     absolutePaths = true
 }
 
