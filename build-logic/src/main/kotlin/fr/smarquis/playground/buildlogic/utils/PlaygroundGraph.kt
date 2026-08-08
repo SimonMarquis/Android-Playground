@@ -56,7 +56,7 @@ internal object PlaygroundGraph {
         val isolatedProjects = buildFeatures.isolatedProjects.active.getOrElse(false)
         val isGraphTask = startParameter.taskNames.any { path -> path.substringAfterLast(":")
             .let { it == GraphDumpTask.NAME || it == GraphUpdateTask.NAME } }
-        if (isolatedProjects && isGraphTask) throw GradleException("Graph-related tasks are not supported with isolated projects! Rerun with `-Dorg.gradle.unsafe.isolated-projects=false`.")
+        if (isolatedProjects && isGraphTask) throw GradleException("Graph-related tasks are not supported with isolated projects! Rerun with `-Dorg.gradle.isolated-projects=false`.")
         val dumpTask = project.tasks.register<GraphDumpTask>(GraphDumpTask.NAME) {
             if (isolatedProjects) return@register disable()
             val graph = measureTimedValue { Graph().invoke(project) }
