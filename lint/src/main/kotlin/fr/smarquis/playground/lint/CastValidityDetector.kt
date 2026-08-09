@@ -70,9 +70,13 @@ public class CastValidityDetector : Detector(), SourceCodeScanner {
 
 
                 if (fromType.semanticallyEquals(toType)) return debug(node, "semanticallyEquals [${fromType.shortName()}]")
-                // if (toType.hasCommonSubtypeWith(fromType)) return debug(node, "hasCommonSubtypeWith")
 
-                fromType.withNullability(false)
+                // Strip nullability from source for subtype comparisons.
+                // Comparing base types only — a cast `a as String?` where `a: A` should check
+                // whether A can produce a non-null String at runtime (unrelated → impossible),
+                // not get confused by the nullable target wrapping.
+                val fromTypeNonNullable = fromType.withNullability(false)
+
 
 
                 val fromSymbol = fromTypeUnwrapped.symbol
@@ -86,10 +90,11 @@ public class CastValidityDetector : Detector(), SourceCodeScanner {
                 if (fromType.isSubtypeOf(toType)) return debug(node, "[${fromType.shortName()}] isSubtypeOf [${toType.shortName()}]")
                 if (fromTypeUnwrapped.isSubtypeOf(toTypeUnwrapped)) return debug(node, "[${fromType.shortName()}] isSubtypeOf(unwrapped) [${toType.shortName()}]")
 
-                val fromTypeIsExtensible = fromType.symbol?.modality?.let { it == KaSymbolModality.OPEN || it == KaSymbolModality.ABSTRACT } == true
-                if (toType.expandedSymbol?.classKind == KaClassKind.INTERFACE && fromTypeIsExtensible) {
-                    return if (isSafeCast) debug(node, "[${fromType.shortName()}] is open/abstract and [${toType.shortName()}] is interface (safe cast [${kt.operationReference.text}])")
-                    else unsafe(node, fromType = fromType, toType = toType, "[${fromType.shortName()}] is open/abstract and [${toType.shortName()}] is interface")
+                val fromTypeIsExtensibleClass = fromTypeUnwrapped.symbol?.let { it.modality == KaSymbolModality.OPEN || it.modality == KaSymbolModality.ABSTRACT } == true
+                    && fromTypeUnwrapped.expandedSymbol?.classKind == KaClassKind.CLASS
+                if (toType.expandedSymbol?.classKind == KaClassKind.INTERFACE && fromTypeIsExtensibleClass) {
+                    return if (isSafeCast) debug(node, "[${fromType.shortName()}] is open/abstract class and [${toType.shortName()}] is interface (safe cast [${kt.operationReference.text}])")
+                    else unsafe(node, fromType = fromType, toType = toType, "[${fromType.shortName()}] is open/abstract class and [${toType.shortName()}] is interface")
                 }
 
 
@@ -103,13 +108,12 @@ public class CastValidityDetector : Detector(), SourceCodeScanner {
                     System.err.println("toType isCompatibleWithTypeParameter? = " + toType.symbol.upperBounds.any { fromType.isSubtypeOf(it) })
                 }
                 if (toTypeUnwrapped is KaTypeParameterType) {
-                    System.err.println("toTypeUnwrapped isCompatibleWithTypeParameter? = " + toTypeUnwrapped.symbol.upperBounds.any { fromTypeUnwrapped.isSubtypeOf(it) })
+                    val upperBoundCompatible = toTypeUnwrapped.symbol.upperBounds.any { fromTypeUnwrapped.isSubtypeOf(it) }
+                    if (upperBoundCompatible) return@analyze // could succeed at runtime via upper bound
+                    System.err.println("toTypeUnwrapped isCompatibleWithTypeParameter? = $upperBoundCompatible")
                     return@analyze
                 }
 
-                System.err.println("toType.enhancedType = " + toTypeUnwrapped.enhancedType)
-                System.err.println("toType.enhancedTypeOrSelf = " + toTypeUnwrapped.enhancedTypeOrSelf)
-                System.err.println("toType.fullyExpandedType = " + toTypeUnwrapped.fullyExpandedType)
                 System.err.println("toType.allSupertypes = " + toTypeUnwrapped.allSupertypes.toList())
                 System.err.println("toType.allSupertypes(true) = " + toTypeUnwrapped.allSupertypes(true).toList())
                 System.err.println("toType.directSupertypes = " + toTypeUnwrapped.directSupertypes.toList())
@@ -158,7 +162,19 @@ public class CastValidityDetector : Detector(), SourceCodeScanner {
 
 
 
-                val isImpossible = !toTypeUnwrapped.isSubtypeOf(fromTypeUnwrapped)
+                // Nothing is the bottom type — no non-null values exist. Casting from it to anything
+                // other than Nothing itself is impossible at runtime, regardless of what the Analysis API
+                // says about subtype relationships.
+                val isNothingTarget = toTypeUnwrapped.expandedSymbol?.name?.asString() == "Nothing"
+                if (isNothingTarget) {
+                    return debug(node, "[${toTypeUnwrapped.shortName()}] is Nothing — casts to it are always impossible")
+                }
+
+                // Strip nullability before the impossible check. We're asking whether the *base* types
+                // have any possible subtype relationship, independent of nullability wrapping on either side.
+                val fromBase = fromTypeNonNullable
+                val toBase = toTypeUnwrapped.withNullability(false)
+                val isImpossible = !toBase.isSubtypeOf(fromBase)
                 if (!isImpossible && KtPsiUtil.isSafeCast(kt)) return
                 val (issue, prefix) = if (isImpossible) IMPOSSIBLE_CAST to "Impossible" else UNSAFE_CAST to "Unsafe"
 

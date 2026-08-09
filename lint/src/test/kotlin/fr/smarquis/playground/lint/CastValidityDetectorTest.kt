@@ -55,7 +55,7 @@ src/Printable.kt:12: Hint: semanticallyEquals [A] [DEBUG]
 src/Printable.kt:14: Hint: [B] isSubtypeOf [A] [DEBUG]
     b as? A // upcast
     ~~~~~~~
-src/Printable.kt:15: Hint: [A] is open/abstract and [Printable] is interface (safe cast [as?]) [DEBUG]
+src/Printable.kt:15: Hint: [A] is open/abstract class and [Printable] is interface (safe cast [as?]) [DEBUG]
     a as? Printable // interface (through downcast)
     ~~~~~~~~~~~~~~~
 src/Printable.kt:16: Hint: [B] isSubtypeOf [Printable] [DEBUG]
@@ -99,7 +99,7 @@ src/Printable.kt:15: Hint: [B] isSubtypeOf [A] [DEBUG]
 src/Printable.kt:14: Error: Impossible cast from B? to Printable [ImpossibleCast]
     b as Printable // interface
     ~~~~~~~~~~~~~~
-src/Printable.kt:6: Warning: Unsafe cast from A to Printable ([A] is open/abstract and [Printable] is interface) [UnsafeCast]
+src/Printable.kt:6: Warning: Unsafe cast from A to Printable ([A] is open/abstract class and [Printable] is interface) [UnsafeCast]
     a as Printable // interface (through downcast) 
     ~~~~~~~~~~~~~~
 src/Printable.kt:7: Warning: Unsafe cast from Printable & A to B [UnsafeCast]
@@ -108,7 +108,7 @@ src/Printable.kt:7: Warning: Unsafe cast from Printable & A to B [UnsafeCast]
 src/Printable.kt:11: Warning: Unsafe cast from A? to A [UnsafeCast]
     a as A // identity
     ~~~~~~
-src/Printable.kt:12: Warning: Unsafe cast from A to Printable ([A] is open/abstract and [Printable] is interface) [UnsafeCast]
+src/Printable.kt:12: Warning: Unsafe cast from A to Printable ([A] is open/abstract class and [Printable] is interface) [UnsafeCast]
     a as Printable // interface (through downcast) 
     ~~~~~~~~~~~~~~
 src/Printable.kt:13: Warning: Unsafe cast from A & Printable to B [UnsafeCast]
@@ -220,6 +220,69 @@ src/Printable.kt:10: Error: Impossible cast from A to Printable [ImpossibleCast]
     a as? Printable
     ~~~~~~~~~~~~~~~
 2 errors, 0 warnings, 2 hints
+            """.trimIndent()
+        )
+        .cleanup()
+
+    @Test
+    fun `cast to nullable target`() = lint()
+        .files(
+            kotlin(
+                """
+fun testNullableTarget(a: Any, b: Any?, c: String?) {
+    a as String?      // CAN succeed (when value is non-null String)
+    b as String?      // CAN succeed or return null -- but not impossible
+    c as String?      // identity with nullable -- should be clean
+}
+                """,
+            ).indented(),
+        )
+        .run()
+        .expect(
+            """
+src/test.kt:4: Hint: semanticallyEquals [String?] [DEBUG]
+    c as String?      // identity with nullable -- should be clean
+    ~~~~~~~~~~~~
+src/test.kt:2: Warning: Unsafe cast from Any to String? [UnsafeCast]
+    a as String?      // CAN succeed (when value is non-null String)
+    ~~~~~~~~~~~~
+src/test.kt:3: Warning: Unsafe cast from Any? to String? [UnsafeCast]
+    b as String?      // CAN succeed or return null -- but not impossible
+    ~~~~~~~~~~~~
+0 errors, 2 warnings, 1 hint
+            """.trimIndent()
+        )
+        .cleanup()
+
+
+
+    @Test
+    fun `cast from Unit literal`() = lint()
+        .files(
+            kotlin(
+                """
+fun testUnitCasts(u: Unit, x: Any) {
+    u as Any          // Unit -> Any is possible (upcast)
+    u as String       // impossible — Unit has exactly one value, never a String
+
+    x as Unit         // from Any down to Unit — unsafe but possible
+}
+                """,
+            ).indented(),
+        )
+        .run()
+        .expect(
+            """
+src/test.kt:2: Hint: [Unit] isSubtypeOf [Any] [DEBUG]
+    u as Any          // Unit -> Any is possible (upcast)
+    ~~~~~~~~
+src/test.kt:3: Error: Impossible cast from Unit to String [ImpossibleCast]
+    u as String       // impossible — Unit has exactly one value, never a String
+    ~~~~~~~~~~~
+src/test.kt:5: Warning: Unsafe cast from Any to Unit [UnsafeCast]
+    x as Unit         // from Any down to Unit — unsafe but possible
+    ~~~~~~~~~
+1 error, 1 warning, 1 hint
             """.trimIndent()
         )
         .cleanup()
