@@ -27,12 +27,14 @@ internal class CastValidityDetectorTest : LintDetectorTest() {
                         b as Printable // interface
                     }
 
-                    fun nullsafe(a: A, b: B) {
+                    fun nullsafe(a: A, b: B, p: Printable) {
                         a as? A // identity
                         a as? B // downcast
                         b as? A // upcast
                         a as? Printable // interface (through downcast)
                         b as? Printable // interface
+                        p as? A
+                        p as? B
                     }
                     """,
             ).indented(),
@@ -75,20 +77,19 @@ src/Printable.kt:16: Hint: [B] isSubtypeOf [Printable] [DEBUG]
                 open class A
                 class B: A(), Printable
 
-                fun test(a: A) {
-                    a as Printable // interface (through downcast) 
-                    a as B // downcast
+                fun test(a1: A, a2: A, p1: Printable, p2: Printable) {
+                    a1 as Printable // interface (through downcast) 
+                    a2 as B // downcast
+                    p1 as A
+                    p2 as B
                 }
 
-                fun testNullable(a: A?, b: B?) {
-                    a as A // identity
-                    a as Printable // interface (through downcast) 
-                    a as B // downcast
-                    b as Printable // interface
-                }
-
-                fun testNullable2(b: B?) {
-                    b as A // upcast
+                fun testNullable(a1: A?, a2: A?, a3: A?, b1: B?, b2: B?) {
+                    a1 as A // identity
+                    a2 as B // downcast
+                    a3 as Printable // interface (through downcast) 
+                    b1 as A // upcast
+                    b2 as Printable // interface
                 }
                 """,
             ).indented(),
@@ -97,26 +98,26 @@ src/Printable.kt:16: Hint: [B] isSubtypeOf [Printable] [DEBUG]
         .expect(
             """
 src/Printable.kt:6: Warning: Unsafe cast from A to Printable ([A] is open/abstract class and [Printable] is interface) [UnsafeCast]
-    a as Printable // interface (through downcast) 
-    ~~~~~~~~~~~~~~
-src/Printable.kt:7: Warning: Unsafe cast from Printable & A to B [UnsafeCast]
-    a as B // downcast
-    ~~~~~~
+    a1 as Printable // interface (through downcast) 
+    ~~~~~~~~~~~~~~~
+src/Printable.kt:7: Warning: Unsafe cast from A to B [UnsafeCast]
+    a2 as B // downcast
+    ~~~~~~~
 src/Printable.kt:11: Warning: Unsafe cast from A? to A [UnsafeCast]
-    a as A // identity
-    ~~~~~~
-src/Printable.kt:12: Warning: Unsafe cast from A to Printable ([A] is open/abstract class and [Printable] is interface) [UnsafeCast]
-    a as Printable // interface (through downcast) 
-    ~~~~~~~~~~~~~~
-src/Printable.kt:13: Warning: Unsafe cast from A & Printable to B [UnsafeCast]
-    a as B // downcast
-    ~~~~~~
-src/Printable.kt:14: Warning: Unsafe cast from B? to Printable (nullable source; target is interface — any subtype could implement it) [UnsafeCast]
-    b as Printable // interface
-    ~~~~~~~~~~~~~~
-src/Printable.kt:18: Warning: Unsafe cast from B? to A [UnsafeCast]
+    a1 as A // identity
+    ~~~~~~~
+src/Printable.kt:12: Warning: Unsafe cast from A? to B [UnsafeCast]
+    a2 as B // downcast
+    ~~~~~~~
+src/Printable.kt:13: Warning: Unsafe cast from B? to A [UnsafeCast]
     b as A // upcast
     ~~~~~~
+src/Printable.kt:17: Warning: Unsafe cast from A? to Printable ([A?] is open/abstract class and [Printable] is interface) [UnsafeCast]
+    a as Printable // interface (through downcast) 
+    ~~~~~~~~~~~~~~
+src/Printable.kt:18: Warning: Unsafe cast from B? to Printable (nullable source; target is interface — any subtype could implement it) [UnsafeCast]
+    b as Printable // interface
+    ~~~~~~~~~~~~~~
 0 errors, 7 warnings
                 """.trimIndent(),
         )
@@ -132,22 +133,25 @@ src/Printable.kt:18: Warning: Unsafe cast from B? to A [UnsafeCast]
                 class C
                 interface Printable
 
-                fun nonNull(a: A, b: B, c: C) {
+                fun nonNull(a: A, b: B, c: C, p: Printable) {
                     a as B
                     b as A
                     c as Printable
+                    p as A
                 }
 
-                fun nullable(a: A?, b: B?, c: C) {
+                fun nullable(a: A?, b: B?, c: C?, p: Printable?) {
                     a as B
                     b as A
                     c as Printable
+                    p as A
                 }
 
-                fun nullsafe(a: A, b: B, c: C) {
+                fun nullsafe(a: A, b: B, c: C, p: Printable) {
                     a as? B
                     b as? A
                     c as? Printable
+                    p as? A
                 }
                 """,
             ).indented(),
@@ -184,46 +188,6 @@ src/A.kt:21: Error: Impossible cast from C to Printable [ImpossibleCast]
     ~~~~~~~~~~~~~~~
 9 errors
             """.trimIndent(),
-        )
-        .cleanup()
-
-    @Test
-    fun `cast to interface`() = lint()
-        .files(
-            kotlin(
-                """
-                interface Printable
-                class A
-                class B: Printable
-                
-                fun test(a: A, b: B) {
-                    a as Printable
-                    b as Printable
-                }
-                fun testNullSafe(a: A, b: B) {
-                    a as? Printable
-                    b as? Printable
-                }
-                    """,
-            ).indented(),
-        )
-        .run()
-        .expect(
-            """
-src/Printable.kt:7: Hint: [B] isSubtypeOf [Printable] [DEBUG]
-    b as Printable
-    ~~~~~~~~~~~~~~
-src/Printable.kt:11: Hint: [B] isSubtypeOf [Printable] [DEBUG]
-    b as? Printable
-    ~~~~~~~~~~~~~~~
-src/Printable.kt:6: Error: Impossible cast from A to Printable [ImpossibleCast]
-    a as Printable
-    ~~~~~~~~~~~~~~
-src/Printable.kt:10: Error: Impossible cast from A to Printable [ImpossibleCast]
-    a as? Printable
-    ~~~~~~~~~~~~~~~
-2 errors, 0 warnings, 2 hints
-            """.trimIndent()
         )
         .cleanup()
 
