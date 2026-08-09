@@ -85,6 +85,9 @@ src/Printable.kt:16: Hint: [B] isSubtypeOf [Printable] [DEBUG]
                     a as Printable // interface (through downcast) 
                     a as B // downcast
                     b as Printable // interface
+                }
+
+                fun testNullable2(b: B?) {
                     b as A // upcast
                 }
                 """,
@@ -93,12 +96,6 @@ src/Printable.kt:16: Hint: [B] isSubtypeOf [Printable] [DEBUG]
         .run()
         .expect(
             """
-src/Printable.kt:15: Hint: [B] isSubtypeOf [A] [DEBUG]
-    b as A // upcast
-    ~~~~~~
-src/Printable.kt:14: Error: Impossible cast from B? to Printable [ImpossibleCast]
-    b as Printable // interface
-    ~~~~~~~~~~~~~~
 src/Printable.kt:6: Warning: Unsafe cast from A to Printable ([A] is open/abstract class and [Printable] is interface) [UnsafeCast]
     a as Printable // interface (through downcast) 
     ~~~~~~~~~~~~~~
@@ -114,7 +111,13 @@ src/Printable.kt:12: Warning: Unsafe cast from A to Printable ([A] is open/abstr
 src/Printable.kt:13: Warning: Unsafe cast from A & Printable to B [UnsafeCast]
     a as B // downcast
     ~~~~~~
-1 error, 5 warnings, 1 hint
+src/Printable.kt:14: Warning: Unsafe cast from B? to Printable (nullable source; target is interface — any subtype could implement it) [UnsafeCast]
+    b as Printable // interface
+    ~~~~~~~~~~~~~~
+src/Printable.kt:18: Warning: Unsafe cast from B? to A [UnsafeCast]
+    b as A // upcast
+    ~~~~~~
+0 errors, 7 warnings
                 """.trimIndent(),
         )
         .cleanup()

@@ -174,8 +174,25 @@ public class CastValidityDetector : Detector(), SourceCodeScanner {
                 // have any possible subtype relationship, independent of nullability wrapping on either side.
                 val fromBase = fromTypeNonNullable
                 val toBase = toTypeUnwrapped.withNullability(false)
-                val isImpossible = !toBase.isSubtypeOf(fromBase)
-                if (!isImpossible && KtPsiUtil.isSafeCast(kt)) return
+
+                // Cast-to-interface with nullable source: we can't rule out an implementation
+                // at runtime (external impls in other modules). Only report "Unsafe", not "Impossible".
+                // Non-nullable + no interface impl = zero instances satisfy it — still "Impossible".
+                val toIsInterface = toTypeUnwrapped.expandedSymbol?.classKind == KaClassKind.INTERFACE
+                if (fromType.nullability.name == "NULLABLE" && toIsInterface) {
+                    return unsafe(node, fromType = fromType, toType = toType,
+                        "nullable source; target is interface — any subtype could implement it")
+                }
+
+                // Impossible check: no subtype relationship in either direction between base types.
+                // If they're both concrete classes with no relationship, the cast is truly impossible.
+                val isImpossible = !fromBase.isSubtypeOf(toBase) && !toBase.isSubtypeOf(fromBase)
+
+                // Safe cast (`as?`) never throws — returns null on failure. If there's no subtype
+                // relationship between base types, we can't prove the value won't match (open class,
+                // cross-module impls), so don't report anything: the cast always "succeeds" via null.
+                if (!isImpossible && isSafeCast) return
+
                 val (issue, prefix) = if (isImpossible) IMPOSSIBLE_CAST to "Impossible" else UNSAFE_CAST to "Unsafe"
 
                 Incident(context)
