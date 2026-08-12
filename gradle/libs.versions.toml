@@ -12,7 +12,7 @@ androidx-benchmark = "1.5.0-rc01"
 androidx-lifecycle = "2.11.0"
 kgp = "2.4.10"
 metro = "1.4.1"
-navigation3 = "1.1.5"
+navigation3 = "1.1.6"
 paparazzi = "2.0.0-alpha05"
 
 [bundles]
