@@ -116,13 +116,6 @@
 
 </details>
 
-- <details><summary><a href="https://github.com/SimonMarquis/Android-Playground/blob/main/lint/src/main/kotlin/fr/smarquis/playground/lint/CastValidityDetector.kt">CastValidityDetector</a></summary>
-
-  - Impossible cast expressions where the source and target types have no possible runtime compatibility (e.g. `A as B` where `A` and `B` are unrelated final classes).
-  - Unsafe cast expressions that are type-compatible in general but not guaranteed to succeed at runtime (e.g. `Any as String`).
-
-</details>
-
 #### 🏗️ Architecture
 
 <!--region graph-->
