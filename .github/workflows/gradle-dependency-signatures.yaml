@@ -31,7 +31,7 @@ jobs:
         with:
           lfs: true
       - id: setup-bot
-        uses: ./.github/actions/setup-bot
+        uses: SimonMarquis/setup-github-app-as-bot@v1
         with:
           client-id: ${{ vars.BOT_CLIENT_ID }}
           private-key: ${{ secrets.BOT_PRIVATE_KEY }}
