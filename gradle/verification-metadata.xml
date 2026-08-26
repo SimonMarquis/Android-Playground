@@ -412,6 +412,11 @@
             <pgp value="635EE627345F3C1DD422B2E207D3516820BCF6B1"/>
          </artifact>
       </component>
+      <component group="com.github.ben-manes.caffeine" name="caffeine" version="3.2.4">
+         <artifact name="caffeine-3.2.4.jar">
+            <pgp value="635EE627345F3C1DD422B2E207D3516820BCF6B1"/>
+         </artifact>
+      </component>
       <component group="com.google.android" name="annotations" version="4.1.1.4">
          <artifact name="annotations-4.1.1.4.jar">
             <pgp value="0F07D1201BDDAB67CFB84EB479752DB6C966F0B8"/>
