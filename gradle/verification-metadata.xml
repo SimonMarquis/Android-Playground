@@ -108,6 +108,7 @@
          <trusted-key id="EB1B3DE71713C9EC2E87CC26EE92349AD86DE446" group="com.google.j2objc" name="j2objc-annotations"/>
          <trusted-key id="EE0CA873074092F806F59B65D364ABAA39A47320" group="^com[.]google($|([.].*))" regex="true"/>
          <trusted-key id="FA7929F83AD44C4590F6CC6815C71C0A4E0B8EDD" group="net.java.dev.jna"/>
+         <trusted-key id="FF6E2C001948C5F2F38B0CC385911F425EC61B51" group="org.junit.platform"/>
       </trusted-keys>
    </configuration>
    <components>
@@ -658,6 +659,11 @@
       <component group="org.apache.commons" name="commons-compress" version="1.21">
          <artifact name="commons-compress-1.21.jar">
             <pgp value="CE8075A251547BEE249BC151A2115AE15F6B8B72"/>
+         </artifact>
+      </component>
+      <component group="org.apache.groovy" name="groovy" version="4.0.29">
+         <artifact name="groovy-4.0.29.jar">
+            <pgp value="34441E504A937F43EB0DAEF96A65176A0FB1CD0B"/>
          </artifact>
       </component>
       <component group="org.bitbucket.b_c" name="jose4j" version="0.9.5">
