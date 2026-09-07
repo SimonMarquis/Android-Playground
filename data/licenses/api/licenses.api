@@ -3,31 +3,46 @@ public final class fr/smarquis/playground/data/licenses/LicensesRepositoryImpl :
 	public fun getLicenses ()Lkotlinx/coroutines/flow/Flow;
 }
 
+public final class fr/smarquis/playground/data/licenses/LicensesRepositoryImpl$MetroFactory : dev/zacsweers/metro/internal/Factory {
+	public static final field Companion Lfr/smarquis/playground/data/licenses/LicensesRepositoryImpl$MetroFactory$Companion;
+	public synthetic fun <init> (Ldev/zacsweers/metro/Provider;Ldev/zacsweers/metro/Provider;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public static final fun create (Ldev/zacsweers/metro/Provider;Ldev/zacsweers/metro/Provider;)Lfr/smarquis/playground/data/licenses/LicensesRepositoryImpl$MetroFactory;
+	public final fun declarationMirror (Lfr/smarquis/playground/core/di/AssetManager;Lkotlin/coroutines/CoroutineContext;)Lfr/smarquis/playground/data/licenses/LicensesRepositoryImpl;
+	public final fun invoke ()Lfr/smarquis/playground/data/licenses/LicensesRepositoryImpl;
+	public synthetic fun invoke ()Ljava/lang/Object;
+	public static final fun newInstance (Lfr/smarquis/playground/core/di/AssetManager;Lkotlin/coroutines/CoroutineContext;)Lfr/smarquis/playground/data/licenses/LicensesRepositoryImpl;
+}
+
+public final class fr/smarquis/playground/data/licenses/LicensesRepositoryImpl$MetroFactory$Companion {
+	public final fun create (Ldev/zacsweers/metro/Provider;Ldev/zacsweers/metro/Provider;)Lfr/smarquis/playground/data/licenses/LicensesRepositoryImpl$MetroFactory;
+	public final fun newInstance (Lfr/smarquis/playground/core/di/AssetManager;Lkotlin/coroutines/CoroutineContext;)Lfr/smarquis/playground/data/licenses/LicensesRepositoryImpl;
+}
+
 public abstract class fr/smarquis/playground/data/licenses/LicensesRepositoryImplContributions {
 }
 
 public final class fr/smarquis/playground/data/licenses/LicensesRepositoryImplContributions$ToAppScope {
 	public static final field INSTANCE Lfr/smarquis/playground/data/licenses/LicensesRepositoryImplContributions$ToAppScope;
-	public final fun provideLicensesRepositoryImplAsLicensesRepository (Lfr/smarquis/playground/core/di/AssetManager;Lkotlin/coroutines/CoroutineContext;)Lfr/smarquis/playground/domain/licenses/LicensesRepository;
+	public static final fun providesLicensesRepositoryImpl (Lfr/smarquis/playground/core/di/AssetManager;Lkotlin/coroutines/CoroutineContext;)Lfr/smarquis/playground/domain/licenses/LicensesRepository;
 }
 
-public final class fr/smarquis/playground/data/licenses/LicensesRepositoryImplContributions$ToAppScope$ProvideLicensesRepositoryImplAsLicensesRepositoryMetroFactory : dev/zacsweers/metro/internal/Factory {
-	public static final field Companion Lfr/smarquis/playground/data/licenses/LicensesRepositoryImplContributions$ToAppScope$ProvideLicensesRepositoryImplAsLicensesRepositoryMetroFactory$Companion;
+public final class fr/smarquis/playground/data/licenses/LicensesRepositoryImplContributions$ToAppScope$ProvidesLicensesRepositoryImplMetroFactory : dev/zacsweers/metro/internal/Factory {
+	public static final field Companion Lfr/smarquis/playground/data/licenses/LicensesRepositoryImplContributions$ToAppScope$ProvidesLicensesRepositoryImplMetroFactory$Companion;
 	public synthetic fun <init> (Ldev/zacsweers/metro/Provider;Ldev/zacsweers/metro/Provider;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
-	public static final fun create (Ldev/zacsweers/metro/Provider;Ldev/zacsweers/metro/Provider;)Lfr/smarquis/playground/data/licenses/LicensesRepositoryImplContributions$ToAppScope$ProvideLicensesRepositoryImplAsLicensesRepositoryMetroFactory;
+	public static final fun create (Ldev/zacsweers/metro/Provider;Ldev/zacsweers/metro/Provider;)Lfr/smarquis/playground/data/licenses/LicensesRepositoryImplContributions$ToAppScope$ProvidesLicensesRepositoryImplMetroFactory;
 	public final fun declarationMirror (Lfr/smarquis/playground/core/di/AssetManager;Lkotlin/coroutines/CoroutineContext;)Lfr/smarquis/playground/domain/licenses/LicensesRepository;
 	public final fun invoke ()Lfr/smarquis/playground/domain/licenses/LicensesRepository;
 	public synthetic fun invoke ()Ljava/lang/Object;
-	public static final fun provideLicensesRepositoryImplAsLicensesRepository (Lfr/smarquis/playground/core/di/AssetManager;Lkotlin/coroutines/CoroutineContext;)Lfr/smarquis/playground/domain/licenses/LicensesRepository;
+	public static final fun providesLicensesRepositoryImpl (Lfr/smarquis/playground/core/di/AssetManager;Lkotlin/coroutines/CoroutineContext;)Lfr/smarquis/playground/domain/licenses/LicensesRepository;
 }
 
-public final class fr/smarquis/playground/data/licenses/LicensesRepositoryImplContributions$ToAppScope$ProvideLicensesRepositoryImplAsLicensesRepositoryMetroFactory$Companion {
+public final class fr/smarquis/playground/data/licenses/LicensesRepositoryImplContributions$ToAppScope$ProvidesLicensesRepositoryImplMetroFactory$Companion {
 	public fun <init> ()V
-	public final fun create (Ldev/zacsweers/metro/Provider;Ldev/zacsweers/metro/Provider;)Lfr/smarquis/playground/data/licenses/LicensesRepositoryImplContributions$ToAppScope$ProvideLicensesRepositoryImplAsLicensesRepositoryMetroFactory;
-	public final fun provideLicensesRepositoryImplAsLicensesRepository (Lfr/smarquis/playground/core/di/AssetManager;Lkotlin/coroutines/CoroutineContext;)Lfr/smarquis/playground/domain/licenses/LicensesRepository;
+	public final fun create (Ldev/zacsweers/metro/Provider;Ldev/zacsweers/metro/Provider;)Lfr/smarquis/playground/data/licenses/LicensesRepositoryImplContributions$ToAppScope$ProvidesLicensesRepositoryImplMetroFactory;
+	public final fun providesLicensesRepositoryImpl (Lfr/smarquis/playground/core/di/AssetManager;Lkotlin/coroutines/CoroutineContext;)Lfr/smarquis/playground/domain/licenses/LicensesRepository;
 }
 
-public final class metro/hints/FrSmarquisPlaygroundDataLicensesLicensesRepositoryImplContributionsToAppScopeDev_zacsweers_metro_AppScopeKt {
-	public static final synthetic fun dev_zacsweers_metro_AppScope (Lfr/smarquis/playground/data/licenses/LicensesRepositoryImplContributions$ToAppScope;)V
+public final class metro/hints/FrSmarquisPlaygroundDataLicensesLicensesRepositoryImplDev_zacsweers_metro_AppScopeKt {
+	public static final synthetic fun dev_zacsweers_metro_AppScope (Lfr/smarquis/playground/data/licenses/LicensesRepositoryImpl;)V
 }
 
