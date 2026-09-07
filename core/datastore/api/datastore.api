@@ -18,6 +18,7 @@ public final class fr/smarquis/playground/core/datastore/di/DataStoreBindings$Pr
 }
 
 public final class fr/smarquis/playground/core/datastore/di/DataStoreBindings$ProvidesDataStoreMetroFactory$Companion {
+	public fun <init> ()V
 	public final fun create (Ldev/zacsweers/metro/Provider;Ldev/zacsweers/metro/Provider;)Lfr/smarquis/playground/core/datastore/di/DataStoreBindings$ProvidesDataStoreMetroFactory;
 	public final fun providesDataStore (Lkotlin/coroutines/CoroutineContext;Lfr/smarquis/playground/core/di/FileManager;)Landroidx/datastore/core/DataStore;
 }

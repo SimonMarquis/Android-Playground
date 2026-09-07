@@ -24,6 +24,7 @@ public final class fr/smarquis/playground/core/utils/di/InstantsBindings$Provide
 }
 
 public final class fr/smarquis/playground/core/utils/di/InstantsBindings$ProvidesCurrentTimeMetroFactory$Companion {
+	public fun <init> ()V
 	public final fun create (Ldev/zacsweers/metro/Provider;)Lfr/smarquis/playground/core/utils/di/InstantsBindings$ProvidesCurrentTimeMetroFactory;
 	public final fun providesCurrentTime (Lkotlin/time/Clock;)Lkotlin/time/Instant;
 }
