@@ -40,12 +40,12 @@ jobs:
     steps:
       - uses: actions/checkout@v7
       - parallel:
-        - uses: ./.github/actions/check-git-lfs
-        - uses: ./.github/actions/setup-java
-        - uses: ./.github/actions/setup-gradle
+        - uses: $/.github/actions/check-git-lfs
+        - uses: $/.github/actions/setup-java
+        - uses: $/.github/actions/setup-gradle
           with:
             cache-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
-        - uses: ./.github/actions/setup-gradle-properties
+        - uses: $/.github/actions/setup-gradle-properties
 
   checks:
     name: 👮 Checks
@@ -57,20 +57,20 @@ jobs:
         with:
           lfs: true
       - parallel:
-        - uses: ./.github/actions/setup-java
-        - uses: ./.github/actions/setup-gradle
+        - uses: $/.github/actions/setup-java
+        - uses: $/.github/actions/setup-gradle
           with:
             cache-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
-        - uses: ./.github/actions/setup-gradle-properties
+        - uses: $/.github/actions/setup-gradle-properties
 
-      - uses: ./.github/actions/check-gradle-dependency-lock-state
+      - uses: $/.github/actions/check-gradle-dependency-lock-state
       - run: ./gradlew :build-logic:validatePlugins --quiet
       - run: ./gradlew licensee --quiet
       - run: ./gradlew topologyCheck --quiet
-      - uses: ./.github/actions/check-kotlin-binary-compatibility-validation
+      - uses: $/.github/actions/check-kotlin-binary-compatibility-validation
       - run: ./gradlew ciBadging -Pplayground.isMinifyEnabled=false --dependency-verification=strict --quiet
       - if: ${{ !cancelled() }}
-        uses: ./.github/actions/archive-gradle-reports
+        uses: $/.github/actions/archive-gradle-reports
 
   build:
     name: 👷 Build
@@ -82,11 +82,11 @@ jobs:
         with:
           lfs: true
       - parallel:
-        - uses: ./.github/actions/setup-java
-        - uses: ./.github/actions/setup-gradle
+        - uses: $/.github/actions/setup-java
+        - uses: $/.github/actions/setup-gradle
           with:
             cache-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
-        - uses: ./.github/actions/setup-gradle-properties
+        - uses: $/.github/actions/setup-gradle-properties
 
       - name: 👷 Build
         id: build
@@ -102,7 +102,7 @@ jobs:
           name: aar
           path: "**/build/outputs/aar"
       - if: ${{ !cancelled() }}
-        uses: ./.github/actions/archive-gradle-reports
+        uses: $/.github/actions/archive-gradle-reports
 
   test:
     name: 🧑‍🔬 Test
@@ -114,26 +114,26 @@ jobs:
         with:
           lfs: true
       - parallel:
-        - uses: ./.github/actions/setup-java
-        - uses: ./.github/actions/setup-gradle
+        - uses: $/.github/actions/setup-java
+        - uses: $/.github/actions/setup-gradle
           with:
             cache-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
-        - uses: ./.github/actions/setup-gradle-properties
+        - uses: $/.github/actions/setup-gradle-properties
 
       - name: 🧑‍🔬 Test
         id: test
         run: ./gradlew ciUnitTest verifyScreenshots
       - name: 📦 Archive JUnit reports
         if: ${{ !cancelled() && contains(fromJSON('["success", "failure"]'), steps.test.outcome) }}
-        uses: ./.github/actions/archive-junit-reports
+        uses: $/.github/actions/archive-junit-reports
         with:
           html: "**/build/reports/tests/test*"
           xml: "**/build/test-results/**/TEST-*.xml"
       - name: 📦 Archive Paparazzi reports
         if: ${{ !cancelled() && contains(fromJSON('["success", "failure"]'), steps.test.outcome) }}
-        uses: ./.github/actions/archive-paparazzi-reports
+        uses: $/.github/actions/archive-paparazzi-reports
       - if: ${{ !cancelled() }}
-        uses: ./.github/actions/archive-gradle-reports
+        uses: $/.github/actions/archive-gradle-reports
 
   lint:
     name: 🕵️ Lint
@@ -149,18 +149,18 @@ jobs:
     steps:
       - uses: actions/checkout@v7
       - parallel:
-        - uses: ./.github/actions/setup-java
-        - uses: ./.github/actions/setup-gradle
+        - uses: $/.github/actions/setup-java
+        - uses: $/.github/actions/setup-gradle
           with:
             cache-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
-        - uses: ./.github/actions/setup-gradle-properties
+        - uses: $/.github/actions/setup-gradle-properties
 
       - name: 🕵️ Lint
         id: lint
         run: ./gradlew ciLint :build-logic:lint --continue
       - name: 📦 Archive Lint reports
         if: ${{ !cancelled() && contains(fromJSON('["success", "failure"]'), steps.lint.outcome) }}
-        uses: ./.github/actions/archive-lint-reports
+        uses: $/.github/actions/archive-lint-reports
         with:
           html: "**/build/reports/lint-results*.html"
           sarif: "**/build/reports/lint-results*.sarif"
@@ -178,4 +178,4 @@ jobs:
           sarif_file: build-logic
           category: build-logic
       - if: ${{ !cancelled() }}
-        uses: ./.github/actions/archive-gradle-reports
+        uses: $/.github/actions/archive-gradle-reports

@@ -8,7 +8,7 @@ runs:
       shell: bash
       id: fsck
     - if: ${{ !cancelled() && github.event_name == 'pull_request' }}
-      uses: ./.github/actions/minimize-comments
+      uses: $/.github/actions/minimize-comments
       with:
         marker: "<!-- playground: check-git-lfs -->"
     - if: ${{ failure() && steps.fsck.conclusion == 'failure' && github.event_name == 'pull_request' }}
