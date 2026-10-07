@@ -18,7 +18,7 @@ runs:
         path: '**/build/paparazzi/failures/*/*.png'
         if-no-files-found: ignore
     - if: ${{ !cancelled() && github.event_name == 'pull_request' }}
-      uses: ./.github/actions/minimize-comments
+      uses: $/.github/actions/minimize-comments
       with:
         marker: "<!-- playground: archive-paparazzi-reports -->"
     - if: ${{ steps.artifact-failures-and-deltas.outputs.artifact-id != '' && github.event_name == 'pull_request' }}
