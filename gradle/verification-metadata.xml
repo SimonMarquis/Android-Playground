@@ -412,6 +412,11 @@
             <pgp value="638DBA7FF338F537EACB7AC0AE1B9D6007DDFA7C"/>
          </artifact>
       </component>
+      <component group="com.google.testparameterinjector" name="test-parameter-injector" version="1.24">
+         <artifact name="test-parameter-injector-1.24.jar">
+            <pgp value="638DBA7FF338F537EACB7AC0AE1B9D6007DDFA7C"/>
+         </artifact>
+      </component>
       <component group="com.googlecode.juniversalchardet" name="juniversalchardet" version="1.0.3">
          <artifact name="juniversalchardet-1.0.3.jar">
             <pgp value="31BAE2E51D95E0F8AD9B7BCC40A3C4432BD7308C"/>
@@ -424,6 +429,11 @@
       </component>
       <component group="com.slack.lint.compose" name="compose-lint-checks" version="1.6.0">
          <artifact name="compose-lint-checks-1.6.0.jar">
+            <pgp value="719F7C29985A8E95F58F47194D8159D6A1159B69"/>
+         </artifact>
+      </component>
+      <component group="com.slack.lint.compose" name="compose-lint-checks" version="1.6.1">
+         <artifact name="compose-lint-checks-1.6.1.jar">
             <pgp value="719F7C29985A8E95F58F47194D8159D6A1159B69"/>
          </artifact>
       </component>
