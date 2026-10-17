@@ -1,3 +1,5 @@
+profile: pedantic
+
 rules:
   unpinned-uses:
     level: error
@@ -7,3 +9,9 @@ rules:
       SimonMarquis/*: ref-pin
   dependabot-cooldown: off
   missing-timeout: off
+  require-expression-wrapping: off
+  undocumented-permissions: off
+  mutable-runner-label: off
+  secrets-outside-env: off
+  require-shell: off
+  anonymous-definition: off

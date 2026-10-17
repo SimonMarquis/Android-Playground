@@ -56,13 +56,21 @@ jobs:
           if-no-files-found: error
 
       - name: 📡 Create PR
-        uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8.1.1
-        with:
-          add-paths: "**/generated/baselineProfiles/*-prof.txt"
-          title: ⚡ Startup & Baseline Profiles
-          commit-message: ⚡ Startup & Baseline Profiles
-          body: ""
-          base: ${{ github.event.repository.default_branch }}
-          branch: update-android-profiles
-          token: ${{ steps.setup-bot.outputs.token }}
-          committer: ${{ steps.setup-bot.outputs.git-identity }}
+        run: |
+          git add -- '**/generated/baselineProfiles/*-prof.txt'
+
+          if git diff --cached --quiet --exit-code -- '**/generated/baselineProfiles/*-prof.txt'; then
+            echo "::notice::UP-TO-DATE"; exit 0
+          fi
+
+          git commit -m "⚡ Startup & Baseline Profiles" -- '**/generated/baselineProfiles/*-prof.txt'
+
+          # Shared bot branch: force it to this run's commit so the PR tracks the latest profiles
+          branch="update-android-profiles"
+          git push --force origin "HEAD:$branch"
+          gh pr view --head "$branch" >/dev/null 2>&1 \
+            || gh pr create --title "⚡ Startup & Baseline Profiles" --fill \
+              --base "$GITHUB_REF_NAME" --head "$branch" \
+              --assignee "$GITHUB_TRIGGERING_ACTOR"
+        env:
+          GH_TOKEN: ${{ steps.setup-bot.outputs.token }}
