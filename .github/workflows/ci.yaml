@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  actions: read
+  actions: write
   contents: read
   pull-requests: write
 
@@ -139,7 +139,7 @@ jobs:
     name: 🕵️ Lint
     needs: validation
     permissions:
-      actions: read
+      actions: write
       contents: read
       pull-requests: write
       # github/codeql-action/upload-sarif
