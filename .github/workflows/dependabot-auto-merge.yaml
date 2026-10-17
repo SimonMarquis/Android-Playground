@@ -4,6 +4,10 @@ on: pull_request
 permissions:
   pull-requests: read
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.head.label || github.head_ref || github.ref }}
+  cancel-in-progress: true
+
 jobs:
   dependabot-auto-merge:
     runs-on: ubuntu-latest
