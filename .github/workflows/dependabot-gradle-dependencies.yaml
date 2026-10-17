@@ -51,7 +51,7 @@ jobs:
             git show --oneline --stat
 
             echo "::notice::UPDATED"
-            echo "dirty=true" >> $GITHUB_OUTPUT
+            echo "dirty=true" >> "$GITHUB_OUTPUT"
           else
             echo "::notice::UP-TO-DATE"
           fi
@@ -73,7 +73,7 @@ jobs:
             git show --oneline --stat
 
             echo "::notice::UPDATED"
-            echo "dirty=true" >> $GITHUB_OUTPUT
+            echo "dirty=true" >> "$GITHUB_OUTPUT"
           else
             echo "::notice::UP-TO-DATE"
           fi
