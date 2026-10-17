@@ -4,3 +4,4 @@ rules:
     policies:
       actions/*: ref-pin
       github/codeql-action/*: ref-pin
+      SimonMarquis/*: ref-pin
