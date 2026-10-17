@@ -5,4 +5,5 @@ rules:
       actions/*: ref-pin
       github/codeql-action/*: ref-pin
       SimonMarquis/*: ref-pin
+  dependabot-cooldown: off
   missing-timeout: off
