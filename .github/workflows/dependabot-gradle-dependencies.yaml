@@ -18,6 +18,8 @@ jobs:
     if: github.event.pull_request.user.login == 'dependabot[bot]' && github.repository == github.event.pull_request.head.repo.full_name && startsWith(github.head_ref, 'dependabot/gradle/')
     steps:
       - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
       - id: setup-bot
         uses: SimonMarquis/setup-github-app-as-bot@v1
         with:
@@ -29,6 +31,7 @@ jobs:
         with:
           ref: ${{ github.head_ref }}
           token: ${{ steps.setup-bot.outputs.token }}
+          persist-credentials: true
       - uses: $/.github/actions/setup-java
       - uses: $/.github/actions/setup-gradle
         with:

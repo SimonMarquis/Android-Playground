@@ -18,6 +18,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
       - id: setup-bot
         uses: SimonMarquis/setup-github-app-as-bot@v1
         with:
@@ -29,6 +31,7 @@ jobs:
         with:
           lfs: true
           token: ${{ steps.setup-bot.outputs.token }}
+          persist-credentials: true
       - if: inputs.ref != ''
         run: gh pr checkout "$INPUT_REF"
         env:
