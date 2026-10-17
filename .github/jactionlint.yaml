@@ -5,3 +5,4 @@ rules:
       actions/*: ref-pin
       github/codeql-action/*: ref-pin
       SimonMarquis/*: ref-pin
+  missing-timeout: off
