@@ -7,8 +7,7 @@ on:
     types:
       - closed
 
-permissions:
-  actions: write
+permissions: {}
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.head.label || github.head_ref || github.ref }}
@@ -23,6 +22,8 @@ env:
 jobs:
   clear-cache:
     runs-on: ubuntu-latest
+    permissions:
+      actions: write
     steps:
       - name: Clear all cache entries
         if: github.event_name == 'workflow_dispatch'
