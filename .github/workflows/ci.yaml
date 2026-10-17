@@ -10,7 +10,6 @@ on:
 permissions:
   actions: read
   contents: read
-  pull-requests: write
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.head.label || github.head_ref || github.ref }}
@@ -35,6 +34,10 @@ jobs:
 
   validation:
     name: 🛃 Validation
+    permissions:
+      actions: read
+      contents: read
+      pull-requests: write
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
@@ -52,6 +55,10 @@ jobs:
   checks:
     name: 👮 Checks
     needs: validation
+    permissions:
+      actions: read
+      contents: read
+      pull-requests: write
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
@@ -111,6 +118,10 @@ jobs:
   test:
     name: 🧑‍🔬 Test
     needs: validation
+    permissions:
+      actions: read
+      contents: read
+      pull-requests: write
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
