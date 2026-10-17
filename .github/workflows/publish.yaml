@@ -28,7 +28,7 @@ jobs:
       - uses: $/.github/actions/setup-java
       - uses: $/.github/actions/setup-gradle
         with:
-          cache-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
+          cache-disabled: true
       - uses: $/.github/actions/setup-gradle-properties
 
       - name: 🔏 Secrets
