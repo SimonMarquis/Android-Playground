@@ -6,8 +6,8 @@ on:
     - cron: 0 9 * * MON
 
 permissions:
-  contents: write
-  pull-requests: write
+  contents: read
+  actions: read
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.head.label || github.head_ref || github.ref }}
@@ -24,6 +24,8 @@ jobs:
         with:
           client-id: ${{ vars.BOT_CLIENT_ID }}
           private-key: ${{ secrets.BOT_PRIVATE_KEY }}
+          permission-contents: write
+          permission-pull-requests: write
       - uses: actions/checkout@v7
         with:
           token: ${{ steps.setup-bot.outputs.token }}
