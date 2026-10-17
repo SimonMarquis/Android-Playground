@@ -63,7 +63,7 @@ jobs:
             --delete 'g:verification-metadata/g:configuration/g:ignored-keys' \
             --delete 'g:verification-metadata/g:components/*' \
             gradle/verification-metadata.xml
-          > gradle/verification-keyring.keys
+          : > gradle/verification-keyring.keys
           ./gradlew "$TASK" --write-verification-metadata pgp,sha256 --export-keys
         env:
           TASK: ${{ inputs.task }}
