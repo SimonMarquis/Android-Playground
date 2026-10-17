@@ -26,6 +26,7 @@ jobs:
       - uses: actions/checkout@v7
         with:
           lfs: true
+          persist-credentials: false
       - uses: $/.github/actions/setup-java
       - uses: $/.github/actions/setup-gradle-properties
       - name: Download latest version of the validation scripts
@@ -65,6 +66,7 @@ jobs:
       - uses: actions/checkout@v7
         with:
           lfs: true
+          persist-credentials: false
       - uses: $/.github/actions/setup-java
       - uses: $/.github/actions/setup-gradle
         with:

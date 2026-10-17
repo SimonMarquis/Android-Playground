@@ -29,6 +29,7 @@ jobs:
       - uses: actions/checkout@v7
         with:
           lfs: true
+          persist-credentials: false
       - id: setup-bot
         uses: SimonMarquis/setup-github-app-as-bot@v1
         with:
@@ -40,6 +41,7 @@ jobs:
         with:
           token: ${{ steps.setup-bot.outputs.token }}
           lfs: true
+          persist-credentials: true
       - if: inputs.ref != ''
         run: gh pr checkout "$INPUT_REF"
         env:
