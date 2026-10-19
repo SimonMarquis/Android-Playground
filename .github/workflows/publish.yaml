@@ -51,6 +51,7 @@ jobs:
             app/build/outputs/apk/release
             app/build/outputs/bundle/release
             app/build/outputs/mapping/release
+          if-no-files-found: error
 
       - name: 📤 Upload
         run: >-
