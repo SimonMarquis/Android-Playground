@@ -17,9 +17,6 @@ env:
   DEVELOCITY_URL: https://scans.gradle.com
   TASKS: checkKotlinAbi licensee assembleRelease ciUnitTest ciLint verifyScreenshots
 
-concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
 jobs:
   build-cache-compatibility:
     runs-on: ubuntu-latest
