@@ -24,6 +24,7 @@ permissions:
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
+
 jobs:
   gradle-dependency-signatures:
     if: contains(fromJson(vars.AUTHORIZED_ACTORS || '[]'), github.actor)

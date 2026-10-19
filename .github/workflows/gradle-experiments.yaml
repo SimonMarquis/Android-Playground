@@ -9,6 +9,10 @@ permissions:
   contents: read
   actions: read
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 env:
   DEVELOCITY_URL: https://scans.gradle.com
   TASKS: checkKotlinAbi licensee assembleRelease ciUnitTest ciLint verifyScreenshots
