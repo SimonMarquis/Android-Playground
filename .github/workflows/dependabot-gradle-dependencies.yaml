@@ -38,9 +38,32 @@ jobs:
           cache-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
       - uses: $/.github/actions/setup-gradle-properties
 
+      - id: gradle-dependency-lock-state
+        run: |
+          ./gradlew dependencyLockState --write-locks > /dev/null
+
+          if ! git diff --quiet --exit-code -- ':(glob)**/*gradle.lockfile';
+          then
+            git commit -m "🤖 Update Gradle dependency lock state" -m "[dependabot skip]" -- ':(glob)**/*gradle.lockfile'
+            git show --oneline --stat
+
+            echo "::notice::UPDATED"
+            echo "dirty=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "::notice::UP-TO-DATE"
+          fi
+
       - id: gradle-signature-verification
         run: |
-          ./gradlew --write-verification-metadata pgp,sha256 --export-keys
+          sudo apt-get install -y xmlstarlet
+          xmlstarlet edit --inplace \
+            -N g="https://schema.gradle.org/dependency-verification" \
+            --delete 'g:verification-metadata/g:configuration/g:ignored-keys' \
+            --delete 'g:verification-metadata/g:components/*' \
+            gradle/verification-metadata.xml
+          : > gradle/verification-keyring.keys
+
+          ./gradlew globalCi --write-verification-metadata pgp,sha256 --export-keys
 
           # Remove unnecessary version attributes from trusted-key entries
           sed -i 's/<trusted-key\(.*\) version="[^"]*"/<trusted-key\1/g' gradle/verification-metadata.xml
@@ -62,21 +85,6 @@ jobs:
         env:
           PR_URL: ${{ github.event.pull_request.html_url }}
           GH_TOKEN: ${{ steps.setup-bot.outputs.token }}
-
-      - id: gradle-dependency-lock-state
-        run: |
-          ./gradlew dependencyLockState --write-locks > /dev/null
-
-          if ! git diff --quiet --exit-code -- ':(glob)**/*gradle.lockfile';
-          then
-            git commit -m "🤖 Update Gradle dependency lock state" -m "[dependabot skip]" -- ':(glob)**/*gradle.lockfile'
-            git show --oneline --stat
-
-            echo "::notice::UPDATED"
-            echo "dirty=true" >> "$GITHUB_OUTPUT"
-          else
-            echo "::notice::UP-TO-DATE"
-          fi
 
       - name: Update the PR with new commits
         if: ${{ !cancelled() && contains(steps.*.outputs.dirty, 'true') }}
