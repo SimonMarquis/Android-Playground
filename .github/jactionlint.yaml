@@ -1,9 +1,15 @@
+profile: pedantic
 rules:
+  anonymous-definition: off
+  dependabot-cooldown: off
+  missing-timeout: off
+  mutable-runner-label: off
+  require-expression-wrapping: off
+  require-shell: off
+  secrets-outside-env: off
+  undocumented-permissions: off
   unpinned-uses:
-    level: error
     policies:
       actions/*: ref-pin
       github/codeql-action/*: ref-pin
       SimonMarquis/*: ref-pin
-  dependabot-cooldown: off
-  missing-timeout: off
