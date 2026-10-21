@@ -63,14 +63,21 @@ jobs:
             echo "::notice::UP-TO-DATE"; exit 0
           fi
 
-          git commit -m "⚡ Startup & Baseline Profiles" -- '**/generated/baselineProfiles/*-prof.txt'
+          git commit -m "$TITLE" -- '**/generated/baselineProfiles/*-prof.txt'
+          git push --force origin "HEAD:refs/heads/$BRANCH"
 
-          # Shared bot branch: force it to this run's commit so the PR tracks the latest profiles
-          branch="update-android-profiles"
-          git push --force origin "HEAD:$branch"
-          gh pr view --head "$branch" >/dev/null 2>&1 \
-            || gh pr create --title "⚡ Startup & Baseline Profiles" --fill \
-              --base "$GITHUB_REF_NAME" --head "$branch" \
-              --assignee "$GITHUB_TRIGGERING_ACTOR"
+          if gh pr view "$BRANCH" --repo "$GITHUB_REPOSITORY" \
+              --json state --jq '.state' 2>/dev/null | grep -qx OPEN; then
+            echo "::notice::PR already exists"; exit 0
+          gh pr create \
+            --repo "$GITHUB_REPOSITORY" \
+            --title "$TITLE" \
+            --body "" \
+            --base "$BASE_BRANCH" \
+            --head "$BRANCH" \
+            --assignee "$GITHUB_TRIGGERING_ACTOR"
         env:
           GH_TOKEN: ${{ steps.setup-bot.outputs.token }}
+          BASE_BRANCH: ${{ github.event.repository.default_branch }}
+          BRANCH: update-android-profiles
+          TITLE: "⚡ Startup & Baseline Profiles"
