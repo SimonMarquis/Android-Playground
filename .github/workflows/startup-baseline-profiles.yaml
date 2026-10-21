@@ -6,11 +6,11 @@ on:
     - cron: 0 9 * * MON
 
 permissions:
-  contents: write
-  pull-requests: write
+  contents: read
+  actions: read
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.event.pull_request.head.label || github.head_ref || github.ref }}
+  group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
@@ -19,20 +19,25 @@ jobs:
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
       - id: setup-bot
         uses: SimonMarquis/setup-github-app-as-bot@v1
         with:
           client-id: ${{ vars.BOT_CLIENT_ID }}
           private-key: ${{ secrets.BOT_PRIVATE_KEY }}
+          permission-contents: write
+          permission-pull-requests: write
       - uses: actions/checkout@v7
         with:
           token: ${{ steps.setup-bot.outputs.token }}
           lfs: true
-      - uses: ./.github/actions/setup-java
-      - uses: ./.github/actions/setup-gradle
+          persist-credentials: true
+      - uses: $/.github/actions/setup-java
+      - uses: $/.github/actions/setup-gradle
         with:
           cache-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
-      - uses: ./.github/actions/setup-gradle-properties
+      - uses: $/.github/actions/setup-gradle-properties
 
       - name: 🎛️ Enable KVM group perms
         run: |
@@ -48,15 +53,33 @@ jobs:
         with:
           name: baseline-profiles
           path: "**/generated/baselineProfiles/*-prof.txt"
+          if-no-files-found: error
 
       - name: 📡 Create PR
-        uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8.1.1
-        with:
-          add-paths: "**/generated/baselineProfiles/*-prof.txt"
-          title: ⚡ Startup & Baseline Profiles
-          commit-message: ⚡ Startup & Baseline Profiles
-          body: ""
-          base: ${{ github.event.repository.default_branch }}
-          branch: update-android-profiles
-          token: ${{ steps.setup-bot.outputs.token }}
-          committer: ${{ steps.setup-bot.outputs.git-identity }}
+        run: |
+          git add -- '**/generated/baselineProfiles/*-prof.txt'
+
+          if git diff --cached --quiet --exit-code -- '**/generated/baselineProfiles/*-prof.txt'; then
+            echo "::notice::UP-TO-DATE"; exit 0
+          fi
+
+          git commit -m "$TITLE" -- '**/generated/baselineProfiles/*-prof.txt'
+          git push --force origin "HEAD:refs/heads/$BRANCH"
+
+          if gh pr view "$BRANCH" --repo "$GITHUB_REPOSITORY" \
+              --json state --jq '.state' 2>/dev/null | grep -qx OPEN; then
+            echo "::notice::PR already exists"; exit 0
+          fi
+
+          gh pr create \
+            --repo "$GITHUB_REPOSITORY" \
+            --title "$TITLE" \
+            --body "" \
+            --base "$BASE_BRANCH" \
+            --head "$BRANCH" \
+            --assignee "$GITHUB_TRIGGERING_ACTOR"
+        env:
+          GH_TOKEN: ${{ steps.setup-bot.outputs.token }}
+          BASE_BRANCH: ${{ github.event.repository.default_branch }}
+          BRANCH: update-android-profiles
+          TITLE: "⚡ Startup & Baseline Profiles"

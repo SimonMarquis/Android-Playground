@@ -10,7 +10,7 @@ runs:
       shell: bash
       id: check
     - if: ${{ !cancelled() && github.event_name == 'pull_request' }}
-      uses: ./.github/actions/minimize-comments
+      uses: $/.github/actions/minimize-comments
       with:
         marker: "<!-- playground: check-kotlin-binary-compatibility-validation -->"
     - if: ${{ failure() && steps.check.conclusion == 'failure' }}

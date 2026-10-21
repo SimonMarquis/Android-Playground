@@ -6,8 +6,7 @@ on:
       - '**/*.versions.toml'
 
 permissions:
-  contents: write
-  pull-requests: write
+  contents: read
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.head.label || github.head_ref || github.ref }}
@@ -16,27 +15,40 @@ concurrency:
 jobs:
   dependabot-gradle-dependencies:
     runs-on: ubuntu-latest
-    if: github.actor == 'dependabot[bot]' && startsWith(github.head_ref, 'dependabot/gradle/')
+    if: github.event.pull_request.user.login == 'dependabot[bot]' && github.repository == github.event.pull_request.head.repo.full_name && startsWith(github.head_ref, 'dependabot/gradle/')
     steps:
       - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
       - id: setup-bot
         uses: SimonMarquis/setup-github-app-as-bot@v1
         with:
           client-id: ${{ vars.BOT_CLIENT_ID }}
           private-key: ${{ secrets.BOT_PRIVATE_KEY }}
+          permission-contents: write
+          permission-pull-requests: write
       - uses: actions/checkout@v7
         with:
           ref: ${{ github.head_ref }}
           token: ${{ steps.setup-bot.outputs.token }}
-      - uses: ./.github/actions/setup-java
-      - uses: ./.github/actions/setup-gradle
+          persist-credentials: true
+      - uses: $/.github/actions/setup-java
+      - uses: $/.github/actions/setup-gradle
         with:
           cache-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
-      - uses: ./.github/actions/setup-gradle-properties
+      - uses: $/.github/actions/setup-gradle-properties
 
       - id: gradle-signature-verification
         run: |
-          ./gradlew --write-verification-metadata pgp,sha256 --export-keys
+          sudo apt-get install -y xmlstarlet
+          xmlstarlet edit --inplace \
+            -N g="https://schema.gradle.org/dependency-verification" \
+            --delete 'g:verification-metadata/g:configuration/g:ignored-keys' \
+            --delete 'g:verification-metadata/g:components/*' \
+            gradle/verification-metadata.xml
+          : > gradle/verification-keyring.keys
+
+          ./gradlew globalCi --write-verification-metadata pgp,sha256 --export-keys
 
           # Remove unnecessary version attributes from trusted-key entries
           sed -i 's/<trusted-key\(.*\) version="[^"]*"/<trusted-key\1/g' gradle/verification-metadata.xml
@@ -47,7 +59,7 @@ jobs:
             git show --oneline --stat
 
             echo "::notice::UPDATED"
-            echo "dirty=true" >> $GITHUB_OUTPUT
+            echo "dirty=true" >> "$GITHUB_OUTPUT"
           else
             echo "::notice::UP-TO-DATE"
           fi
@@ -69,7 +81,7 @@ jobs:
             git show --oneline --stat
 
             echo "::notice::UPDATED"
-            echo "dirty=true" >> $GITHUB_OUTPUT
+            echo "dirty=true" >> "$GITHUB_OUTPUT"
           else
             echo "::notice::UP-TO-DATE"
           fi
