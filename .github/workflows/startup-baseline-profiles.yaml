@@ -69,6 +69,8 @@ jobs:
           if gh pr view "$BRANCH" --repo "$GITHUB_REPOSITORY" \
               --json state --jq '.state' 2>/dev/null | grep -qx OPEN; then
             echo "::notice::PR already exists"; exit 0
+          fi
+
           gh pr create \
             --repo "$GITHUB_REPOSITORY" \
             --title "$TITLE" \

@@ -67,7 +67,7 @@ kotlinx-coroutines-bom = "org.jetbrains.kotlinx:kotlinx-coroutines-bom:1.11.0"
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core" }
 kotlinx-coroutines-guava = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-guava" }
 kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test" }
-kotlinx-serialization-bom = "org.jetbrains.kotlinx:kotlinx-serialization-bom:1.11.0"
+kotlinx-serialization-bom = "org.jetbrains.kotlinx:kotlinx-serialization-bom:1.12.0"
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json" }
 
 lint = { module = "com.android.tools.lint:lint", version.ref = "android-tools" }
@@ -98,7 +98,7 @@ android-test = { id = "com.android.test", version.ref = "agp" }
 androidx-baselineprofile = { id = "androidx.baselineprofile", version.ref = "androidx-benchmark" }
 artifactsSizeReport = "io.github.cdsap.android-artifacts-size-report:0.2.1"
 dagp = "com.autonomousapps.dependency-analysis:3.19.2"
-develocity = "com.gradle.develocity:4.6.0"
+develocity = "com.gradle.develocity:4.6.1"
 kotlin-assignment = { id = "org.jetbrains.kotlin.plugin.assignment", version.ref = "kgp" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kgp" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kgp" }
