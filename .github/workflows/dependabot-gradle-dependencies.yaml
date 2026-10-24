@@ -15,11 +15,22 @@ concurrency:
 jobs:
   dependabot-gradle-dependencies:
     runs-on: ubuntu-latest
-    if: github.event.pull_request.user.login == 'dependabot[bot]' && github.repository == github.event.pull_request.head.repo.full_name && startsWith(github.head_ref, 'dependabot/gradle/')
+    if: >-
+      github.actor == 'dependabot[bot]' &&
+      github.event.pull_request.user.login == 'dependabot[bot]' &&
+      github.repository == github.event.pull_request.head.repo.full_name &&
+      startsWith(github.head_ref, 'dependabot/gradle/')
     steps:
       - uses: actions/checkout@v7
         with:
+          ref: ${{ github.head_ref }}
           persist-credentials: false
+      - uses: $/.github/actions/setup-java
+      - uses: $/.github/actions/setup-gradle
+        with:
+          cache-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
+      - uses: $/.github/actions/setup-gradle-properties
+
       - id: setup-bot
         uses: SimonMarquis/setup-github-app-as-bot@v1
         with:
@@ -27,16 +38,6 @@ jobs:
           private-key: ${{ secrets.BOT_PRIVATE_KEY }}
           permission-contents: write
           permission-pull-requests: write
-      - uses: actions/checkout@v7
-        with:
-          ref: ${{ github.head_ref }}
-          token: ${{ steps.setup-bot.outputs.token }}
-          persist-credentials: true
-      - uses: $/.github/actions/setup-java
-      - uses: $/.github/actions/setup-gradle
-        with:
-          cache-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
-      - uses: $/.github/actions/setup-gradle-properties
 
       - id: gradle-signature-verification
         run: |
@@ -69,7 +70,6 @@ jobs:
         run: gh pr merge --disable-auto "$PR_URL"
         env:
           PR_URL: ${{ github.event.pull_request.html_url }}
-          GH_TOKEN: ${{ steps.setup-bot.outputs.token }}
 
       - id: gradle-dependency-lock-state
         run: |
