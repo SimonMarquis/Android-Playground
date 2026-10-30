@@ -23,6 +23,7 @@ jobs:
     steps:
       - uses: actions/checkout@v7
         with:
+          lfs: true
           ref: ${{ github.head_ref }}
           persist-credentials: false
       - uses: $/.github/actions/setup-java
