@@ -2,6 +2,7 @@ profile: pedantic
 rules:
   anonymous-definition: off
   dependabot-cooldown: off
+  gh-without-token: off
   missing-timeout: off
   mutable-runner-label: off
   require-expression-wrapping: off
