@@ -11,6 +11,7 @@ on:
 
 permissions:
   contents: read
+  pull-requests: read
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -24,22 +25,11 @@ jobs:
       - uses: actions/checkout@v7
         with:
           persist-credentials: false
-      - id: setup-bot
-        uses: SimonMarquis/setup-github-app-as-bot@v1
-        with:
-          client-id: ${{ vars.BOT_CLIENT_ID }}
-          private-key: ${{ secrets.BOT_PRIVATE_KEY }}
-          permission-contents: write
-          permission-pull-requests: write
-      - uses: actions/checkout@v7
-        with:
-          token: ${{ steps.setup-bot.outputs.token }}
-          persist-credentials: true
       - if: inputs.ref != ''
         run: gh pr checkout "$INPUT_REF"
         env:
           INPUT_REF: ${{ inputs.ref }}
-          GH_TOKEN: ${{ steps.setup-bot.outputs.token }}
+          GH_TOKEN: ${{ github.token }}
 
       - uses: $/.github/actions/setup-java
       - uses: $/.github/actions/setup-gradle
@@ -48,6 +38,13 @@ jobs:
       - uses: $/.github/actions/setup-gradle-properties
 
       - run: ./gradlew updateKotlinAbi > /dev/null
+
+      - uses: SimonMarquis/setup-github-app-as-bot@v1
+        with:
+          client-id: ${{ vars.BOT_CLIENT_ID }}
+          private-key: ${{ secrets.BOT_PRIVATE_KEY }}
+          permission-contents: write
+          permission-pull-requests: write
       - run: |
           if ! git diff --quiet --exit-code -- ':(glob)**/api/*.api';
           then
@@ -72,4 +69,3 @@ jobs:
           fi
         env:
           INPUT_REF: ${{ inputs.ref }}
-          GH_TOKEN: ${{ steps.setup-bot.outputs.token }}

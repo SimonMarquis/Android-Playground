@@ -20,6 +20,7 @@ on:
 
 permissions:
   contents: read
+  pull-requests: read
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -34,23 +35,11 @@ jobs:
         with:
           lfs: true
           persist-credentials: false
-      - id: setup-bot
-        uses: SimonMarquis/setup-github-app-as-bot@v1
-        with:
-          client-id: ${{ vars.BOT_CLIENT_ID }}
-          private-key: ${{ secrets.BOT_PRIVATE_KEY }}
-          permission-contents: write
-          permission-pull-requests: write
-      - uses: actions/checkout@v7
-        with:
-          token: ${{ steps.setup-bot.outputs.token }}
-          lfs: true
-          persist-credentials: true
       - if: inputs.ref != ''
         run: gh pr checkout "$INPUT_REF"
         env:
           INPUT_REF: ${{ inputs.ref }}
-          GH_TOKEN: ${{ steps.setup-bot.outputs.token }}
+          GH_TOKEN: ${{ github.token }}
 
       - uses: $/.github/actions/setup-java
       - uses: $/.github/actions/setup-gradle
@@ -81,6 +70,12 @@ jobs:
         env:
           TASK: ${{ inputs.task }}
 
+      - uses: SimonMarquis/setup-github-app-as-bot@v1
+        with:
+          client-id: ${{ vars.BOT_CLIENT_ID }}
+          private-key: ${{ secrets.BOT_PRIVATE_KEY }}
+          permission-contents: write
+          permission-pull-requests: write
       - run: |
           # Remove unnecessary version attributes from trusted-key entries
           sed -i 's/<trusted-key\(.*\) version="[^"]*"/<trusted-key\1/g' gradle/verification-metadata.xml
@@ -107,4 +102,3 @@ jobs:
           fi
         env:
           INPUT_REF: ${{ inputs.ref }}
-          GH_TOKEN: ${{ steps.setup-bot.outputs.token }}
