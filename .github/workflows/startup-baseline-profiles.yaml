@@ -20,19 +20,8 @@ jobs:
     steps:
       - uses: actions/checkout@v7
         with:
-          persist-credentials: false
-      - id: setup-bot
-        uses: SimonMarquis/setup-github-app-as-bot@v1
-        with:
-          client-id: ${{ vars.BOT_CLIENT_ID }}
-          private-key: ${{ secrets.BOT_PRIVATE_KEY }}
-          permission-contents: write
-          permission-pull-requests: write
-      - uses: actions/checkout@v7
-        with:
-          token: ${{ steps.setup-bot.outputs.token }}
           lfs: true
-          persist-credentials: true
+          persist-credentials: false
       - uses: $/.github/actions/setup-java
       - uses: $/.github/actions/setup-gradle
         with:
@@ -55,6 +44,12 @@ jobs:
           path: "**/generated/baselineProfiles/*-prof.txt"
           if-no-files-found: error
 
+      - uses: SimonMarquis/setup-github-app-as-bot@v1
+        with:
+          client-id: ${{ vars.BOT_CLIENT_ID }}
+          private-key: ${{ secrets.BOT_PRIVATE_KEY }}
+          permission-contents: write
+          permission-pull-requests: write
       - name: 📡 Create PR
         run: |
           git add -- '**/generated/baselineProfiles/*-prof.txt'
@@ -79,7 +74,6 @@ jobs:
             --head "$BRANCH" \
             --assignee "$GITHUB_TRIGGERING_ACTOR"
         env:
-          GH_TOKEN: ${{ steps.setup-bot.outputs.token }}
           BASE_BRANCH: ${{ github.event.repository.default_branch }}
           BRANCH: update-android-profiles
           TITLE: "⚡ Startup & Baseline Profiles"

@@ -11,6 +11,7 @@ on:
 
 permissions:
   contents: read
+  pull-requests: read
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -23,24 +24,13 @@ jobs:
     steps:
       - uses: actions/checkout@v7
         with:
-          persist-credentials: false
-      - id: setup-bot
-        uses: SimonMarquis/setup-github-app-as-bot@v1
-        with:
-          client-id: ${{ vars.BOT_CLIENT_ID }}
-          private-key: ${{ secrets.BOT_PRIVATE_KEY }}
-          permission-contents: write
-          permission-pull-requests: write
-      - uses: actions/checkout@v7
-        with:
           lfs: true
-          token: ${{ steps.setup-bot.outputs.token }}
-          persist-credentials: true
+          persist-credentials: false
       - if: inputs.ref != ''
         run: gh pr checkout "$INPUT_REF"
         env:
           INPUT_REF: ${{ inputs.ref }}
-          GH_TOKEN: ${{ steps.setup-bot.outputs.token }}
+          GH_TOKEN: ${{ github.token }}
 
       - uses: $/.github/actions/check-git-lfs
       - uses: $/.github/actions/setup-java
@@ -50,6 +40,13 @@ jobs:
       - uses: $/.github/actions/setup-gradle-properties
 
       - run: ./gradlew cleanRecordScreenshots
+
+      - uses: SimonMarquis/setup-github-app-as-bot@v1
+        with:
+          client-id: ${{ vars.BOT_CLIENT_ID }}
+          private-key: ${{ secrets.BOT_PRIVATE_KEY }}
+          permission-contents: write
+          permission-pull-requests: write
       - run: |
           git status --porcelain
           git add -- '**/src/test/snapshots/**/*.png'
@@ -75,4 +72,3 @@ jobs:
           fi
         env:
           INPUT_REF: ${{ inputs.ref }}
-          GH_TOKEN: ${{ steps.setup-bot.outputs.token }}
