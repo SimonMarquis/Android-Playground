@@ -265,13 +265,11 @@ private fun LicensesScreenItem(it: ArtifactDetail) {
                 modifier = Modifier.basicMarquee(),
                 text = "${it.artifactId}:${it.version}",
                 style = PlaygroundTheme.typography.bodySmall,
-                fontFamily = Monospace,
             )
             Text(
                 modifier = Modifier.basicMarquee(),
                 text = it.spdxLicenses.joinToString(" $bullet ") { it.name },
                 style = PlaygroundTheme.typography.bodySmall,
-                fontFamily = Monospace,
             )
         }
         LicensesScreenDropdown(it, expanded, onDismiss = { expanded = false })
