@@ -19,3 +19,4 @@ runs:
         cache-encryption-key: ${{ inputs.cache-encryption-key }}
         gradle-home-cache-strict-match: true
         validate-wrappers: true
+    - uses: cdsap/build-process-watcher@575ec3883ba750bf190bab5edbb97a97829f5216 # v0.6.0
