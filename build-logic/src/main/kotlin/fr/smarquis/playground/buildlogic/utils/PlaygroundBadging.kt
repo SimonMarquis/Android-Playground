@@ -17,8 +17,6 @@ import org.gradle.api.Project
 import org.gradle.api.Task
 import org.gradle.api.file.DirectoryProperty
 import org.gradle.api.file.RegularFileProperty
-import org.gradle.api.problems.ProblemGroup
-import org.gradle.api.problems.ProblemId
 import org.gradle.api.problems.Problems
 import org.gradle.api.provider.Property
 import org.gradle.api.tasks.CacheableTask
@@ -157,6 +155,9 @@ internal abstract class CheckBadgingTask : DefaultTask() {
     @get:Inject
     abstract val problems: Problems
 
+    private val problemGroup by lazy { problems.groups.verification.group("Playground") }
+    private val badgingChangedProblemId by lazy { problemGroup.problemId("Android badging file changed!") }
+
     init {
         group = VERIFICATION_GROUP
         description = "Validates the generated badging file against the golden badging file."
@@ -168,14 +169,12 @@ internal abstract class CheckBadgingTask : DefaultTask() {
             assertThat(generatedBadging.get().asFile.readLines().filterNot(String::isBlank))
                 .containsExactly(*goldenBadging.get().asFile.readLines().filterNot(String::isBlank).toTypedArray())
         }.onFailure {
-            val problemGroup = ProblemGroup.create(/* name = */ "playground-group", /* displayName = */ "Playground")
-            val problemId = ProblemId.create(/* name = */ "playground-android-badging", /* displayName = */ "Android badging file changed!", /* group = */ problemGroup)
-            val exception = GradleException("Generated Android badging file differs from the golden badging file!").initCause(it)
-            problems.reporter.throwing(exception, problemId) {
+            val exception = GradleException("Generated Android badging file differs from the golden badging file!")
+            exception.initCause(it)
+            throw problems.reporter.throwing(exception, badgingChangedProblemId) {
                 contextualLabel(exception.message.orEmpty())
                 fileLocation(generatedBadging.get().asFile.absolutePath)
                 solution("If this change is intended, run the `${updateTask.get()}` task.")
-                withException(exception)
             }
         }
     }

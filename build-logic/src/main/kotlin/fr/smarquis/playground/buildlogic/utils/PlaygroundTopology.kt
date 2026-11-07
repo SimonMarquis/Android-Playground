@@ -11,8 +11,6 @@ import org.gradle.api.GradleException
 import org.gradle.api.Project
 import org.gradle.api.artifacts.ProjectDependency
 import org.gradle.api.file.RegularFileProperty
-import org.gradle.api.problems.ProblemGroup
-import org.gradle.api.problems.ProblemId
 import org.gradle.api.problems.Problems
 import org.gradle.api.provider.Property
 import org.gradle.api.provider.SetProperty
@@ -82,6 +80,10 @@ internal abstract class CheckTopologyTask : DefaultTask() {
     @get:Inject
     abstract val problems: Problems
 
+    private val problemGroup by lazy { problems.groups.dependencies.declaration }
+    private val missingRuleProblemId by lazy { problemGroup.problemId("Topology missing rule!") }
+    private val violationProblemId by lazy { problemGroup.problemId("Topology rule violation!") }
+
     init {
         group = VERIFICATION_GROUP
         description = "Checks the topology of project dependencies."
@@ -98,10 +100,8 @@ internal abstract class CheckTopologyTask : DefaultTask() {
         val matchingRules = RULES.filter { it.key.matches(projectPath.get()) }.values.flatten()
         logger.debug("{} Matching rules {}", LOG, matchingRules)
         if (matchingRules.isEmpty()) {
-            val problemGroup = ProblemGroup.create(/* name = */ "playground-group", /* displayName = */ "Playground")
-            val problemId = ProblemId.create(/* name = */ "playground-topology-missing-rule", /* displayName = */ "Topology missing rule!", /* group = */ problemGroup)
             val exception = GradleException("Missing topology rule for project ${projectPath.get()}!")
-            problems.reporter.throwing(exception, problemId) {
+            throw problems.reporter.throwing(exception, missingRuleProblemId) {
                 contextualLabel(exception.message.orEmpty())
                 fileLocation(projectBuildFile.asFile.get().absolutePath)
                 solution(
@@ -110,17 +110,14 @@ internal abstract class CheckTopologyTask : DefaultTask() {
                     Rules: ${RULES.keys}
                     """.trimIndent(),
                 )
-                withException(exception)
             }
         }
 
         val violations = dependencies.filter { d -> matchingRules.none { it.matches(d) } }
         logger.debug("{} Violations {}", LOG, violations)
         if (violations.isNotEmpty()) {
-            val problemGroup = ProblemGroup.create(/* name = */ "playground-group", /* displayName = */ "Playground")
-            val problemId = ProblemId.create(/* name = */ "playground-topology-violation", /* displayName = */ "Topology rule violation!", /* group = */ problemGroup)
             val exception = GradleException("Topology rule violations for project ${projectPath.get()}! $violations")
-            problems.reporter.throwing(exception, problemId) {
+            throw problems.reporter.throwing(exception, violationProblemId) {
                 contextualLabel(exception.message.orEmpty())
                 fileLocation(projectBuildFile.asFile.get().absolutePath)
                 solution(
@@ -129,7 +126,6 @@ internal abstract class CheckTopologyTask : DefaultTask() {
                     Matching rules: $matchingRules
                     """.trimIndent(),
                 )
-                withException(exception)
             }
         }
     }
