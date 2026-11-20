@@ -20,7 +20,10 @@ internal class PlaygroundAndroidBasePlugin : Plugin<Project> {
             resourcePrefix = "playground_" + parts.joinToString(separator = "_").lowercase() + "_"
 
             compileSdk {
-                version = release(versions.compileSdk.toString().toInt())
+                val compileSdkVersion = versions.compileSdk.toString().split('.').map(String::toInt)
+                version = release(compileSdkVersion.first()) {
+                    minorApiLevel = compileSdkVersion.getOrNull(1)
+                }
             }
 
             defaultConfig.apply {
