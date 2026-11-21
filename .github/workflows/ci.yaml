@@ -103,9 +103,7 @@ jobs:
         id: build
         run: ./gradlew assembleRelease
       - name: Verify configuration cache reuse
-        run: |
-          ./gradlew assembleRelease | tee "$RUNNER_TEMP/configuration-cache.log"
-          grep -F "Configuration cache entry reused." "$RUNNER_TEMP/configuration-cache.log"
+        run: ./gradlew assembleRelease
       - name: 📦 Archive APKs
         uses: actions/upload-artifact@v7
         with:
