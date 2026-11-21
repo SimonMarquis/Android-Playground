@@ -13,6 +13,7 @@ import org.gradle.api.artifacts.Dependency
 import org.gradle.api.artifacts.dsl.Dependencies
 import org.gradle.api.artifacts.dsl.DependencyCollector
 import org.gradle.api.model.ObjectFactory
+import org.jetbrains.kotlin.gradle.dsl.KotlinAndroidProjectExtension
 import org.jetbrains.kotlin.gradle.dsl.KotlinJvmProjectExtension
 import javax.inject.Inject
 
@@ -41,7 +42,12 @@ public interface UnitTestOptions {
 }
 
 @PlaygroundDslMarker
-public interface AndroidApp : CommonOptions, UnitTestOptions {
+public interface AndroidKotlinOptions {
+    public fun kotlin(action: Action<KotlinAndroidProjectExtension>)
+}
+
+@PlaygroundDslMarker
+public interface AndroidApp : CommonOptions, UnitTestOptions, AndroidKotlinOptions {
     public fun compose()
     public fun testFixtures()
     public fun android(action: Action<ApplicationExtension>)
@@ -49,7 +55,7 @@ public interface AndroidApp : CommonOptions, UnitTestOptions {
 }
 
 @PlaygroundDslMarker
-public interface AndroidLibrary : CommonOptions, UnitTestOptions {
+public interface AndroidLibrary : CommonOptions, UnitTestOptions, AndroidKotlinOptions {
     public fun compose()
     public fun screenshots()
     public fun testFixtures()
@@ -58,7 +64,7 @@ public interface AndroidLibrary : CommonOptions, UnitTestOptions {
 }
 
 @PlaygroundDslMarker
-public interface AndroidBenchmark : CommonOptions {
+public interface AndroidBenchmark : CommonOptions, AndroidKotlinOptions {
     public fun android(action: Action<TestExtension>)
     public fun androidComponents(action: Action<TestAndroidComponentsExtension>)
 }
@@ -150,6 +156,7 @@ internal abstract class PlaygroundExtensionImpl @Inject constructor(
         project.androidApplication { defaultConfig.applicationId = applicationId }
         options.evaluate()
         options.androidActions.forEach { project.extensions.configure(ApplicationExtension::class.java, it) }
+        options.kotlinActions.forEach { project.extensions.configure(KotlinAndroidProjectExtension::class.java, it) }
         options.componentActions.forEach { project.extensions.configure(ApplicationAndroidComponentsExtension::class.java, it) }
         options.evaluateDependencies()
     }
@@ -160,6 +167,7 @@ internal abstract class PlaygroundExtensionImpl @Inject constructor(
         project.configurePlaygroundAndroidLibrary()
         options.evaluate()
         options.androidActions.forEach { project.extensions.configure(LibraryExtension::class.java, it) }
+        options.kotlinActions.forEach { project.extensions.configure(KotlinAndroidProjectExtension::class.java, it) }
         options.componentActions.forEach { project.extensions.configure(LibraryAndroidComponentsExtension::class.java, it) }
         options.evaluateDependencies()
     }
@@ -171,6 +179,7 @@ internal abstract class PlaygroundExtensionImpl @Inject constructor(
         project.androidTest { this.targetProjectPath = targetProjectPath }
         options.evaluate()
         options.androidActions.forEach { project.extensions.configure(TestExtension::class.java, it) }
+        options.kotlinActions.forEach { project.extensions.configure(KotlinAndroidProjectExtension::class.java, it) }
         options.componentActions.forEach { project.extensions.configure(TestAndroidComponentsExtension::class.java, it) }
         options.evaluateDependencies()
     }
@@ -221,7 +230,12 @@ internal abstract class CommonOptionsImpl(protected val project: Project, privat
     }
 }
 
-internal class AndroidAppImpl(project: Project, objects: ObjectFactory) : CommonOptionsImpl(project, objects), AndroidApp {
+internal abstract class AndroidOptionsImpl(project: Project, objects: ObjectFactory) : CommonOptionsImpl(project, objects), AndroidKotlinOptions {
+    val kotlinActions = mutableListOf<Action<KotlinAndroidProjectExtension>>()
+    override fun kotlin(action: Action<KotlinAndroidProjectExtension>) { kotlinActions.add(action) }
+}
+
+internal class AndroidAppImpl(project: Project, objects: ObjectFactory) : AndroidOptionsImpl(project, objects), AndroidApp {
     val androidActions = mutableListOf<Action<ApplicationExtension>>()
     val componentActions = mutableListOf<Action<ApplicationAndroidComponentsExtension>>()
     override fun compose() { composeEnabled = true }
@@ -231,7 +245,7 @@ internal class AndroidAppImpl(project: Project, objects: ObjectFactory) : Common
     override fun androidComponents(action: Action<ApplicationAndroidComponentsExtension>) { componentActions.add(action) }
 }
 
-internal class AndroidLibraryImpl(project: Project, objects: ObjectFactory) : CommonOptionsImpl(project, objects), AndroidLibrary {
+internal class AndroidLibraryImpl(project: Project, objects: ObjectFactory) : AndroidOptionsImpl(project, objects), AndroidLibrary {
     val androidActions = mutableListOf<Action<LibraryExtension>>()
     val componentActions = mutableListOf<Action<LibraryAndroidComponentsExtension>>()
     override fun compose() { composeEnabled = true }
@@ -242,7 +256,7 @@ internal class AndroidLibraryImpl(project: Project, objects: ObjectFactory) : Co
     override fun androidComponents(action: Action<LibraryAndroidComponentsExtension>) { componentActions.add(action) }
 }
 
-internal class AndroidBenchmarkImpl(project: Project, objects: ObjectFactory) : CommonOptionsImpl(project, objects), AndroidBenchmark {
+internal class AndroidBenchmarkImpl(project: Project, objects: ObjectFactory) : AndroidOptionsImpl(project, objects), AndroidBenchmark {
     val androidActions = mutableListOf<Action<TestExtension>>()
     val componentActions = mutableListOf<Action<TestAndroidComponentsExtension>>()
     override fun android(action: Action<TestExtension>) { androidActions.add(action) }
