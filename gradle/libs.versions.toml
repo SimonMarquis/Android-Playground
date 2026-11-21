@@ -110,7 +110,6 @@ metro = { id = "dev.zacsweers.metro", version.ref = "metro" }
 paparazzi = { id = "app.cash.paparazzi", version.ref = "paparazzi" }
 
 playground-base = { id = "playground.base" }
+playground-build = { id = "playground.build" }
 playground-greeting = { id = "playground.greeting" }
 playground-root = { id = "playground.root" }
-
-playground-build = { id = "playground.build" }

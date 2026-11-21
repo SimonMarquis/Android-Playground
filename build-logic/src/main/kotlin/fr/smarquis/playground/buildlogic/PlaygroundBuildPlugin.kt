@@ -81,8 +81,8 @@ internal abstract class PlaygroundDependenciesImpl @Inject constructor(private v
             "runtimeOnly" to runtimeOnly, "testImplementation" to testImplementation,
             "testFixturesApi" to testFixturesApi, "testFixturesImplementation" to testFixturesImplementation,
         )
-        collectors.forEach { (name, collector) ->
-            target.configurations.findByName(name)?.fromDependencyCollector(collector)
+        target.configurations.configureEach {
+            collectors[name]?.let { fromDependencyCollector(it) }
         }
     }
 }
