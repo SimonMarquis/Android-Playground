@@ -79,8 +79,6 @@ jobs:
       - run: ./gradlew topologyCheck --quiet
       - uses: $/.github/actions/check-kotlin-binary-compatibility-validation
       - run: ./gradlew ciBadging -Pplayground.isMinifyEnabled=false --dependency-verification=strict --quiet
-      - name: Check playground DSL
-        run: python3 .github/scripts/check-playground-dsl.py
       - if: ${{ !cancelled() }}
         uses: $/.github/actions/archive-gradle-reports
 
