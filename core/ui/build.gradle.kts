@@ -1,15 +1,19 @@
 plugins {
-    alias(libs.plugins.playground.android.library)
-    alias(libs.plugins.playground.android.compose)
+    alias(libs.plugins.playground.build)
 }
 
-android.testFixtures.enable = true
+playground {
+    androidLibrary {
+        compose()
+        testFixtures()
 
-dependencies {
-    api(libs.androidx.material3)
-    api(libs.androidx.compose.ui.text)
-    implementation(libs.androidx.appcompat)
-    implementation(libs.androidx.compose.ui)
-    implementation(libs.androidx.splashscreen)
-    testFixturesApi(libs.paparazzi)
+        dependencies {
+            api(libs.androidx.material3)
+            api(libs.androidx.compose.ui.text)
+            implementation(libs.androidx.appcompat)
+            implementation(libs.androidx.compose.ui)
+            implementation(libs.androidx.splashscreen)
+            testFixturesApi(libs.paparazzi)
+        }
+    }
 }
