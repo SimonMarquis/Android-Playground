@@ -3,7 +3,21 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 plugins {
     `java-library`
     alias(libs.plugins.android.lint)
-    alias(libs.plugins.playground.kotlin.jvm)
+    alias(libs.plugins.playground.build)
+}
+
+playground {
+    jvmLibrary {
+        kotlin { compilerOptions.jvmTarget = JvmTarget.JVM_17 }
+
+        dependencies {
+            compileOnly(libs.kotlin.stdlib)
+            compileOnly(libs.lint.api)
+            compileOnly(libs.lint.checks)
+            testImplementation(libs.lint)
+            testImplementation(libs.lint.tests)
+        }
+    }
 }
 
 java {
@@ -11,16 +25,7 @@ java {
     targetCompatibility = JavaVersion.VERSION_17
 }
 
-kotlin.compilerOptions.jvmTarget = JvmTarget.JVM_17
 
 lint {
     disable += "LintImplTrimIndent"
-}
-
-dependencies {
-    compileOnly(libs.kotlin.stdlib)
-    compileOnly(libs.lint.api)
-    compileOnly(libs.lint.checks)
-    testImplementation(libs.lint)
-    testImplementation(libs.lint.tests)
 }

@@ -109,14 +109,7 @@ licensee = "app.cash.licensee:1.14.1"
 metro = { id = "dev.zacsweers.metro", version.ref = "metro" }
 paparazzi = { id = "app.cash.paparazzi", version.ref = "paparazzi" }
 
-playground-android-application = { id = "playground.android-application" }
-playground-android-compose = { id = "playground.android-compose" }
-playground-android-library = { id = "playground.android-library" }
-playground-android-test = { id = "playground.android-test" }
 playground-base = { id = "playground.base" }
+playground-build = { id = "playground.build" }
 playground-greeting = { id = "playground.greeting" }
-playground-kotlin-jvm = { id = "playground.kotlin-jvm" }
-playground-metro = { id = "playground.metro" }
-playground-platform = { id = "playground.platform" }
 playground-root = { id = "playground.root" }
-playground-screenshots = { id = "playground.screenshots" }

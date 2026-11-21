@@ -3,16 +3,12 @@ package fr.smarquis.playground.buildlogic
 import fr.smarquis.playground.buildlogic.dsl.apply
 import fr.smarquis.playground.buildlogic.dsl.assign
 import fr.smarquis.playground.buildlogic.dsl.configure
-import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.jetbrains.kotlin.compose.compiler.gradle.ComposeCompilerGradlePluginExtension
 import org.jetbrains.kotlin.compose.compiler.gradle.ComposeCompilerGradleSubplugin
 
-internal class PlaygroundAndroidComposePlugin : Plugin<Project> {
-
-    override fun apply(target: Project): Unit = with(target) {
+internal fun Project.configurePlaygroundAndroidCompose(): Unit = with(this) {
         apply<ComposeCompilerGradleSubplugin>()
-        apply<PlaygroundAndroidBasePlugin>()
 
         android {
             buildFeatures.compose = true
@@ -20,18 +16,19 @@ internal class PlaygroundAndroidComposePlugin : Plugin<Project> {
 
         configureComposeCompilerMetrics()
 
-        dependencies.add("implementation", target.libs.`androidx-compose-foundations`)
-        dependencies.add("implementation", target.libs.`androidx-compose-runtime`)
-        dependencies.add("implementation", target.libs.`androidx-compose-ui-tooling-preview`)
-        dependencies.add("debugImplementation", target.libs.`androidx-compose-ui-test-manifest`)
-        dependencies.add("debugImplementation", target.libs.`androidx-compose-ui-tooling`)
-        dependencies.add("lintChecks", target.libs.`slack-compose-lint`)
+        dependencies.add("implementation", libs.`androidx-compose-foundations`)
+        dependencies.add("implementation", libs.`androidx-compose-runtime`)
+        dependencies.add("implementation", libs.`androidx-compose-ui-tooling-preview`)
+        dependencies.add("debugImplementation", libs.`androidx-compose-ui-test-manifest`)
+        dependencies.add("debugImplementation", libs.`androidx-compose-ui-tooling`)
+        dependencies.add("lintChecks", libs.`slack-compose-lint`)
     }
 
-    /**
-     * https://github.com/JetBrains/kotlin/blob/master/plugins/compose/design/compiler-metrics.md
-     */
-    private fun Project.configureComposeCompilerMetrics(
+
+/**
+ * https://github.com/JetBrains/kotlin/blob/master/plugins/compose/design/compiler-metrics.md
+ */
+private fun Project.configureComposeCompilerMetrics(
         properties: PlaygroundProperties = playground(),
     ) {
         extensions.configure<ComposeCompilerGradlePluginExtension> {
@@ -52,4 +49,3 @@ internal class PlaygroundAndroidComposePlugin : Plugin<Project> {
         }
     }
 
-}

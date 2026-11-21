@@ -3,13 +3,10 @@ package fr.smarquis.playground.buildlogic
 import fr.smarquis.playground.buildlogic.dsl.apply
 import io.github.cdsap.agp.artifacts.AndroidArtifactsInfoPlugin
 import org.gradle.api.JavaVersion
-import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.jetbrains.kotlin.gradle.dsl.KotlinAndroidProjectExtension
 
-internal class PlaygroundAndroidBasePlugin : Plugin<Project> {
-
-    override fun apply(target: Project): Unit = with(target) {
+internal fun Project.configurePlaygroundAndroidBase(): Unit = with(this) {
         apply<PlaygroundBasePlugin>()
         apply<AndroidArtifactsInfoPlugin>()
         configureKotlin<KotlinAndroidProjectExtension>()
@@ -51,4 +48,3 @@ internal class PlaygroundAndroidBasePlugin : Plugin<Project> {
         dependencies.add("coreLibraryDesugaring", libs.`android-desugarJdkLibs`.get())
     }
 
-}

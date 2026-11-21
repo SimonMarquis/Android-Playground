@@ -14,6 +14,7 @@ plugins {
     alias(libs.plugins.develocity) apply false
     alias(libs.plugins.kotlin.compose) apply false
     alias(libs.plugins.kotlin.jvm) apply false
+    alias(libs.plugins.kotlin.serialization) apply false
     alias(libs.plugins.kotlin.powerAssert) apply false
     alias(libs.plugins.licensee) apply false
     alias(libs.plugins.metro) apply false

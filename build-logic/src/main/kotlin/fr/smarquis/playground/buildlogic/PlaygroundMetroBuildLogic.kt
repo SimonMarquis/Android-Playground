@@ -6,12 +6,9 @@ import dev.zacsweers.metro.gradle.MetroGradleSubplugin
 import dev.zacsweers.metro.gradle.MetroPluginExtension
 import fr.smarquis.playground.buildlogic.dsl.apply
 import fr.smarquis.playground.buildlogic.dsl.assign
-import org.gradle.api.Plugin
 import org.gradle.api.Project
 
-internal class PlaygroundMetroPlugin : Plugin<Project> {
-
-    override fun apply(target: Project): Unit = with(target) {
+internal fun Project.configurePlaygroundMetro(): Unit = with(this) {
         apply<MetroGradleSubplugin>()
 
         @OptIn(ExperimentalMetroGradleApi::class)
@@ -27,4 +24,3 @@ internal class PlaygroundMetroPlugin : Plugin<Project> {
         dependencies.add("api", libs.`metro-runtime`)
     }
 
-}

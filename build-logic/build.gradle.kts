@@ -63,15 +63,8 @@ tasks {
 
 gradlePlugin {
     plugins {
-        create("PlaygroundAndroidApplicationPlugin", libs.plugins.playground.android.application)
-        create("PlaygroundAndroidComposePlugin", libs.plugins.playground.android.compose)
-        create("PlaygroundAndroidLibraryPlugin", libs.plugins.playground.android.library)
-        create("PlaygroundAndroidTestPlugin", libs.plugins.playground.android.test)
+        create("PlaygroundBuildPlugin", libs.plugins.playground.build)
         create("PlaygroundBasePlugin", libs.plugins.playground.base)
-        create("PlaygroundMetroPlugin", libs.plugins.playground.metro)
-        create("PlaygroundKotlinJvmPlugin", libs.plugins.playground.kotlin.jvm)
-        create("PlaygroundPlatformPlugin", libs.plugins.playground.platform)
-        create("PlaygroundScreenshotsPlugin", libs.plugins.playground.screenshots)
         create("PlaygroundRootPlugin", libs.plugins.playground.root)
         create("greeting.GreetingPlugin", libs.plugins.playground.greeting)
     }

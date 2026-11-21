@@ -1,8 +1,13 @@
 plugins {
-    alias(libs.plugins.playground.kotlin.jvm)
-    alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.playground.build)
 }
 
-dependencies {
-    implementation(libs.androidx.navigation3.runtime)
+playground {
+    jvmLibrary {
+        serialization()
+
+        dependencies {
+            implementation(libs.androidx.navigation3.runtime)
+        }
+    }
 }

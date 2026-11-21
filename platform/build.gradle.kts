@@ -1,3 +1,7 @@
 plugins {
-    alias(libs.plugins.playground.platform)
+    alias(libs.plugins.playground.build)
+}
+
+playground {
+    platform()
 }
