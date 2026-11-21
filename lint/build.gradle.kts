@@ -6,16 +6,17 @@ plugins {
     alias(libs.plugins.playground.build)
 }
 
-java {
-    sourceCompatibility = JavaVersion.VERSION_17
-    targetCompatibility = JavaVersion.VERSION_17
-}
-
 playground {
     jvmLibrary {
         kotlin { compilerOptions.jvmTarget = JvmTarget.JVM_17 }
     }
 }
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
+
 
 lint {
     disable += "LintImplTrimIndent"
