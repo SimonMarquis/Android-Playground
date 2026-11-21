@@ -3,6 +3,8 @@ package fr.smarquis.playground.buildlogic
 import com.android.build.api.dsl.ApplicationExtension
 import com.android.build.api.dsl.LibraryExtension
 import com.android.build.api.dsl.TestExtension
+import com.android.build.api.variant.ApplicationAndroidComponentsExtension
+import com.android.build.api.variant.LibraryAndroidComponentsExtension
 import com.android.build.api.variant.TestAndroidComponentsExtension
 import org.gradle.api.Action
 import org.gradle.api.Plugin
@@ -43,6 +45,7 @@ public interface AndroidApp : CommonOptions, UnitTestOptions {
     public fun compose()
     public fun testFixtures()
     public fun android(action: Action<ApplicationExtension>)
+    public fun androidComponents(action: Action<ApplicationAndroidComponentsExtension>)
 }
 
 @PlaygroundDslMarker
@@ -51,6 +54,7 @@ public interface AndroidLibrary : CommonOptions, UnitTestOptions {
     public fun screenshots()
     public fun testFixtures()
     public fun android(action: Action<LibraryExtension>)
+    public fun androidComponents(action: Action<LibraryAndroidComponentsExtension>)
 }
 
 @PlaygroundDslMarker
@@ -146,6 +150,7 @@ internal abstract class PlaygroundExtensionImpl @Inject constructor(
         project.androidApplication { defaultConfig.applicationId = applicationId }
         options.evaluate()
         options.androidActions.forEach { project.extensions.configure(ApplicationExtension::class.java, it) }
+        options.componentActions.forEach { project.extensions.configure(ApplicationAndroidComponentsExtension::class.java, it) }
         options.evaluateDependencies()
     }
 
@@ -155,6 +160,7 @@ internal abstract class PlaygroundExtensionImpl @Inject constructor(
         project.configurePlaygroundAndroidLibrary()
         options.evaluate()
         options.androidActions.forEach { project.extensions.configure(LibraryExtension::class.java, it) }
+        options.componentActions.forEach { project.extensions.configure(LibraryAndroidComponentsExtension::class.java, it) }
         options.evaluateDependencies()
     }
 
@@ -217,19 +223,23 @@ internal abstract class CommonOptionsImpl(protected val project: Project, privat
 
 internal class AndroidAppImpl(project: Project, objects: ObjectFactory) : CommonOptionsImpl(project, objects), AndroidApp {
     val androidActions = mutableListOf<Action<ApplicationExtension>>()
+    val componentActions = mutableListOf<Action<ApplicationAndroidComponentsExtension>>()
     override fun compose() { composeEnabled = true }
     override fun testFixtures() { fixturesEnabled = true }
     override fun enableFixtures() { project.androidApplication { testFixtures.enable = true } }
     override fun android(action: Action<ApplicationExtension>) { androidActions.add(action) }
+    override fun androidComponents(action: Action<ApplicationAndroidComponentsExtension>) { componentActions.add(action) }
 }
 
 internal class AndroidLibraryImpl(project: Project, objects: ObjectFactory) : CommonOptionsImpl(project, objects), AndroidLibrary {
     val androidActions = mutableListOf<Action<LibraryExtension>>()
+    val componentActions = mutableListOf<Action<LibraryAndroidComponentsExtension>>()
     override fun compose() { composeEnabled = true }
     override fun screenshots() { screenshotsEnabled = true }
     override fun testFixtures() { fixturesEnabled = true }
     override fun enableFixtures() { project.androidLibrary { testFixtures.enable = true } }
     override fun android(action: Action<LibraryExtension>) { androidActions.add(action) }
+    override fun androidComponents(action: Action<LibraryAndroidComponentsExtension>) { componentActions.add(action) }
 }
 
 internal class AndroidBenchmarkImpl(project: Project, objects: ObjectFactory) : CommonOptionsImpl(project, objects), AndroidBenchmark {
