@@ -1,3 +1,4 @@
+import androidx.baselineprofile.gradle.producer.BaselineProfileProducerExtension
 import com.android.build.api.variant.BuiltArtifacts
 
 plugins {
@@ -39,7 +40,7 @@ playground {
     }
 }
 
-baselineProfile {
+configure<BaselineProfileProducerExtension> {
     managedDevices += "gmd"
     useConnectedDevices = false
 }

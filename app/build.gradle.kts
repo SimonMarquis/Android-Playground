@@ -1,3 +1,5 @@
+import androidx.baselineprofile.gradle.consumer.BaselineProfileConsumerExtension
+
 plugins {
     idea
     alias(libs.plugins.playground.build)
@@ -46,12 +48,12 @@ playground {
     }
 }
 
-baselineProfile {
+configure<BaselineProfileConsumerExtension> {
     dexLayoutOptimization = true
 }
 
 dependencies {
-    baselineProfile(project(":profiling"))
+    add("baselineProfile", project(":profiling"))
 }
 
 idea {
