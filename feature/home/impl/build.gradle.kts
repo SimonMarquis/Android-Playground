@@ -6,6 +6,7 @@ playground {
     androidLibrary {
         compose()
         metro()
+        flowTests()
         screenshots()
         serialization()
 
@@ -22,8 +23,6 @@ playground {
             implementation(libs.androidx.navigation3.runtime)
             implementation(libs.kotlinx.serialization.json)
             implementation(libs.metrox.viewmodel.compose)
-            testImplementation(libs.kotlinx.coroutines.test)
-            testImplementation(libs.turbine)
             testImplementation(libs.testParameterInjector)
             testImplementation(testFixtures(project(":core:ui")))
             testImplementation(testFixtures(project(":core:utils")))

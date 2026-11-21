@@ -12,16 +12,16 @@ internal fun Project.configurePlaygroundScreenshots() {
             val screenshotTestingVariant = playground().screenshotTestingVariant.map { it.capitalized() }
             tasks.register("recordScreenshots") {
                 description = "Record screenshot tests golden images."
-                dependsOn("recordPaparazzi${screenshotTestingVariant.get()}")
+                dependsOn(screenshotTestingVariant.map { "recordPaparazzi$it" })
             }
             tasks.register("cleanRecordScreenshots") {
                 description = "Clean and record screenshot tests golden images."
-                dependsOn("cleanRecordPaparazzi${screenshotTestingVariant.get()}")
+                dependsOn(screenshotTestingVariant.map { "cleanRecordPaparazzi$it" })
             }
             tasks.register("verifyScreenshots") {
                 group = VERIFICATION_GROUP
                 description = "Verify screenshot tests images against golden images."
-                dependsOn("verifyPaparazzi${screenshotTestingVariant.get()}")
+                dependsOn(screenshotTestingVariant.map { "verifyPaparazzi$it" })
             }.also {
                 PlaygroundGlobalCi.addToGlobalCi(project, it)
             }

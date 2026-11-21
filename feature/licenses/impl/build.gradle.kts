@@ -6,6 +6,7 @@ playground {
     androidLibrary {
         compose()
         metro()
+        flowTests()
         screenshots()
         serialization()
 
@@ -20,9 +21,7 @@ playground {
             implementation(libs.kotlinx.collections)
             implementation(libs.kotlinx.serialization.json)
             implementation(libs.metrox.viewmodel.compose)
-            testImplementation(libs.kotlinx.coroutines.test)
             testImplementation(libs.testParameterInjector)
-            testImplementation(libs.turbine)
             testImplementation(testFixtures(project(":core:ui")))
             testImplementation(testFixtures(project(":domain:licenses")))
             testImplementation(testFixtures(project(":core:utils")))

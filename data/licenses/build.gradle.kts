@@ -5,6 +5,7 @@ plugins {
 playground {
     jvmLibrary {
         metro()
+        flowTests()
         serialization()
 
         dependencies {
@@ -12,8 +13,6 @@ playground {
             implementation(project(":core:di"))
             implementation(libs.kotlinx.coroutines.core)
             implementation(libs.kotlinx.serialization.json)
-            testImplementation(libs.kotlinx.coroutines.test)
-            testImplementation(libs.turbine)
             testImplementation(testFixtures(project(":core:di")))
             testImplementation(testFixtures(project(":core:utils")))
         }

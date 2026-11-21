@@ -30,6 +30,7 @@ public interface PlaygroundExtension {
 public interface CommonOptions {
     public fun metro()
     public fun serialization()
+    public fun flowTests()
     public fun dependencies(action: Action<PlaygroundDependencies>)
 }
 
@@ -146,12 +147,14 @@ internal abstract class PlaygroundExtensionImpl @Inject constructor(
 internal abstract class CommonOptionsImpl(protected val project: Project, private val objects: ObjectFactory) : CommonOptions {
     private var metroEnabled = false
     private var serializationEnabled = false
+    private var flowTestsEnabled = false
     protected var fixturesEnabled = false
     protected var composeEnabled = false
     protected var screenshotsEnabled = false
     private val dependencyActions = mutableListOf<Action<PlaygroundDependencies>>()
     override fun metro() { metroEnabled = true }
     override fun serialization() { serializationEnabled = true }
+    override fun flowTests() { flowTestsEnabled = true }
     override fun dependencies(action: Action<PlaygroundDependencies>) { dependencyActions.add(action) }
     protected open fun enableFixtures() = Unit
     fun evaluate() {
@@ -159,6 +162,10 @@ internal abstract class CommonOptionsImpl(protected val project: Project, privat
         if (composeEnabled) project.configurePlaygroundAndroidCompose()
         if (metroEnabled) project.configurePlaygroundMetro()
         if (serializationEnabled) project.pluginManager.apply("org.jetbrains.kotlin.plugin.serialization")
+        if (flowTestsEnabled) {
+            project.dependencies.add("testImplementation", project.libs.`kotlinx-coroutines-test`)
+            project.dependencies.add("testImplementation", project.libs.turbine)
+        }
         if (screenshotsEnabled) project.configurePlaygroundScreenshots()
         if (dependencyActions.isNotEmpty()) {
             val dependencies = objects.newInstance(PlaygroundDependenciesImpl::class.java, project)
