@@ -102,8 +102,6 @@ jobs:
       - name: 👷 Build
         id: build
         run: ./gradlew assembleRelease
-      - name: Verify configuration cache reuse
-        run: ./gradlew assembleRelease
       - name: 📦 Archive APKs
         uses: actions/upload-artifact@v7
         with:
