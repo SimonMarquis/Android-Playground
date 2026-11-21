@@ -12,6 +12,7 @@ playground {
         metro()
 
         dependencies {
+            add("baselineProfile", project(":profiling"))
             implementation(libs.androidx.lifecycle.process)
             implementation(libs.androidx.lifecycle.viewmodel.navigation3)
             implementation(libs.androidx.profileinstaller)
@@ -52,9 +53,6 @@ configure<BaselineProfileConsumerExtension> {
     dexLayoutOptimization = true
 }
 
-dependencies {
-    add("baselineProfile", project(":profiling"))
-}
 
 idea {
     module {

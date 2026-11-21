@@ -30,19 +30,23 @@ public interface PlaygroundExtension {
 public interface CommonOptions {
     public fun metro()
     public fun serialization()
-    public fun flowTests()
     public fun dependencies(action: Action<PlaygroundDependencies>)
 }
 
 @PlaygroundDslMarker
-public interface AndroidApp : CommonOptions {
+public interface UnitTestOptions {
+    public fun flowTests()
+}
+
+@PlaygroundDslMarker
+public interface AndroidApp : CommonOptions, UnitTestOptions {
     public fun compose()
     public fun testFixtures()
     public fun android(action: Action<ApplicationExtension>)
 }
 
 @PlaygroundDslMarker
-public interface AndroidLibrary : CommonOptions {
+public interface AndroidLibrary : CommonOptions, UnitTestOptions {
     public fun compose()
     public fun screenshots()
     public fun testFixtures()
@@ -56,7 +60,7 @@ public interface AndroidBenchmark : CommonOptions {
 }
 
 @PlaygroundDslMarker
-public interface JvmLibrary : CommonOptions {
+public interface JvmLibrary : CommonOptions, UnitTestOptions {
     public fun testFixtures()
     public fun kotlin(action: Action<KotlinJvmProjectExtension>)
 }
@@ -68,20 +72,49 @@ public interface PlaygroundDependencies : Dependencies {
     public val compileOnly: DependencyCollector
     public val runtimeOnly: DependencyCollector
     public val testImplementation: DependencyCollector
+    public val testRuntimeOnly: DependencyCollector
+    public val androidTestImplementation: DependencyCollector
+    public val androidTestRuntimeOnly: DependencyCollector
+    public val debugImplementation: DependencyCollector
+    public val releaseImplementation: DependencyCollector
+    public val lintChecks: DependencyCollector
     public val testFixturesApi: DependencyCollector
     public val testFixturesImplementation: DependencyCollector
     public fun testFixtures(dependency: Any): Dependency
+    public fun add(configuration: String, dependency: Any)
 }
 
 internal abstract class PlaygroundDependenciesImpl @Inject constructor(private val target: Project) : PlaygroundDependencies {
     override fun testFixtures(dependency: Any): Dependency = target.dependencies.testFixtures(dependency)
 
-    fun wire() {
+    override fun add(configuration: String, dependency: Any) {
+        target.dependencies.add(configuration, dependency)
+    }
+
+    fun wire(fixturesEnabled: Boolean) {
         val collectors = mapOf(
             "api" to api, "implementation" to implementation, "compileOnly" to compileOnly,
             "runtimeOnly" to runtimeOnly, "testImplementation" to testImplementation,
+            "testRuntimeOnly" to testRuntimeOnly, "androidTestImplementation" to androidTestImplementation,
+            "androidTestRuntimeOnly" to androidTestRuntimeOnly, "debugImplementation" to debugImplementation,
+            "releaseImplementation" to releaseImplementation, "lintChecks" to lintChecks,
             "testFixturesApi" to testFixturesApi, "testFixturesImplementation" to testFixturesImplementation,
         )
+        if (!fixturesEnabled) {
+            for (collector in listOf(testFixturesApi, testFixturesImplementation)) {
+                require(collector.dependencies.get().isEmpty() && collector.dependencyConstraints.get().isEmpty()) {
+                    "Fixture dependencies require testFixtures() in the playground module block"
+                }
+            }
+        }
+        val names = target.configurations.names
+        for ((name, collector) in collectors) {
+            if (name !in names && !name.startsWith("testFixtures")) {
+                require(collector.dependencies.get().isEmpty() && collector.dependencyConstraints.get().isEmpty()) {
+                    "The $name dependency configuration is not available in ${target.path}"
+                }
+            }
+        }
         target.configurations.configureEach {
             collectors[name]?.let { fromDependencyCollector(it) }
         }
@@ -113,6 +146,7 @@ internal abstract class PlaygroundExtensionImpl @Inject constructor(
         project.androidApplication { defaultConfig.applicationId = applicationId }
         options.evaluate()
         options.androidActions.forEach { project.extensions.configure(ApplicationExtension::class.java, it) }
+        options.evaluateDependencies()
     }
 
     override fun androidLibrary(action: Action<AndroidLibrary>) = configure {
@@ -121,6 +155,7 @@ internal abstract class PlaygroundExtensionImpl @Inject constructor(
         project.configurePlaygroundAndroidLibrary()
         options.evaluate()
         options.androidActions.forEach { project.extensions.configure(LibraryExtension::class.java, it) }
+        options.evaluateDependencies()
     }
 
     override fun androidBenchmark(targetProjectPath: String, action: Action<AndroidBenchmark>) = configure {
@@ -131,6 +166,7 @@ internal abstract class PlaygroundExtensionImpl @Inject constructor(
         options.evaluate()
         options.androidActions.forEach { project.extensions.configure(TestExtension::class.java, it) }
         options.componentActions.forEach { project.extensions.configure(TestAndroidComponentsExtension::class.java, it) }
+        options.evaluateDependencies()
     }
 
     override fun jvmLibrary(action: Action<JvmLibrary>) = configure {
@@ -139,12 +175,13 @@ internal abstract class PlaygroundExtensionImpl @Inject constructor(
         project.configurePlaygroundKotlinJvm()
         options.evaluate()
         options.kotlinActions.forEach { project.extensions.configure(KotlinJvmProjectExtension::class.java, it) }
+        options.evaluateDependencies()
     }
 
     override fun platform() = configure { project.configurePlaygroundPlatform() }
 }
 
-internal abstract class CommonOptionsImpl(protected val project: Project, private val objects: ObjectFactory) : CommonOptions {
+internal abstract class CommonOptionsImpl(protected val project: Project, private val objects: ObjectFactory) : CommonOptions, UnitTestOptions {
     private var metroEnabled = false
     private var serializationEnabled = false
     private var flowTestsEnabled = false
@@ -167,10 +204,13 @@ internal abstract class CommonOptionsImpl(protected val project: Project, privat
             project.dependencies.add("testImplementation", project.libs.turbine)
         }
         if (screenshotsEnabled) project.configurePlaygroundScreenshots()
+    }
+
+    fun evaluateDependencies() {
         if (dependencyActions.isNotEmpty()) {
             val dependencies = objects.newInstance(PlaygroundDependenciesImpl::class.java, project)
             dependencyActions.forEach { it.execute(dependencies) }
-            dependencies.wire()
+            dependencies.wire(fixturesEnabled)
         }
     }
 }
