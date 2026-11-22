@@ -1,6 +1,3 @@
-import fr.smarquis.playground.buildlogic.PlaygroundExtension
-import org.gradle.api.JavaVersion.VERSION_17
-
 pluginManagement {
     includeBuild("build-logic")
     repositories {
@@ -32,15 +29,6 @@ dependencyResolutionManagement {
         maven("https://central.sonatype.com/repository/maven-snapshots") { mavenContent { snapshotsOnly() } }
     }
     versionCatalogs {
-        maybeCreate("libs").apply {
-            // Override Gradle Catalog versions:
-            // ./gradlew --system-prop "libs_version_minCompileSdk=35"
-            // ./gradlew -Dlibs_version_minCompileSdk=35
-            providers.systemPropertiesPrefixedBy("libs_version_").get()
-                .mapKeys { (key, _) -> key.removePrefix("libs_version_") }
-                .also { if (it.isNotEmpty()) logger.lifecycle("ℹ️ Overriding versions $it") }
-                .forEach { (key, value) -> version(key, value) }
-        }
         create("local") {
             from(files("gradle/local.versions.toml"))
         }
@@ -48,36 +36,10 @@ dependencyResolutionManagement {
 }
 
 plugins {
-    id("playground.project") apply false
     id("com.gradle.develocity") version "4.6.1"
     id("com.gradle.common-custom-user-data-gradle-plugin") version "2.8.0"
+    id("playground.settings")
 }
-
-develocity {
-    buildScan {
-        termsOfUseUrl = "https://gradle.com/terms-of-service"
-        termsOfUseAgree = "yes"
-        val isCi = providers.environmentVariable("CI").map(String::toBoolean)
-        publishing.onlyIf { isCi.getOrElse(false) }
-        uploadInBackground = isCi
-        obfuscation {
-            ipAddresses { it.map { "0.0.0.0" } }
-        }
-    }
-    buildCache {
-        local {
-            // NOTE: can be disabled
-            // isEnabled = providers.gradleProperty("...").orNull?.toBoolean() ?: true
-            // NOTE: or even relocated
-            // directory = ...
-        }
-    }
-}
-
-// https://docs.gradle.org/current/userguide/configuration_cache.html#config_cache:stable
-enableFeaturePreview("STABLE_CONFIGURATION_CACHE")
-// https://docs.gradle.org/9.6.1/release-notes.html#opt-into-gradle-10-behavior-by-disabling-implicit-lookup-in-parent-projects
-enableFeaturePreview("NO_IMPLICIT_LOOKUP_IN_PARENT_PROJECTS")
 
 rootProject.name = "Android-Playground"
 
@@ -101,36 +63,4 @@ include(
     ":data:settings",
     ":platform",
     ":profiling",
-)
-
-with(VERSION_17) {
-    check(JavaVersion.current().isCompatibleWith(this)) {
-        """
-        This build requires JDK $this+ but it is currently using JDK ${JavaVersion.current()}.
-        Java Home: [${System.getProperty("java.home")}]
-        """.trimIndent()
-    }
-}
-
-gradle.lifecycle.beforeProject {
-    logger.lifecycle("🏗️ Configuring $this")
-    apply(plugin = "base")
-    apply(plugin = "playground.project")
-}
-
-gradle.lifecycle.afterProject {
-    if (this == rootProject) return@afterProject
-    if (!buildFile.exists()) return@afterProject
-    // Ensures each module selects its Playground configuration.
-    require(extensions.getByType<PlaygroundExtension>().configured) {
-        "👮 $this is missing a module type in playground { }"
-    }
-}
-
-logger.lifecycle(
-    """
-    📦 Gradle: ${GradleVersion.current().version}
-    📦 Java:   ${JavaVersion.current()}
-    📦 Kotlin: ${KotlinVersion.CURRENT}
-    """.trimIndent(),
 )

@@ -112,3 +112,4 @@ paparazzi = { id = "app.cash.paparazzi", version.ref = "paparazzi" }
 playground-greeting = { id = "playground.greeting" }
 playground-project = { id = "playground.project" }
 playground-root = { id = "playground.root" }
+playground-settings = { id = "playground.settings" }
