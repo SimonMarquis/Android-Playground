@@ -2,7 +2,7 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
     `java-library`
-    alias(libs.plugins.android.lint)
+    id("com.android.lint")
 }
 
 playground {
