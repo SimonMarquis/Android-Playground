@@ -7,8 +7,8 @@
 -keepclassmembers,allowshrinking class * { @androidx.compose.ui.tooling.preview.Preview <methods>; }
 -checkdiscard class * { @androidx.compose.ui.tooling.preview.Preview <methods>; }
 
-# Check @TestOnly classes & methods have been removed
--keep,allowshrinking @org.jetbrains.annotations.TestOnly class * { *; }
--checkdiscard @org.jetbrains.annotations.TestOnly class * { *; }
--keepclassmembers,allowshrinking class * { @org.jetbrains.annotations.TestOnly <methods>; }
--checkdiscard class * { @org.jetbrains.annotations.TestOnly <methods>; }
+# Check @TestOnly classes & methods have been removed, limited to this app's own code (because some libraries might incorrectly use this annotation)
+-keep,allowshrinking @org.jetbrains.annotations.TestOnly class fr.smarquis.playground.* { *; }
+-checkdiscard @org.jetbrains.annotations.TestOnly class fr.smarquis.playground.* { *; }
+-keepclassmembers,allowshrinking class fr.smarquis.playground.* { @org.jetbrains.annotations.TestOnly <methods>; }
+-checkdiscard class fr.smarquis.playground.* { @org.jetbrains.annotations.TestOnly <methods>; }
