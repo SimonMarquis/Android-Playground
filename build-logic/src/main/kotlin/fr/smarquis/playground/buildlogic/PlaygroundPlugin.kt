@@ -33,6 +33,8 @@ public annotation class PlaygroundDslMarker
 
 @PlaygroundDslMarker
 public interface PlaygroundExtension {
+    public val configured: Boolean
+
     public fun androidApp(applicationId: String, action: Action<AndroidApp>)
     public fun androidLibrary(action: Action<AndroidLibrary> = Action {})
     public fun androidBenchmark(targetProjectPath: String, action: Action<AndroidBenchmark> = Action {})
@@ -170,7 +172,8 @@ internal abstract class PlaygroundExtensionImpl @Inject constructor(
     private val project: Project,
     private val objects: ObjectFactory,
 ) : PlaygroundExtension {
-    private var configured = false
+    override var configured: Boolean = false
+        private set
 
     private fun configure(block: () -> Unit) {
         check(!configured) { "Only one playground module type may be configured per project" }
