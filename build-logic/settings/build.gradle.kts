@@ -4,6 +4,7 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_21
 plugins {
     alias(libs.plugins.kotlin.jvm)
     alias(libs.plugins.kotlin.sam)
+    alias(libs.plugins.kotlin.assignment)
     `java-gradle-plugin`
     alias(libs.plugins.android.lint)
 }
@@ -26,20 +27,32 @@ kotlin {
 samWithReceiver {
     annotation(HasImplicitReceiver::class.qualifiedName!!)
 }
+assignment {
+    annotation(SupportsKotlinAssignmentOverloading::class.qualifiedName!!)
+}
 
 dependencies {
     implementation(project(":project"))
-    compileOnly(libs.plugins.develocity.map { "${it.pluginId}:${it.pluginId}.gradle.plugin:${it.version.requiredVersion}" })
+    compileOnly(plugin(libs.plugins.develocity))
     lintChecks(libs.androidx.lint.gradle)
 }
 
 gradlePlugin {
     plugins {
-        register("PlaygroundSettingsPlugin") {
-            id = "playground.settings"
-            implementationClass = "fr.smarquis.playground.buildlogic.PlaygroundSettingsPlugin"
-        }
+        create("PlaygroundSettingsPlugin", libs.plugins.playground.settings)
     }
+}
+
+private fun NamedDomainObjectContainer<PluginDeclaration>.create(
+    name: String,
+    plugin: Provider<PluginDependency>,
+) = register(name) {
+    id = plugin.get().pluginId
+    implementationClass = "fr.smarquis.playground.buildlogic.$name"
+}
+
+private fun DependencyHandlerScope.plugin(plugin: Provider<PluginDependency>) = plugin.map {
+    "${it.pluginId}:${it.pluginId}.gradle.plugin:${it.version.requiredVersion}"
 }
 
 tasks.validatePlugins {

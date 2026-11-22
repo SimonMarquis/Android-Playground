@@ -177,7 +177,7 @@ jobs:
 
       - name: 🕵️ Lint
         id: lint
-        run: ./gradlew ciLint :build-logic:project:lint :build-logic:settings:lint --continue
+        run: ./gradlew ciLint :build-logic:ciLint --continue
       - name: 📦 Archive Lint reports
         if: ${{ !cancelled() && contains(fromJSON('["success", "failure"]'), steps.lint.outcome) }}
         uses: $/.github/actions/archive-lint-reports
