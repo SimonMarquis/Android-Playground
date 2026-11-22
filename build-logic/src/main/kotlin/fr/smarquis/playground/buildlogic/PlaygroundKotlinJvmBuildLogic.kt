@@ -1,17 +1,14 @@
 package fr.smarquis.playground.buildlogic
 
+import com.android.build.gradle.LintPlugin
 import fr.smarquis.playground.buildlogic.dsl.apply
-import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.jetbrains.kotlin.gradle.dsl.KotlinJvmProjectExtension
 import org.jetbrains.kotlin.gradle.plugin.KotlinPluginWrapper
 
-internal class PlaygroundKotlinJvmPlugin : Plugin<Project> {
-
-    override fun apply(target: Project) = with(target) {
+internal fun Project.configurePlaygroundKotlinJvm() {
         apply<KotlinPluginWrapper>()
-        apply<PlaygroundBasePlugin>()
+        apply<LintPlugin>()
+        plugins.getPlugin(PlaygroundProjectPlugin::class.java).configureModule(this)
         configureKotlin<KotlinJvmProjectExtension>()
     }
-
-}

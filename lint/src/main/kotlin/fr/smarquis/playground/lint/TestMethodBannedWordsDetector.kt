@@ -58,7 +58,7 @@ public class TestMethodBannedWordsDetector : Detector(), SourceCodeScanner {
             explanation = """
                 Test methods name should not contains banned words.
                 The default behavior checks for ${BANNED_WORDS.defaultValue} words to reduce collisions when searching through logs.
-                """.trimIndent(),
+                """,
             category = Category.TESTING,
             priority = 5,
             severity = Severity.ERROR,

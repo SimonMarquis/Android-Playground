@@ -97,7 +97,7 @@ public class NamedParametersDetector : Detector(), SourceCodeScanner {
                           Not specifying parameters name using the same type can lead to unexpected results when refactoring methods signature.
                           Enforcing explicit named parameters also helps detecting mistakes during code review.
                           Quick fix: `⌥⏎` (macOS) or `Alt+Enter` (Windows/Linux) ➝ `Add names to call arguments`.
-                          """.trimIndent(),
+                          """,
             category = PRODUCTIVITY,
             priority = 4,
             severity = INFORMATIONAL,

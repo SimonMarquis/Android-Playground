@@ -32,19 +32,19 @@ assignment {
 }
 
 dependencies {
-    compileOnly(plugin(libs.plugins.android.cacheFix))
+    implementation(plugin(libs.plugins.android.cacheFix))
     compileOnly(plugin(libs.plugins.androidx.baselineprofile))
-    compileOnly(plugin(libs.plugins.artifactsSizeReport))
+    implementation(plugin(libs.plugins.artifactsSizeReport))
     compileOnly(plugin(libs.plugins.develocity))
-    compileOnly(plugin(libs.plugins.kotlin.compose))
-    compileOnly(plugin(libs.plugins.kotlin.jvm))
-    compileOnly(plugin(libs.plugins.kotlin.powerAssert))
-    compileOnly(plugin(libs.plugins.licensee))
-    compileOnly(plugin(libs.plugins.paparazzi))
+    implementation(plugin(libs.plugins.kotlin.compose))
+    implementation(plugin(libs.plugins.kotlin.jvm))
+    implementation(plugin(libs.plugins.kotlin.powerAssert))
+    implementation(plugin(libs.plugins.licensee))
+    implementation(plugin(libs.plugins.paparazzi))
     implementation(plugin(libs.plugins.dagp))
     implementation(plugin(libs.plugins.metro))
 
-    compileOnly(libs.android.gradle.api)
+    implementation(libs.android.gradle.api)
     compileOnly(libs.android.tools.common)
     implementation(libs.assertk)
     lintChecks(libs.androidx.lint.gradle)
@@ -63,15 +63,7 @@ tasks {
 
 gradlePlugin {
     plugins {
-        create("PlaygroundAndroidApplicationPlugin", libs.plugins.playground.android.application)
-        create("PlaygroundAndroidComposePlugin", libs.plugins.playground.android.compose)
-        create("PlaygroundAndroidLibraryPlugin", libs.plugins.playground.android.library)
-        create("PlaygroundAndroidTestPlugin", libs.plugins.playground.android.test)
-        create("PlaygroundBasePlugin", libs.plugins.playground.base)
-        create("PlaygroundMetroPlugin", libs.plugins.playground.metro)
-        create("PlaygroundKotlinJvmPlugin", libs.plugins.playground.kotlin.jvm)
-        create("PlaygroundPlatformPlugin", libs.plugins.playground.platform)
-        create("PlaygroundScreenshotsPlugin", libs.plugins.playground.screenshots)
+        create("PlaygroundProjectPlugin", libs.plugins.playground.project)
         create("PlaygroundRootPlugin", libs.plugins.playground.root)
         create("greeting.GreetingPlugin", libs.plugins.playground.greeting)
     }

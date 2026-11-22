@@ -13,14 +13,11 @@ import fr.smarquis.playground.buildlogic.utils.computeVersionCode
 import fr.smarquis.playground.buildlogic.utils.computeVersionName
 import fr.smarquis.playground.buildlogic.utils.versionProperties
 import org.gradle.api.NamedDomainObjectContainer
-import org.gradle.api.Plugin
 import org.gradle.api.Project
 
-internal class PlaygroundAndroidApplicationPlugin : Plugin<Project> {
-
-    override fun apply(target: Project) = with(target) {
+internal fun Project.configurePlaygroundAndroidApplication() {
         apply<AppPlugin>()
-        apply<PlaygroundAndroidBasePlugin>()
+        configurePlaygroundAndroidBase()
         apply<LicenseePlugin>()
 
         androidApplication {
@@ -35,10 +32,10 @@ internal class PlaygroundAndroidApplicationPlugin : Plugin<Project> {
             }
             signingConfigs {
                 named("debug") {
-                    configure(target, this@signingConfigs)
+                    configure(this@configurePlaygroundAndroidApplication, this@signingConfigs)
                 }
                 register("release") {
-                    configure(target, this@signingConfigs)
+                    configure(this@configurePlaygroundAndroidApplication, this@signingConfigs)
                 }
             }
             buildTypes {
@@ -73,7 +70,6 @@ internal class PlaygroundAndroidApplicationPlugin : Plugin<Project> {
         PlaygroundGlobalCi.addToGlobalCi(project, "assembleRelease")
         PlaygroundGlobalCi.addToGlobalCi(project, "licensee")
     }
-}
 
 private fun ApkSigningConfig.configure(
     project: Project,

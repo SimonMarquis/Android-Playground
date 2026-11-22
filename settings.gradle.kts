@@ -1,3 +1,4 @@
+import fr.smarquis.playground.buildlogic.PlaygroundExtension
 import org.gradle.api.JavaVersion.VERSION_17
 
 pluginManagement {
@@ -47,6 +48,7 @@ dependencyResolutionManagement {
 }
 
 plugins {
+    id("playground.project") apply false
     id("com.gradle.develocity") version "4.6.1"
     id("com.gradle.common-custom-user-data-gradle-plugin") version "2.8.0"
 }
@@ -113,15 +115,15 @@ with(VERSION_17) {
 gradle.lifecycle.beforeProject {
     logger.lifecycle("🏗️ Configuring $this")
     apply(plugin = "base")
+    apply(plugin = "playground.project")
 }
 
 gradle.lifecycle.afterProject {
     if (this == rootProject) return@afterProject
     if (!buildFile.exists()) return@afterProject
-    // Ensures our base plugin is applied everywhere
-    require(plugins.hasPlugin("playground.base")) {
-        val sortedPlugins = plugins.toList().map(Plugin<Any>::toString).sorted()
-        "👮 $this is missing base plugin!\n${sortedPlugins.joinToString("\n")}"
+    // Ensures each module selects its Playground configuration.
+    require(extensions.getByType<PlaygroundExtension>().configured) {
+        "👮 $this is missing a module type in playground { }"
     }
 }
 

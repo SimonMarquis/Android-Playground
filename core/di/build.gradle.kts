@@ -1,11 +1,12 @@
-plugins {
-    alias(libs.plugins.playground.kotlin.jvm)
-    alias(libs.plugins.playground.metro)
-    `java-test-fixtures`
-}
+playground {
+    jvmLibrary {
+        metro()
+        testFixtures()
 
-dependencies {
-    implementation(libs.kotlinx.coroutines.core)
-    testFixturesApi(libs.metro.runtime)
-    testFixturesApi(libs.junit)
+        dependencies {
+            implementation(libs.kotlinx.coroutines.core)
+            testFixturesApi(libs.metro.runtime)
+            testFixturesApi(libs.junit)
+        }
+    }
 }

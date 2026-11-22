@@ -34,10 +34,10 @@ internal object PlaygroundLint {
         }
     }
 
-    private fun Project.createJvmCiLintTask() = afterEvaluate {
+    private fun Project.createJvmCiLintTask() {
         logger.debug("{} Creating CI lint tasks for project '{}'", LOG, this)
 
-        val lint = tasks.named("lint")
+        val lint = "lint"
         registerCiLintTask(name = "lintDebug", dependency = lint, disabled = true)
         registerCiLintTask(name = "lintRelease", dependency = lint, disabled = true)
         configureLintTask(extensions.getByType())
