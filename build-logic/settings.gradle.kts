@@ -41,3 +41,5 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "build-logic"
+
+include(":project", ":settings")

@@ -74,7 +74,7 @@ jobs:
         - uses: $/.github/actions/setup-gradle-properties
 
       - uses: $/.github/actions/check-gradle-dependency-lock-state
-      - run: ./gradlew :build-logic:validatePlugins --quiet
+      - run: ./gradlew -p build-logic validatePlugins --quiet
       - run: ./gradlew licensee --quiet
       - run: ./gradlew topologyCheck --quiet
       - uses: $/.github/actions/check-kotlin-binary-compatibility-validation
@@ -177,7 +177,7 @@ jobs:
 
       - name: 🕵️ Lint
         id: lint
-        run: ./gradlew ciLint :build-logic:lint --continue
+        run: ./gradlew ciLint :build-logic:project:lint :build-logic:settings:lint --continue
       - name: 📦 Archive Lint reports
         if: ${{ !cancelled() && contains(fromJSON('["success", "failure"]'), steps.lint.outcome) }}
         uses: $/.github/actions/archive-lint-reports
@@ -191,11 +191,17 @@ jobs:
         with:
           sarif_file: app
           category: app
-      - name: 🔍 Analyze build-logic SARIF report
-        if: ${{ !cancelled() && hashFiles('build-logic/**/*.sarif') != '' }}
+      - name: 🔍 Analyze project build-logic SARIF report
+        if: ${{ !cancelled() && hashFiles('build-logic/project/**/*.sarif') != '' }}
         uses: github/codeql-action/upload-sarif@v4
         with:
-          sarif_file: build-logic
-          category: build-logic
+          sarif_file: build-logic/project
+          category: build-logic-project
+      - name: 🔍 Analyze settings build-logic SARIF report
+        if: ${{ !cancelled() && hashFiles('build-logic/settings/**/*.sarif') != '' }}
+        uses: github/codeql-action/upload-sarif@v4
+        with:
+          sarif_file: build-logic/settings
+          category: build-logic-settings
       - if: ${{ !cancelled() }}
         uses: $/.github/actions/archive-gradle-reports
