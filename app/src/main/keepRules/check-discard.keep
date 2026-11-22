@@ -8,7 +8,11 @@
 -checkdiscard class * { @androidx.compose.ui.tooling.preview.Preview <methods>; }
 
 # Check @TestOnly classes & methods have been removed
--keep,allowshrinking @org.jetbrains.annotations.TestOnly class * { *; }
--checkdiscard @org.jetbrains.annotations.TestOnly class * { *; }
--keepclassmembers,allowshrinking class * { @org.jetbrains.annotations.TestOnly <methods>; }
--checkdiscard class * { @org.jetbrains.annotations.TestOnly <methods>; }
+# NOTE: limited to this app's own code. Libraries may legitimately keep
+# @TestOnly members in release builds — e.g. since androidx.compose.runtime 1.13.0,
+# Recomposer.processCompositionError() invokes CompositionImpl.getParent(),
+# which is annotated @TestOnly.
+-keep,allowshrinking @org.jetbrains.annotations.TestOnly class fr.smarquis.playground.* { *; }
+-checkdiscard @org.jetbrains.annotations.TestOnly class fr.smarquis.playground.* { *; }
+-keepclassmembers,allowshrinking class fr.smarquis.playground.* { @org.jetbrains.annotations.TestOnly <methods>; }
+-checkdiscard class fr.smarquis.playground.* { @org.jetbrains.annotations.TestOnly <methods>; }
