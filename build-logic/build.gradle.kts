@@ -32,15 +32,15 @@ assignment {
 }
 
 dependencies {
-    compileOnly(plugin(libs.plugins.android.cacheFix))
+    implementation(plugin(libs.plugins.android.cacheFix))
     compileOnly(plugin(libs.plugins.androidx.baselineprofile))
-    compileOnly(plugin(libs.plugins.artifactsSizeReport))
+    implementation(plugin(libs.plugins.artifactsSizeReport))
     compileOnly(plugin(libs.plugins.develocity))
-    compileOnly(plugin(libs.plugins.kotlin.compose))
+    implementation(plugin(libs.plugins.kotlin.compose))
     implementation(plugin(libs.plugins.kotlin.jvm))
-    compileOnly(plugin(libs.plugins.kotlin.powerAssert))
-    compileOnly(plugin(libs.plugins.licensee))
-    compileOnly(plugin(libs.plugins.paparazzi))
+    implementation(plugin(libs.plugins.kotlin.powerAssert))
+    implementation(plugin(libs.plugins.licensee))
+    implementation(plugin(libs.plugins.paparazzi))
     implementation(plugin(libs.plugins.dagp))
     implementation(plugin(libs.plugins.metro))
 
