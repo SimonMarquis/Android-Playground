@@ -7,9 +7,9 @@ import org.gradle.api.JavaVersion
 import org.gradle.api.Project
 import org.jetbrains.kotlin.gradle.dsl.KotlinAndroidProjectExtension
 
-internal fun Project.configurePlaygroundAndroidBase(): Unit = with(this) {
+internal fun Project.configurePlaygroundAndroidBase() {
         apply<AndroidCacheFixPlugin>()
-        plugins.getPlugin(PlaygroundPlugin::class.java).configureModule(this)
+        plugins.getPlugin(PlaygroundProjectPlugin::class.java).configureModule(this)
         apply<AndroidArtifactsInfoPlugin>()
         configureKotlin<KotlinAndroidProjectExtension>()
 
@@ -49,4 +49,3 @@ internal fun Project.configurePlaygroundAndroidBase(): Unit = with(this) {
 
         dependencies.add("coreLibraryDesugaring", libs.`android-desugarJdkLibs`.get())
     }
-

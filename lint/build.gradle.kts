@@ -1,13 +1,12 @@
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
-plugins {
-    `java-library`
-    id("com.android.lint")
-}
-
 playground {
     jvmLibrary {
         kotlin { compilerOptions.jvmTarget = JvmTarget.JVM_17 }
+        java {
+            sourceCompatibility = JavaVersion.VERSION_17
+            targetCompatibility = JavaVersion.VERSION_17
+        }
 
         dependencies {
             compileOnly(libs.kotlin.stdlib)
@@ -17,14 +16,4 @@ playground {
             testImplementation(libs.lint.tests)
         }
     }
-}
-
-java {
-    sourceCompatibility = JavaVersion.VERSION_17
-    targetCompatibility = JavaVersion.VERSION_17
-}
-
-
-lint {
-    disable += "LintImplTrimIndent"
 }

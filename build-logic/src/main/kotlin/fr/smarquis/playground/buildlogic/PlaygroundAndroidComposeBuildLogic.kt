@@ -7,7 +7,7 @@ import org.gradle.api.Project
 import org.jetbrains.kotlin.compose.compiler.gradle.ComposeCompilerGradlePluginExtension
 import org.jetbrains.kotlin.compose.compiler.gradle.ComposeCompilerGradleSubplugin
 
-internal fun Project.configurePlaygroundAndroidCompose(): Unit = with(this) {
+internal fun Project.configurePlaygroundAndroidCompose() {
         apply<ComposeCompilerGradleSubplugin>()
 
         android {
@@ -48,4 +48,3 @@ private fun Project.configureComposeCompilerMetrics(
                 .add(isolated.rootProject.projectDirectory.dir(".config").file("compose_compiler_config.conf"))
         }
     }
-

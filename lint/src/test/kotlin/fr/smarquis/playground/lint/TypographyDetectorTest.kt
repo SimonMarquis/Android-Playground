@@ -27,8 +27,8 @@ class TypographyDetectorTest : LintDetectorTest() {
                 <resources>
                     <string name="quotes">Good ol’ apostrophe</string>
                 </resources>
-                """.trimIndent(),
-            ),
+                """,
+            ).indented(),
         ).run()
         .expect(
             """
@@ -65,8 +65,8 @@ class TypographyDetectorTest : LintDetectorTest() {
                     <!-- NBSP is ignored for now -->
                     <string name="spacing">Spacing:\u00A0!</string>
                 </resources>
-                """.trimIndent(),
-            ),
+                """,
+            ).indented(),
         ).run()
         .expect(
             """
@@ -132,8 +132,8 @@ class TypographyDetectorTest : LintDetectorTest() {
                         <item>start \u00A9 end</item>
                     </string-array>
                 </resources>
-                """.trimIndent(),
-            ),
+                """,
+            ).indented(),
         ).run()
         .expect(
             """
@@ -189,8 +189,8 @@ class TypographyDetectorTest : LintDetectorTest() {
                     <string name="percent_3">Foo %1＄d\u0025!</string>
                     <string name="percent_4" formatted="true">Foo 10%% or 42\u0025s!</string>
                 </resources>
-                """.trimIndent(),
-            ),
+                """,
+            ).indented(),
         ).run()
         .expect(
             """
@@ -248,8 +248,8 @@ class TypographyDetectorTest : LintDetectorTest() {
                     <string name="registered">(r)</string>
                     <string name="trademark">(tm)</string>
                 </resources>
-                """.trimIndent(),
-            ),
+                """,
+            ).indented(),
         ).run()
         .expect(
             """

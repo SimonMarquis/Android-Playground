@@ -1,17 +1,15 @@
 package fr.smarquis.playground.buildlogic
 
 import dev.zacsweers.metro.gradle.DiagnosticSeverity
-import dev.zacsweers.metro.gradle.ExperimentalMetroGradleApi
 import dev.zacsweers.metro.gradle.MetroGradleSubplugin
 import dev.zacsweers.metro.gradle.MetroPluginExtension
 import fr.smarquis.playground.buildlogic.dsl.apply
 import fr.smarquis.playground.buildlogic.dsl.assign
 import org.gradle.api.Project
 
-internal fun Project.configurePlaygroundMetro(): Unit = with(this) {
+internal fun Project.configurePlaygroundMetro() {
         apply<MetroGradleSubplugin>()
 
-        @OptIn(ExperimentalMetroGradleApi::class)
         extensions.configure<MetroPluginExtension>("metro") {
             contributesAsInject = true
             generateContributionProviders = true
@@ -23,4 +21,3 @@ internal fun Project.configurePlaygroundMetro(): Unit = with(this) {
 
         dependencies.add("api", libs.`metro-runtime`)
     }
-

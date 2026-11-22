@@ -24,6 +24,7 @@ import org.gradle.api.artifacts.Dependency
 import org.gradle.api.artifacts.dsl.Dependencies
 import org.gradle.api.artifacts.dsl.DependencyCollector
 import org.gradle.api.model.ObjectFactory
+import org.gradle.api.plugins.JavaPluginExtension
 import org.jetbrains.kotlin.gradle.dsl.KotlinAndroidProjectExtension
 import org.jetbrains.kotlin.gradle.dsl.KotlinJvmProjectExtension
 import javax.inject.Inject
@@ -50,9 +51,7 @@ public interface CommonOptions {
 }
 
 @PlaygroundDslMarker
-public interface UnitTestOptions {
-    public fun flowTests()
-}
+public interface UnitTestOptions
 
 @PlaygroundDslMarker
 public interface AndroidKotlinOptions {
@@ -85,6 +84,7 @@ public interface AndroidBenchmark : CommonOptions, AndroidKotlinOptions {
 @PlaygroundDslMarker
 public interface JvmLibrary : CommonOptions, UnitTestOptions {
     public fun testFixtures()
+    public fun java(action: Action<JavaPluginExtension>)
     public fun kotlin(action: Action<KotlinJvmProjectExtension>)
 }
 
@@ -144,7 +144,7 @@ internal abstract class PlaygroundDependenciesImpl @Inject constructor(private v
     }
 }
 
-internal abstract class PlaygroundPlugin : Plugin<Project> {
+internal abstract class PlaygroundProjectPlugin : Plugin<Project> {
     @get:Inject
     abstract val buildFeatures: BuildFeatures
 
@@ -221,6 +221,7 @@ internal abstract class PlaygroundExtensionImpl @Inject constructor(
         action.execute(options)
         project.configurePlaygroundKotlinJvm()
         options.evaluate()
+        options.javaActions.forEach { project.extensions.configure(JavaPluginExtension::class.java, it) }
         options.kotlinActions.forEach { project.extensions.configure(KotlinJvmProjectExtension::class.java, it) }
         options.evaluateDependencies()
     }
@@ -231,14 +232,12 @@ internal abstract class PlaygroundExtensionImpl @Inject constructor(
 internal abstract class CommonOptionsImpl(protected val project: Project, private val objects: ObjectFactory) : CommonOptions, UnitTestOptions {
     private var metroEnabled = false
     private var serializationEnabled = false
-    private var flowTestsEnabled = false
     protected var fixturesEnabled = false
     protected var composeEnabled = false
     protected var screenshotsEnabled = false
     private val dependencyActions = mutableListOf<Action<PlaygroundDependencies>>()
     override fun metro() { metroEnabled = true }
     override fun serialization() { serializationEnabled = true }
-    override fun flowTests() { flowTestsEnabled = true }
     override fun dependencies(action: Action<PlaygroundDependencies>) { dependencyActions.add(action) }
     protected open fun enableFixtures() = Unit
     fun evaluate() {
@@ -246,10 +245,6 @@ internal abstract class CommonOptionsImpl(protected val project: Project, privat
         if (composeEnabled) project.configurePlaygroundAndroidCompose()
         if (metroEnabled) project.configurePlaygroundMetro()
         if (serializationEnabled) project.pluginManager.apply("org.jetbrains.kotlin.plugin.serialization")
-        if (flowTestsEnabled) {
-            project.dependencies.add("testImplementation", project.libs.`kotlinx-coroutines-test`)
-            project.dependencies.add("testImplementation", project.libs.turbine)
-        }
         if (screenshotsEnabled) project.configurePlaygroundScreenshots()
     }
 
@@ -296,8 +291,10 @@ internal class AndroidBenchmarkImpl(project: Project, objects: ObjectFactory) : 
 }
 
 internal class JvmLibraryImpl(project: Project, objects: ObjectFactory) : CommonOptionsImpl(project, objects), JvmLibrary {
+    val javaActions = mutableListOf<Action<JavaPluginExtension>>()
     val kotlinActions = mutableListOf<Action<KotlinJvmProjectExtension>>()
     override fun testFixtures() { fixturesEnabled = true }
     override fun enableFixtures() { project.pluginManager.apply("java-test-fixtures") }
     override fun kotlin(action: Action<KotlinJvmProjectExtension>) { kotlinActions.add(action) }
+    override fun java(action: Action<JavaPluginExtension>) { javaActions.add(action) }
 }

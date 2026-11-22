@@ -43,8 +43,8 @@ class AssertionsDetectorTest : LintDetectorTest() {
                         assertFalse(false)
                     }
                 }
-                """.trimIndent(),
-            ),
+                """,
+            ).indented(),
         )
         .run()
         .expect(
@@ -85,8 +85,8 @@ class AssertionsDetectorTest : LintDetectorTest() {
                         assertIs<Any>(Unit)
                     }
                 }
-                """.trimIndent(),
-            ),
+                """,
+            ).indented(),
         )
         .run()
         .expectClean()
@@ -104,8 +104,8 @@ class AssertionsDetectorTest : LintDetectorTest() {
                         assert(false)
                     }
                 }
-                """.trimIndent(),
-            ),
+                """,
+            ).indented(),
         )
         .run()
         .expectClean()
@@ -129,8 +129,8 @@ class AssertionsDetectorTest : LintDetectorTest() {
                         kotlin.assert(false)
                     }
                 }
-                """.trimIndent(),
-            ),
+                """,
+            ).indented(),
         )
         .run()
         .expect(

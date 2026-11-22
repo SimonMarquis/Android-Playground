@@ -15,7 +15,7 @@ import fr.smarquis.playground.buildlogic.utils.versionProperties
 import org.gradle.api.NamedDomainObjectContainer
 import org.gradle.api.Project
 
-internal fun Project.configurePlaygroundAndroidApplication() = with(this) {
+internal fun Project.configurePlaygroundAndroidApplication() {
         apply<AppPlugin>()
         configurePlaygroundAndroidBase()
         apply<LicenseePlugin>()
@@ -32,10 +32,10 @@ internal fun Project.configurePlaygroundAndroidApplication() = with(this) {
             }
             signingConfigs {
                 named("debug") {
-                    configure(this@with, this@signingConfigs)
+                    configure(this@configurePlaygroundAndroidApplication, this@signingConfigs)
                 }
                 register("release") {
-                    configure(this@with, this@signingConfigs)
+                    configure(this@configurePlaygroundAndroidApplication, this@signingConfigs)
                 }
             }
             buildTypes {

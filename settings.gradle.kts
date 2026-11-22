@@ -48,7 +48,7 @@ dependencyResolutionManagement {
 }
 
 plugins {
-    id("playground") apply false
+    id("playground.project") apply false
     id("com.gradle.develocity") version "4.6.1"
     id("com.gradle.common-custom-user-data-gradle-plugin") version "2.8.0"
 }
@@ -115,7 +115,7 @@ with(VERSION_17) {
 gradle.lifecycle.beforeProject {
     logger.lifecycle("🏗️ Configuring $this")
     apply(plugin = "base")
-    apply(plugin = "playground")
+    apply(plugin = "playground.project")
 }
 
 gradle.lifecycle.afterProject {

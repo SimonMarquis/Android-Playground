@@ -4,7 +4,7 @@ import com.android.build.gradle.LibraryPlugin
 import fr.smarquis.playground.buildlogic.dsl.apply
 import org.gradle.api.Project
 
-internal fun Project.configurePlaygroundAndroidLibrary() = with(this) {
+internal fun Project.configurePlaygroundAndroidLibrary() {
         apply<LibraryPlugin>()
         configurePlaygroundAndroidBase()
         androidLibrary {
@@ -13,4 +13,3 @@ internal fun Project.configurePlaygroundAndroidLibrary() = with(this) {
             }
         }
     }
-

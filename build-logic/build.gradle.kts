@@ -63,10 +63,7 @@ tasks {
 
 gradlePlugin {
     plugins {
-        register("PlaygroundPlugin") {
-            id = "playground"
-            implementationClass = "fr.smarquis.playground.buildlogic.PlaygroundPlugin"
-        }
+        create("PlaygroundProjectPlugin", libs.plugins.playground.project)
         create("PlaygroundRootPlugin", libs.plugins.playground.root)
         create("greeting.GreetingPlugin", libs.plugins.playground.greeting)
     }
