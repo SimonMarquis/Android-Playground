@@ -48,6 +48,7 @@
             <trusting group="androidx.core"/>
             <trusting group="androidx.databinding"/>
             <trusting group="androidx.datastore"/>
+            <trusting group="androidx.graphics"/>
             <trusting group="androidx.hilt"/>
             <trusting group="androidx.lifecycle"/>
             <trusting group="androidx.navigation3"/>
