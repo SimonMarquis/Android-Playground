@@ -172,12 +172,12 @@ internal abstract class PlaygroundExtensionImpl @Inject constructor(
     private val project: Project,
     private val objects: ObjectFactory,
 ) : PlaygroundExtension {
-    override var configured: Boolean = false
-        private set
+    private var moduleConfigured = false
+    override val configured: Boolean get() = moduleConfigured
 
     private fun configure(block: () -> Unit) {
         check(!configured) { "Only one playground module type may be configured per project" }
-        configured = true
+        moduleConfigured = true
         block()
     }
 
