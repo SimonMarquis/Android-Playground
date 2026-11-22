@@ -2,7 +2,6 @@ import androidx.baselineprofile.gradle.consumer.BaselineProfileConsumerExtension
 
 plugins {
     idea
-    alias(libs.plugins.playground.build)
     alias(libs.plugins.androidx.baselineprofile)
 }
 

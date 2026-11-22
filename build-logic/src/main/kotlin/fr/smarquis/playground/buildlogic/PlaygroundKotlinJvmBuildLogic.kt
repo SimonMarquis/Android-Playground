@@ -7,7 +7,7 @@ import org.jetbrains.kotlin.gradle.plugin.KotlinPluginWrapper
 
 internal fun Project.configurePlaygroundKotlinJvm() = with(this) {
         apply<KotlinPluginWrapper>()
-        apply<PlaygroundBasePlugin>()
+        plugins.getPlugin(PlaygroundPlugin::class.java).configureModule(this)
         configureKotlin<KotlinJvmProjectExtension>()
     }
 

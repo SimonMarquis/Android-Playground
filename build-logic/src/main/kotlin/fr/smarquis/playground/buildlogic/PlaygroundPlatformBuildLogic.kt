@@ -7,7 +7,6 @@ import org.gradle.api.plugins.JavaPlatformPlugin
 
 internal fun Project.configurePlaygroundPlatform() = with(this) {
         apply<JavaPlatformPlugin>()
-        apply<PlaygroundBasePlugin>()
 
         PlaygroundPlatforms.configurePlatformProject(this)
         PlaygroundPlatforms.logBillOfMaterials(this)

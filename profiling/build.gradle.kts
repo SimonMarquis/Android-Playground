@@ -2,7 +2,6 @@ import androidx.baselineprofile.gradle.producer.BaselineProfileProducerExtension
 import com.android.build.api.variant.BuiltArtifacts
 
 plugins {
-    alias(libs.plugins.playground.build)
     alias(libs.plugins.androidx.baselineprofile)
 }
 

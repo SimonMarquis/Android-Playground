@@ -47,6 +47,7 @@ dependencyResolutionManagement {
 }
 
 plugins {
+    id("playground") apply false
     id("com.gradle.develocity") version "4.6.1"
     id("com.gradle.common-custom-user-data-gradle-plugin") version "2.8.0"
 }
@@ -113,13 +114,14 @@ with(VERSION_17) {
 gradle.lifecycle.beforeProject {
     logger.lifecycle("🏗️ Configuring $this")
     apply(plugin = "base")
+    apply(plugin = "playground")
 }
 
 gradle.lifecycle.afterProject {
     if (this == rootProject) return@afterProject
     if (!buildFile.exists()) return@afterProject
-    // Ensures our base plugin is applied everywhere
-    require(plugins.hasPlugin("playground.base")) {
+    // Ensures the Playground plugin is applied everywhere
+    require(plugins.hasPlugin("playground")) {
         val sortedPlugins = plugins.toList().map(Plugin<Any>::toString).sorted()
         "👮 $this is missing base plugin!\n${sortedPlugins.joinToString("\n")}"
     }

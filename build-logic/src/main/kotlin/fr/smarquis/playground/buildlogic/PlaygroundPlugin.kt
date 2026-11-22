@@ -6,9 +6,20 @@ import com.android.build.api.dsl.TestExtension
 import com.android.build.api.variant.ApplicationAndroidComponentsExtension
 import com.android.build.api.variant.LibraryAndroidComponentsExtension
 import com.android.build.api.variant.TestAndroidComponentsExtension
+import fr.smarquis.playground.buildlogic.utils.PlaygroundBadging
+import fr.smarquis.playground.buildlogic.utils.PlaygroundDependencyAnalysis
+import fr.smarquis.playground.buildlogic.utils.PlaygroundDependencyLocking
+import fr.smarquis.playground.buildlogic.utils.PlaygroundGlobalCi
+import fr.smarquis.playground.buildlogic.utils.PlaygroundGraph
+import fr.smarquis.playground.buildlogic.utils.PlaygroundLint
+import fr.smarquis.playground.buildlogic.utils.PlaygroundPlatforms
+import fr.smarquis.playground.buildlogic.utils.PlaygroundTopology
+import fr.smarquis.playground.buildlogic.utils.PlaygroundUnitTests
+import org.gradle.StartParameter
 import org.gradle.api.Action
 import org.gradle.api.Plugin
 import org.gradle.api.Project
+import org.gradle.api.configuration.BuildFeatures
 import org.gradle.api.artifacts.Dependency
 import org.gradle.api.artifacts.dsl.Dependencies
 import org.gradle.api.artifacts.dsl.DependencyCollector
@@ -131,9 +142,27 @@ internal abstract class PlaygroundDependenciesImpl @Inject constructor(private v
     }
 }
 
-internal class PlaygroundBuildPlugin : Plugin<Project> {
+internal abstract class PlaygroundPlugin : Plugin<Project> {
+    @get:Inject
+    abstract val buildFeatures: BuildFeatures
+
+    @get:Inject
+    abstract val startParameter: StartParameter
+
     override fun apply(target: Project) {
         target.extensions.create(PlaygroundExtension::class.java, "playground", PlaygroundExtensionImpl::class.java, target)
+    }
+
+    internal fun configureModule(target: Project) {
+        PlaygroundGlobalCi.configureSubproject(target)
+        PlaygroundUnitTests.configureSubproject(target)
+        PlaygroundLint.configureSubproject(target)
+        PlaygroundBadging.configureProject(target)
+        PlaygroundDependencyLocking.configureProject(target)
+        PlaygroundPlatforms.configureProject(target)
+        PlaygroundTopology.configureProject(target)
+        PlaygroundGraph.configureProject(target, startParameter, buildFeatures)
+        PlaygroundDependencyAnalysis.configureProject(target)
     }
 }
 

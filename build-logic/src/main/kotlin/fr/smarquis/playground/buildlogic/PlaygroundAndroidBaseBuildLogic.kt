@@ -2,12 +2,14 @@ package fr.smarquis.playground.buildlogic
 
 import fr.smarquis.playground.buildlogic.dsl.apply
 import io.github.cdsap.agp.artifacts.AndroidArtifactsInfoPlugin
+import org.gradle.android.AndroidCacheFixPlugin
 import org.gradle.api.JavaVersion
 import org.gradle.api.Project
 import org.jetbrains.kotlin.gradle.dsl.KotlinAndroidProjectExtension
 
 internal fun Project.configurePlaygroundAndroidBase(): Unit = with(this) {
-        apply<PlaygroundBasePlugin>()
+        apply<AndroidCacheFixPlugin>()
+        plugins.getPlugin(PlaygroundPlugin::class.java).configureModule(this)
         apply<AndroidArtifactsInfoPlugin>()
         configureKotlin<KotlinAndroidProjectExtension>()
 

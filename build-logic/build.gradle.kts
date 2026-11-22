@@ -37,14 +37,14 @@ dependencies {
     compileOnly(plugin(libs.plugins.artifactsSizeReport))
     compileOnly(plugin(libs.plugins.develocity))
     compileOnly(plugin(libs.plugins.kotlin.compose))
-    compileOnly(plugin(libs.plugins.kotlin.jvm))
+    implementation(plugin(libs.plugins.kotlin.jvm))
     compileOnly(plugin(libs.plugins.kotlin.powerAssert))
     compileOnly(plugin(libs.plugins.licensee))
     compileOnly(plugin(libs.plugins.paparazzi))
     implementation(plugin(libs.plugins.dagp))
     implementation(plugin(libs.plugins.metro))
 
-    compileOnly(libs.android.gradle.api)
+    implementation(libs.android.gradle.api)
     compileOnly(libs.android.tools.common)
     implementation(libs.assertk)
     lintChecks(libs.androidx.lint.gradle)
@@ -63,8 +63,10 @@ tasks {
 
 gradlePlugin {
     plugins {
-        create("PlaygroundBuildPlugin", libs.plugins.playground.build)
-        create("PlaygroundBasePlugin", libs.plugins.playground.base)
+        register("PlaygroundPlugin") {
+            id = "playground"
+            implementationClass = "fr.smarquis.playground.buildlogic.PlaygroundPlugin"
+        }
         create("PlaygroundRootPlugin", libs.plugins.playground.root)
         create("greeting.GreetingPlugin", libs.plugins.playground.greeting)
     }

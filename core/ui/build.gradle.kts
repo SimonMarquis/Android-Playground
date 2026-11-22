@@ -1,7 +1,3 @@
-plugins {
-    alias(libs.plugins.playground.build)
-}
-
 playground {
     androidLibrary {
         compose()
