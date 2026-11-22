@@ -33,6 +33,7 @@ assignment {
 
 dependencies {
     implementation(project(":project"))
+    implementation(plugin(libs.plugins.ccud))
     compileOnly(plugin(libs.plugins.develocity))
     lintChecks(libs.androidx.lint.gradle)
 }
