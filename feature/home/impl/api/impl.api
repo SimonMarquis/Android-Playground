@@ -1,0 +1,65 @@
+public final class fr/smarquis/playground/feature/home/ComposableSingletons$HomeScreenKt {
+	public static final field INSTANCE Lfr/smarquis/playground/feature/home/ComposableSingletons$HomeScreenKt;
+	public fun <init> ()V
+	public final fun getLambda$-781337648$impl ()Lkotlin/jvm/functions/Function3;
+	public final fun getLambda$105668226$impl ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$804303530$impl ()Lkotlin/jvm/functions/Function2;
+}
+
+public final class fr/smarquis/playground/feature/home/HomeBindings {
+	public static final field $stable I
+	public static final field INSTANCE Lfr/smarquis/playground/feature/home/HomeBindings;
+}
+
+public final class fr/smarquis/playground/feature/home/HomeBindings$ProvidesEntryMetroFactory : dev/zacsweers/metro/internal/Factory {
+	public static final field $stable I
+	public static final field INSTANCE Lfr/smarquis/playground/feature/home/HomeBindings$ProvidesEntryMetroFactory;
+	public static final fun create ()Lfr/smarquis/playground/feature/home/HomeBindings$ProvidesEntryMetroFactory;
+	public synthetic fun invoke ()Ljava/lang/Object;
+	public final fun invoke ()Lkotlin/jvm/functions/Function2;
+	public static final fun providesEntry ()Lkotlin/jvm/functions/Function2;
+}
+
+public final class fr/smarquis/playground/feature/home/HomeViewModel : androidx/lifecycle/ViewModel {
+	public static final field $stable I
+	public final fun getRolls ()Lkotlinx/coroutines/flow/StateFlow;
+	public final fun getSettings ()Lkotlinx/coroutines/flow/StateFlow;
+	public final fun reset ()Lkotlinx/coroutines/Job;
+	public final fun roll ()Lkotlinx/coroutines/Job;
+	public final fun update (Lfr/smarquis/playground/domain/settings/Settings;)Lkotlinx/coroutines/Job;
+}
+
+public abstract class fr/smarquis/playground/feature/home/HomeViewModelContributions {
+	public static final field $stable I
+}
+
+public final class fr/smarquis/playground/feature/home/HomeViewModelContributions$ToAppScope {
+	public static final field $stable I
+	public static final field INSTANCE Lfr/smarquis/playground/feature/home/HomeViewModelContributions$ToAppScope;
+	public static final fun provideIntoMapHomeViewModel (Lfr/smarquis/playground/domain/dice/DiceRoller;Lfr/smarquis/playground/domain/dice/DiceSource;Lfr/smarquis/playground/domain/settings/SettingsSource;Lfr/smarquis/playground/feature/home/HomeData;)Landroidx/lifecycle/ViewModel;
+}
+
+public final class fr/smarquis/playground/feature/home/HomeViewModelContributions$ToAppScope$ProvideIntoMapHomeViewModelMetroFactory : dev/zacsweers/metro/internal/Factory {
+	public static final field $stable I
+	public static final field Companion Lfr/smarquis/playground/feature/home/HomeViewModelContributions$ToAppScope$ProvideIntoMapHomeViewModelMetroFactory$Companion;
+	public synthetic fun <init> (Ldev/zacsweers/metro/Provider;Ldev/zacsweers/metro/Provider;Ldev/zacsweers/metro/Provider;Ldev/zacsweers/metro/Provider;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public static final fun create (Ldev/zacsweers/metro/Provider;Ldev/zacsweers/metro/Provider;Ldev/zacsweers/metro/Provider;Ldev/zacsweers/metro/Provider;)Lfr/smarquis/playground/feature/home/HomeViewModelContributions$ToAppScope$ProvideIntoMapHomeViewModelMetroFactory;
+	public final fun invoke ()Landroidx/lifecycle/ViewModel;
+	public synthetic fun invoke ()Ljava/lang/Object;
+	public static final fun provideIntoMapHomeViewModel (Lfr/smarquis/playground/domain/dice/DiceRoller;Lfr/smarquis/playground/domain/dice/DiceSource;Lfr/smarquis/playground/domain/settings/SettingsSource;Lfr/smarquis/playground/feature/home/HomeData;)Landroidx/lifecycle/ViewModel;
+}
+
+public final class fr/smarquis/playground/feature/home/HomeViewModelContributions$ToAppScope$ProvideIntoMapHomeViewModelMetroFactory$Companion {
+	public fun <init> ()V
+	public final fun create (Ldev/zacsweers/metro/Provider;Ldev/zacsweers/metro/Provider;Ldev/zacsweers/metro/Provider;Ldev/zacsweers/metro/Provider;)Lfr/smarquis/playground/feature/home/HomeViewModelContributions$ToAppScope$ProvideIntoMapHomeViewModelMetroFactory;
+	public final fun provideIntoMapHomeViewModel (Lfr/smarquis/playground/domain/dice/DiceRoller;Lfr/smarquis/playground/domain/dice/DiceSource;Lfr/smarquis/playground/domain/settings/SettingsSource;Lfr/smarquis/playground/feature/home/HomeData;)Landroidx/lifecycle/ViewModel;
+}
+
+public final class metro/hints/FrSmarquisPlaygroundFeatureHomeHomeBindingsDev_zacsweers_metro_AppScopeKt {
+	public static final synthetic fun dev_zacsweers_metro_AppScope (Lfr/smarquis/playground/feature/home/HomeBindings;)V
+}
+
+public final class metro/hints/FrSmarquisPlaygroundFeatureHomeHomeViewModelDev_zacsweers_metro_AppScopeKt {
+	public static final synthetic fun dev_zacsweers_metro_AppScope (Lfr/smarquis/playground/feature/home/HomeViewModel;)V
+}
+

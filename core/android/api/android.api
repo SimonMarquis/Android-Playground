@@ -1,0 +1,334 @@
+public final class fr/smarquis/playground/core/android/AndroidAssetManager : fr/smarquis/playground/core/di/AssetManager {
+	public fun <init> (Landroid/content/res/AssetManager;)V
+	public fun open (Ljava/lang/String;)Ljava/io/InputStream;
+}
+
+public abstract class fr/smarquis/playground/core/android/AndroidAssetManagerContributions {
+}
+
+public final class fr/smarquis/playground/core/android/AndroidAssetManagerContributions$ToAppScope {
+	public static final field INSTANCE Lfr/smarquis/playground/core/android/AndroidAssetManagerContributions$ToAppScope;
+	public static final fun providesAndroidAssetManager (Landroid/content/res/AssetManager;)Lfr/smarquis/playground/core/di/AssetManager;
+}
+
+public final class fr/smarquis/playground/core/android/AndroidAssetManagerContributions$ToAppScope$ProvidesAndroidAssetManagerMetroFactory : dev/zacsweers/metro/internal/Factory {
+	public static final field Companion Lfr/smarquis/playground/core/android/AndroidAssetManagerContributions$ToAppScope$ProvidesAndroidAssetManagerMetroFactory$Companion;
+	public synthetic fun <init> (Ldev/zacsweers/metro/Provider;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public static final fun create (Ldev/zacsweers/metro/Provider;)Lfr/smarquis/playground/core/android/AndroidAssetManagerContributions$ToAppScope$ProvidesAndroidAssetManagerMetroFactory;
+	public final fun invoke ()Lfr/smarquis/playground/core/di/AssetManager;
+	public synthetic fun invoke ()Ljava/lang/Object;
+	public static final fun providesAndroidAssetManager (Landroid/content/res/AssetManager;)Lfr/smarquis/playground/core/di/AssetManager;
+}
+
+public final class fr/smarquis/playground/core/android/AndroidAssetManagerContributions$ToAppScope$ProvidesAndroidAssetManagerMetroFactory$Companion {
+	public fun <init> ()V
+	public final fun create (Ldev/zacsweers/metro/Provider;)Lfr/smarquis/playground/core/android/AndroidAssetManagerContributions$ToAppScope$ProvidesAndroidAssetManagerMetroFactory;
+	public final fun providesAndroidAssetManager (Landroid/content/res/AssetManager;)Lfr/smarquis/playground/core/di/AssetManager;
+}
+
+public final class fr/smarquis/playground/core/android/AndroidFileManager : fr/smarquis/playground/core/di/FileManager {
+	public fun <init> (Landroid/app/Application;)V
+	public fun deleteFile (Ljava/lang/String;)Z
+	public fun invoke (Ljava/lang/String;)Ljava/io/File;
+	public fun openFileInput (Ljava/lang/String;)Ljava/io/FileInputStream;
+	public fun openFileOutput (Ljava/lang/String;)Ljava/io/FileOutputStream;
+}
+
+public abstract class fr/smarquis/playground/core/android/AndroidFileManagerContributions {
+}
+
+public final class fr/smarquis/playground/core/android/AndroidFileManagerContributions$ToAppScope {
+	public static final field INSTANCE Lfr/smarquis/playground/core/android/AndroidFileManagerContributions$ToAppScope;
+	public static final fun providesAndroidFileManager (Landroid/app/Application;)Lfr/smarquis/playground/core/di/FileManager;
+}
+
+public final class fr/smarquis/playground/core/android/AndroidFileManagerContributions$ToAppScope$ProvidesAndroidFileManagerMetroFactory : dev/zacsweers/metro/internal/Factory {
+	public static final field Companion Lfr/smarquis/playground/core/android/AndroidFileManagerContributions$ToAppScope$ProvidesAndroidFileManagerMetroFactory$Companion;
+	public synthetic fun <init> (Ldev/zacsweers/metro/Provider;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public static final fun create (Ldev/zacsweers/metro/Provider;)Lfr/smarquis/playground/core/android/AndroidFileManagerContributions$ToAppScope$ProvidesAndroidFileManagerMetroFactory;
+	public final fun invoke ()Lfr/smarquis/playground/core/di/FileManager;
+	public synthetic fun invoke ()Ljava/lang/Object;
+	public static final fun providesAndroidFileManager (Landroid/app/Application;)Lfr/smarquis/playground/core/di/FileManager;
+}
+
+public final class fr/smarquis/playground/core/android/AndroidFileManagerContributions$ToAppScope$ProvidesAndroidFileManagerMetroFactory$Companion {
+	public fun <init> ()V
+	public final fun create (Ldev/zacsweers/metro/Provider;)Lfr/smarquis/playground/core/android/AndroidFileManagerContributions$ToAppScope$ProvidesAndroidFileManagerMetroFactory;
+	public final fun providesAndroidFileManager (Landroid/app/Application;)Lfr/smarquis/playground/core/di/FileManager;
+}
+
+public final class fr/smarquis/playground/core/android/Context_extKt {
+	public static final fun packageInfo (Landroid/content/Context;)Landroid/content/pm/PackageInfo;
+	public static final fun versionCode (Landroid/content/Context;)Ljava/lang/Long;
+	public static final fun versionName (Landroid/content/Context;)Ljava/lang/String;
+}
+
+public final class fr/smarquis/playground/core/android/ProfileVerifierLogger {
+	public fun <init> ()V
+	public final fun invoke ()Lkotlinx/coroutines/Job;
+}
+
+public final class fr/smarquis/playground/core/android/ProfileVerifierLogger$MetroFactory : dev/zacsweers/metro/internal/Factory {
+	public static final field Companion Lfr/smarquis/playground/core/android/ProfileVerifierLogger$MetroFactory$Companion;
+	public static final fun create ()Lfr/smarquis/playground/core/android/ProfileVerifierLogger$MetroFactory;
+	public final fun invoke ()Lfr/smarquis/playground/core/android/ProfileVerifierLogger;
+	public synthetic fun invoke ()Ljava/lang/Object;
+	public static final fun newInstance ()Lfr/smarquis/playground/core/android/ProfileVerifierLogger;
+}
+
+public final class fr/smarquis/playground/core/android/ProfileVerifierLogger$MetroFactory$Companion {
+	public final fun create ()Lfr/smarquis/playground/core/android/ProfileVerifierLogger$MetroFactory;
+	public final fun newInstance ()Lfr/smarquis/playground/core/android/ProfileVerifierLogger;
+}
+
+public final class fr/smarquis/playground/core/android/StrictMode {
+	public static final field INSTANCE Lfr/smarquis/playground/core/android/StrictMode;
+	public final fun install ()V
+	public final fun isInstalled ()Z
+	public final fun uninstall ()V
+}
+
+public final class fr/smarquis/playground/core/android/UncaughtExceptionHandler : java/lang/Thread$UncaughtExceptionHandler {
+	public static final field INSTANCE Lfr/smarquis/playground/core/android/UncaughtExceptionHandler;
+	public final fun install ()V
+	public final fun isInstalled ()Z
+	public fun uncaughtException (Ljava/lang/Thread;Ljava/lang/Throwable;)V
+	public final fun uninstall ()V
+}
+
+public final class fr/smarquis/playground/core/android/di/AppBindings {
+	public static final field INSTANCE Lfr/smarquis/playground/core/android/di/AppBindings;
+}
+
+public final class fr/smarquis/playground/core/android/di/AppBindings$ProvidesPackageNameMetroFactory : dev/zacsweers/metro/internal/Factory {
+	public static final field Companion Lfr/smarquis/playground/core/android/di/AppBindings$ProvidesPackageNameMetroFactory$Companion;
+	public synthetic fun <init> (Ldev/zacsweers/metro/Provider;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public static final fun create (Ldev/zacsweers/metro/Provider;)Lfr/smarquis/playground/core/android/di/AppBindings$ProvidesPackageNameMetroFactory;
+	public synthetic fun invoke ()Ljava/lang/Object;
+	public final fun invoke ()Ljava/lang/String;
+	public static final fun providesPackageName (Landroid/app/Application;)Ljava/lang/String;
+}
+
+public final class fr/smarquis/playground/core/android/di/AppBindings$ProvidesPackageNameMetroFactory$Companion {
+	public fun <init> ()V
+	public final fun create (Ldev/zacsweers/metro/Provider;)Lfr/smarquis/playground/core/android/di/AppBindings$ProvidesPackageNameMetroFactory;
+	public final fun providesPackageName (Landroid/app/Application;)Ljava/lang/String;
+}
+
+public final class fr/smarquis/playground/core/android/di/AppBindings$ProvidesVersionCodeMetroFactory : dev/zacsweers/metro/internal/Factory {
+	public static final field Companion Lfr/smarquis/playground/core/android/di/AppBindings$ProvidesVersionCodeMetroFactory$Companion;
+	public synthetic fun <init> (Ldev/zacsweers/metro/Provider;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public static final fun create (Ldev/zacsweers/metro/Provider;)Lfr/smarquis/playground/core/android/di/AppBindings$ProvidesVersionCodeMetroFactory;
+	public final fun invoke ()Ljava/lang/Long;
+	public synthetic fun invoke ()Ljava/lang/Object;
+	public static final fun providesVersionCode (Landroid/app/Application;)J
+}
+
+public final class fr/smarquis/playground/core/android/di/AppBindings$ProvidesVersionCodeMetroFactory$Companion {
+	public fun <init> ()V
+	public final fun create (Ldev/zacsweers/metro/Provider;)Lfr/smarquis/playground/core/android/di/AppBindings$ProvidesVersionCodeMetroFactory;
+	public final fun providesVersionCode (Landroid/app/Application;)J
+}
+
+public final class fr/smarquis/playground/core/android/di/AppBindings$ProvidesVersionNameMetroFactory : dev/zacsweers/metro/internal/Factory {
+	public static final field Companion Lfr/smarquis/playground/core/android/di/AppBindings$ProvidesVersionNameMetroFactory$Companion;
+	public synthetic fun <init> (Ldev/zacsweers/metro/Provider;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public static final fun create (Ldev/zacsweers/metro/Provider;)Lfr/smarquis/playground/core/android/di/AppBindings$ProvidesVersionNameMetroFactory;
+	public synthetic fun invoke ()Ljava/lang/Object;
+	public final fun invoke ()Ljava/lang/String;
+	public static final fun providesVersionName (Landroid/app/Application;)Ljava/lang/String;
+}
+
+public final class fr/smarquis/playground/core/android/di/AppBindings$ProvidesVersionNameMetroFactory$Companion {
+	public fun <init> ()V
+	public final fun create (Ldev/zacsweers/metro/Provider;)Lfr/smarquis/playground/core/android/di/AppBindings$ProvidesVersionNameMetroFactory;
+	public final fun providesVersionName (Landroid/app/Application;)Ljava/lang/String;
+}
+
+public final class fr/smarquis/playground/core/android/di/CoreAndroidBindings {
+	public static final field INSTANCE Lfr/smarquis/playground/core/android/di/CoreAndroidBindings;
+}
+
+public final class fr/smarquis/playground/core/android/di/CoreAndroidBindings$ProvidesAssetManagerMetroFactory : dev/zacsweers/metro/internal/Factory {
+	public static final field Companion Lfr/smarquis/playground/core/android/di/CoreAndroidBindings$ProvidesAssetManagerMetroFactory$Companion;
+	public synthetic fun <init> (Ldev/zacsweers/metro/Provider;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public static final fun create (Ldev/zacsweers/metro/Provider;)Lfr/smarquis/playground/core/android/di/CoreAndroidBindings$ProvidesAssetManagerMetroFactory;
+	public final fun invoke ()Landroid/content/res/AssetManager;
+	public synthetic fun invoke ()Ljava/lang/Object;
+	public static final fun providesAssetManager (Landroid/app/Application;)Landroid/content/res/AssetManager;
+}
+
+public final class fr/smarquis/playground/core/android/di/CoreAndroidBindings$ProvidesAssetManagerMetroFactory$Companion {
+	public fun <init> ()V
+	public final fun create (Ldev/zacsweers/metro/Provider;)Lfr/smarquis/playground/core/android/di/CoreAndroidBindings$ProvidesAssetManagerMetroFactory;
+	public final fun providesAssetManager (Landroid/app/Application;)Landroid/content/res/AssetManager;
+}
+
+public final class fr/smarquis/playground/core/android/di/CoreAndroidBindings$ProvidesDisplayMetricsMetroFactory : dev/zacsweers/metro/internal/Factory {
+	public static final field Companion Lfr/smarquis/playground/core/android/di/CoreAndroidBindings$ProvidesDisplayMetricsMetroFactory$Companion;
+	public synthetic fun <init> (Ldev/zacsweers/metro/Provider;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public static final fun create (Ldev/zacsweers/metro/Provider;)Lfr/smarquis/playground/core/android/di/CoreAndroidBindings$ProvidesDisplayMetricsMetroFactory;
+	public final fun invoke ()Lfr/smarquis/playground/core/di/DisplayMetrics;
+	public synthetic fun invoke ()Ljava/lang/Object;
+	public static final fun providesDisplayMetrics (Landroid/app/Application;)Lfr/smarquis/playground/core/di/DisplayMetrics;
+}
+
+public final class fr/smarquis/playground/core/android/di/CoreAndroidBindings$ProvidesDisplayMetricsMetroFactory$Companion {
+	public fun <init> ()V
+	public final fun create (Ldev/zacsweers/metro/Provider;)Lfr/smarquis/playground/core/android/di/CoreAndroidBindings$ProvidesDisplayMetricsMetroFactory;
+	public final fun providesDisplayMetrics (Landroid/app/Application;)Lfr/smarquis/playground/core/di/DisplayMetrics;
+}
+
+public final class fr/smarquis/playground/core/android/di/CoreAndroidBindings$ProvidesPackageInfoMetroFactory : dev/zacsweers/metro/internal/Factory {
+	public static final field Companion Lfr/smarquis/playground/core/android/di/CoreAndroidBindings$ProvidesPackageInfoMetroFactory$Companion;
+	public synthetic fun <init> (Ldev/zacsweers/metro/Provider;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public static final fun create (Ldev/zacsweers/metro/Provider;)Lfr/smarquis/playground/core/android/di/CoreAndroidBindings$ProvidesPackageInfoMetroFactory;
+	public final fun invoke ()Landroid/content/pm/PackageInfo;
+	public synthetic fun invoke ()Ljava/lang/Object;
+	public static final fun providesPackageInfo (Landroid/app/Application;)Landroid/content/pm/PackageInfo;
+}
+
+public final class fr/smarquis/playground/core/android/di/CoreAndroidBindings$ProvidesPackageInfoMetroFactory$Companion {
+	public fun <init> ()V
+	public final fun create (Ldev/zacsweers/metro/Provider;)Lfr/smarquis/playground/core/android/di/CoreAndroidBindings$ProvidesPackageInfoMetroFactory;
+	public final fun providesPackageInfo (Landroid/app/Application;)Landroid/content/pm/PackageInfo;
+}
+
+public final class fr/smarquis/playground/core/android/di/DeviceBindings {
+	public static final field INSTANCE Lfr/smarquis/playground/core/android/di/DeviceBindings;
+	public final fun providesDeviceManufacturer ()Ljava/lang/String;
+	public final fun providesDeviceModel ()Ljava/lang/String;
+	public final fun providesDeviceProduct ()Ljava/lang/String;
+	public final fun providesDeviceRelease ()Ljava/lang/String;
+	public final fun providesDeviceSdkInt ()I
+}
+
+public final class fr/smarquis/playground/core/android/di/DeviceBindings$ProvidesDeviceManufacturerMetroFactory : dev/zacsweers/metro/internal/Factory {
+	public static final field INSTANCE Lfr/smarquis/playground/core/android/di/DeviceBindings$ProvidesDeviceManufacturerMetroFactory;
+	public static final fun create ()Lfr/smarquis/playground/core/android/di/DeviceBindings$ProvidesDeviceManufacturerMetroFactory;
+	public synthetic fun invoke ()Ljava/lang/Object;
+	public final fun invoke ()Ljava/lang/String;
+	public static final fun providesDeviceManufacturer ()Ljava/lang/String;
+}
+
+public final class fr/smarquis/playground/core/android/di/DeviceBindings$ProvidesDeviceModelMetroFactory : dev/zacsweers/metro/internal/Factory {
+	public static final field INSTANCE Lfr/smarquis/playground/core/android/di/DeviceBindings$ProvidesDeviceModelMetroFactory;
+	public static final fun create ()Lfr/smarquis/playground/core/android/di/DeviceBindings$ProvidesDeviceModelMetroFactory;
+	public synthetic fun invoke ()Ljava/lang/Object;
+	public final fun invoke ()Ljava/lang/String;
+	public static final fun providesDeviceModel ()Ljava/lang/String;
+}
+
+public final class fr/smarquis/playground/core/android/di/DeviceBindings$ProvidesDeviceProductMetroFactory : dev/zacsweers/metro/internal/Factory {
+	public static final field INSTANCE Lfr/smarquis/playground/core/android/di/DeviceBindings$ProvidesDeviceProductMetroFactory;
+	public static final fun create ()Lfr/smarquis/playground/core/android/di/DeviceBindings$ProvidesDeviceProductMetroFactory;
+	public synthetic fun invoke ()Ljava/lang/Object;
+	public final fun invoke ()Ljava/lang/String;
+	public static final fun providesDeviceProduct ()Ljava/lang/String;
+}
+
+public final class fr/smarquis/playground/core/android/di/DeviceBindings$ProvidesDeviceReleaseMetroFactory : dev/zacsweers/metro/internal/Factory {
+	public static final field INSTANCE Lfr/smarquis/playground/core/android/di/DeviceBindings$ProvidesDeviceReleaseMetroFactory;
+	public static final fun create ()Lfr/smarquis/playground/core/android/di/DeviceBindings$ProvidesDeviceReleaseMetroFactory;
+	public synthetic fun invoke ()Ljava/lang/Object;
+	public final fun invoke ()Ljava/lang/String;
+	public static final fun providesDeviceRelease ()Ljava/lang/String;
+}
+
+public final class fr/smarquis/playground/core/android/di/DeviceBindings$ProvidesDeviceSdkIntMetroFactory : dev/zacsweers/metro/internal/Factory {
+	public static final field INSTANCE Lfr/smarquis/playground/core/android/di/DeviceBindings$ProvidesDeviceSdkIntMetroFactory;
+	public static final fun create ()Lfr/smarquis/playground/core/android/di/DeviceBindings$ProvidesDeviceSdkIntMetroFactory;
+	public final fun invoke ()Ljava/lang/Integer;
+	public synthetic fun invoke ()Ljava/lang/Object;
+	public static final fun providesDeviceSdkInt ()I
+}
+
+public final class fr/smarquis/playground/core/android/di/InstantsBindings {
+	public static final field INSTANCE Lfr/smarquis/playground/core/android/di/InstantsBindings;
+}
+
+public final class fr/smarquis/playground/core/android/di/InstantsBindings$ProvidesFirstInstallTimeMetroFactory : dev/zacsweers/metro/internal/Factory {
+	public static final field Companion Lfr/smarquis/playground/core/android/di/InstantsBindings$ProvidesFirstInstallTimeMetroFactory$Companion;
+	public synthetic fun <init> (Ldev/zacsweers/metro/Provider;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public static final fun create (Ldev/zacsweers/metro/Provider;)Lfr/smarquis/playground/core/android/di/InstantsBindings$ProvidesFirstInstallTimeMetroFactory;
+	public synthetic fun invoke ()Ljava/lang/Object;
+	public final fun invoke ()Lkotlin/time/Instant;
+	public static final fun providesFirstInstallTime (Landroid/content/pm/PackageInfo;)Lkotlin/time/Instant;
+}
+
+public final class fr/smarquis/playground/core/android/di/InstantsBindings$ProvidesFirstInstallTimeMetroFactory$Companion {
+	public fun <init> ()V
+	public final fun create (Ldev/zacsweers/metro/Provider;)Lfr/smarquis/playground/core/android/di/InstantsBindings$ProvidesFirstInstallTimeMetroFactory;
+	public final fun providesFirstInstallTime (Landroid/content/pm/PackageInfo;)Lkotlin/time/Instant;
+}
+
+public final class fr/smarquis/playground/core/android/di/InstantsBindings$ProvidesLastUpdateTimeMetroFactory : dev/zacsweers/metro/internal/Factory {
+	public static final field Companion Lfr/smarquis/playground/core/android/di/InstantsBindings$ProvidesLastUpdateTimeMetroFactory$Companion;
+	public synthetic fun <init> (Ldev/zacsweers/metro/Provider;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public static final fun create (Ldev/zacsweers/metro/Provider;)Lfr/smarquis/playground/core/android/di/InstantsBindings$ProvidesLastUpdateTimeMetroFactory;
+	public synthetic fun invoke ()Ljava/lang/Object;
+	public final fun invoke ()Lkotlin/time/Instant;
+	public static final fun providesLastUpdateTime (Landroid/content/pm/PackageInfo;)Lkotlin/time/Instant;
+}
+
+public final class fr/smarquis/playground/core/android/di/InstantsBindings$ProvidesLastUpdateTimeMetroFactory$Companion {
+	public fun <init> ()V
+	public final fun create (Ldev/zacsweers/metro/Provider;)Lfr/smarquis/playground/core/android/di/InstantsBindings$ProvidesLastUpdateTimeMetroFactory;
+	public final fun providesLastUpdateTime (Landroid/content/pm/PackageInfo;)Lkotlin/time/Instant;
+}
+
+public final class fr/smarquis/playground/core/android/di/PlaygroundViewModelFactory : dev/zacsweers/metrox/viewmodel/MetroViewModelFactory {
+	public fun <init> (Ljava/util/Map;Ljava/util/Map;Ljava/util/Map;)V
+}
+
+public abstract class fr/smarquis/playground/core/android/di/PlaygroundViewModelFactoryContributions {
+}
+
+public final class fr/smarquis/playground/core/android/di/PlaygroundViewModelFactoryContributions$ToAppScope {
+	public static final field INSTANCE Lfr/smarquis/playground/core/android/di/PlaygroundViewModelFactoryContributions$ToAppScope;
+	public static final fun providesPlaygroundViewModelFactory (Ljava/util/Map;Ljava/util/Map;Ljava/util/Map;)Ldev/zacsweers/metrox/viewmodel/MetroViewModelFactory;
+}
+
+public final class fr/smarquis/playground/core/android/di/PlaygroundViewModelFactoryContributions$ToAppScope$ProvidesPlaygroundViewModelFactoryMetroFactory : dev/zacsweers/metro/internal/Factory {
+	public static final field Companion Lfr/smarquis/playground/core/android/di/PlaygroundViewModelFactoryContributions$ToAppScope$ProvidesPlaygroundViewModelFactoryMetroFactory$Companion;
+	public synthetic fun <init> (Ldev/zacsweers/metro/Provider;Ldev/zacsweers/metro/Provider;Ldev/zacsweers/metro/Provider;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public static final fun create (Ldev/zacsweers/metro/Provider;Ldev/zacsweers/metro/Provider;Ldev/zacsweers/metro/Provider;)Lfr/smarquis/playground/core/android/di/PlaygroundViewModelFactoryContributions$ToAppScope$ProvidesPlaygroundViewModelFactoryMetroFactory;
+	public final fun invoke ()Ldev/zacsweers/metrox/viewmodel/MetroViewModelFactory;
+	public synthetic fun invoke ()Ljava/lang/Object;
+	public static final fun providesPlaygroundViewModelFactory (Ljava/util/Map;Ljava/util/Map;Ljava/util/Map;)Ldev/zacsweers/metrox/viewmodel/MetroViewModelFactory;
+}
+
+public final class fr/smarquis/playground/core/android/di/PlaygroundViewModelFactoryContributions$ToAppScope$ProvidesPlaygroundViewModelFactoryMetroFactory$Companion {
+	public fun <init> ()V
+	public final fun create (Ldev/zacsweers/metro/Provider;Ldev/zacsweers/metro/Provider;Ldev/zacsweers/metro/Provider;)Lfr/smarquis/playground/core/android/di/PlaygroundViewModelFactoryContributions$ToAppScope$ProvidesPlaygroundViewModelFactoryMetroFactory;
+	public final fun providesPlaygroundViewModelFactory (Ljava/util/Map;Ljava/util/Map;Ljava/util/Map;)Ldev/zacsweers/metrox/viewmodel/MetroViewModelFactory;
+}
+
+public final class metro/hints/FrSmarquisPlaygroundCoreAndroidAndroidAssetManagerDev_zacsweers_metro_AppScopeKt {
+	public static final synthetic fun dev_zacsweers_metro_AppScope (Lfr/smarquis/playground/core/android/AndroidAssetManager;)V
+}
+
+public final class metro/hints/FrSmarquisPlaygroundCoreAndroidAndroidFileManagerDev_zacsweers_metro_AppScopeKt {
+	public static final synthetic fun dev_zacsweers_metro_AppScope (Lfr/smarquis/playground/core/android/AndroidFileManager;)V
+}
+
+public final class metro/hints/FrSmarquisPlaygroundCoreAndroidDiAppBindingsDev_zacsweers_metro_AppScopeKt {
+	public static final synthetic fun dev_zacsweers_metro_AppScope (Lfr/smarquis/playground/core/android/di/AppBindings;)V
+}
+
+public final class metro/hints/FrSmarquisPlaygroundCoreAndroidDiCoreAndroidBindingsDev_zacsweers_metro_AppScopeKt {
+	public static final synthetic fun dev_zacsweers_metro_AppScope (Lfr/smarquis/playground/core/android/di/CoreAndroidBindings;)V
+}
+
+public final class metro/hints/FrSmarquisPlaygroundCoreAndroidDiDeviceBindingsDev_zacsweers_metro_AppScopeKt {
+	public static final synthetic fun dev_zacsweers_metro_AppScope (Lfr/smarquis/playground/core/android/di/DeviceBindings;)V
+}
+
+public final class metro/hints/FrSmarquisPlaygroundCoreAndroidDiInstantsBindingsDev_zacsweers_metro_AppScopeKt {
+	public static final synthetic fun dev_zacsweers_metro_AppScope (Lfr/smarquis/playground/core/android/di/InstantsBindings;)V
+}
+
+public final class metro/hints/FrSmarquisPlaygroundCoreAndroidDiPlaygroundViewModelFactoryDev_zacsweers_metro_AppScopeKt {
+	public static final synthetic fun dev_zacsweers_metro_AppScope (Lfr/smarquis/playground/core/android/di/PlaygroundViewModelFactory;)V
+}
+

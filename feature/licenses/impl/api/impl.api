@@ -1,0 +1,98 @@
+public final class fr/smarquis/playground/feature/licenses/ComposableSingletons$LicensesScreenKt {
+	public static final field INSTANCE Lfr/smarquis/playground/feature/licenses/ComposableSingletons$LicensesScreenKt;
+	public fun <init> ()V
+	public final fun getLambda$-2089006031$impl ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$-712087148$impl ()Lkotlin/jvm/functions/Function3;
+	public final fun getLambda$647749521$impl ()Lkotlin/jvm/functions/Function2;
+}
+
+public final class fr/smarquis/playground/feature/licenses/LicensesBindings {
+	public static final field $stable I
+	public static final field INSTANCE Lfr/smarquis/playground/feature/licenses/LicensesBindings;
+	public final fun providesEntry ()Lkotlin/jvm/functions/Function2;
+}
+
+public final class fr/smarquis/playground/feature/licenses/LicensesBindings$ProvidesEntryMetroFactory : dev/zacsweers/metro/internal/Factory {
+	public static final field $stable I
+	public static final field INSTANCE Lfr/smarquis/playground/feature/licenses/LicensesBindings$ProvidesEntryMetroFactory;
+	public static final fun create ()Lfr/smarquis/playground/feature/licenses/LicensesBindings$ProvidesEntryMetroFactory;
+	public synthetic fun invoke ()Ljava/lang/Object;
+	public final fun invoke ()Lkotlin/jvm/functions/Function2;
+	public static final fun providesEntry ()Lkotlin/jvm/functions/Function2;
+}
+
+public final class fr/smarquis/playground/feature/licenses/LicensesViewModel : androidx/lifecycle/ViewModel {
+	public static final field $stable I
+	public fun <init> (Lfr/smarquis/playground/domain/licenses/LicensesRepository;Lkotlin/coroutines/CoroutineContext;)V
+	public final fun getUiState ()Lkotlinx/coroutines/flow/StateFlow;
+}
+
+public abstract class fr/smarquis/playground/feature/licenses/LicensesViewModelContributions {
+	public static final field $stable I
+}
+
+public final class fr/smarquis/playground/feature/licenses/LicensesViewModelContributions$ToAppScope {
+	public static final field $stable I
+	public static final field INSTANCE Lfr/smarquis/playground/feature/licenses/LicensesViewModelContributions$ToAppScope;
+	public static final fun provideIntoMapLicensesViewModel (Lfr/smarquis/playground/domain/licenses/LicensesRepository;Lkotlin/coroutines/CoroutineContext;)Landroidx/lifecycle/ViewModel;
+}
+
+public final class fr/smarquis/playground/feature/licenses/LicensesViewModelContributions$ToAppScope$ProvideIntoMapLicensesViewModelMetroFactory : dev/zacsweers/metro/internal/Factory {
+	public static final field $stable I
+	public static final field Companion Lfr/smarquis/playground/feature/licenses/LicensesViewModelContributions$ToAppScope$ProvideIntoMapLicensesViewModelMetroFactory$Companion;
+	public synthetic fun <init> (Ldev/zacsweers/metro/Provider;Ldev/zacsweers/metro/Provider;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public static final fun create (Ldev/zacsweers/metro/Provider;Ldev/zacsweers/metro/Provider;)Lfr/smarquis/playground/feature/licenses/LicensesViewModelContributions$ToAppScope$ProvideIntoMapLicensesViewModelMetroFactory;
+	public final fun invoke ()Landroidx/lifecycle/ViewModel;
+	public synthetic fun invoke ()Ljava/lang/Object;
+	public static final fun provideIntoMapLicensesViewModel (Lfr/smarquis/playground/domain/licenses/LicensesRepository;Lkotlin/coroutines/CoroutineContext;)Landroidx/lifecycle/ViewModel;
+}
+
+public final class fr/smarquis/playground/feature/licenses/LicensesViewModelContributions$ToAppScope$ProvideIntoMapLicensesViewModelMetroFactory$Companion {
+	public fun <init> ()V
+	public final fun create (Ldev/zacsweers/metro/Provider;Ldev/zacsweers/metro/Provider;)Lfr/smarquis/playground/feature/licenses/LicensesViewModelContributions$ToAppScope$ProvideIntoMapLicensesViewModelMetroFactory;
+	public final fun provideIntoMapLicensesViewModel (Lfr/smarquis/playground/domain/licenses/LicensesRepository;Lkotlin/coroutines/CoroutineContext;)Landroidx/lifecycle/ViewModel;
+}
+
+public abstract interface class fr/smarquis/playground/feature/licenses/UiState {
+}
+
+public final class fr/smarquis/playground/feature/licenses/UiState$Failure : fr/smarquis/playground/feature/licenses/UiState {
+	public static final field $stable I
+	public fun <init> (Ljava/lang/Throwable;)V
+	public final fun component1 ()Ljava/lang/Throwable;
+	public final fun copy (Ljava/lang/Throwable;)Lfr/smarquis/playground/feature/licenses/UiState$Failure;
+	public static synthetic fun copy$default (Lfr/smarquis/playground/feature/licenses/UiState$Failure;Ljava/lang/Throwable;ILjava/lang/Object;)Lfr/smarquis/playground/feature/licenses/UiState$Failure;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getCause ()Ljava/lang/Throwable;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class fr/smarquis/playground/feature/licenses/UiState$Loading : fr/smarquis/playground/feature/licenses/UiState {
+	public static final field $stable I
+	public static final field INSTANCE Lfr/smarquis/playground/feature/licenses/UiState$Loading;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class fr/smarquis/playground/feature/licenses/UiState$Success : fr/smarquis/playground/feature/licenses/UiState {
+	public static final field $stable I
+	public fun <init> (Lkotlinx/collections/immutable/PersistentMap;)V
+	public final fun component1 ()Lkotlinx/collections/immutable/PersistentMap;
+	public final fun copy (Lkotlinx/collections/immutable/PersistentMap;)Lfr/smarquis/playground/feature/licenses/UiState$Success;
+	public static synthetic fun copy$default (Lfr/smarquis/playground/feature/licenses/UiState$Success;Lkotlinx/collections/immutable/PersistentMap;ILjava/lang/Object;)Lfr/smarquis/playground/feature/licenses/UiState$Success;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getLicenses ()Lkotlinx/collections/immutable/PersistentMap;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class metro/hints/FrSmarquisPlaygroundFeatureLicensesLicensesBindingsDev_zacsweers_metro_AppScopeKt {
+	public static final synthetic fun dev_zacsweers_metro_AppScope (Lfr/smarquis/playground/feature/licenses/LicensesBindings;)V
+}
+
+public final class metro/hints/FrSmarquisPlaygroundFeatureLicensesLicensesViewModelDev_zacsweers_metro_AppScopeKt {
+	public static final synthetic fun dev_zacsweers_metro_AppScope (Lfr/smarquis/playground/feature/licenses/LicensesViewModel;)V
+}
+

@@ -94,11 +94,17 @@ internal inline fun <reified T : KotlinBaseExtension> Project.configureKotlin(
             else -> TODO("Unsupported project extension $this ${T::class}")
         }
 
-        // FIXME:
-        //  - https://issuetracker.google.com/issues/474474278
-        //  - https://youtrack.jetbrains.com/issue/KT-83410
         @OptIn(ExperimentalAbiValidation::class)
-        if (kotlin !is KotlinAndroidProjectExtension) abiValidation {
+        if (kotlin !is KotlinAndroidProjectExtension || this@configureKotlin.isAndroidLibrary) abiValidation {
+            if (kotlin is KotlinAndroidProjectExtension) {
+                // AGP's built-in Kotlin does not run KGP's ABI validation setup action.
+                referenceDumpDir.set(this@configureKotlin.layout.projectDirectory.dir("api"))
+                keepLocallyUnsupportedTargets.set(true)
+                val abiCheckTask = checkTaskProvider
+                this@configureKotlin.tasks.named("check").configure {
+                    dependsOn(abiCheckTask)
+                }
+            }
             PlaygroundGlobalCi.addToGlobalCi(project = this@configureKotlin, checkTaskProvider)
             filters {
                 exclude {
