@@ -55,6 +55,10 @@ private fun DependencyHandlerScope.plugin(plugin: Provider<PluginDependency>) = 
 }
 
 tasks {
+    // Kotlin cannot suppress ERROR_SUPPRESSION at file or declaration scope.
+    named<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>("compileKotlin") {
+        compilerOptions.freeCompilerArgs.add("-Xwarning-level=ERROR_SUPPRESSION:disabled")
+    }
     validatePlugins {
         enableStricterValidation = true
         failOnWarning = true
